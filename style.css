@@ -1,8 +1,12 @@
 body {
   margin: 0;
   padding: 0;
-  background: url('assets/kiffen.png') no-repeat center top fixed;
+  background-color: black;
+  background-image: url('assets/kiffen.png');
+  background-repeat: no-repeat;
+  background-position: center top;
   background-size: 98%;
+  background-attachment: fixed;
   font-family: Arial, sans-serif;
   color: white;
   min-height: 100vh;
