@@ -1,88 +1,79 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: url('assets/dashboard.png') no-repeat center center fixed;
-  background-size: cover;
-  color: #fff;
-  height: 100vh;
+  color: white;
   overflow-x: hidden;
 }
 
-/* Menübutton */
-.menu-toggle {
-  font-size: 28px;
-  cursor: pointer;
+.background {
+  background: url('assets/dashboard.png') no-repeat center center fixed;
+  background-size: cover;
   position: fixed;
+  inset: 0;
+  z-index: -1;
+  filter: brightness(0.7);
+}
+
+.menu-toggle {
+  position: absolute;
   top: 20px;
   left: 20px;
-  z-index: 1001;
+  background: rgba(0,0,0,0.6);
   color: white;
-  background: rgba(0, 0, 0, 0.6);
+  font-size: 28px;
   padding: 10px 15px;
-  border-radius: 5px;
-  backdrop-filter: blur(4px);
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 100;
 }
 
-/* Seitenmenü */
-.side-menu {
+.sidebar {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 220px;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.85);
-  padding-top: 60px;
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
-  z-index: 1000;
+  top: 70px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.85);
+  padding: 15px;
+  border-radius: 10px;
+  display: none;
+  z-index: 99;
 }
 
-.side-menu.show {
-  transform: translateX(0);
-}
-
-.side-menu ul {
+.sidebar ul {
   list-style: none;
   padding: 0;
-  margin: 0;
 }
 
-.side-menu ul li {
-  padding: 15px 20px;
+.sidebar ul li {
+  margin: 10px 0;
 }
 
-.side-menu ul li a {
+.sidebar ul li a {
   color: white;
   text-decoration: none;
-  display: block;
+  font-size: 18px;
 }
 
-.side-menu ul li a:hover {
-  background-color: #333;
-}
-
-/* Dashboard-Karten im Glasstil */
 .dashboard-container {
-  padding: 100px 20px 20px 20px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-
-.glass-card {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  padding: 30px;
-  width: 260px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  padding: 100px 20px 40px 20px;
   text-align: center;
-  color: #fff;
-  transition: 0.3s;
 }
 
-.glass-card:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.03);
+h1 {
+  font-size: 32px;
+  margin-bottom: 40px;
+}
+
+.card {
+  margin: 20px auto;
+  max-width: 300px;
+  padding: 25px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.3);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
