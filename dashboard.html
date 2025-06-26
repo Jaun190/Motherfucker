@@ -7,11 +7,12 @@
   <link rel="stylesheet" href="dashboard.css" />
 </head>
 <body>
+
   <!-- Menübutton -->
   <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
   <!-- Seitenmenü -->
-  <nav id="side-menu" class="side-menu hidden">
+  <nav id="side-menu" class="side-menu">
     <ul>
       <li><a href="index.html">🏠 Startseite</a></li>
       <li><a href="dashboard.html">📊 Dashboard</a></li>
@@ -23,23 +24,10 @@
 
   <!-- Dashboard Inhalt -->
   <div class="dashboard-container">
-    <div class="card">
-      <p class="value">💰 €1'520</p>
-      <p class="label">Einnahmen</p>
-    </div>
-
-    <div class="card">
-      <p class="value">🌿 320</p>
-      <p class="label">Ertrag</p>
-    </div>
-
-    <div class="card">
-      <p class="value">👥 1'225</p>
-      <p class="label">Nutzer</p>
-    </div>
+    <!-- Dein Inhalt hier -->
   </div>
 
-  <!-- Menü-Logik -->
+  <!-- JS für Menü -->
   <script>
     function toggleMenu() {
       document.getElementById('side-menu').classList.toggle('show');
