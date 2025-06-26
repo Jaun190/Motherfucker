@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  background: url('assets/kiffen.png') no-repeat center center fixed;
+  background: url('assets/kiffen.png') no-repeat center 30% fixed;
   background-size: 95%;
   font-family: Arial, sans-serif;
   color: white;
