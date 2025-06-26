@@ -1,61 +1,51 @@
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  padding: 0;
+  font-family: Arial, sans-serif;
   background-image: url('assets/dashboard.png');
-  background-size: 99%;
-  background-position: center;
+  background-size: contain;
   background-repeat: no-repeat;
+  background-position: center top;
+  background-color: #000; /* falls Ränder entstehen */
+  min-height: 100vh;
   color: white;
-  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 800px) {
+  body {
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+.container {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  gap: 20px;
+  width: 90%;
+  max-width: 400px;
+  margin-top: 50vh;
+  transform: translateY(-50%);
+}
+
+.info-card {
+  background: rgba(0, 0, 0, 0.55);
   padding: 20px;
-  box-sizing: border-box;
-}
-
-/* Menüpunkte (drei Punkte oben links) */
-.menu {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-top: 10px;
-  margin-left: 10px;
-}
-
-.dot {
-  width: 6px;
-  height: 6px;
-  background-color: white;
-  border-radius: 50%;
-}
-
-/* Dashboard-Boxen */
-.dashboard-content {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-top: 80px;
-  margin-left: 10px;
-}
-
-.info-box {
-  background: rgba(0, 0, 0, 0.4);
   border-radius: 16px;
-  padding: 20px;
-  width: 260px;
-  backdrop-filter: blur(5px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(6px);
 }
 
-.info-box h2 {
-  margin: 0;
-  font-size: 28px;
+.value {
+  font-size: 24px;
+  font-weight: bold;
 }
 
-.info-box p {
-  margin: 5px 0 0;
-  font-size: 16px;
+.label {
+  font-size: 14px;
   color: #ccc;
+  margin-top: 4px;
 }
