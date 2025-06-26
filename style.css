@@ -1,24 +1,40 @@
 body {
   margin: 0;
   padding: 0;
-  background: url('assets/kiffen.png') no-repeat center 30% fixed;
+  background: url('assets/kiffen.png') no-repeat center top fixed;
   background-size: 95%;
   font-family: Arial, sans-serif;
   color: white;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  align-items: center;
+}
+
+.welcome {
+  text-align: center;
+  padding: 40px 20px 10px;
+}
+
+.highlight {
+  color: #00e676;
 }
 
 .form-container {
   background: rgba(0, 0, 0, 0.65);
-  padding: 24px;
-  margin: 0 auto 60px;
-  max-width: 360px;
+  padding: 30px;
+  margin-top: 20px;
+  width: 90%;
+  max-width: 380px;
   border-radius: 20px;
   backdrop-filter: blur(8px);
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #00e676;
 }
 
 form input {
@@ -27,7 +43,7 @@ form input {
   padding: 14px;
   border-radius: 12px;
   border: none;
-  background: #1c1c1c;
+  background: #1f1f1f;
   color: white;
   font-size: 1rem;
 }
