@@ -1,3 +1,3 @@
-document.getElementById('menuToggle').addEventListener('click', function () {
-  document.getElementById('sidebar').classList.toggle('open');
+document.getElementById('hamburger').addEventListener('click', function () {
+  document.getElementById('overlayMenu').classList.toggle('open');
 });
