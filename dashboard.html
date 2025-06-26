@@ -5,19 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GrowEmpire Dashboard</title>
   <link rel="stylesheet" href="dashboard.css" />
+  <script defer src="dashboard.js"></script>
 </head>
 <body>
 
-  <!-- Menü-Button -->
+  <!-- Burger-Menü (☰) -->
   <div class="menu-button" onclick="toggleMenu()">☰</div>
 
-  <!-- Sidebar-Menü -->
+  <!-- Sidebar -->
   <nav id="sidebar" class="sidebar">
     <ul>
-      <li><a href="#">📊 Dashboard</a></li>
-      <li><a href="#">🤝 Partner</a></li>
-      <li><a href="#">⚙️ Einstellungen</a></li>
-      <li><a href="#">📕 Logout</a></li>
+      <li><a href="dashboard.html">📊 Dashboard</a></li>
+      <li><a href="partner.html">🤝 Partner</a></li>
+      <li><a href="settings.html">⚙️ Einstellungen</a></li>
+      <li><a href="index.html">🚪 Logout</a></li>
     </ul>
   </nav>
 
@@ -40,11 +41,5 @@
     </div>
   </div>
 
-  <script>
-    function toggleMenu() {
-      const sidebar = document.getElementById("sidebar");
-      sidebar.style.left = sidebar.style.left === "0px" ? "-250px" : "0px";
-    }
-  </script>
 </body>
 </html>
