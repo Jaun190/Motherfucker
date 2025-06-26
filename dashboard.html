@@ -7,6 +7,21 @@
   <link rel="stylesheet" href="dashboard.css" />
 </head>
 <body>
+
+  <!-- Menü-Button -->
+  <div class="menu-button" onclick="toggleMenu()">☰</div>
+
+  <!-- Sidebar-Menü -->
+  <nav id="sidebar" class="sidebar">
+    <ul>
+      <li><a href="#">📊 Dashboard</a></li>
+      <li><a href="#">🤝 Partner</a></li>
+      <li><a href="#">⚙️ Einstellungen</a></li>
+      <li><a href="#">📕 Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- Dashboard Inhalt -->
   <div class="container">
     <div class="card">
       <span>💰</span>
@@ -24,5 +39,12 @@
       <p>Nutzer</p>
     </div>
   </div>
+
+  <script>
+    function toggleMenu() {
+      const sidebar = document.getElementById("sidebar");
+      sidebar.style.left = sidebar.style.left === "0px" ? "-250px" : "0px";
+    }
+  </script>
 </body>
 </html>
