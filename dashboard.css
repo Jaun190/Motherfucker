@@ -7,65 +7,72 @@ body {
   overflow-x: hidden;
 }
 
-/* Neuer Burger-Button */
-#burger-button {
+/* Menü-Button */
+.menu-button {
   position: fixed;
   top: 20px;
   left: 20px;
   z-index: 1001;
-  font-size: 26px;
-  background-color: rgba(0, 0, 0, 0.6);
+  font-size: 28px;
   color: white;
-  border: none;
+  background-color: rgba(0, 0, 0, 0.7);
   padding: 10px 14px;
   border-radius: 8px;
   cursor: pointer;
 }
 
-/* Neue Sidebar */
+/* Sidebar */
 .sidebar {
   position: fixed;
   top: 0;
-  left: 0;
+  left: -240px;
   width: 220px;
   height: 100%;
-  background-color: rgba(20, 20, 20, 0.95);
+  background-color: rgba(15, 15, 15, 0.95);
   box-shadow: 2px 0 12px rgba(0, 0, 0, 0.6);
-  padding-top: 80px;
+  transition: left 0.3s ease-in-out;
+  padding-top: 70px;
   padding-left: 20px;
   z-index: 1000;
-  transition: transform 0.3s ease;
 }
 
-.sidebar.hidden {
-  transform: translateX(-100%);
-}
-
-.sidebar ul {
+.menu-links {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.sidebar ul li {
+.menu-links li {
   margin: 20px 0;
 }
 
-.sidebar ul li a {
+.menu-links a {
   color: white;
   text-decoration: none;
   font-size: 18px;
 }
 
-.sidebar ul li.logout {
-  margin-top: 40px;
-}
-
-.sidebar ul li a:hover {
+.menu-links a:hover {
   color: #00ffcc;
 }
 
-/* Dashboard-Karten */
+.logout-link {
+  position: absolute;
+  bottom: 30px;
+  left: 20px;
+}
+
+.logout-link a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.logout-link a:hover {
+  color: #ff4c4c;
+}
+
+/* Inhalt */
 .container {
   display: flex;
   flex-direction: column;
@@ -93,7 +100,7 @@ body {
 
 .card h2 {
   margin: 10px 0 5px;
-  font-size: 28px;
+  font-size: 24px;
 }
 
 .card p {
