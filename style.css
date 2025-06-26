@@ -14,7 +14,7 @@ body {
 .form-container {
   background: rgba(0, 0, 0, 0.65);
   padding: 24px;
-  margin: 0 auto 20px;
+  margin: 0 auto 60px;
   max-width: 360px;
   border-radius: 20px;
   backdrop-filter: blur(8px);
