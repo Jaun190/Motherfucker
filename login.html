@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GrowEmpire Login</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script defer src="auth.js"></script>
+</head>
+<body>
+  <div class="background">
+    <div class="login-box">
+      <input type="email" id="login-email" placeholder="E-Mail" />
+      <input type="password" id="login-password" placeholder="Passwort" />
+      <button onclick="login()">Einloggen</button>
+      <div class="register-link">
+        Noch kein Account? <a href="register.html">Hier registrieren</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
