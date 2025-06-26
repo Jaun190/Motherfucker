@@ -1,25 +1,61 @@
-/* dashboard.css */
 body {
   margin: 0;
-  padding: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: url('assets/growempire_dashboard_bg.png') no-repeat center center fixed;
+  background-image: url('assets/dashboard.png');
   background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
   height: 100vh;
-  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-.dashboard {
-  height: 100%;
-  width: 100%;
-  position: relative;
+/* Menüpunkte (drei Punkte oben links) */
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+  margin-left: 10px;
 }
 
-.menu-button {
-  position: absolute;
-  top: 20px;
-  left: 20px;
+.dot {
+  width: 6px;
+  height: 6px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+/* Dashboard-Boxen */
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 80px;
+  margin-left: 10px;
+}
+
+.info-box {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 16px;
+  padding: 20px;
+  width: 260px;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.info-box h2 {
+  margin: 0;
   font-size: 28px;
-  color: white;
-  cursor: pointer;
+}
+
+.info-box p {
+  margin: 5px 0 0;
+  font-size: 16px;
+  color: #ccc;
 }
