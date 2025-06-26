@@ -2,54 +2,81 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GrowEmpire Dashboard</title>
-  <link rel="stylesheet" href="dashboard.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://images.unsplash.com/photo-1584438784894-089d6b76d7f2?fit=crop&w=1080&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+
+    .header {
+      padding: 2rem;
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: bold;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+    }
+
+    .dashboard {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 2rem;
+      width: 280px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      text-align: center;
+    }
+
+    .card h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 1.2rem;
+      color: #e0ffe3;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Menübutton -->
-  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  <div class="header">🌱 GrowEmpire Dashboard</div>
 
-  <!-- Seitenmenü -->
-  <nav id="side-menu" class="side-menu">
-    <ul>
-      <li><a href="index.html">🏠 Startseite</a></li>
-      <li><a href="dashboard.html">📊 Dashboard</a></li>
-      <li><a href="register.html">📝 Registrieren</a></li>
-      <li><a href="#">⚙️ Einstellungen</a></li>
-      <li><a href="#">🚪 Logout</a></li>
-    </ul>
-  </nav>
-
-  <!-- Dashboard Glas-Karten -->
-  <div class="dashboard-container">
-    <div class="glass-card">
-      <h2>💰 Einnahmen</h2>
-      <p>CHF 4'320</p>
+  <div class="dashboard">
+    <div class="card">
+      <h2>€1'520</h2>
+      <p>Einnahmen</p>
     </div>
-
-    <div class="glass-card">
-      <h2>🌿 Aktive Pflanzen</h2>
-      <p>128</p>
+    <div class="card">
+      <h2>320 🌿</h2>
+      <p>Ertrag</p>
     </div>
-
-    <div class="glass-card">
-      <h2>👥 Deine Partner</h2>
-      <p>23 aktiv</p>
-    </div>
-
-    <div class="glass-card">
-      <h2>🕒 Nächste Ernte</h2>
-      <p>in 12 Tagen</p>
+    <div class="card">
+      <h2>1'225 👤</h2>
+      <p>Nutzer</p>
     </div>
   </div>
 
-  <!-- JS für Menü -->
-  <script>
-    function toggleMenu() {
-      document.getElementById('side-menu').classList.toggle('show');
-    }
-  </script>
 </body>
 </html>
