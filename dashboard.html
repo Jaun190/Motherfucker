@@ -5,20 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GrowEmpire Dashboard</title>
   <link rel="stylesheet" href="dashboard.css" />
-  <script defer src="menu.js"></script>
 </head>
 <body>
   <div class="background"></div>
 
   <!-- Hamburger Menü -->
-  <div class="menu-toggle" id="menuToggle">
+  <div class="hamburger" id="hamburger">
     <div></div>
     <div></div>
     <div></div>
   </div>
 
-  <!-- Seitenmenü -->
-  <nav class="sidebar" id="sidebar">
+  <!-- Overlay Navigation -->
+  <nav class="overlay-menu" id="overlayMenu">
     <ul>
       <li><a href="dashboard.html">📊 Dashboard</a></li>
       <li><a href="partner.html">🤝 Partner</a></li>
@@ -27,14 +26,14 @@
     </ul>
   </nav>
 
-  <!-- Titel -->
   <h1 class="headline">GrowEmpire Dashboard</h1>
 
-  <!-- Statistik-Karten -->
   <div class="card-container">
     <div class="card">💰<br><strong>€1'520</strong><br>Einnahmen</div>
     <div class="card">🌿<br><strong>320</strong><br>Ertrag</div>
     <div class="card">👥<br><strong>1'225</strong><br>Nutzer</div>
   </div>
+
+  <script src="menu.js"></script>
 </body>
 </html>
