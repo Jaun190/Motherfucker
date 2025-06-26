@@ -2,56 +2,44 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GrowEmpire Dashboard</title>
-  <link rel="stylesheet" href="dashboard.css" />
+  <link rel="stylesheet" href="dashboard.css"/>
 </head>
 <body>
-
   <!-- Menü Button -->
   <div class="menu-button" id="menu-toggle">⋮</div>
 
   <!-- Menü -->
   <div class="menu" id="menu">
-    <a href="#">🌱 Pflanzen kaufen</a>
-    <a href="#">📜 Lizenz</a>
+    <a href="#">🌿 Pflanzen</a>
+    <a href="#">📦 Lizenz</a>
     <a href="#">👥 Partner</a>
     <a href="#" id="logout-button">🚪 Logout</a>
   </div>
 
-  <!-- Dashboard Inhalt -->
-  <div class="overlay">
-    <h2>Deine Übersicht</h2>
+  <!-- Dashboard -->
+  <div class="dashboard-container">
+    <h1 class="title">GrowEmpire</h1>
 
-    <div class="info-vertical">
-      <div class="info-block">🌱 Pflanzen: <strong>8</strong></div>
+    <!-- Obere Infokarten -->
+    <div class="info-cards">
+      <div class="card">💰 <br><span class="value">€1,520</span><br>Einnahmen</div>
+      <div class="card">🌿 <br><span class="value">320</span><br>Ertrag</div>
+      <div class="card">👥 <br><span class="value">1,225</span><br>Nutzer</div>
     </div>
 
-    <div class="info-vertical">
-      <div class="info-block">📦 Investiert: <strong>CHF 1’200.–</strong></div>
+    <!-- Untere visuelle Karten -->
+    <div class="visual-cards">
+      <div class="visual-box">📈 Kurvendiagramm</div>
+      <div class="visual-box">🌱 Pflanzenbild</div>
+      <div class="visual-box">📊 Balken</div>
     </div>
-
-    <div class="info-vertical">
-      <div class="info-block">⏳ Zeit bis Ernte: <strong>14 Tage</strong></div>
-    </div>
-
-    <div class="info-vertical">
-      <div class="info-block">💰 Geplanter Ertrag: <strong>CHF 1’440.–</strong></div>
-    </div>
-
-    <div class="info-vertical">
-      <div class="info-block">🧑‍🤝‍🧑 Partner: <strong>3</strong></div>
-    </div>
-
   </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import {
-      getAuth,
-      onAuthStateChanged,
-      signOut
-    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyA1nAnkncIJMK-BNPVUNDgJ33yphCcQs2w",
@@ -81,6 +69,5 @@
       document.getElementById("menu").classList.toggle("visible");
     });
   </script>
-
 </body>
 </html>
