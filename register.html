@@ -4,20 +4,34 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GrowEmpire Registrierung</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script defer src="auth.js"></script>
+  <link rel="stylesheet" href="register.css" />
 </head>
 <body>
-  <div class="background">
-    <div class="login-box">
-      <input type="email" id="register-email" placeholder="E-Mail" />
-      <input type="password" id="register-password" placeholder="Passwort" />
-      <button onclick="register()">Registrieren</button>
-      <div class="register-link">
-        Bereits Account? <a href="login.html">Hier einloggen</a>
-      </div>
-    </div>
+
+  <div class="form-container">
+    <h2>Registrierung</h2>
+    <form id="register-form">
+      <input type="text" id="vorname" placeholder="Vorname" required />
+      <input type="text" id="nachname" placeholder="Nachname" required />
+      <input type="email" id="email" placeholder="E-Mail" required />
+      <input type="password" id="password" placeholder="Passwort" required />
+      <input type="tel" id="telefon" placeholder="Telefonnummer" required />
+      <select id="land" required>
+        <option value="">Land auswählen</option>
+        <option value="ch">Schweiz</option>
+        <option value="de">Deutschland</option>
+        <option value="at">Österreich</option>
+      </select>
+      <label style="margin-top: 10px; display: block;">
+        <input type="checkbox" required />
+        Ich akzeptiere die AGB
+      </label>
+      <button type="submit">Registrieren</button>
+    </form>
+    <p>Schon registriert? <a href="index.html">Zum Login</a></p>
+    <p id="error-msg" class="error"></p>
   </div>
+
+  <script type="module" src="auth.js"></script>
 </body>
 </html>
