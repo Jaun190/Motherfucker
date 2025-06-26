@@ -8,18 +8,47 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: url('https://images.unsplash.com/photo-1584438784894-089d6b76d7f2?fit=crop&w=1080&q=80') no-repeat center center fixed;
-      background-size: cover;
+      background: linear-gradient(to right, #093028, #237A57);
       color: white;
     }
 
+    .menu-toggle {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(0,0,0,0.6);
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .menu {
+      position: absolute;
+      top: 60px;
+      left: 20px;
+      background: rgba(0,0,0,0.85);
+      padding: 15px;
+      border-radius: 12px;
+      display: none;
+      flex-direction: column;
+      z-index: 1000;
+    }
+
+    .menu a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 0;
+    }
+
     .header {
-      padding: 2rem;
+      padding: 3rem 1rem 1rem;
       text-align: center;
       font-size: 2.5rem;
       font-weight: bold;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(10px);
     }
 
     .dashboard {
@@ -50,16 +79,16 @@
       font-size: 1.2rem;
       color: #e0ffe3;
     }
-
-    @media (max-width: 768px) {
-      .dashboard {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
   </style>
 </head>
 <body>
+
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <div class="menu" id="menu">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="partner.html">Partner</a>
+    <!-- weitere Menüpunkte folgen -->
+  </div>
 
   <div class="header">🌱 GrowEmpire Dashboard</div>
 
@@ -78,5 +107,11 @@
     </div>
   </div>
 
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+    }
+  </script>
 </body>
 </html>
