@@ -8,7 +8,7 @@
 </head>
 <body>
 
-  <!-- 3-Punkte-Menü Button -->
+  <!-- Menü Button -->
   <div class="menu-button" id="menu-toggle">⋮</div>
 
   <!-- Menü -->
@@ -21,7 +21,6 @@
 
   <!-- Dashboard Inhalt -->
   <div class="overlay">
-    <h1>Willkommen bei GrowEmpire</h1>
     <p>Dein Account ist aktiv.</p>
   </div>
 
@@ -46,7 +45,7 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    // Auth-Schutz
+    // Login-Schutz
     onAuthStateChanged(auth, (user) => {
       if (!user) {
         window.location.href = "index.html";
@@ -59,7 +58,7 @@
       window.location.href = "index.html";
     });
 
-    // Menü umschalten
+    // Menü-Logik
     document.getElementById("menu-toggle").addEventListener("click", () => {
       document.getElementById("menu").classList.toggle("visible");
     });
