@@ -2,18 +2,68 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script defer src="auth.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GrowEmpire Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css" />
 </head>
 <body>
-  <div class="background">
-    <div class="login-box">
-      <h1 id="welcome-text">Willkommen!</h1>
-      <button onclick="logout()">Logout</button>
-    </div>
+
+  <!-- 3-Punkte-Menü Button -->
+  <div class="menu-button" id="menu-toggle">⋮</div>
+
+  <!-- Menü -->
+  <div class="menu" id="menu">
+    <a href="#">🌱 Pflanzen kaufen</a>
+    <a href="#">📜 Lizenz</a>
+    <a href="#">👥 Partner</a>
+    <a href="#" id="logout-button">🚪 Logout</a>
   </div>
+
+  <!-- Dashboard Inhalt -->
+  <div class="overlay">
+    <h1>Willkommen bei GrowEmpire</h1>
+    <p>Dein Account ist aktiv.</p>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA1nAnkncIJMK-BNPVUNDgJ33yphCcQs2w",
+      authDomain: "growempire-880f9.firebaseapp.com",
+      projectId: "growempire-880f9",
+      storageBucket: "growempire-880f9.appspot.com",
+      messagingSenderId: "706198931644",
+      appId: "1:706198931644:web:04dd773d807fabe0c868b9",
+      measurementId: "G-DSH4X18TS5"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Auth-Schutz
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = "index.html";
+      }
+    });
+
+    // Logout
+    document.getElementById("logout-button").addEventListener("click", async () => {
+      await signOut(auth);
+      window.location.href = "index.html";
+    });
+
+    // Menü umschalten
+    document.getElementById("menu-toggle").addEventListener("click", () => {
+      document.getElementById("menu").classList.toggle("visible");
+    });
+  </script>
+
 </body>
 </html>
