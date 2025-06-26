@@ -7,19 +7,51 @@
   <link rel="stylesheet" href="dashboard.css" />
 </head>
 <body>
-  <div class="container">
-    <div class="info-card">
-      <div class="value">💰 €1'520</div>
-      <div class="label">Einnahmen</div>
+  <div class="menu-button" onclick="toggleMenu()">⋮</div>
+  <div class="dropdown-menu" id="dropdownMenu">
+    <ul>
+      <li>🌱 Mein Anbau</li>
+      <li>📊 Statistiken</li>
+      <li>💸 Auszahlungen</li>
+      <li>⚙️ Einstellungen</li>
+      <li class="logout">🚪 Logout</li>
+    </ul>
+  </div>
+
+  <div class="dashboard-container">
+    <h1 class="title">GrowEmpire</h1>
+
+    <div class="card">
+      <p class="value">💰 €1'520</p>
+      <p class="label">Einnahmen</p>
     </div>
-    <div class="info-card">
-      <div class="value">🌿 320</div>
-      <div class="label">Ertrag</div>
+
+    <div class="card">
+      <p class="value">🌿 320</p>
+      <p class="label">Ertrag</p>
     </div>
-    <div class="info-card">
-      <div class="value">👥 1'225</div>
-      <div class="label">Nutzer</div>
+
+    <div class="card">
+      <p class="value">👥 1'225</p>
+      <p class="label">Nutzer</p>
     </div>
   </div>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("dropdownMenu");
+      menu.classList.toggle("show");
+    }
+
+    // Optional: Schließe das Menü bei Klick außerhalb
+    window.onclick = function (e) {
+      if (!e.target.matches(".menu-button")) {
+        const menu = document.getElementById("dropdownMenu");
+        if (menu.classList.contains("show")) {
+          menu.classList.remove("show");
+        }
+      }
+    };
+  </script>
 </body>
 </html>
