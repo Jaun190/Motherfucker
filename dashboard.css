@@ -1,96 +1,43 @@
 body {
   margin: 0;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Segoe UI', sans-serif;
+  background: url('assets/dashboard.png') no-repeat center center fixed;
+  background-size: cover;
   color: white;
   overflow-x: hidden;
 }
 
-.background {
-  background-image: url('assets/dashboard.png');
-  background-size: cover;
-  background-position: center;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-}
-
-/* Hamburger */
-.hamburger {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 2001;
-  cursor: pointer;
-}
-.hamburger div {
-  width: 30px;
-  height: 4px;
-  background-color: white;
-  margin: 6px 0;
-  border-radius: 2px;
-}
-
-/* Neues mattes Menü */
-.side-menu {
-  position: fixed;
-  top: 0;
-  left: -220px;
-  width: 200px;
-  height: 100%;
-  background: #111; /* dunkel, nicht glasig */
-  padding-top: 80px;
-  transition: left 0.3s ease;
-  z-index: 2000;
-  border-top-right-radius: 12px;
-  border-bottom-right-radius: 12px;
-  box-shadow: 2px 0 12px rgba(0,0,0,0.5);
-}
-
-.side-menu.open {
-  left: 0;
-}
-
-.side-menu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.side-menu ul li {
-  margin: 15px 0;
-}
-
-.side-menu ul li a {
-  display: block;
-  padding: 12px 20px;
-  text-decoration: none;
-  color: white;
-  font-size: 17px;
-  font-weight: 600;
-  transition: background 0.3s ease;
-}
-
-.side-menu ul li a:hover {
-  background: #222;
-  border-radius: 8px;
-}
-
-/* Karten */
-.card-container {
+.container {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  padding-top: 100px;
   gap: 20px;
-  padding: 120px 20px 20px 20px;
-  text-align: center;
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  padding: 25px;
+  width: 80%;
+  max-width: 350px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.35); /* Dunkelglas */
+  border-radius: 20px;
+  text-align: center;
   backdrop-filter: blur(6px);
-  font-size: 1.3em;
-  font-weight: normal;
-  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.card span {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.card h2 {
+  margin: 5px 0;
+  font-size: 28px;
+}
+
+.card p {
+  margin: 0;
+  color: #ccc;
 }
