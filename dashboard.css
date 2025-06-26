@@ -1,10 +1,10 @@
 body {
   margin: 0;
   padding: 0;
-  background: url('assets/dashboard.png') no-repeat center center fixed;
-  background-size: cover;
   font-family: Arial, sans-serif;
   height: 100vh;
+  background: url('assets/dashboard.png') no-repeat center center fixed;
+  background-size: cover;
   color: white;
   display: flex;
   justify-content: center;
@@ -23,7 +23,7 @@ body {
   z-index: 999;
 }
 
-/* Menü-Panel */
+/* Menü */
 .menu {
   position: absolute;
   top: 60px;
@@ -55,11 +55,45 @@ body {
   background: rgba(0, 230, 118, 0.6);
 }
 
-/* Overlay zentriert */
+/* Dashboard-Inhalt */
 .overlay {
   background: rgba(0, 0, 0, 0.7);
   padding: 40px;
   border-radius: 20px;
   text-align: center;
   backdrop-filter: blur(6px);
+  max-width: 90%;
+}
+
+.overlay h2 {
+  margin-top: 0;
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+}
+
+/* Glasige Infoboxen */
+.info-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.info-block {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  font-size: 1.1rem;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease;
+}
+
+.info-block:hover {
+  transform: translateY(-2px);
+  background: rgba(0, 230, 118, 0.1);
 }
