@@ -4,114 +4,42 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GrowEmpire Dashboard</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #093028, #237A57);
-      color: white;
-    }
-
-    .menu-toggle {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: rgba(0,0,0,0.6);
-      border: none;
-      padding: 10px 15px;
-      border-radius: 8px;
-      font-size: 24px;
-      color: white;
-      cursor: pointer;
-      z-index: 1000;
-    }
-
-    .menu {
-      position: absolute;
-      top: 60px;
-      left: 20px;
-      background: rgba(0,0,0,0.85);
-      padding: 15px;
-      border-radius: 12px;
-      display: none;
-      flex-direction: column;
-      z-index: 1000;
-    }
-
-    .menu a {
-      color: white;
-      text-decoration: none;
-      padding: 8px 0;
-    }
-
-    .header {
-      padding: 3rem 1rem 1rem;
-      text-align: center;
-      font-size: 2.5rem;
-      font-weight: bold;
-    }
-
-    .dashboard {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-      padding: 2rem;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(15px);
-      border-radius: 20px;
-      padding: 2rem;
-      width: 280px;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      text-align: center;
-    }
-
-    .card h2 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .card p {
-      font-size: 1.2rem;
-      color: #e0ffe3;
-    }
-  </style>
+  <link rel="stylesheet" href="dashboard.css" />
+  <script defer src="menu.js"></script>
 </head>
 <body>
+  <div class="background"></div>
 
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-  <div class="menu" id="menu">
-    <a href="dashboard.html">Dashboard</a>
-    <a href="partner.html">Partner</a>
-    <!-- weitere Menüpunkte folgen -->
+  <!-- Hamburger Menu -->
+  <div class="menu-toggle" id="menuToggle">
+    ☰
   </div>
 
-  <div class="header">🌱 GrowEmpire Dashboard</div>
+  <!-- Sidebar Menu -->
+  <nav class="sidebar" id="sidebar">
+    <ul>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="partner.html">Partner</a></li>
+      <li><a href="#">Einstellungen</a></li>
+      <li><a href="index.html">Logout</a></li>
+    </ul>
+  </nav>
 
-  <div class="dashboard">
-    <div class="card">
+  <!-- Dashboard Inhalt -->
+  <div class="dashboard-container">
+    <h1>GrowEmpire Dashboard</h1>
+    <div class="card glass">
       <h2>€1'520</h2>
       <p>Einnahmen</p>
     </div>
-    <div class="card">
+    <div class="card glass">
       <h2>320 🌿</h2>
       <p>Ertrag</p>
     </div>
-    <div class="card">
+    <div class="card glass">
       <h2>1'225 👤</h2>
       <p>Nutzer</p>
     </div>
   </div>
-
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById('menu');
-      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-    }
-  </script>
 </body>
 </html>
