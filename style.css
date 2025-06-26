@@ -1,60 +1,58 @@
-body, html {
+body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
-  height: 100%;
-  background-color: black;
-}
-
-.background {
-  background-image: url('kiffen.png');
+  background: url('assets/kiffen.png') no-repeat center center fixed;
   background-size: cover;
-  background-position: center;
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  padding-bottom: 40px;
+  font-family: Arial, sans-serif;
+  color: white;
 }
 
-.login-box {
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 20px;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 400px;
+.welcome {
   text-align: center;
+  padding: 40px 20px 10px;
 }
 
-.login-box input {
+.highlight {
+  color: #00e676;
+}
+
+.form-container {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 30px;
+  margin: 20px auto;
+  max-width: 400px;
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+}
+
+form input {
+  display: block;
   width: 100%;
+  margin: 10px 0;
   padding: 12px;
-  margin-bottom: 12px;
-  border-radius: 8px;
+  border-radius: 6px;
   border: none;
-  font-size: 16px;
+  background: #222;
+  color: white;
 }
 
-.login-box button {
+form button {
   width: 100%;
-  padding: 12px;
-  background-color: #2ecc71;
-  color: white;
-  font-size: 16px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.login-box .register-link {
-  margin-top: 12px;
-  font-size: 14px;
-  color: white;
-}
-
-.login-box .register-link a {
-  color: #2ecc71;
-  text-decoration: none;
+  background: #00e676;
+  color: black;
   font-weight: bold;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+form button:hover {
+  background: #00ff88;
+}
+
+.error {
+  color: red;
+  text-align: center;
 }
