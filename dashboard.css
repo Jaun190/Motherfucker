@@ -1,51 +1,98 @@
 body {
   margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
   background-image: url('assets/dashboard.png');
-  background-size: contain;
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
-  background-position: center top;
-  background-color: #000; /* falls Ränder entstehen */
+  color: #fff;
   min-height: 100vh;
-  color: white;
+  position: relative;
+}
+
+.dashboard-container {
+  padding: 20px;
+  padding-top: 100px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
 }
 
-@media (min-width: 800px) {
-  body {
-    background-size: cover;
-    background-position: center;
-  }
+.title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-shadow: 0 0 6px rgba(0,0,0,0.6);
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 90%;
-  max-width: 400px;
-  margin-top: 50vh;
-  transform: translateY(-50%);
-}
-
-.info-card {
-  background: rgba(0, 0, 0, 0.55);
-  padding: 20px;
+.card {
+  background: rgba(0, 0, 0, 0.75);
   border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(6px);
+  padding: 20px;
+  width: 85%;
+  max-width: 400px;
+  margin-bottom: 20px;
+  text-align: left;
+  box-shadow: 0 0 8px rgba(0,0,0,0.6);
 }
 
 .value {
   font-size: 24px;
   font-weight: bold;
+  margin: 0;
 }
 
 .label {
   font-size: 14px;
   color: #ccc;
-  margin-top: 4px;
+  margin-top: 5px;
+}
+
+/* Menübutton oben rechts */
+.menu-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+/* Dropdown-Menü */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 55px;
+  right: 20px;
+  background-color: rgba(0,0,0,0.9);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  z-index: 999;
+  width: 180px;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 10px 0;
+}
+
+.dropdown-menu li {
+  padding: 10px 20px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.dropdown-menu li:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+.dropdown-menu .logout {
+  color: #ff4444;
 }
