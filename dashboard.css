@@ -7,7 +7,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Menü-Button */
+/* Menü-Button (☰) */
 .menu-button {
   position: fixed;
   top: 20px;
@@ -36,37 +36,55 @@ body {
   z-index: 1000;
 }
 
-.sidebar ul {
+/* Menüeinträge oben */
+.menu-links {
   list-style: none;
   padding: 0;
   margin: 0;
+  flex-grow: 1;
 }
 
-.sidebar ul li {
+.menu-links li {
   margin: 20px 0;
 }
 
-.sidebar ul li a {
+.menu-links a {
   color: white;
   text-decoration: none;
   font-size: 18px;
   transition: 0.2s;
 }
 
-.sidebar ul li a:hover {
+.menu-links a:hover {
   color: #00ffcc;
 }
 
-/* Container mit größerem Abstand nach oben */
+/* Logout ganz unten */
+.logout-link {
+  position: absolute;
+  bottom: 30px;
+  left: 20px;
+}
+
+.logout-link a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.logout-link a:hover {
+  color: #ff4c4c;
+}
+
+/* Karten-Bereich */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 180px; /* ↑ damit GrowEmpire oben sichtbar ist */
+  padding-top: 180px;
   gap: 20px;
 }
 
-/* Karten */
 .card {
   width: 80%;
   max-width: 350px;
