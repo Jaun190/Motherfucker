@@ -3,38 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GrowEmpire Dashboard</title>
-  <link rel="stylesheet" href="dashboard.css" />
-  <script defer src="dashboard.js"></script>
+  <title>GrowEmpire Login</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Sidebar Menu Button -->
-  <div class="menu-button" onclick="toggleMenu()">☰</div>
-
-  <!-- Sidebar -->
-  <nav id="sidebar" class="sidebar">
-    <ul>
-      <li><a href="#">📊 Dashboard</a></li>
-      <li><a href="#">🤝 Partner</a></li>
-      <li><a href="#">⚙️ Einstellungen</a></li>
-      <li><a href="#">🚪 Logout</a></li>
-    </ul>
-  </nav>
-
-  <!-- Main Content -->
-  <div class="container">
-    <div class="card">
-      <span>💰</span> <h2>€1'520</h2>
-      <p>Einnahmen</p>
-    </div>
-    <div class="card">
-      <span>🌿</span> <h2>320</h2>
-      <p>Ertrag</p>
-    </div>
-    <div class="card">
-      <span>👥</span> <h2>1'225</h2>
-      <p>Nutzer</p>
-    </div>
+  <div class="form-container">
+    <h2>GrowEmpire Login</h2>
+    <form id="login-form">
+      <input type="email" id="email" placeholder="E-Mail" required />
+      <input type="password" id="password" placeholder="Passwort" required />
+      <button type="submit">Einloggen</button>
+    </form>
+    <p>Noch kein Account? <a href="register.html">Hier registrieren</a></p>
+    <p id="error-msg" class="error"></p>
   </div>
+  <script type="module" src="auth.js"></script>
 </body>
 </html>
