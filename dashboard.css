@@ -1,4 +1,3 @@
-/* Allgemein */
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
@@ -16,14 +15,6 @@ body {
   z-index: -1;
 }
 
-/* Überschrift */
-.headline {
-  margin-top: 80px;
-  font-size: 2em;
-  text-align: center;
-  text-shadow: 0 0 5px black;
-}
-
 /* Karten */
 .card-container {
   display: flex;
@@ -31,6 +22,7 @@ body {
   gap: 20px;
   padding: 20px;
   text-align: center;
+  margin-top: 100px;
 }
 
 .card {
@@ -39,7 +31,7 @@ body {
   padding: 20px;
   backdrop-filter: blur(6px);
   font-size: 1.3em;
-  font-weight: bold;
+  font-weight: normal;
   box-shadow: 0 0 10px rgba(0,0,0,0.4);
 }
 
