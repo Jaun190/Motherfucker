@@ -1,0 +1,92 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  background-image: url('assets/kiffen.png');
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 98%;
+  background-attachment: fixed;
+  font-family: Arial, sans-serif;
+  color: white;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.form-container {
+  background: black;
+  padding: 32px;
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+  margin-bottom: 0;
+}
+
+.form-container h2 {
+  text-align: center;
+  color: white;
+  margin-bottom: 24px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+form input,
+form select,
+form button {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px;
+  font-size: 1rem;
+  border-radius: 12px;
+  border: none;
+}
+
+form input,
+form select {
+  background: white;
+  color: black;
+}
+
+form input::placeholder {
+  color: #666;
+}
+
+form button {
+  background: #00e676;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+form button:hover {
+  background: #00ff88;
+}
+
+p {
+  text-align: center;
+  font-size: 0.95rem;
+  margin-top: 10px;
+}
+
+a {
+  color: #00e676;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.error {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+}
