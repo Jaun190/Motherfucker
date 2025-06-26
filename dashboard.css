@@ -1,15 +1,14 @@
-body {
-  margin: 0;
+ body {
+   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: url('assets/dashboard.png') no-repeat center center fixed;
-  background-size: cover;
-  color: white;
-  display: flex;
-  flex-direction: column;
+   background: url('assets/dashboard.png') center center / cover no-repeat fixed;
+   color: white;
+   display: flex;
+   flex-direction: column;
   align-items: center;
   min-height: 100vh;
   overflow-x: hidden;
-}
+ } 
 
 /* Menü-Button */
 .menu-button {
