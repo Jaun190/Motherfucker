@@ -1,43 +1,61 @@
-const SUPABASE_URL = 'https://ghfzdgaunxblpudkmxmy.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoZnpkZ2F1bnhibHB1ZGtteG15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3MDI5NTksImV4cCI6MjA2NjI3ODk1OX0.J8ni4SszaI33ljthdEjqXf8ZKFCs4uWnRZZDyU0IlUU';
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-async function login() {
-  const email = document.getElementById('login-email').value;
-  const password = document.getElementById('login-password').value;
-  const { error } = await supabase.auth.signInWithPassword({ email, password });
-  if (error) {
-    alert('Login fehlgeschlagen: ' + error.message);
-  } else {
-    window.location.href = 'dashboard.html';
-  }
-}
+// Firebase-Konfiguration
+const firebaseConfig = {
+  apiKey: "AIzaSyA1nAnkncIJMK-BNPVUNDgJ33yphCcQs2w",
+  authDomain: "growempire-880f9.firebaseapp.com",
+  projectId: "growempire-880f9",
+  storageBucket: "growempire-880f9.appspot.com",
+  messagingSenderId: "706198931644",
+  appId: "1:706198931644:web:04dd773d807fabe0c868b9",
+  measurementId: "G-DSH4X18TS5"
+};
 
-async function register() {
-  const email = document.getElementById('register-email').value;
-  const password = document.getElementById('register-password').value;
-  const { error } = await supabase.auth.signUp({ email, password });
-  if (error) {
-    alert('Registrierung fehlgeschlagen: ' + error.message);
-  } else {
-    alert('Erfolgreich registriert! Jetzt einloggen.');
-    window.location.href = 'login.html';
-  }
-}
+// Initialisieren
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-async function logout() {
-  await supabase.auth.signOut();
-  window.location.href = 'login.html';
-}
+// Login
+const loginForm = document.getElementById("login-form");
+if (loginForm) {
+  loginForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
 
-window.addEventListener('DOMContentLoaded', async () => {
-  const { data: { session } } = await supabase.auth.getSession();
-  if (window.location.pathname.includes('dashboard') && !session) {
-    window.location.href = 'login.html';
-  } else if (session && window.location.pathname.includes('dashboard')) {
-    const welcomeText = document.getElementById('welcome-text');
-    if (welcomeText) {
-      welcomeText.innerText = `Willkommen, ${session.user.email}!`;
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      window.location.href = "dashboard.html";
+    } catch (error) {
+      document.getElementById("error-msg").textContent = "Fehler: " + error.message;
     }
-  }
-});
+  });
+}
+
+// Registrierung
+const registerForm = document.getElementById("register-form");
+if (registerForm) {
+  registerForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirm-password").value;
+
+    if (password !== confirmPassword) {
+      document.getElementById("error-msg").textContent = "Passwörter stimmen nicht überein.";
+      return;
+    }
+
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      window.location.href = "dashboard.html";
+    } catch (error) {
+      document.getElementById("error-msg").textContent = "Fehler: " + error.message;
+    }
+  });
+}
