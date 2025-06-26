@@ -5,43 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GrowEmpire Dashboard</title>
   <link rel="stylesheet" href="dashboard.css" />
-  <script defer src="dashboard.js"></script>
 </head>
 <body>
 
-  <!-- Burger-Menü -->
-  <div class="menu-button" onclick="toggleMenu()">☰</div>
+  <!-- Neuer Burger-Button -->
+  <button id="burger-button">☰</button>
 
-  <!-- Sidebar -->
-  <nav id="sidebar" class="sidebar">
-    <ul class="menu-links">
+  <!-- Neue Sidebar -->
+  <aside id="sidebar" class="sidebar hidden">
+    <ul>
       <li><a href="dashboard.html">📊 Dashboard</a></li>
       <li><a href="partner.html">🤝 Partner</a></li>
       <li><a href="settings.html">⚙️ Einstellungen</a></li>
+      <li class="logout"><a href="index.html">🚪 Logout</a></li>
     </ul>
-    <div class="logout-link">
-      <a href="index.html">🚪 Logout</a>
-    </div>
-  </nav>
+  </aside>
 
   <!-- Dashboard Inhalt -->
   <div class="container">
-    <div class="card">
-      <span>💰</span>
-      <h2>€1'520</h2>
-      <p>Einnahmen</p>
-    </div>
-    <div class="card">
-      <span>🌿</span>
-      <h2>320</h2>
-      <p>Ertrag</p>
-    </div>
-    <div class="card">
-      <span>👥</span>
-      <h2>1'225</h2>
-      <p>Nutzer</p>
-    </div>
+    <div class="card"><span>💰</span><h2>€1'520</h2><p>Einnahmen</p></div>
+    <div class="card"><span>🌿</span><h2>320</h2><p>Ertrag</p></div>
+    <div class="card"><span>👥</span><h2>1'225</h2><p>Nutzer</p></div>
   </div>
+
+  <!-- Neues JS direkt eingebaut -->
+  <script>
+    const burger = document.getElementById("burger-button");
+    const sidebar = document.getElementById("sidebar");
+
+    burger.addEventListener("click", () => {
+      sidebar.classList.toggle("hidden");
+    });
+  </script>
 
 </body>
 </html>
