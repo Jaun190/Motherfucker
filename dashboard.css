@@ -7,7 +7,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Menü-Button (☰) */
+/* Menü-Button */
 .menu-button {
   position: fixed;
   top: 20px;
@@ -57,15 +57,16 @@ body {
   color: #00ffcc;
 }
 
-/* Dashboard-Karten */
+/* Container mit größerem Abstand nach oben */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 120px;
+  padding-top: 180px; /* ↑ damit GrowEmpire oben sichtbar ist */
   gap: 20px;
 }
 
+/* Karten */
 .card {
   width: 80%;
   max-width: 350px;
