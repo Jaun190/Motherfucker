@@ -1,3 +1,4 @@
-document.getElementById('hamburger').addEventListener('click', function () {
-  document.getElementById('overlayMenu').classList.toggle('open');
-});
+function toggleMenu() {
+  const sidebar = document.getElementById('sidebar');
+  sidebar.style.left = (sidebar.style.left === '0px') ? '-240px' : '0px';
+}
