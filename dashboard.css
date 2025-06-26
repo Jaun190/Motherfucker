@@ -1,1 +1,65 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: url('assets/dashboard.png') no-repeat center center fixed;
+  background-size: cover;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
 
+/* Menü-Button (links oben) */
+.menu-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+  z-index: 999;
+}
+
+/* Menü-Panel */
+.menu {
+  position: absolute;
+  top: 60px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.85);
+  padding: 14px;
+  border-radius: 12px;
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 998;
+}
+
+.menu.visible {
+  display: flex;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 14px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.menu a:hover {
+  background: rgba(0, 230, 118, 0.6);
+}
+
+/* Overlay zentriert */
+.overlay {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  backdrop-filter: blur(6px);
+}
