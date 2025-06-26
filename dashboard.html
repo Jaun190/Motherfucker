@@ -7,20 +7,22 @@
   <link rel="stylesheet" href="dashboard.css" />
 </head>
 <body>
-  <div class="menu-button" onclick="toggleMenu()">⋮</div>
-  <div class="dropdown-menu" id="dropdownMenu">
+  <!-- Menübutton -->
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+  <!-- Seitenmenü -->
+  <nav id="side-menu" class="side-menu hidden">
     <ul>
-      <li>🌱 Mein Anbau</li>
-      <li>📊 Statistiken</li>
-      <li>💸 Auszahlungen</li>
-      <li>⚙️ Einstellungen</li>
-      <li class="logout">🚪 Logout</li>
+      <li><a href="index.html">🏠 Startseite</a></li>
+      <li><a href="dashboard.html">📊 Dashboard</a></li>
+      <li><a href="register.html">📝 Registrieren</a></li>
+      <li><a href="#">⚙️ Einstellungen</a></li>
+      <li><a href="#">🚪 Logout</a></li>
     </ul>
-  </div>
+  </nav>
 
+  <!-- Dashboard Inhalt -->
   <div class="dashboard-container">
-    <h1 class="title">GrowEmpire</h1>
-
     <div class="card">
       <p class="value">💰 €1'520</p>
       <p class="label">Einnahmen</p>
@@ -37,21 +39,11 @@
     </div>
   </div>
 
+  <!-- Menü-Logik -->
   <script>
     function toggleMenu() {
-      const menu = document.getElementById("dropdownMenu");
-      menu.classList.toggle("show");
+      document.getElementById('side-menu').classList.toggle('show');
     }
-
-    // Optional: Schließe das Menü bei Klick außerhalb
-    window.onclick = function (e) {
-      if (!e.target.matches(".menu-button")) {
-        const menu = document.getElementById("dropdownMenu");
-        if (menu.classList.contains("show")) {
-          menu.classList.remove("show");
-        }
-      }
-    };
   </script>
 </body>
 </html>
