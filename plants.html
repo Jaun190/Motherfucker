@@ -3,16 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pflanzen kaufen – GrowEmpire</title>
+  <title>Pflanzen kaufen</title>
   <link rel="stylesheet" href="assets/plants.css" />
 </head>
 <body>
-
-  <!-- Burger-Menü -->
   <div class="menu-button" onclick="toggleMenu()">☰</div>
-
-  <!-- Dropdown-Menü -->
-  <div class="dropdown" id="menu">
+  <div id="dropdown" class="dropdown">
     <a href="dashboard.html">📊 Dashboard</a>
     <a href="partner.html">🤝 Partner</a>
     <a href="settings.html">⚙️ Einstellungen</a>
@@ -20,10 +16,8 @@
     <a href="index.html">📕 Logout</a>
   </div>
 
-  <!-- Seitenüberschrift -->
-  <h1>🌱 Pflanzen kaufen<br><span>GrowEmpire</span></h1>
+  <h1>🌱 Pflanzen kaufen <br> GrowEmpire</h1>
 
-  <!-- Pflanzen-Karten -->
   <div class="plant-grid">
     <div class="plant-card">
       <img src="assets/kush2.png" alt="Kush #2">
@@ -31,35 +25,7 @@
       <p>CHF 180.– | 75 Tage</p>
       <button>Kaufen</button>
     </div>
-
     <div class="plant-card">
-      <img src="assets/sativa.png" alt="Sativa Dream">
+      <img src="assets/sativa1.png" alt="Sativa Dream">
       <h2>Sativa Dream</h2>
-      <p>CHF 195.– | 80 Tage</p>
-      <button>Kaufen</button>
-    </div>
-
-    <div class="plant-card">
-      <img src="assets/purple.png" alt="Purple Haze">
-      <h2>Purple Haze</h2>
-      <p>CHF 210.– | 85 Tage</p>
-      <button>Kaufen</button>
-    </div>
-
-    <div class="plant-card">
-      <img src="assets/ogkush.png" alt="OG Kush">
-      <h2>OG Kush</h2>
-      <p>CHF 190.– | 70 Tage</p>
-      <button>Kaufen</button>
-    </div>
-  </div>
-
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById("menu");
-      menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
-    }
-  </script>
-
-</body>
-</html>
+      <p>CHF 195.– | 80 Tage</p
