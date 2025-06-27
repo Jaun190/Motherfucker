@@ -6,52 +6,12 @@
   <title>Einstellungen</title>
   <link rel="stylesheet" href="dashboard.css" />
   <style>
-    .settings-box {
-      background: rgba(0, 0, 0, 0.4);
-      padding: 20px;
-      border-radius: 20px;
-      max-width: 400px;
-      margin: 120px auto 40px;
-      backdrop-filter: blur(6px);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    .settings-box h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    label {
-      display: block;
-      margin: 12px 0 6px;
-      font-weight: bold;
-    }
-
-    select, input[type="file"], input[type="email"], .checkbox-row {
-      width: 100%;
-      padding: 10px;
-      border-radius: 10px;
-      border: none;
-      margin-bottom: 14px;
-      font-size: 16px;
-    }
-
-    .checkbox-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .settings-box button {
-      background-color: #00ffcc;
-      color: black;
-      padding: 12px;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      cursor: pointer;
-      width: 100%;
-      margin-top: 10px;
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('assets/dashboard.png') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
     }
 
     .menu-button {
@@ -84,73 +44,62 @@
       color: white;
       text-decoration: none;
       font-size: 18px;
-      display: block;
     }
 
     .menu a:hover {
       color: #00ffcc;
     }
 
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: url('assets/dashboard.png') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
+    .settings-box {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 20px;
+      border-radius: 20px;
+      max-width: 400px;
+      margin: 120px auto 40px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .settings-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin: 12px 0 6px;
+      font-weight: bold;
+    }
+
+    select, input[type="file"], .checkbox-row {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      margin-bottom: 14px;
+      font-size: 16px;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .settings-box button {
+      background-color: #00ffcc;
+      color: black;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
 
   <!-- 3 Punkte Menü -->
-  <div class="menu-button" onclick="toggleMenu()">☰</div>
-  <div class="menu" id="menu">
-    <a href="dashboard.html">📊 Dashboard</a>
-    <a href="partner.html">🤝 Partner</a>
-    <a href="settings.html">⚙️ Einstellungen</a>
-    <a href="index.html">🚪 Logout</a>
-  </div>
-
-  <!-- Einstellungen-Box -->
-  <div class="settings-box">
-    <h2>⚙️ Einstellungen</h2>
-
-    <label for="language">🌍 Sprache wählen</label>
-    <select id="language">
-      <option>Deutsch 🇩🇪</option>
-      <option>English 🇬🇧</option>
-      <option>Français 🇫🇷</option>
-    </select>
-
-    <label for="kyc">🆔 Ausweis hochladen</label>
-    <input type="file" id="kyc" accept=".jpg,.jpeg,.png,.pdf" />
-
-    <label>🔔 Benachrichtigungen</label>
-    <div class="checkbox-row">
-      <input type="checkbox" id="notify1" checked />
-      <label for="notify1">E-Mail bei neuen Partnern</label>
-    </div>
-    <div class="checkbox-row">
-      <input type="checkbox" id="notify2" />
-      <label for="notify2">SMS bei Auszahlung</label>
-    </div>
-
-    <label>🎨 Design Theme</label>
-    <div class="checkbox-row">
-      <input type="radio" name="theme" checked /> Dark
-      <input type="radio" name="theme" /> Light
-      <input type="radio" name="theme" /> Weed 🌿
-    </div>
-
-    <button onclick="alert('Gespeichert!')">Speichern</button>
-  </div>
-
-  <!-- JS für Menü -->
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById('menu');
-      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-    }
-  </script>
-</body>
-</html>
+  <div class="menu-button" onclick="
