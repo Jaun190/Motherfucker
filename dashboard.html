@@ -3,132 +3,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GrowEmpire Dashboard</title>
-  <link rel="stylesheet" href="dashboard.css" />
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: url('assets/dashboard.png') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
-      overflow-x: hidden;
-    }
-
-    .menu-button {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 1001;
-      font-size: 28px;
-      color: white;
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 10px 14px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    .dropdown {
-      position: fixed;
-      top: 70px;
-      left: 20px;
-      background-color: rgba(0, 0, 0, 0.85);
-      border-radius: 12px;
-      padding: 12px 16px;
-      display: none;
-      flex-direction: column;
-      gap: 10px;
-      z-index: 1000;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-    }
-
-    .dropdown a {
-      color: white;
-      text-decoration: none;
-      font-size: 16px;
-    }
-
-    .dropdown a:hover {
-      color: #00ffcc;
-    }
-
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 160px;
-      gap: 20px;
-    }
-
-    .card {
-      width: 80%;
-      max-width: 350px;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 20px;
-      text-align: center;
-      backdrop-filter: blur(6px);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .card span {
-      font-size: 32px;
-      display: block;
-      margin-bottom: 10px;
-    }
-
-    .card h2 {
-      margin: 10px 0 5px;
-      font-size: 28px;
-    }
-
-    .card p {
-      margin: 0;
-      color: #ccc;
-      font-size: 16px;
-    }
-  </style>
+  <title>Pflanzen kaufen</title>
+  <link rel="stylesheet" href="plants.css" />
 </head>
 <body>
-
-  <!-- Burger-Menü -->
-  <div class="menu-button" onclick="toggleDropdown()">☰</div>
-
-  <!-- Modernes Dropdown-Menü -->
-  <div id="dropdown" class="dropdown">
+  <div class="menu-button" onclick="toggleMenu()">☰</div>
+  <div id="menu" class="dropdown">
     <a href="dashboard.html">📊 Dashboard</a>
     <a href="partner.html">🤝 Partner</a>
-    <a href="plants.html">🌿 Pflanzen kaufen</a>
     <a href="settings.html">⚙️ Einstellungen</a>
-    <a href="index.html">🚪 Logout</a>
+    <a href="plants.html">🌿 Pflanzen kaufen</a>
+    <a href="index.html">📕 Logout</a>
   </div>
 
-  <!-- Dashboard-Inhalt -->
-  <div class="container">
-    <div class="card">
-      <span>💰</span>
-      <h2>€1'520</h2>
-      <p>Einnahmen</p>
+  <h1>🌿 Pflanzen kaufen<br>GrowEmpire</h1>
+
+  <div class="plant-grid">
+    <div class="plant-card">
+      <img src="assets/kush2.png" alt="Kush #2" />
+      <h2>Kush #2</h2>
+      <p>CHF 180.– | 75 Tage</p>
+      <button onclick="fakeBuy('Kush #2', 180)">Kaufen</button>
     </div>
-    <div class="card">
-      <span>🌿</span>
-      <h2>320</h2>
-      <p>Ertrag</p>
+
+    <div class="plant-card">
+      <img src="assets/sativa1.png" alt="Sativa Dream" />
+      <h2>Sativa Dream</h2>
+      <p>CHF 195.– | 80 Tage</p>
+      <button onclick="fakeBuy('Sativa Dream', 195)">Kaufen</button>
     </div>
-    <div class="card">
-      <span>👥</span>
-      <h2>1'225</h2>
-      <p>Nutzer</p>
+
+    <div class="plant-card">
+      <img src="assets/haze1.png" alt="Purple Haze" />
+      <h2>Purple Haze</h2>
+      <p>CHF 210.– | 85 Tage</p>
+      <button onclick="fakeBuy('Purple Haze', 210)">Kaufen</button>
+    </div>
+
+    <div class="plant-card">
+      <img src="assets/ogkush.png" alt="OG Kush" />
+      <h2>OG Kush</h2>
+      <p>CHF 190.– | 70 Tage</p>
+      <button onclick="fakeBuy('OG Kush', 190)">Kaufen</button>
     </div>
   </div>
 
-  <!-- JavaScript für Menü -->
   <script>
-    function toggleDropdown() {
-      const dropdown = document.getElementById("dropdown");
-      dropdown.style.display = (dropdown.style.display === "flex") ? "none" : "flex";
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    }
+
+    function fakeBuy(name, price) {
+      alert(`✅ Du hast ${name} erfolgreich für CHF ${price}.– gekauft!`);
     }
   </script>
-
 </body>
 </html>
