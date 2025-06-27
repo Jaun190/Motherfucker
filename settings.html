@@ -3,16 +3,55 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GrowEmpire Einstellungen</title>
+  <title>Einstellungen</title>
   <link rel="stylesheet" href="dashboard.css" />
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: url('assets/dashboard.png') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
-      overflow-x: hidden;
+    .settings-box {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 20px;
+      border-radius: 20px;
+      max-width: 400px;
+      margin: 120px auto 40px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .settings-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin: 12px 0 6px;
+      font-weight: bold;
+    }
+
+    select, input[type="file"], input[type="email"], .checkbox-row {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      margin-bottom: 14px;
+      font-size: 16px;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .settings-box button {
+      background-color: #00ffcc;
+      color: black;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
     }
 
     .menu-button {
@@ -28,117 +67,90 @@
       cursor: pointer;
     }
 
-    .dropdown {
+    .menu {
       position: fixed;
       top: 70px;
       left: 20px;
-      background-color: rgba(0, 0, 0, 0.85);
-      border-radius: 12px;
-      padding: 12px 16px;
+      background: rgba(0, 0, 0, 0.9);
+      border-radius: 16px;
+      padding: 10px 16px;
       display: none;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
       z-index: 1000;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
     }
 
-    .dropdown a {
+    .menu a {
       color: white;
       text-decoration: none;
-      font-size: 16px;
+      font-size: 18px;
+      display: block;
     }
 
-    .dropdown a:hover {
+    .menu a:hover {
       color: #00ffcc;
     }
 
-    .content {
-      padding-top: 140px;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 28px;
-      margin-bottom: 30px;
-    }
-
-    .setting {
-      margin: 20px auto;
-      max-width: 320px;
-      background-color: rgba(0, 0, 0, 0.4);
-      padding: 20px;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(6px);
-    }
-
-    label {
-      display: block;
-      text-align: left;
-      margin-bottom: 8px;
-      font-weight: bold;
-    }
-
-    input[type="text"],
-    input[type="email"] {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: none;
-      margin-bottom: 15px;
-      font-size: 16px;
-    }
-
-    button {
-      padding: 10px 18px;
-      border: none;
-      border-radius: 8px;
-      background-color: #00ffcc;
-      color: black;
-      font-weight: bold;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #00ddaa;
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('assets/dashboard.png') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
     }
   </style>
 </head>
 <body>
 
-  <!-- Burger-Menü -->
-  <div class="menu-button" onclick="toggleDropdown()">☰</div>
-
-  <!-- Dropdown-Menü -->
-  <div id="dropdown" class="dropdown">
+  <!-- 3 Punkte Menü -->
+  <div class="menu-button" onclick="toggleMenu()">☰</div>
+  <div class="menu" id="menu">
     <a href="dashboard.html">📊 Dashboard</a>
     <a href="partner.html">🤝 Partner</a>
     <a href="settings.html">⚙️ Einstellungen</a>
     <a href="index.html">🚪 Logout</a>
   </div>
 
-  <!-- Einstellungen-Inhalt -->
-  <div class="content">
-    <h1>⚙️ Einstellungen</h1>
-    <div class="setting">
-      <label for="username">Benutzername</label>
-      <input type="text" id="username" placeholder="Dein Benutzername" />
+  <!-- Einstellungen-Box -->
+  <div class="settings-box">
+    <h2>⚙️ Einstellungen</h2>
 
-      <label for="email">E-Mail</label>
-      <input type="email" id="email" placeholder="deine@email.ch" />
+    <label for="language">🌍 Sprache wählen</label>
+    <select id="language">
+      <option>Deutsch 🇩🇪</option>
+      <option>English 🇬🇧</option>
+      <option>Français 🇫🇷</option>
+    </select>
 
-      <button>Speichern</button>
+    <label for="kyc">🆔 Ausweis hochladen</label>
+    <input type="file" id="kyc" accept=".jpg,.jpeg,.png,.pdf" />
+
+    <label>🔔 Benachrichtigungen</label>
+    <div class="checkbox-row">
+      <input type="checkbox" id="notify1" checked />
+      <label for="notify1">E-Mail bei neuen Partnern</label>
     </div>
+    <div class="checkbox-row">
+      <input type="checkbox" id="notify2" />
+      <label for="notify2">SMS bei Auszahlung</label>
+    </div>
+
+    <label>🎨 Design Theme</label>
+    <div class="checkbox-row">
+      <input type="radio" name="theme" checked /> Dark
+      <input type="radio" name="theme" /> Light
+      <input type="radio" name="theme" /> Weed 🌿
+    </div>
+
+    <button onclick="alert('Gespeichert!')">Speichern</button>
   </div>
 
-  <!-- Menü-Logik -->
+  <!-- JS für Menü -->
   <script>
-    function toggleDropdown() {
-      const dropdown = document.getElementById("dropdown");
-      dropdown.style.display = (dropdown.style.display === "flex") ? "none" : "flex";
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
     }
   </script>
-
 </body>
 </html>
