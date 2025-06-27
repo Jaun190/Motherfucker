@@ -1,97 +1,68 @@
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: url('dashboard.png') no-repeat center center fixed;
-  background-size: cover;
-  color: white;
-  overflow-x: hidden;
-}
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pflanzen kaufen</title>
+  <link rel="stylesheet" href="assets/plants.css" />
+</head>
+<body>
 
-.menu-button {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 1001;
-  font-size: 28px;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 10px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-}
+  <!-- Menü -->
+  <div class="menu-button" onclick="toggleDropdown()">☰</div>
+  <div id="dropdown" class="dropdown">
+    <a href="dashboard.html">📊 Dashboard</a>
+    <a href="partner.html">🤝 Partner</a>
+    <a href="settings.html">⚙️ Einstellungen</a>
+    <a href="plants.html">🌿 Pflanzen kaufen</a>
+    <a href="index.html">📕 Logout</a>
+  </div>
 
-.dropdown {
-  position: fixed;
-  top: 70px;
-  left: 20px;
-  background-color: rgba(0, 0, 0, 0.9);
-  border-radius: 12px;
-  padding: 12px 16px;
-  display: none;
-  flex-direction: column;
-  gap: 10px;
-  z-index: 1000;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-}
+  <!-- Titel -->
+  <h1>🌿 Pflanzen kaufen</h1>
 
-.dropdown a {
-  color: white;
-  text-decoration: none;
-  font-size: 16px;
-}
+  <!-- Pflanzen-Karten -->
+  <div class="plant-container">
+    <div class="plant-card">
+      <img src="assets/kush2.png" alt="Kush #2" />
+      <h2>Kush #2</h2>
+      <p>CHF 180.– | 75 Tage</p>
+      <button onclick="fakeBuy('Kush #2', 180)">Kaufen</button>
+    </div>
 
-.dropdown a:hover {
-  color: #00ffcc;
-}
+    <div class="plant-card">
+      <img src="assets/sativa1.png" alt="Sativa Dream" />
+      <h2>Sativa Dream</h2>
+      <p>CHF 195.– | 80 Tage</p>
+      <button onclick="fakeBuy('Sativa Dream', 195)">Kaufen</button>
+    </div>
 
-h1 {
-  text-align: center;
-  font-size: 32px;
-  margin-top: 100px;
-  margin-bottom: 40px;
-}
+    <div class="plant-card">
+      <img src="assets/haze1.png" alt="Purple Haze" />
+      <h2>Purple Haze</h2>
+      <p>CHF 210.– | 85 Tage</p>
+      <button onclick="fakeBuy('Purple Haze', 210)">Kaufen</button>
+    </div>
 
-.plant-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  padding-bottom: 50px;
-}
+    <div class="plant-card">
+      <img src="assets/ogkush.png" alt="OG Kush" />
+      <h2>OG Kush</h2>
+      <p>CHF 190.– | 70 Tage</p>
+      <button onclick="fakeBuy('OG Kush', 190)">Kaufen</button>
+    </div>
+  </div>
 
-.plant-card {
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 20px;
-  width: 160px;
-  padding: 16px;
-  text-align: center;
-  backdrop-filter: blur(6px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
+  <!-- Funktionierendes JavaScript -->
+  <script>
+    function toggleDropdown() {
+      const dropdown = document.getElementById("dropdown");
+      dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
+    }
 
-.plant-card img {
-  width: 100%;
-  border-radius: 12px;
-  margin-bottom: 10px;
-}
+    function fakeBuy(name, price) {
+      alert(`✅ Du hast ${name} erfolgreich für CHF ${price}.– gekauft!`);
+    }
+  </script>
 
-.plant-card h2 {
-  font-size: 18px;
-  margin: 10px 0 5px;
-}
-
-.plant-card p {
-  margin: 0 0 10px;
-  font-size: 14px;
-  color: #ccc;
-}
-
-.plant-card button {
-  background-color: #00ffcc;
-  color: black;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 16px;
-  font-weight: bold;
-  cursor: pointer;
-}
+</body>
+</html>
