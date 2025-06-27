@@ -4,63 +4,95 @@ body {
   background: url('assets/dashboard.png') no-repeat center center fixed;
   background-size: cover;
   color: white;
+  overflow-x: hidden;
 }
 
-.shop-container {
-  padding: 40px 20px;
+.menu-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1001;
+  font-size: 28px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: fixed;
+  top: 70px;
+  left: 20px;
+  background-color: rgba(0, 0, 0, 0.85);
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+.dropdown a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+.dropdown a:hover {
+  color: #00ffcc;
+}
+
+.title {
   text-align: center;
+  margin-top: 100px;
+  font-size: 28px;
+}
+.title span {
+  font-size: 20px;
+  color: #ccc;
 }
 
-.shop-container h1 {
-  font-size: 32px;
-  margin-bottom: 30px;
-}
-
-.shop-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 24px;
+.plant-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 20px;
+  padding: 30px;
+  justify-items: center;
 }
 
 .plant-card {
-  background: rgba(0, 0, 0, 0.6);
-  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.3);
   padding: 20px;
-  width: 160px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(5px);
-}
-
-.plant-card img.plant-img {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  margin-bottom: 10px;
-}
-
-.plant-card h3 {
-  margin: 10px 0 5px;
-  font-size: 18px;
-}
-
-.plant-card p {
-  margin: 0 0 10px;
-  color: #ccc;
-  font-size: 14px;
-}
-
-.plant-card button {
-  background-color: #00ffcc;
-  color: black;
-  border: none;
-  padding: 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
+  border-radius: 16px;
   width: 100%;
+  max-width: 220px;
+  text-align: center;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
-
+.plant-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+.plant-card h2 {
+  margin: 0;
+  font-size: 20px;
+}
+.plant-card p {
+  margin: 6px 0 14px;
+  color: #ccc;
+}
+.plant-card button {
+  background: #00ffcc;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
 .plant-card button:hover {
-  background-color: #00ccaa;
+  background: #00ccaa;
 }
