@@ -4,55 +4,60 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pflanzen kaufen – GrowEmpire</title>
-  <link rel="stylesheet" href="planta.css" />
+  <link rel="stylesheet" href="assets/plants.css" />
 </head>
 <body>
 
-  <!-- Burger-Menü -->
+  <!-- Menü -->
   <div class="menu-button" onclick="toggleDropdown()">☰</div>
   <div id="dropdown" class="dropdown">
     <a href="dashboard.html">📊 Dashboard</a>
     <a href="partner.html">🤝 Partner</a>
     <a href="settings.html">⚙️ Einstellungen</a>
     <a href="planta.html">🌿 Pflanzen kaufen</a>
-    <a href="index.html">🚪 Logout</a>
+    <a href="index.html">📕 Logout</a>
   </div>
 
-  <h1 class="title">🌱 Pflanzen kaufen<br><span>GrowEmpire</span></h1>
+  <!-- Seite -->
+  <h1>🌱 Pflanzen kaufen<br>GrowEmpire</h1>
 
   <div class="plant-grid">
+
     <div class="plant-card">
-      <img src="assets/kush2.png" alt="Kush #2" />
+      <img src="assets/kush2.png" alt="Kush #2">
       <h2>Kush #2</h2>
       <p>CHF 180.– | 75 Tage</p>
       <button>Kaufen</button>
     </div>
+
     <div class="plant-card">
-      <img src="assets/kiffen.png" alt="Sativa Dream" />
+      <img src="assets/sativa.png" alt="Sativa Dream">
       <h2>Sativa Dream</h2>
       <p>CHF 195.– | 80 Tage</p>
       <button>Kaufen</button>
     </div>
+
     <div class="plant-card">
-      <img src="assets/purple.png" alt="Purple Haze" />
+      <img src="assets/purple.png" alt="Purple Haze">
       <h2>Purple Haze</h2>
       <p>CHF 210.– | 85 Tage</p>
       <button>Kaufen</button>
     </div>
+
     <div class="plant-card">
-      <img src="assets/ogkush.png" alt="OG Kush" />
+      <img src="assets/og.png" alt="OG Kush">
       <h2>OG Kush</h2>
-      <p>CHF 199.– | 78 Tage</p>
+      <p>CHF 190.– | 70 Tage</p>
       <button>Kaufen</button>
     </div>
+
   </div>
 
   <script>
     function toggleDropdown() {
-      const dropdown = document.getElementById("dropdown");
-      dropdown.style.display = (dropdown.style.display === "flex") ? "none" : "flex";
+      const menu = document.getElementById("dropdown");
+      menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
     }
   </script>
-
 </body>
 </html>
