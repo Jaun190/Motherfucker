@@ -8,17 +8,15 @@
 </head>
 <body>
 
-  <!-- Burger-Menü -->
-  <div class="menu-button" onclick="toggleMenu()">☰</div>
+  <!-- Modernes Burger-Menü -->
+  <div class="burger" onclick="toggleMenu()">☰</div>
 
-  <!-- Seitenmenü -->
-  <nav id="menu" class="dropdown hidden">
-    <ul>
-      <li><a href="dashboard.html">📊 Dashboard</a></li>
-      <li><a href="partner.html">🤝 Partner</a></li>
-      <li><a href="settings.html">⚙️ Einstellungen</a></li>
-      <li><a href="index.html">🚪 Logout</a></li>
-    </ul>
+  <!-- Slide-In Menü -->
+  <nav id="sidebar" class="sidebar hidden">
+    <a href="dashboard.html">📊 Dashboard</a>
+    <a href="partner.html">🤝 Partner</a>
+    <a href="settings.html">⚙️ Einstellungen</a>
+    <a href="index.html" class="logout">🚪 Logout</a>
   </nav>
 
   <!-- Inhalt -->
@@ -29,11 +27,10 @@
     <div class="card"><span>👥</span><h2>1'225</h2><p>Nutzer</p></div>
   </div>
 
-  <!-- Menü-Script -->
+  <!-- JavaScript -->
   <script>
     function toggleMenu() {
-      const menu = document.getElementById("menu");
-      menu.classList.toggle("hidden");
+      document.getElementById('sidebar').classList.toggle('hidden');
     }
   </script>
 
