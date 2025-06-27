@@ -1,55 +1,46 @@
 body {
-  background-color: red !important;
-}body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #001a00;
+  background: linear-gradient(to bottom, #052d0c, #021e05);
   color: white;
+}
+
+.menu-button {
+  font-size: 30px;
+  margin: 15px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.dropdown {
+  display: none;
+  flex-direction: column;
+  background-color: #004d26;
+  position: absolute;
+  top: 50px;
+  left: 15px;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.dropdown a {
+  color: #fff;
+  text-decoration: none;
+  margin: 5px 0;
 }
 
 h1 {
   text-align: center;
-  padding-top: 60px;
-  font-size: 2rem;
+  font-size: 28px;
+  margin-top: 80px;
+  margin-bottom: 20px;
 }
 
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  padding: 20px;
-  max-width: 900px;
-  margin: auto;
-}
-
-.card {
-  background: #003300;
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
-  text-align: center;
-  transition: transform 0.2s ease;
-}
-
-.card:hover {
-  transform: scale(1.05);
-}
-
-.card span {
-  font-size: 2rem;
-  display: block;
-  margin-bottom: 10px;
-}
-
-.card h2 {
-  font-size: 1.5rem;
-  margin: 0;
-}
-
-.card p {
-  font-size: 1rem;
-  margin: 5px 0 0;
-}
 .dashboard-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -57,11 +48,32 @@ h1 {
   padding: 20px;
 }
 
-.dashboard-card {
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 20px;
+.card {
+  background-color: #0b3d26;
   padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   text-align: center;
-  color: white;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.card span {
+  font-size: 24px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.card h2 {
+  font-size: 22px;
+  margin: 10px 0 5px 0;
+}
+
+.card p {
+  margin: 0;
+  font-size: 14px;
+  color: #ccc;
 }
