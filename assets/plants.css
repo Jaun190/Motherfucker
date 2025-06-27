@@ -1,16 +1,10 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: url('assets/dashboard.png') no-repeat center center fixed;
+  background: url('dashboard.png') no-repeat center center fixed;
   background-size: cover;
   color: white;
   overflow-x: hidden;
-}
-
-h1 {
-  text-align: center;
-  margin-top: 100px;
-  font-size: 32px;
 }
 
 .menu-button {
@@ -30,13 +24,14 @@ h1 {
   position: fixed;
   top: 70px;
   left: 20px;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgba(0, 0, 0, 0.9);
   border-radius: 12px;
   padding: 12px 16px;
   display: none;
   flex-direction: column;
   gap: 10px;
   z-index: 1000;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
 }
 
 .dropdown a {
@@ -49,53 +44,54 @@ h1 {
   color: #00ffcc;
 }
 
-.plant-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+h1 {
+  text-align: center;
+  font-size: 32px;
+  margin-top: 100px;
+  margin-bottom: 40px;
+}
+
+.plant-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
-  padding: 20px;
-  max-width: 1000px;
-  margin: auto;
+  padding-bottom: 50px;
 }
 
 .plant-card {
-  background: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 20px;
-  padding: 20px;
+  width: 160px;
+  padding: 16px;
   text-align: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(6px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .plant-card img {
   width: 100%;
-  max-height: 160px;
-  object-fit: cover;
   border-radius: 12px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .plant-card h2 {
-  margin: 0;
-  font-size: 22px;
+  font-size: 18px;
+  margin: 10px 0 5px;
 }
 
 .plant-card p {
-  margin: 10px 0;
+  margin: 0 0 10px;
+  font-size: 14px;
   color: #ccc;
 }
 
 .plant-card button {
   background-color: #00ffcc;
   color: black;
-  padding: 10px 20px;
-  font-size: 16px;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-weight: bold;
   cursor: pointer;
-  margin-top: 10px;
-}
-
-.plant-card button:hover {
-  background-color: #00ddb3;
 }
