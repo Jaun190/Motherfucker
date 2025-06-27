@@ -8,11 +8,11 @@
 </head>
 <body>
 
-  <!-- Burger-Button -->
-  <div class="burger" onclick="toggleMenu()">☰</div>
+  <!-- Burger-Menü -->
+  <div class="menu-button" onclick="toggleMenu()">☰</div>
 
-  <!-- Menü -->
-  <nav id="menu" class="menu hidden">
+  <!-- Seitenmenü -->
+  <nav id="menu" class="dropdown hidden">
     <ul>
       <li><a href="dashboard.html">📊 Dashboard</a></li>
       <li><a href="partner.html">🤝 Partner</a></li>
@@ -21,32 +21,19 @@
     </ul>
   </nav>
 
-  <!-- Dashboard Inhalt -->
+  <!-- Inhalt -->
   <div class="container">
-    <h1 class="title">GrowEmpire</h1>
-
-    <div class="card">
-      <span>💰</span>
-      <h2>€1'520</h2>
-      <p>Einnahmen</p>
-    </div>
-    <div class="card">
-      <span>🌿</span>
-      <h2>320</h2>
-      <p>Ertrag</p>
-    </div>
-    <div class="card">
-      <span>👥</span>
-      <h2>1'225</h2>
-      <p>Nutzer</p>
-    </div>
+    <h1>GrowEmpire</h1>
+    <div class="card"><span>💰</span><h2>€1'520</h2><p>Einnahmen</p></div>
+    <div class="card"><span>🌿</span><h2>320</h2><p>Ertrag</p></div>
+    <div class="card"><span>👥</span><h2>1'225</h2><p>Nutzer</p></div>
   </div>
 
-  <!-- JS -->
+  <!-- Menü-Script -->
   <script>
     function toggleMenu() {
-      const menu = document.getElementById('menu');
-      menu.classList.toggle('hidden');
+      const menu = document.getElementById("menu");
+      menu.classList.toggle("hidden");
     }
   </script>
 
