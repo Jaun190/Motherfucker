@@ -8,31 +8,44 @@
 </head>
 <body>
 
-  <!-- Burger-Menü -->
-  <div class="burger" onclick="toggleMenu()">☰</div>
-
-  <!-- Dropdown-Menü -->
-  <div id="dropdown-menu" class="dropdown hidden">
-    <a href="dashboard.html">📊 Dashboard</a>
-    <a href="partner.html">🤝 Partner</a>
-    <a href="settings.html">⚙️ Einstellungen</a>
-    <a href="index.html" class="logout">🚪 Logout</a>
+  <!-- Drei Punkte Menü (modern) -->
+  <div class="menu-wrapper">
+    <button id="menu-toggle" class="menu-button">☰</button>
+    <div id="menu-box" class="menu-box hidden">
+      <a href="dashboard.html">📊 Dashboard</a>
+      <a href="partner.html">🤝 Partner</a>
+      <a href="settings.html">⚙️ Einstellungen</a>
+      <a href="index.html" class="logout">🚪 Logout</a>
+    </div>
   </div>
 
   <!-- Dashboard Inhalt -->
+  <h1 class="title">GrowEmpire</h1>
   <div class="container">
-    <h1>GrowEmpire</h1>
-    <div class="card"><span>💰</span><h2>€1'520</h2><p>Einnahmen</p></div>
-    <div class="card"><span>🌿</span><h2>320</h2><p>Ertrag</p></div>
-    <div class="card"><span>👥</span><h2>1'225</h2><p>Nutzer</p></div>
+    <div class="card">
+      <span>💰</span>
+      <h2>€1'520</h2>
+      <p>Einnahmen</p>
+    </div>
+    <div class="card">
+      <span>🌿</span>
+      <h2>320</h2>
+      <p>Ertrag</p>
+    </div>
+    <div class="card">
+      <span>👥</span>
+      <h2>1'225</h2>
+      <p>Nutzer</p>
+    </div>
   </div>
 
-  <!-- Menü-Script -->
+  <!-- Toggle-Script -->
   <script>
-    function toggleMenu() {
-      const menu = document.getElementById("dropdown-menu");
-      menu.classList.toggle("hidden");
-    }
+    const toggle = document.getElementById('menu-toggle');
+    const box = document.getElementById('menu-box');
+    toggle.addEventListener('click', () => {
+      box.classList.toggle('hidden');
+    });
   </script>
 
 </body>
