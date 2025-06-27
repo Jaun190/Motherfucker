@@ -7,64 +7,76 @@ body {
   overflow-x: hidden;
 }
 
-/* Menü-Button */
-.menu-button {
+/* Burger-Menü */
+.burger {
   position: fixed;
   top: 20px;
   left: 20px;
-  z-index: 1000;
+  z-index: 1001;
   font-size: 28px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 12px 16px;
+  border-radius: 10px;
   color: white;
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 10px 14px;
-  border-radius: 8px;
   cursor: pointer;
+  backdrop-filter: blur(6px);
 }
 
-/* Menü (Dropdown) */
-.dropdown {
+/* Sidebar */
+.sidebar {
   position: fixed;
-  top: 60px;
+  top: 70px;
   left: 20px;
-  background-color: rgba(0, 0, 0, 0.9);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
   padding: 20px;
-  border-radius: 12px;
-  z-index: 999;
+  border-radius: 16px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
   width: 200px;
+  animation: slideIn 0.3s ease;
 }
 
-.dropdown ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+@keyframes slideIn {
+  from { transform: translateX(-20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
 }
 
-.dropdown li {
-  margin-bottom: 15px;
-}
-
-.dropdown a {
+.sidebar a {
   color: white;
-  text-decoration: none;
   font-size: 18px;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
 }
 
-.dropdown a:hover {
+.sidebar a:hover {
   color: #00ffcc;
+  transform: translateX(5px);
 }
 
-/* Versteckt */
+.sidebar .logout:hover {
+  color: #ff4c4c;
+}
+
 .hidden {
   display: none;
 }
 
-/* Karten */
+/* Inhalt */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 150px;
+  padding-top: 140px;
   gap: 20px;
+}
+
+.container h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
 }
 
 .card {
