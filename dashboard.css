@@ -7,75 +7,73 @@ body {
   overflow-x: hidden;
 }
 
-/* Burger-Menü */
-.burger {
-  position: fixed;
+/* Titel */
+.title {
+  text-align: center;
+  margin-top: 80px;
+  font-size: 32px;
+}
+
+/* Menü Wrapper */
+.menu-wrapper {
+  position: absolute;
   top: 20px;
   left: 20px;
-  font-size: 28px;
-  background: rgba(0,0,0,0.6);
-  padding: 10px 14px;
-  border-radius: 10px;
-  z-index: 1001;
-  color: white;
-  cursor: pointer;
-  backdrop-filter: blur(4px);
 }
 
-/* Dropdown-Menü */
-.dropdown {
-  position: fixed;
-  top: 60px;
-  left: 20px;
-  background: rgba(15, 15, 15, 0.95);
-  padding: 14px 20px;
+/* Menü Button */
+.menu-button {
+  font-size: 24px;
+  background-color: rgba(0,0,0,0.7);
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Menü Box */
+.menu-box {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  background-color: rgba(20, 20, 20, 0.95);
   border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  min-width: 180px;
   z-index: 1000;
-  animation: fadeDown 0.3s ease;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
-.dropdown a {
+.menu-box a {
+  padding: 14px 20px;
   color: white;
   text-decoration: none;
-  font-size: 18px;
-  padding: 6px 8px;
-  border-radius: 8px;
-  transition: 0.2s;
+  font-size: 16px;
+  transition: background 0.3s;
 }
 
-.dropdown a:hover {
-  background: rgba(255, 255, 255, 0.1);
+.menu-box a:hover {
+  background-color: rgba(0, 255, 170, 0.15);
 }
 
-.dropdown .logout:hover {
-  color: #ff4c4c;
+.menu-box .logout:hover {
+  background-color: rgba(255, 80, 80, 0.2);
 }
 
 .hidden {
   display: none;
 }
 
-@keyframes fadeDown {
-  from { opacity: 0; transform: translateY(-10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* Inhalt */
+/* Dashboard Karten */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 160px;
+  padding-top: 40px;
   gap: 20px;
-}
-
-.container h1 {
-  font-size: 32px;
-  margin-bottom: 20px;
 }
 
 .card {
@@ -104,4 +102,10 @@ body {
   margin: 0;
   color: #ccc;
   font-size: 16px;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
