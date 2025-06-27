@@ -3,40 +3,107 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Partner | GrowEmpire</title>
+  <title>GrowEmpire Partner</title>
   <link rel="stylesheet" href="dashboard.css" />
-  <script defer src="dashboard.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('assets/dashboard.png') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .menu-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1001;
+      font-size: 28px;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .dropdown {
+      position: fixed;
+      top: 70px;
+      left: 20px;
+      background-color: rgba(0, 0, 0, 0.85);
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 1000;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    }
+
+    .dropdown a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .dropdown a:hover {
+      color: #00ffcc;
+    }
+
+    .content {
+      padding-top: 140px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #ccc;
+      margin: 12px 0;
+    }
+
+    .icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
 <body>
 
   <!-- Burger-Menü -->
-  <div class="menu-button" onclick="toggleMenu()">☰</div>
+  <div class="menu-button" onclick="toggleDropdown()">☰</div>
 
-  <!-- Sidebar -->
-  <nav id="sidebar" class="sidebar">
-    <ul class="menu-links">
-      <li><a href="dashboard.html">📊 Dashboard</a></li>
-      <li><a href="partner.html">🤝 Partner</a></li>
-      <li><a href="settings.html">⚙️ Einstellungen</a></li>
-    </ul>
-    <div class="logout-link">
-      <a href="index.html">🚪 Logout</a>
-    </div>
-  </nav>
-
-  <!-- Partner Inhalt -->
-  <div class="container">
-    <div class="card">
-      <span>🔗</span>
-      <h2>Dein Referral-Link</h2>
-      <p>https://growempire.com/register?ref=deinName</p>
-    </div>
-    <div class="card">
-      <span>📈</span>
-      <h2>Deine Downline</h2>
-      <p>👥 12 aktive Partner</p>
-    </div>
+  <!-- Dropdown-Menü -->
+  <div id="dropdown" class="dropdown">
+    <a href="dashboard.html">📊 Dashboard</a>
+    <a href="partner.html">🤝 Partner</a>
+    <a href="settings.html">⚙️ Einstellungen</a>
+    <a href="index.html">🚪 Logout</a>
   </div>
+
+  <!-- Partner-Inhalt -->
+  <div class="content">
+    <h1>Dein Referral-Link</h1>
+    <p>🔗 https://growempire.com/register?ref=deinName</p>
+
+    <div class="icon">📈</div>
+    <h1>Deine Downline</h1>
+    <p>👥 12 aktive Partner</p>
+  </div>
+
+  <!-- Menü-Logik -->
+  <script>
+    function toggleDropdown() {
+      const dropdown = document.getElementById("dropdown");
+      dropdown.style.display = (dropdown.style.display === "flex") ? "none" : "flex";
+    }
+  </script>
 
 </body>
 </html>
