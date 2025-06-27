@@ -6,6 +6,7 @@
   <title>Einstellungen</title>
   <link rel="stylesheet" href="dashboard.css" />
   <style>
+    /* Dein bisheriger CSS-Code hier – wie im Screenshot */
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
@@ -101,5 +102,45 @@
 </head>
 <body>
 
-  <!-- 3 Punkte Menü -->
-  <div class="menu-button" onclick="
+  <div class="menu-button" onclick="toggleMenu()">☰</div>
+  <div class="menu" id="menu">
+    <a href="dashboard.html">📊 Dashboard</a>
+    <a href="partner.html">🤝 Partner</a>
+    <a href="settings.html">⚙️ Einstellungen</a>
+    <a href="index.html">🚪 Logout</a>
+  </div>
+
+  <div class="settings-box">
+    <h2>⚙️ Einstellungen</h2>
+
+    <label>🌍 Sprache wählen</label>
+    <select>
+      <option>Deutsch 🇩🇪</option>
+      <option>English 🇬🇧</option>
+    </select>
+
+    <label>🪪 Ausweis hochladen</label>
+    <input type="file" />
+
+    <label>🔔 Benachrichtigungen</label>
+    <div class="checkbox-row">
+      <input type="checkbox" id="emailNotif" checked />
+      <label for="emailNotif">E-Mail bei neuen Partnern</label>
+    </div>
+    <div class="checkbox-row">
+      <input type="checkbox" id="smsNotif" />
+      <label for="smsNotif">SMS bei Auszahlung</label>
+    </div>
+
+    <button>Speichern</button>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    }
+  </script>
+
+</body>
+</html>
