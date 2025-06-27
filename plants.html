@@ -5,8 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pflanzen kaufen</title>
   <link rel="stylesheet" href="assets/plants.css" />
+  <script src="https://unpkg.com/@supabase/supabase-js"></script>
+  <script defer src="plants.js"></script>
 </head>
 <body>
+
   <!-- Menü -->
   <div class="menu-button" onclick="toggleDropdown()">☰</div>
   <div id="dropdown" class="dropdown">
@@ -20,42 +23,8 @@
   <!-- Titel -->
   <h1>🌿 Pflanzen kaufen</h1>
 
-  <!-- Pflanzenliste -->
-  <div class="plant-container">
-    <div class="plant-card">
-      <img src="assets/kush2.png" alt="Kush #2" />
-      <h2>Kush #2</h2>
-      <p>CHF 180.– | 75 Tage</p>
-      <button>Kaufen</button>
-    </div>
+  <!-- Pflanzen-Karten (wird automatisch gefüllt) -->
+  <div id="plant-container" class="plant-container"></div>
 
-    <div class="plant-card">
-      <img src="assets/sativa1.png" alt="Sativa Dream" />
-      <h2>Sativa Dream</h2>
-      <p>CHF 195.– | 80 Tage</p>
-      <button>Kaufen</button>
-    </div>
-
-    <div class="plant-card">
-      <img src="assets/haze1.png" alt="Purple Haze" />
-      <h2>Purple Haze</h2>
-      <p>CHF 210.– | 85 Tage</p>
-      <button>Kaufen</button>
-    </div>
-
-    <div class="plant-card">
-      <img src="assets/ogkush.png" alt="OG Kush" />
-      <h2>OG Kush</h2>
-      <p>CHF 190.– | 70 Tage</p>
-      <button>Kaufen</button>
-    </div>
-  </div>
-
-  <script>
-    function toggleDropdown() {
-      const dropdown = document.getElementById("dropdown");
-      dropdown.style.display = (dropdown.style.display === "flex") ? "none" : "flex";
-    }
-  </script>
 </body>
 </html>
