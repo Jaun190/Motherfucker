@@ -50,3 +50,46 @@ body {
   color: #ccc;
   font-size: 16px;
 }
+.burger {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 999;
+  font-size: 28px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+}
+
+.menu {
+  position: fixed;
+  top: 60px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 998;
+  backdrop-filter: blur(8px);
+}
+
+.menu.hidden {
+  display: none;
+}
+
+.menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  margin: 10px 0;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
