@@ -6,7 +6,6 @@
   <title>Einstellungen</title>
   <link rel="stylesheet" href="dashboard.css" />
   <style>
-    /* Dein bisheriger CSS-Code hier – wie im Screenshot */
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
@@ -19,26 +18,26 @@
       position: fixed;
       top: 20px;
       left: 20px;
-      z-index: 1001;
       font-size: 28px;
+      background: rgba(0, 0, 0, 0.7);
       color: white;
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 10px 14px;
+      padding: 12px 16px;
       border-radius: 8px;
       cursor: pointer;
+      z-index: 999;
     }
 
     .menu {
       position: fixed;
       top: 70px;
       left: 20px;
-      background: rgba(0, 0, 0, 0.9);
+      background: rgba(0, 0, 0, 0.95);
       border-radius: 16px;
-      padding: 10px 16px;
+      padding: 14px 20px;
       display: none;
       flex-direction: column;
       gap: 12px;
-      z-index: 1000;
+      z-index: 998;
     }
 
     .menu a {
@@ -55,10 +54,10 @@
       background: rgba(0, 0, 0, 0.4);
       padding: 20px;
       border-radius: 20px;
-      max-width: 400px;
-      margin: 120px auto 40px;
+      max-width: 420px;
+      margin: 100px auto 40px;
       backdrop-filter: blur(6px);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     }
 
     .settings-box h2 {
@@ -72,36 +71,26 @@
       font-weight: bold;
     }
 
-    select, input[type="file"], .checkbox-row {
+    input[type="file"] {
       width: 100%;
       padding: 10px;
       border-radius: 10px;
-      border: none;
-      margin-bottom: 14px;
       font-size: 16px;
-    }
-
-    .checkbox-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .settings-box button {
-      background-color: #00ffcc;
+      background-color: white;
       color: black;
-      padding: 12px;
       border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      cursor: pointer;
-      width: 100%;
+    }
+
+    #uploadStatus {
       margin-top: 10px;
+      font-size: 14px;
+      color: #ccc;
     }
   </style>
 </head>
 <body>
 
+  <!-- 3-Punkte-Menü -->
   <div class="menu-button" onclick="toggleMenu()">☰</div>
   <div class="menu" id="menu">
     <a href="dashboard.html">📊 Dashboard</a>
@@ -110,36 +99,40 @@
     <a href="index.html">🚪 Logout</a>
   </div>
 
+  <!-- Einstellungsbox -->
   <div class="settings-box">
     <h2>⚙️ Einstellungen</h2>
 
-    <label>🌍 Sprache wählen</label>
-    <select>
-      <option>Deutsch 🇩🇪</option>
-      <option>English 🇬🇧</option>
-    </select>
-
-    <label>🪪 Ausweis hochladen</label>
-    <input type="file" />
-
-    <label>🔔 Benachrichtigungen</label>
-    <div class="checkbox-row">
-      <input type="checkbox" id="emailNotif" checked />
-      <label for="emailNotif">E-Mail bei neuen Partnern</label>
-    </div>
-    <div class="checkbox-row">
-      <input type="checkbox" id="smsNotif" />
-      <label for="smsNotif">SMS bei Auszahlung</label>
-    </div>
-
-    <button>Speichern</button>
+    <!-- Ausweis hochladen -->
+    <label for="ausweisUpload">🪪 Ausweis hochladen</label>
+    <input type="file" id="ausweisUpload" accept=".jpg,.jpeg,.png,.pdf" />
+    <p id="uploadStatus">Keine Datei ausgewählt</p>
   </div>
 
+  <!-- JS -->
   <script>
     function toggleMenu() {
       const menu = document.getElementById("menu");
       menu.style.display = menu.style.display === "flex" ? "none" : "flex";
     }
+
+    const fileInput = document.getElementById('ausweisUpload');
+    const uploadStatus = document.getElementById('uploadStatus');
+
+    fileInput.addEventListener('change', () => {
+      const file = fileInput.files[0];
+      if (!file) {
+        uploadStatus.textContent = 'Keine Datei ausgewählt';
+        return;
+      }
+
+      if (file.size > 5 * 1024 * 1024) {
+        uploadStatus.textContent = 'Datei ist zu groß (max. 5 MB)';
+        return;
+      }
+
+      uploadStatus.textContent = `📎 Datei: ${file.name}`;
+    });
   </script>
 
 </body>
