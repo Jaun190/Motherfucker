@@ -86,3 +86,9 @@ h1 {
   text-align: center;
   transition: transform 0.2s;
 }
+body {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 50, 0, 0.8)),
+              url("assets/dashboard.png") no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+}
