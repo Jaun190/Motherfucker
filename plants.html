@@ -3,60 +3,145 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pflanzen kaufen</title>
-  <link rel="stylesheet" href="plants.css" />
+  <title>Pflanzen kaufen – GrowEmpire</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #041d10;
+      color: white;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 20px 0;
+      font-size: 2rem;
+    }
+
+    .menu-button {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      font-size: 24px;
+      background: none;
+      border: none;
+      color: white;
+      z-index: 1000;
+      cursor: pointer;
+    }
+
+    .dropdown {
+      display: none;
+      flex-direction: column;
+      background-color: #072a14;
+      padding: 10px;
+      position: absolute;
+      top: 50px;
+      left: 15px;
+      border-radius: 8px;
+      z-index: 999;
+    }
+
+    .dropdown a {
+      color: #00ff99;
+      text-decoration: none;
+      margin: 5px 0;
+    }
+
+    .plant-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .plant-card {
+      background-color: #083a1d;
+      border-radius: 20px;
+      overflow: hidden;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0, 255, 100, 0.2);
+    }
+
+    .plant-card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .plant-card h2 {
+      font-size: 1.2rem;
+      margin: 10px 0 5px 0;
+    }
+
+    .plant-card p {
+      margin: 5px 0 10px;
+      color: #ccc;
+    }
+
+    button {
+      background-color: #00ffcc;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 20px;
+      font-weight: bold;
+      cursor: pointer;
+      color: black;
+    }
+
+    button:hover {
+      background-color: #00ccaa;
+    }
+  </style>
 </head>
 <body>
-  <div class="menu-button" onclick="toggleMenu()">☰</div>
-  <div id="menu" class="dropdown">
+
+  <!-- Burger-Menü -->
+  <button class="menu-button" onclick="toggleMenu()">☰</button>
+  <div id="dropdown" class="dropdown">
     <a href="dashboard.html">📊 Dashboard</a>
     <a href="partner.html">🤝 Partner</a>
     <a href="settings.html">⚙️ Einstellungen</a>
-    <a href="plants.html">🌿 Pflanzen kaufen</a>
-    <a href="index.html">📕 Logout</a>
+    <a href="index.html">🚪 Logout</a>
   </div>
 
-  <h1>🌿 Pflanzen kaufen<br>GrowEmpire</h1>
+  <h1>🌿 Pflanzen kaufen</h1>
 
   <div class="plant-grid">
     <div class="plant-card">
-      <img src="assets/kush2.png" alt="Kush #2" />
-      <h2>Kush #2</h2>
-      <p>CHF 180.– | 75 Tage</p>
-      <button onclick="fakeBuy('Kush #2', 180)">Kaufen</button>
-    </div>
-
-    <div class="plant-card">
-      <img src="assets/sativa1.png" alt="Sativa Dream" />
-      <h2>Sativa Dream</h2>
-      <p>CHF 195.– | 80 Tage</p>
-      <button onclick="fakeBuy('Sativa Dream', 195)">Kaufen</button>
-    </div>
-
-    <div class="plant-card">
-      <img src="assets/haze1.png" alt="Purple Haze" />
-      <h2>Purple Haze</h2>
-      <p>CHF 210.– | 85 Tage</p>
-      <button onclick="fakeBuy('Purple Haze', 210)">Kaufen</button>
-    </div>
-
-    <div class="plant-card">
-      <img src="assets/ogkush.png" alt="OG Kush" />
+      <img src="ogkush.png" alt="OG Kush" />
       <h2>OG Kush</h2>
-      <p>CHF 190.– | 70 Tage</p>
-      <button onclick="fakeBuy('OG Kush', 190)">Kaufen</button>
+      <p>Kräftige Blüte, Klassiker unter den Strains.</p>
+      <button>Kaufen</button>
+    </div>
+    <div class="plant-card">
+      <img src="purplehaze.png" alt="Purple Haze" />
+      <h2>Purple Haze</h2>
+      <p>Fruchtiger Geschmack mit starkem High.</p>
+      <button>Kaufen</button>
+    </div>
+    <div class="plant-card">
+      <img src="gelato.png" alt="Gelato" />
+      <h2>Gelato</h2>
+      <p>Süß & cremig – perfekt für Genießer.</p>
+      <button>Kaufen</button>
+    </div>
+    <div class="plant-card">
+      <img src="amnesia.png" alt="Amnesia" />
+      <h2>Amnesia</h2>
+      <p>Stark & legendär – für erfahrene Grower.</p>
+      <button>Kaufen</button>
     </div>
   </div>
 
   <script>
     function toggleMenu() {
-      const menu = document.getElementById("menu");
+      const menu = document.getElementById("dropdown");
       menu.style.display = menu.style.display === "flex" ? "none" : "flex";
     }
-
-    function fakeBuy(name, price) {
-      alert(`✅ Du hast ${name} erfolgreich für CHF ${price}.– gekauft!`);
-    }
   </script>
+
 </body>
 </html>
