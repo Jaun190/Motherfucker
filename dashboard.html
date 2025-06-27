@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GrowEmpire Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+
+  <!-- Burger-Menü -->
+  <button class="menu-button" onclick="toggleMenu()">☰</button>
+  <div id="dropdown" class="dropdown">
+    <a href="plants.html">🌱 Pflanzen kaufen</a>
+    <a href="partner.html">🤝 Partner</a>
+    <a href="settings.html">⚙️ Einstellungen</a>
+    <a href="index.html">🚪 Logout</a>
+  </div>
+
+  <h1 style="text-align:center; margin-top: 100px;">📊 Dashboard Übersicht</h1>
+
+  <div class="dashboard-grid">
+    <div class="card">
+      <span>💰</span>
+      <h2>CHF 1'520.–</h2>
+      <p>Gesamteinnahmen</p>
+    </div>
+    <div class="card">
+      <span>🌿</span>
+      <h2>320</h2>
+      <p>Aktive Pflanzen</p>
+    </div>
+    <div class="card">
+      <span>👥</span>
+      <h2>1225</h2>
+      <p>Downline-Nutzer</p>
+    </div>
+    <div class="card">
+      <span>⏳</span>
+      <h2>13 Tage</h2>
+      <p>Bis zur nächsten Ernte</p>
+    </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("dropdown");
+      menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+    }
+  </script>
+
+</body>
+</html>
