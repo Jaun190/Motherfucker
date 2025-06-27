@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pflanzen kaufen – GrowEmpire</title>
+  <link rel="stylesheet" href="dashboard.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: url('assets/dashboard.png') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+
+    .shop-container {
+      max-width: 1200px;
+      margin: 80px auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .plant-card {
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      border-radius: 20px;
+      padding: 20px;
+      width: 260px;
+      text-align: center;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .plant-card img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 10px;
+    }
+
+    .plant-card h3 {
+      margin: 10px 0 5px;
+    }
+
+    .plant-card p {
+      margin: 6px 0;
+      color: #ccc;
+    }
+
+    .plant-card button {
+      margin-top: 12px;
+      background: #00ff88;
+      border: none;
+      padding: 10px 16px;
+      color: black;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .plant-card button:hover {
+      background: #00e07a;
+    }
+
+    .headline {
+      text-align: center;
+      font-size: 32px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="headline">🌱 Pflanzen kaufen</div>
+
+  <div class="shop-container">
+
+    <!-- Sorte 1 -->
+    <div class="plant-card">
+      <img src="assets/leaf1.png" alt="Green Kush" />
+      <h3>Green Kush</h3>
+      <p>CHF 150.– | 75 Tage</p>
+      <p>💰 Ertrag: CHF 180.–</p>
+      <button onclick="buy('Green Kush')">Jetzt kaufen</button>
+    </div>
+
+    <!-- Sorte 2 -->
+    <div class="plant-card">
+      <img src="assets/leaf2.png" alt="Purple Haze" />
+      <h3>Purple Haze</h3>
+      <p>CHF 180.– | 90 Tage</p>
+      <p>💰 Ertrag: CHF 220.–</p>
+      <button onclick="buy('Purple Haze')">Jetzt kaufen</button>
+    </div>
+
+    <!-- Sorte 3 -->
+    <div class="plant-card">
+      <img src="assets/leaf3.png" alt="Swiss OG" />
+      <h3>Swiss OG</h3>
+      <p>CHF 200.– | 60 Tage</p>
+      <p>💰 Ertrag: CHF 230.–</p>
+      <button onclick="buy('Swiss OG')">Jetzt kaufen</button>
+    </div>
+
+    <!-- Sorte 4 -->
+    <div class="plant-card">
+      <img src="assets/leaf4.png" alt="Lemon Diesel" />
+      <h3>Lemon Diesel</h3>
+      <p>CHF 220.– | 65 Tage</p>
+      <p>💰 Ertrag: CHF 250.–</p>
+      <button onclick="buy('Lemon Diesel')">Jetzt kaufen</button>
+    </div>
+
+  </div>
+
+  <script>
+    function buy(name) {
+      alert("🌿 Du hast '" + name + "' gekauft!");
+      // Später: Stripe- oder Supabase-Logik hier einbauen
+    }
+  </script>
+
+</body>
+</html>
