@@ -7,13 +7,13 @@ body {
   overflow-x: hidden;
 }
 
-/* Menü-Button */
+/* Burger-Menü */
 .menu-button {
   position: fixed;
   top: 20px;
   left: 20px;
   z-index: 1001;
-  font-size: 28px;
+  font-size: 26px;
   color: white;
   background-color: rgba(0, 0, 0, 0.7);
   padding: 10px 14px;
@@ -25,15 +25,24 @@ body {
 .sidebar {
   position: fixed;
   top: 0;
-  left: -240px;
+  left: 0;
   width: 220px;
   height: 100%;
   background-color: rgba(15, 15, 15, 0.95);
   box-shadow: 2px 0 12px rgba(0, 0, 0, 0.6);
-  transition: left 0.3s ease-in-out;
+  transform: translateX(-250px);
+  transition: transform 0.3s ease-in-out;
   padding-top: 70px;
   padding-left: 20px;
   z-index: 1000;
+}
+
+.sidebar.hidden {
+  transform: translateX(-250px);
+}
+
+.sidebar.show {
+  transform: translateX(0);
 }
 
 .menu-links {
@@ -77,8 +86,13 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 180px;
+  padding-top: 140px;
   gap: 20px;
+}
+
+.title {
+  font-size: 36px;
+  margin-bottom: 20px;
 }
 
 .card {
@@ -100,16 +114,11 @@ body {
 
 .card h2 {
   margin: 10px 0 5px;
-  font-size: 24px;
+  font-size: 28px;
 }
 
 .card p {
   margin: 0;
   color: #ccc;
   font-size: 16px;
-}
-/* Sidebar verstecken */
-.hidden {
-  transform: translateX(-250px);
-  transition: transform 0.3s ease-in-out;
 }
