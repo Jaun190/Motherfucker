@@ -1,14 +1,15 @@
-e<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GrowEmpire Dashboard</title>
   <link rel="stylesheet" href="dashboard.css" />
+  <script defer src="dashboard.js"></script>
 </head>
 <body>
 
-  <!-- Burger-Button -->
+  <!-- Burger-Menü -->
   <div class="menu-button" onclick="toggleMenu()">☰</div>
 
   <!-- Sidebar -->
@@ -23,8 +24,9 @@ e<!DOCTYPE html>
     </div>
   </nav>
 
-  <!-- Inhalt -->
+  <!-- Dashboard Inhalt -->
   <div class="container">
+    <h1 class="title">GrowEmpire</h1>
     <div class="card">
       <span>💰</span>
       <h2>€1'520</h2>
@@ -41,14 +43,6 @@ e<!DOCTYPE html>
       <p>Nutzer</p>
     </div>
   </div>
-
-  <!-- Toggle Script -->
-  <script>
-    function toggleMenu() {
-      const sidebar = document.getElementById("sidebar");
-      sidebar.classList.toggle("hidden");
-    }
-  </script>
 
 </body>
 </html>
