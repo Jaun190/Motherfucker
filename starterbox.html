@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Starterbox kaufen – GrowEmpire</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      background: #0a1e13;
+      color: white;
+    }
+  </style>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+
+  <div class="bg-neutral-900 p-8 rounded-xl shadow-lg max-w-md w-full text-center">
+    <h1 class="text-3xl font-bold text-green-400 mb-4">Starterbox kaufen</h1>
+    <p class="mb-6 text-gray-300">Aktiviere dein GrowEmpire-Konto mit der Starterbox für CHF 49.–.</p>
+    
+    <button onclick="activateStarterbox()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded">
+      ✅ Starterbox jetzt aktivieren
+    </button>
+
+    <p id="status" class="mt-4 text-sm text-gray-400"></p>
+  </div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyC7i9q4MnzBwuu2BtLii5gGt3DO-oGdlRw",
+      authDomain: "ruedi-aebcb.firebaseapp.com",
+      projectId: "ruedi-aebcb",
+      storageBucket: "ruedi-aebcb.appspot.com",
+      messagingSenderId: "784338413167",
+      appId: "1:784338413167:web:13687c8f7825da1e168f9a"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    auth.onAuthStateChanged(user => {
+      if (!user) {
+        window.location.href = "index.html";
+      }
+    });
+
+    async function activateStarterbox() {
+      const user = auth.currentUser;
+      if (!user) return;
+
+      try {
+        await db.collection("nutzer").doc(user.uid).update({
+          starterbox: true
+        });
+
+        document.getElementById("status").textContent = "✅ Starterbox aktiviert! Weiterleitung...";
+        setTimeout(() => {
+          window.location.href = "dashboard.html";
+        }, 1000);
+      } catch (error) {
+        document.getElementById("status").textContent = "❌ Fehler: " + error.message;
+      }
+    }
+  </script>
+
+</body>
+</html>
