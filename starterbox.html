@@ -5,10 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Starterbox kaufen – GrowEmpire</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
   <style>
     body {
-      background: #0a1e13;
+      background: #041e13;
       color: white;
     }
   </style>
@@ -21,10 +20,10 @@
 <body class="flex items-center justify-center min-h-screen">
 
   <div class="bg-neutral-900 p-8 rounded-xl shadow-lg max-w-md w-full text-center">
-    <h1 class="text-3xl font-bold text-green-400 mb-4">Starterbox kaufen</h1>
-    <p class="mb-6 text-gray-300">Aktiviere dein GrowEmpire-Konto mit der Starterbox für CHF 49.–.</p>
-    
-    <button onclick="activateStarterbox()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded">
+    <h1 class="text-3xl font-bold text-green-400 mb-4">🌱 Starterbox kaufen</h1>
+    <p class="mb-6 text-gray-300">Aktiviere deinen GrowEmpire-Account mit der Starterbox für CHF 49.–</p>
+
+    <button onclick="activateStarterbox()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded">
       ✅ Starterbox jetzt aktivieren
     </button>
 
@@ -32,6 +31,7 @@
   </div>
 
   <script>
+    // Firebase-Konfiguration
     const firebaseConfig = {
       apiKey: "AIzaSyC7i9q4MnzBwuu2BtLii5gGt3DO-oGdlRw",
       authDomain: "ruedi-aebcb.firebaseapp.com",
@@ -41,16 +41,21 @@
       appId: "1:784338413167:web:13687c8f7825da1e168f9a"
     };
 
+    // Initialisierung
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
 
+    // Prüfen ob eingeloggt
     auth.onAuthStateChanged(user => {
+      console.log("Benutzerstatus:", user); // Debug-Ausgabe
       if (!user) {
+        alert("🚫 Du bist ausgeloggt oder dein Login ist abgelaufen.");
         window.location.href = "index.html";
       }
     });
 
+    // Starterbox aktivieren
     async function activateStarterbox() {
       const user = auth.currentUser;
       if (!user) return;
@@ -69,6 +74,5 @@
       }
     }
   </script>
-
 </body>
 </html>
