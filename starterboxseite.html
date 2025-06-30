@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Starterbox – GrowEmpire</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-image: url('assets/dashboard.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+  </style>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+</head>
+
+<body class="flex items-center justify-center min-h-screen text-white text-center">
+  <div class="bg-black bg-opacity-80 p-8 rounded-xl shadow-xl max-w-xl w-full space-y-6">
+    <h1 class="text-3xl font-bold text-green-400">🚀 Deine Starterbox</h1>
+    <p class="text-lg">Der Einstieg in dein Hanf-Imperium!</p>
+    
+    <ul class="text-left text-sm space-y-2">
+      <li>✅ 1 m² Anbaufläche freigeschaltet</li>
+      <li>✅ Zugang zum Pflanzenmarkt</li>
+      <li>✅ Provisionen durch Partner</li>
+      <li>✅ Dashboard & Verdienstübersicht</li>
+    </ul>
+
+    <button onclick="kaufeStarterbox()" class="bg-green-500 hover:bg-green-600 py-3 px-6 rounded font-bold text-white">
+      Starterbox jetzt kaufen für CHF 49.–
+    </button>
+
+    <p id="status" class="text-green-400 font-semibold"></p>
+  </div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyC7i9q4MnzBwuu2BtLii5gGt3DO-oGdlRw",
+      authDomain: "ruedi-aebcb.firebaseapp.com",
+      projectId: "ruedi-aebcb",
+      storageBucket: "ruedi-aebcb.appspot.com",
+      messagingSenderId: "784338413167",
+      appId: "1:784338413167:web:13687c8f7825da1e168f9a"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    async function kaufeStarterbox() {
+      const status = document.getElementById("status");
+      const user = auth.currentUser;
+
+      if (!user) {
+        status.textContent = "❌ Nicht eingeloggt.";
+        return;
+      }
+
+      try {
+        await db.collection("nutzer").doc(user.uid).update({
+          starterbox: true
+        });
+        status.textContent = "✅ Starterbox erfolgreich aktiviert!";
+        setTimeout(() => window.location.href = "dashboard.html", 1500);
+      } catch (error) {
+        status.textContent = "❌ Fehler: " + error.message;
+      }
+    }
+
+    auth.onAuthStateChanged((user) => {
+      if (!user) {
+        window.location.href = "index.html";
+      }
+    });
+  </script>
+</body>
+</html>
