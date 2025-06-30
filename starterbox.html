@@ -10,6 +10,16 @@
       background: #041e13;
       color: white;
     }
+    #loading {
+      position: fixed;
+      inset: 0;
+      background: #000000ee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      font-size: 1.2rem;
+    }
   </style>
 
   <!-- Firebase SDKs -->
@@ -19,7 +29,11 @@
 </head>
 <body class="flex items-center justify-center min-h-screen">
 
-  <div class="bg-neutral-900 p-8 rounded-xl shadow-lg max-w-md w-full text-center">
+  <!-- Ladeanzeige -->
+  <div id="loading">🔒 Authentifizierung wird geprüft...</div>
+
+  <!-- Inhalt -->
+  <div id="mainContent" class="bg-neutral-900 p-8 rounded-xl shadow-lg max-w-md w-full text-center hidden">
     <h1 class="text-3xl font-bold text-green-400 mb-4">🌱 Starterbox kaufen</h1>
     <p class="mb-6 text-gray-300">Aktiviere deinen GrowEmpire-Account mit der Starterbox für CHF 49.–</p>
 
@@ -31,7 +45,6 @@
   </div>
 
   <script>
-    // Firebase-Konfiguration
     const firebaseConfig = {
       apiKey: "AIzaSyC7i9q4MnzBwuu2BtLii5gGt3DO-oGdlRw",
       authDomain: "ruedi-aebcb.firebaseapp.com",
@@ -41,22 +54,27 @@
       appId: "1:784338413167:web:13687c8f7825da1e168f9a"
     };
 
-    // Initialisierung
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
 
-    // Prüfen ob eingeloggt
-    auth.onAuthStateChanged(user => {
-      console.log("Benutzerstatus:", user); // Debug-Ausgabe
-      if (!user) {
-        alert("🚫 Du bist ausgeloggt oder dein Login ist abgelaufen.");
-        window.location.href = "index.html";
+    auth.onAuthStateChanged(async (user) => {
+      const loading = document.getElementById("loading");
+      const main = document.getElementById("mainContent");
+
+      if (user) {
+        loading.style.display = "none";
+        main.classList.remove("hidden");
+      } else {
+        loading.innerHTML = "⛔ Nicht eingeloggt. Weiterleitung...";
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 1000);
       }
     });
 
-    // Starterbox aktivieren
     async function activateStarterbox() {
+      const status = document.getElementById("status");
       const user = auth.currentUser;
       if (!user) return;
 
@@ -65,12 +83,12 @@
           starterbox: true
         });
 
-        document.getElementById("status").textContent = "✅ Starterbox aktiviert! Weiterleitung...";
+        status.textContent = "✅ Starterbox erfolgreich aktiviert!";
         setTimeout(() => {
           window.location.href = "dashboard.html";
-        }, 1000);
+        }, 1500);
       } catch (error) {
-        document.getElementById("status").textContent = "❌ Fehler: " + error.message;
+        status.textContent = "❌ Fehler: " + error.message;
       }
     }
   </script>
