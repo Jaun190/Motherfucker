@@ -13,15 +13,18 @@
       background-size: cover;
       color: #fff;
     }
+
     .menu-toggle {
       position: absolute;
       top: 20px;
       left: 20px;
       background-color: #0f0;
       padding: 10px;
-      border-radius: 8px;
+      border-radius: 6px;
       cursor: pointer;
+      z-index: 10;
     }
+
     .menu-content {
       display: none;
       position: absolute;
@@ -32,21 +35,25 @@
       padding: 10px;
       z-index: 10;
     }
+
     .menu-content a {
       display: block;
       color: #0f0;
       text-decoration: none;
       padding: 5px 0;
     }
+
     .menu-toggle:hover + .menu-content,
     .menu-content:hover {
       display: block;
     }
+
     .box-container {
       max-width: 600px;
       margin: 100px auto 50px;
       padding: 20px;
     }
+
     .box {
       border: 2px solid #00ff90;
       border-radius: 20px;
@@ -55,21 +62,26 @@
       padding: 20px;
       box-shadow: 0 0 20px #00ff90;
     }
+
     .box h2 {
       color: #00ff90;
       margin-bottom: 10px;
     }
+
     .box p {
       margin: 5px 0;
     }
+
     .box ul {
       list-style: none;
       padding-left: 0;
     }
+
     .box li::before {
-      content: "✅";
+      content: "🌱";
       margin-right: 8px;
     }
+
     .buy-btn {
       display: block;
       background-color: #00ff90;
@@ -87,45 +99,49 @@
 </head>
 <body>
 
-  <!-- Menü -->
-  <div class="menu-toggle">☰</div>
-  <div class="menu-content">
-    <a href="dashboard.html">📊 Dashboard</a>
-    <a href="pflanzen.html">🌱 Pflanzen kaufen</a>
-    <a href="starterbox.html">🎁 Starterbox</a>
-    <a href="partner.html">👬 Partner</a>
-    <a href="index.html">🔴 Logout</a>
+<!-- ☰ Menü -->
+<div class="menu-toggle">☰</div>
+<div class="menu-content">
+  <a href="dashboard.html">📊 Dashboard</a>
+  <a href="plants.html">🌱 Pflanzen kaufen</a>
+  <a href="starterbox.html">💎 Starterbox</a>
+  <a href="partner.html">🤝 Partner</a>
+  <a href="settings.html">⚙️ Einstellungen</a>
+  <a href="index.html">🚪 Logout</a>
+</div>
+
+<!-- Boxen -->
+<div class="box-container">
+
+  <!-- PRO BOX -->
+  <div class="box">
+    <h2>Pro Box</h2>
+    <p><strong>CHF 150.–</strong> – für 6 Monate</p>
+    <ul>
+      <li>2 m² Anbaufläche</li>
+      <li>Exklusive Sorten freigeschaltet</li>
+      <li>Reinvest-Boni</li>
+      <li>+20 % Ertrag auf Pflanzen</li>
+      <li>Referral-Link aktiv</li>
+    </ul>
+    <button class="buy-btn">Pro Box kaufen</button>
   </div>
 
-  <div class="box-container">
-    <!-- PRO BOX -->
-    <div class="box">
-      <h2>Pro Box</h2>
-      <p><strong>CHF 150.–</strong> – für 6 Monate</p>
-      <ul>
-        <li>2 m² Anbaufläche</li>
-        <li>Exklusive Sorten freigeschaltet</li>
-        <li>Reinvest-Boni</li>
-        <li>+20 % Ertrag auf Pflanzen</li>
-        <li>Referral-Link aktiv</li>
-      </ul>
-      <button class="buy-btn">Pro Box kaufen</button>
-    </div>
-
-    <!-- PREMIUM BOX -->
-    <div class="box">
-      <h2>Premium Box</h2>
-      <p><strong>CHF 199.–</strong> – für 12 Monate</p>
-      <ul>
-        <li>3 m² Anbaufläche</li>
-        <li>Alle Sorten & Module freigeschaltet</li>
-        <li>Reinvest & Bonusaktionen</li>
-        <li>+30 % Ertrag auf Pflanzen</li>
-        <li>Extra Support</li>
-      </ul>
-      <button class="buy-btn">Premium Box kaufen</button>
-    </div>
+  <!-- PREMIUM BOX -->
+  <div class="box">
+    <h2>Premium Box</h2>
+    <p><strong>CHF 199.–</strong> – für 12 Monate</p>
+    <ul>
+      <li>3 m² Anbaufläche</li>
+      <li>Alle Sorten & Module freigeschaltet</li>
+      <li>Reinvest & Bonusaktionen</li>
+      <li>+30 % Ertrag auf Pflanzen</li>
+      <li>Extra Support</li>
+    </ul>
+    <button class="buy-btn">Premium Box kaufen</button>
   </div>
+
+</div>
 
 </body>
 </html>
