@@ -3,136 +3,128 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GrowEmpire – Starterbox</title>
+  <title>GrowEmpire – Box wählen</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
       margin: 0;
-      padding: 0;
+      padding-top: 90px;
       font-family: Arial, sans-serif;
-      background: url("assets/dashboard.png") no-repeat center center fixed;
+      background-image: url("assets/dashboard.png");
       background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
       color: white;
-      text-shadow: 0 0 4px #000;
     }
 
-    .menu {
-      background: rgba(0, 0, 0, 0.85);
+    .nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      padding: 10px;
       display: flex;
       justify-content: center;
-      align-items: center;
-      padding: 10px;
       gap: 20px;
-      flex-wrap: wrap;
+      z-index: 1000;
     }
 
-    .menu a {
+    .nav a {
       color: #00ff99;
       text-decoration: none;
       font-weight: bold;
     }
 
-    .container {
+    .content {
       max-width: 800px;
-      margin: 30px auto;
+      margin: auto;
       padding: 20px;
-      background-color: rgba(0, 0, 0, 0.65);
-      border-radius: 20px;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
-      font-size: 2em;
     }
 
     .box {
-      margin-bottom: 30px;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.6);
+      background-color: rgba(0, 0, 0, 0.8);
       border: 2px solid #00ff99;
-      border-radius: 15px;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 40px;
     }
 
     .box h2 {
+      margin-top: 0;
       color: #00ff99;
-      margin-bottom: 10px;
+      font-size: 1.8em;
     }
 
     .box p {
       font-size: 1.2em;
+      font-weight: bold;
     }
 
     .box ul {
-      padding-left: 20px;
-      text-align: left;
+      list-style-type: none;
+      padding-left: 0;
     }
 
-    .box ul li {
-      margin-bottom: 5px;
+    .box li {
+      margin: 10px 0;
     }
 
-    button {
-      margin-top: 15px;
-      padding: 10px 20px;
+    .buy-btn {
+      display: inline-block;
       background-color: #00ff99;
-      border: none;
-      border-radius: 10px;
+      color: black;
+      padding: 12px 25px;
       font-weight: bold;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #00cc77;
+      font-size: 1em;
+      border-radius: 10px;
+      text-decoration: none;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-
-  <div class="menu">
+  <div class="nav">
     <a href="dashboard.html">📊 Dashboard</a>
     <a href="pflanzen.html">🌱 Pflanzen kaufen</a>
     <a href="starterbox.html">🎁 Starterbox</a>
-    <a href="partner.html">👥 Partner</a>
+    <a href="partner.html">🧑‍🤝‍🧑 Partner</a>
     <a href="#" onclick="logout()">📕 Logout</a>
   </div>
 
-  <div class="container">
-    <h1>🎁 Wähle deine GrowEmpire Box</h1>
-
+  <div class="content">
     <div class="box">
       <h2>Starterbox</h2>
-      <p><strong>CHF 99.–</strong> für 3 Monate</p>
+      <p>CHF 99.– für 3 Monate</p>
       <ul>
-        <li>✅ 1 m² Anbaufläche</li>
+        <li>✅ 1 m² virtuelle Anbaufläche</li>
         <li>✅ Zugang zum Pflanzen-Kaufen-Modul</li>
-        <li>✅ Referral-Link aktiviert</li>
+        <li>✅ Aktivierung deines Referral-Links</li>
         <li>✅ Teilnahme am Gewinnsystem</li>
       </ul>
-      <button>Starterbox kaufen</button>
+      <a href="#" class="buy-btn">Starterbox kaufen</a>
     </div>
 
     <div class="box">
       <h2>Pro Box</h2>
-      <p><strong>CHF 150.–</strong> für 6 Monate</p>
+      <p>CHF 150.– für 6 Monate</p>
       <ul>
-        <li>✅ 2 m² Anbaufläche</li>
-        <li>✅ Exklusive Sorten</li>
+        <li>✅ 2 m² Anbaufläche</li>
+        <li>✅ Exklusive Sorten freigeschaltet</li>
         <li>✅ Reinvest-Boni</li>
         <li>✅ Referral-Link aktiv</li>
       </ul>
-      <button>Pro Box kaufen</button>
+      <a href="#" class="buy-btn">Pro Box kaufen</a>
     </div>
 
     <div class="box">
       <h2>Premium Box</h2>
-      <p><strong>CHF 199.–</strong> für 12 Monate</p>
+      <p>CHF 199.– für 12 Monate</p>
       <ul>
-        <li>✅ 3 m² Anbaufläche</li>
+        <li>✅ 3 m² Anbaufläche</li>
         <li>✅ Alle Sorten & Module freigeschaltet</li>
         <li>✅ Extra Boni & Support</li>
       </ul>
-      <button>Premium Box kaufen</button>
+      <a href="#" class="buy-btn">Premium Box kaufen</a>
     </div>
   </div>
 
@@ -142,6 +134,5 @@
       window.location.href = "index.html";
     }
   </script>
-
 </body>
 </html>
