@@ -3,27 +3,94 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🌱 GrowEmpire Dashboard</title>
+  <title>GrowEmpire Dashboard</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background: #001a00;
+      color: #fff;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    .menu-toggle {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 28px;
+      cursor: pointer;
+      z-index: 999;
+    }
+    nav {
+      background: #003300;
+      padding: 10px 0;
+    }
+    nav a {
+      margin: 0 10px;
+      color: #00ff99;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .title {
+      margin-top: 60px;
+      font-size: 30px;
+      font-weight: bold;
+    }
+    .section {
+      margin: 30px 0;
+    }
+    .ref-link {
+      word-break: break-all;
+      color: #00ff99;
+      font-weight: bold;
+    }
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      padding: 20px;
+    }
+    .card {
+      background: #004d00;
+      padding: 20px;
+      border-radius: 10px;
+      width: 150px;
+    }
+    .emoji {
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+    .value {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .label {
+      font-size: 14px;
+      color: #ccc;
+    }
+  </style>
 </head>
-<body class="dashboard-body">
+<body>
 
-  <!-- Menü -->
   <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-  <nav id="sideMenu" class="hidden">
+
+  <nav id="navMenu">
     <a href="dashboard.html">📊 Dashboard</a>
-    <a href="plants.html">🌿 Pflanzen kaufen</a>
-    <a href="index.html">🚪 Logout</a>
+    <a href="plants.html">🌱 Pflanzen kaufen</a>
+    <a href="starterbox.html">🎁 Starterbox</a>
+    <a href="index.html">📴 Logout</a>
   </nav>
 
-  <h1 class="center-title">🌱 GrowEmpire<br>Dashboard</h1>
+  <div class="title">🌿 GrowEmpire Dashboard</div>
 
-  <section class="ref-section">
-    <h2>🔗 Dein Referral-Link</h2>
-    <p id="refLink">https://example.com</p>
-  </section>
+  <div class="section">
+    <h3>🔗 Dein Referral-Link</h3>
+    <p class="ref-link" id="refLink"></p>
+  </div>
 
-  <section class="grid">
+  <div class="grid">
     <div class="card">
       <div class="emoji">💰</div>
       <div class="value">CHF 1'520.–</div>
@@ -44,23 +111,22 @@
       <div class="value">13 Tage</div>
       <div class="label">Bis zur nächsten Ernte</div>
     </div>
-  </section>
+  </div>
 
   <script>
-    // Menü ein-/ausblenden
     function toggleMenu() {
-      document.getElementById("sideMenu").classList.toggle("hidden");
+      const nav = document.getElementById("navMenu");
+      nav.style.display = nav.style.display === "none" ? "block" : "none";
     }
 
-    // Weiterleitung wenn nicht eingeloggt
+    // Redirect to login if not logged in
     const user = localStorage.getItem("user");
     if (!user) {
       window.location.href = "index.html";
+    } else {
+      const refLink = `https://jaun190.github.io/Motherfucker/index.html?ref=${user}`;
+      document.getElementById("refLink").innerText = refLink;
     }
-
-    // Referral-Link korrekt anzeigen
-    const refLink = `https://jaun190.github.io/Motherfucker/index.html?ref=${user}`;
-    document.getElementById("refLink").innerHTML = `<a href="${refLink}" target="_blank">${refLink}</a>`;
   </script>
 
 </body>
