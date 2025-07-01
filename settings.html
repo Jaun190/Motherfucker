@@ -3,137 +3,107 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Einstellungen</title>
-  <link rel="stylesheet" href="dashboard.css" />
+  <title>Einstellungen – GrowEmpire</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: Arial, sans-serif;
       background: url('assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
       color: white;
     }
 
     .menu-button {
-      position: fixed;
+      position: absolute;
       top: 20px;
       left: 20px;
+      background: none;
+      border: none;
       font-size: 28px;
-      background: rgba(0, 0, 0, 0.7);
       color: white;
-      padding: 12px 16px;
-      border-radius: 8px;
       cursor: pointer;
-      z-index: 999;
+      z-index: 10;
     }
 
-    .menu {
-      position: fixed;
-      top: 70px;
-      left: 20px;
-      background: rgba(0, 0, 0, 0.95);
-      border-radius: 16px;
-      padding: 14px 20px;
+    .dropdown {
       display: none;
+      position: absolute;
+      top: 60px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.9);
+      padding: 10px;
+      border-radius: 8px;
       flex-direction: column;
-      gap: 12px;
-      z-index: 998;
+      z-index: 10;
     }
 
-    .menu a {
-      color: white;
+    .dropdown a {
+      color: #0f0;
       text-decoration: none;
-      font-size: 18px;
+      margin: 5px 0;
     }
 
-    .menu a:hover {
-      color: #00ffcc;
-    }
-
-    .settings-box {
-      background: rgba(0, 0, 0, 0.4);
-      padding: 20px;
-      border-radius: 20px;
-      max-width: 420px;
-      margin: 100px auto 40px;
-      backdrop-filter: blur(6px);
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-    }
-
-    .settings-box h2 {
+    h1 {
+      margin-top: 100px;
       text-align: center;
-      margin-bottom: 20px;
+      color: #0f0;
+    }
+
+    .content {
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
     }
 
     label {
       display: block;
-      margin: 12px 0 6px;
-      font-weight: bold;
+      margin-top: 15px;
+      color: #0f0;
     }
 
-    input[type="file"] {
+    input {
       width: 100%;
       padding: 10px;
-      border-radius: 10px;
-      font-size: 16px;
-      background-color: white;
-      color: black;
+      margin-top: 5px;
+      border-radius: 6px;
       border: none;
-    }
-
-    #uploadStatus {
-      margin-top: 10px;
-      font-size: 14px;
-      color: #ccc;
+      font-size: 16px;
     }
   </style>
 </head>
 <body>
 
-  <!-- 3-Punkte-Menü -->
-  <div class="menu-button" onclick="toggleMenu()">☰</div>
-  <div class="menu" id="menu">
-    <a href="dashboard.html">📊 Dashboard</a>
-    <a href="partner.html">🤝 Partner</a>
-    <a href="settings.html">⚙️ Einstellungen</a>
-    <a href="index.html">🚪 Logout</a>
-  </div>
+<!-- ☰ Menü -->
+<button class="menu-button" onclick="toggleMenu()">☰</button>
+<div id="dropdown" class="dropdown">
+  <a href="dashboard.html">📊 Dashboard</a>
+  <a href="plants.html">🌱 Pflanzen kaufen</a>
+  <a href="starterbox.html">💎 Starterbox</a>
+  <a href="partner.html">🤝 Partner</a>
+  <a href="settings.html">⚙️ Einstellungen</a>
+  <a href="index.html">🚪 Logout</a>
+</div>
 
-  <!-- Einstellungsbox -->
-  <div class="settings-box">
-    <h2>⚙️ Einstellungen</h2>
+<h1>⚙️ Einstellungen</h1>
+<div class="content">
+  <label for="name">Benutzername:</label>
+  <input type="text" id="name" value="DeinName" />
 
-    <!-- Ausweis hochladen -->
-    <label for="ausweisUpload">🪪 Ausweis hochladen</label>
-    <input type="file" id="ausweisUpload" accept=".jpg,.jpeg,.png,.pdf" />
-    <p id="uploadStatus">Keine Datei ausgewählt</p>
-  </div>
+  <label for="email">E-Mail:</label>
+  <input type="email" id="email" value="deinname@email.com" />
 
-  <!-- JS -->
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById("menu");
-      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
-    }
+  <label for="password">Neues Passwort:</label>
+  <input type="password" id="password" placeholder="Neues Passwort" />
+</div>
 
-    const fileInput = document.getElementById('ausweisUpload');
-    const uploadStatus = document.getElementById('uploadStatus');
-
-    fileInput.addEventListener('change', () => {
-      const file = fileInput.files[0];
-      if (!file) {
-        uploadStatus.textContent = 'Keine Datei ausgewählt';
-        return;
-      }
-
-      if (file.size > 5 * 1024 * 1024) {
-        uploadStatus.textContent = 'Datei ist zu groß (max. 5 MB)';
-        return;
-      }
-
-      uploadStatus.textContent = `📎 Datei: ${file.name}`;
-    });
-  </script>
-
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById("dropdown");
+    menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+  }
+</script>
 </body>
 </html>
