@@ -1,60 +1,157 @@
-<!DOCTYPE html><html lang="de">
+<!DOCTYPE html>
+<html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GrowEmpire Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
   <style>
     body {
-      background-image: url('assets/dashboard.png');
-      background-size: cover;
-      background-position: center;
-      font-family: Arial, sans-serif;
-      color: white;
       margin: 0;
-      padding: 0;
+      font-family: Arial, sans-serif;
+      background: url('assets/dashboard.png') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
     }
-    .status-box {
-      background-color: rgba(0, 0, 0, 0.75);
-      border: 2px solid #00ff66;
-      border-radius: 12px;
+
+    .menu-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: rgba(0, 128, 0, 0.8);
+      border: none;
+      border-radius: 10px;
+      padding: 10px 14px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .menu-btn span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      margin: 5px auto;
+      background-color: white;
+    }
+
+    .nav {
+      display: none;
+      position: fixed;
+      top: 60px;
+      left: 20px;
+      background-color: rgba(0, 0, 0, 0.8);
       padding: 15px;
-      margin: 30px auto 10px;
-      width: 90%;
-      max-width: 500px;
+      border-radius: 10px;
+      z-index: 999;
+    }
+
+    .nav a {
+      display: block;
+      color: #00ff99;
+      text-decoration: none;
+      margin: 10px 0;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 80px;
+      font-size: 24px;
+    }
+
+    .box-info {
+      font-size: 1.1em;
+      font-weight: bold;
+      color: #0f0;
+      margin-top: -10px;
+      margin-bottom: 15px;
       text-align: center;
     }
-    .status-box h2 {
-      color: #00ff66;
+
+    .card {
+      background-color: rgba(0, 0, 0, 0.4);
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 15px;
+      width: 85%;
+      max-width: 400px;
+      box-shadow: 0 0 10px #00ff00;
+      text-align: center;
+    }
+
+    .card h3 {
+      font-size: 1.5em;
       margin-bottom: 10px;
+    }
+
+    .card span {
+      display: block;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #00ffcc;
     }
   </style>
 </head>
-<body>  <!-- Menü-Button -->  <div class="menu-button" onclick="toggleMenu()">☰</div>
-  <div class="menu" id="nav-menu">
+<body>
+
+  <button class="menu-btn" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <div class="nav" id="nav">
     <a href="dashboard.html">📊 Dashboard</a>
     <a href="pflanzen.html">🌱 Pflanzen kaufen</a>
     <a href="starterbox.html">🎁 Starterbox</a>
     <a href="partner.html">👬 Partner</a>
-    <a href="index.html" onclick="localStorage.clear()">📕 Logout</a>
-  </div>  <!-- Box-Status -->  <div class="status-box" id="boxStatus">
-    <h2>🎁 Starterbox-Status</h2>
-    <p id="boxInfo">Keine Box aktiviert.</p>
-  </div>  <script>
+    <a href="index.html">📕 Logout</a>
+  </div>
+
+  <h2>🌿 GrowEmpire Dashboard</h2>
+  <p id="box-status" class="box-info">Box-Status wird geladen…</p>
+
+  <div class="card">
+    <span>💰</span>
+    <h3>CHF 1'520.–</h3>
+    <p>Gesamteinnahmen</p>
+  </div>
+
+  <div class="card">
+    <span>🌱</span>
+    <h3>320</h3>
+    <p>Aktive Pflanzen</p>
+  </div>
+
+  <div class="card">
+    <span>👥</span>
+    <h3>1225</h3>
+    <p>Downline-Nutzer</p>
+  </div>
+
+  <div class="card">
+    <span>⏳</span>
+    <h3>13 Tage</h3>
+    <p>Bis zur nächsten Ernte</p>
+  </div>
+
+  <script>
     function toggleMenu() {
-      const menu = document.getElementById("nav-menu");
-      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+      const nav = document.getElementById("nav");
+      nav.style.display = nav.style.display === "block" ? "none" : "block";
     }
 
-    const box = localStorage.getItem('growempire_box');
-    const boxInfo = document.getElementById('boxInfo');
+    // Box-Status aus localStorage auslesen
+    const box = localStorage.getItem("growempire_box");
+    const boxStatus = document.getElementById("box-status");
 
-    if (box === 'pro') {
-      boxInfo.textContent = '✅ Pro Box aktiv – +20 % Ertrag auf Pflanzen';
-    } else if (box === 'premium') {
-      boxInfo.textContent = '👑 Premium Box aktiv – +30 % Ertrag auf Pflanzen';
+    if (box === "pro") {
+      boxStatus.textContent = "📦 Aktive Lizenz: Pro Box – +20 % Ertrag";
+    } else if (box === "premium") {
+      boxStatus.textContent = "🎁 Aktive Lizenz: Premium Box – +30 % Ertrag";
     } else {
-      boxInfo.textContent = '⚠️ Keine aktive Starterbox. Bitte eine Box wählen.';
+      boxStatus.textContent = "❌ Keine Box aktiv – bitte Starterbox wählen";
     }
-  </script></body>
+  </script>
+
+</body>
 </html>
