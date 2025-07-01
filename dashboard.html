@@ -3,26 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GrowEmpire Dashboard</title>
+  <title>Dashboard | GrowEmpire</title>
   <style>
     body {
       margin: 0;
       font-family: "Segoe UI", sans-serif;
+      background: url('assets/dashboard.png') center center / cover no-repeat fixed;
       color: white;
       text-align: center;
-      background: url('assets/dashboard.png') no-repeat center center fixed;
-      background-size: cover;
-      backdrop-filter: blur(2px);
+      backdrop-filter: blur(3px);
     }
 
     nav {
       background: rgba(0, 50, 0, 0.85);
       display: flex;
       justify-content: space-around;
-      align-items: center;
-      padding: 10px 0;
-      box-shadow: 0 0 10px #00ff88;
+      padding: 10px;
       flex-wrap: wrap;
+      box-shadow: 0 0 10px #00ff88;
     }
 
     nav a {
@@ -30,59 +28,36 @@
       font-weight: bold;
       text-decoration: none;
       margin: 5px 10px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
     }
 
-    .title {
-      margin-top: 30px;
-      font-size: 26px;
-      font-weight: bold;
-      color: #bdfcc9;
+    h1 {
+      margin-top: 40px;
+      font-size: 28px;
       text-shadow: 1px 1px 2px black;
     }
 
-    .ref-link {
-      color: #00ffcc;
-      font-weight: bold;
-      word-break: break-all;
-      padding: 0 20px;
-      text-shadow: 1px 1px 2px black;
-    }
-
-    .cards {
+    .stats {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 15px;
-      margin: 30px 0;
+      gap: 20px;
+      margin: 30px auto;
+      max-width: 90%;
+      width: 400px;
     }
 
     .card {
-      background: rgba(0, 100, 0, 0.6);
-      border: 1px solid #00ff99;
-      box-shadow: 0 0 15px rgba(0, 255, 153, 0.3);
-      border-radius: 20px;
+      background: rgba(0, 100, 0, 0.65);
       padding: 20px;
-      width: 80%;
-      max-width: 320px;
-      backdrop-filter: blur(5px);
+      border-radius: 15px;
+      box-shadow: 0 0 12px rgba(0, 255, 153, 0.2);
     }
 
-    .card .emoji {
-      font-size: 28px;
-    }
-
-    .card .number {
-      font-size: 22px;
+    .card span {
+      display: block;
+      font-size: 18px;
       font-weight: bold;
-      margin: 5px 0;
-    }
-
-    .card .label {
-      color: #ddd;
-      font-size: 14px;
+      margin-top: 8px;
+      color: #00ffcc;
     }
   </style>
 </head>
@@ -92,46 +67,30 @@
     <a href="dashboard.html">📊 Dashboard</a>
     <a href="plants.html">🌱 Pflanzen kaufen</a>
     <a href="starterbox.html">🎁 Starterbox</a>
+    <a href="partner.html">🤝 Partner</a>
     <a href="index.html">📴 Logout</a>
   </nav>
 
-  <div class="title">🌿 GrowEmpire Dashboard</div>
+  <h1>🌿 GrowEmpire Dashboard</h1>
 
-  <h3>🔗 Dein Referral-Link</h3>
-  <p class="ref-link" id="refLink"></p>
-
-  <div class="cards">
+  <div class="stats">
     <div class="card">
-      <div class="emoji">💰</div>
-      <div class="number">CHF 1'520.–</div>
-      <div class="label">Gesamteinnahmen</div>
+      💰 <span>CHF 1'520.–</span>
+      Gesamteinnahmen
     </div>
     <div class="card">
-      <div class="emoji">🌿</div>
-      <div class="number">320</div>
-      <div class="label">Aktive Pflanzen</div>
+      🌱 <span>320</span>
+      Aktive Pflanzen
     </div>
     <div class="card">
-      <div class="emoji">👥</div>
-      <div class="number">1225</div>
-      <div class="label">Downline-Nutzer</div>
+      👥 <span>1225</span>
+      Downline-Nutzer
     </div>
     <div class="card">
-      <div class="emoji">⏳</div>
-      <div class="number">13 Tage</div>
-      <div class="label">Bis zur nächsten Ernte</div>
+      ⏳ <span>13 Tage</span>
+      Bis zur nächsten Ernte
     </div>
   </div>
-
-  <script>
-    const user = localStorage.getItem("user");
-    if (!user) {
-      window.location.href = "index.html";
-    } else {
-      document.getElementById("refLink").textContent =
-        "https://jaun190.github.io/Motherfucker/index.html?ref=" + user;
-    }
-  </script>
 
 </body>
 </html>
