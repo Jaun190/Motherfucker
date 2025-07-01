@@ -12,22 +12,25 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-image: url('assets/dashboard.png');
+      background-image: url("assets/dashboard.png");
       background-size: cover;
       background-attachment: fixed;
       background-position: center;
       color: #fff;
     }
+
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: rgba(0, 0, 0, 0.7);
       padding: 10px 20px;
+      background-color: rgba(0, 0, 0, 0.7);
     }
+
     .navbar h1 {
       font-size: 1.2rem;
     }
+
     .menu-button {
       background-color: #25a244;
       border: none;
@@ -36,6 +39,7 @@
       font-size: 18px;
       cursor: pointer;
     }
+
     .menu {
       position: absolute;
       top: 60px;
@@ -47,15 +51,18 @@
       flex-direction: column;
       z-index: 999;
     }
+
     .menu a {
       color: #fff;
       text-decoration: none;
       margin: 8px 0;
       font-weight: bold;
     }
+
     .menu a:hover {
       color: #00ff88;
     }
+
     .plant-container {
       max-width: 600px;
       margin: 100px auto 50px;
@@ -64,21 +71,25 @@
       border-radius: 15px;
       box-shadow: 0 0 10px #00ff88;
     }
+
     .plant-container h2 {
       text-align: center;
       margin-bottom: 20px;
       color: #00ff88;
     }
+
     .plant {
       background-color: #003300;
       margin-bottom: 15px;
       padding: 15px;
       border-radius: 12px;
     }
+
     .plant h3 {
       margin-top: 0;
       color: #00ff88;
     }
+
     .buy-btn {
       background-color: #00ff88;
       color: black;
@@ -88,55 +99,9 @@
       font-weight: bold;
       cursor: pointer;
     }
+
     .buy-btn:hover {
       background-color: #00cc66;
     }
   </style>
-</head>
-<body>
-  <!-- Navbar -->
-  <div class="navbar">
-    <button class="menu-button" onclick="toggleMenu()">☰</button>
-    <h1>GrowEmpire Dashboard</h1>
-  </div>
-
-  <!-- Menü -->
-  <div class="menu" id="navMenu">
-    <a href="dashboard.html">📊 Dashboard</a>
-    <a href="plants.html">🌱 Pflanzen kaufen</a>
-    <a href="starterbox.html">🎁 Starterbox</a>
-    <a href="partner.html">👬 Partner</a>
-    <a href="index.html">📕 Logout</a>
-  </div>
-
-  <!-- Pflanzen Inhalt -->
-  <div class="plant-container">
-    <h2>🌱 Pflanzen kaufen</h2>
-
-    <div class="plant">
-      <h3>Hanf Regular</h3>
-      <p>Preis: CHF 150.–<br>Laufzeit: 75 Tage<br>Ertrag: CHF 180.–</p>
-      <button class="buy-btn">Jetzt kaufen</button>
-    </div>
-
-    <div class="plant">
-      <h3>Hanf Pro</h3>
-      <p>Preis: CHF 200.–<br>Laufzeit: 75 Tage<br>Ertrag: CHF 240.–</p>
-      <button class="buy-btn">Jetzt kaufen</button>
-    </div>
-
-    <div class="plant">
-      <h3>Hanf Premium</h3>
-      <p>Preis: CHF 300.–<br>Laufzeit: 75 Tage<br>Ertrag: CHF 360.–</p>
-      <button class="buy-btn">Jetzt kaufen</button>
-    </div>
-  </div>
-
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById('navMenu');
-      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-    }
-  </script>
-</body>
-</html>
+</
