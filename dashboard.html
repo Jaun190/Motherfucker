@@ -1,108 +1,60 @@
-<!DOCTYPE html>
-<html lang="de">
+<!DOCTYPE html><html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard | GrowEmpire</title>
+  <title>GrowEmpire Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
     body {
-      margin: 0;
-      font-family: "Segoe UI", sans-serif;
-      background: url('assets/dashboard.png') center center / cover no-repeat fixed;
+      background-image: url('assets/dashboard.png');
+      background-size: cover;
+      background-position: center;
+      font-family: Arial, sans-serif;
       color: white;
+      margin: 0;
+      padding: 0;
+    }
+    .status-box {
+      background-color: rgba(0, 0, 0, 0.75);
+      border: 2px solid #00ff66;
+      border-radius: 12px;
+      padding: 15px;
+      margin: 30px auto 10px;
+      width: 90%;
+      max-width: 500px;
       text-align: center;
-      backdrop-filter: blur(3px);
     }
-
-    .menu-button {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      font-size: 28px;
-      background: rgba(0, 100, 0, 0.6);
-      padding: 10px 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      z-index: 1000;
-      color: #00ff88;
-      font-weight: bold;
-    }
-
-    .dropdown-menu {
-      display: none;
-      flex-direction: column;
-      position: fixed;
-      top: 65px;
-      left: 20px;
-      background: rgba(0, 50, 0, 0.95);
-      border-radius: 10px;
-      padding: 10px;
-      z-index: 999;
-      box-shadow: 0 0 10px #00ff88;
-    }
-
-    .dropdown-menu a {
-      color: #00ff99;
-      text-decoration: none;
-      margin: 5px 0;
-      font-weight: bold;
-      display: block;
-    }
-
-    .dropdown-menu a:hover {
-      text-decoration: underline;
-    }
-
-    .stats {
-      margin-top: 100px;
-      padding: 20px;
-    }
-
-    .card {
-      background: rgba(0, 100, 0, 0.6);
-      padding: 20px;
-      margin: 10px auto;
-      border-radius: 15px;
-      max-width: 400px;
-      box-shadow: 0 0 12px rgba(0, 255, 153, 0.2);
-    }
-
-    .card span {
-      display: block;
-      font-size: 18px;
-      font-weight: bold;
-      margin-top: 8px;
-      color: #00ffcc;
+    .status-box h2 {
+      color: #00ff66;
+      margin-bottom: 10px;
     }
   </style>
 </head>
-<body>
-
-  <!-- ☰ Menü -->
-  <div class="menu-button" onclick="toggleMenu()">☰</div>
-  <div id="dropdownMenu" class="dropdown-menu">
+<body>  <!-- Menü-Button -->  <div class="menu-button" onclick="toggleMenu()">☰</div>
+  <div class="menu" id="nav-menu">
     <a href="dashboard.html">📊 Dashboard</a>
-    <a href="plants.html">🌱 Pflanzen kaufen</a>
+    <a href="pflanzen.html">🌱 Pflanzen kaufen</a>
     <a href="starterbox.html">🎁 Starterbox</a>
-    <a href="partner.html">🤝 Partner</a>
-    <a href="index.html">🚪 Logout</a>
-  </div>
-
-  <h1>🌿 GrowEmpire Dashboard</h1>
-
-  <div class="stats">
-    <div class="card">💰 <span>CHF 1'520.–</span> Gesamteinnahmen</div>
-    <div class="card">🌱 <span>320</span> Aktive Pflanzen</div>
-    <div class="card">👥 <span>1225</span> Downline-Nutzer</div>
-    <div class="card">⏳ <span>13 Tage</span> Bis zur nächsten Ernte</div>
-  </div>
-
-  <script>
+    <a href="partner.html">👬 Partner</a>
+    <a href="index.html" onclick="localStorage.clear()">📕 Logout</a>
+  </div>  <!-- Box-Status -->  <div class="status-box" id="boxStatus">
+    <h2>🎁 Starterbox-Status</h2>
+    <p id="boxInfo">Keine Box aktiviert.</p>
+  </div>  <script>
     function toggleMenu() {
-      const menu = document.getElementById("dropdownMenu");
+      const menu = document.getElementById("nav-menu");
       menu.style.display = menu.style.display === "flex" ? "none" : "flex";
     }
-  </script>
 
-</body>
+    const box = localStorage.getItem('growempire_box');
+    const boxInfo = document.getElementById('boxInfo');
+
+    if (box === 'pro') {
+      boxInfo.textContent = '✅ Pro Box aktiv – +20 % Ertrag auf Pflanzen';
+    } else if (box === 'premium') {
+      boxInfo.textContent = '👑 Premium Box aktiv – +30 % Ertrag auf Pflanzen';
+    } else {
+      boxInfo.textContent = '⚠️ Keine aktive Starterbox. Bitte eine Box wählen.';
+    }
+  </script></body>
 </html>
