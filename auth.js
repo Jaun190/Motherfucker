@@ -5,21 +5,21 @@ import {
   createUserWithEmailAndPassword,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-// 🔐 Deine korrekte Firebase-Konfiguration:
+// 🔧 KORREKTE Firebase-Konfiguration
 const firebaseConfig = {
   apiKey: "AIzaSyC7i9q4MnzBwuu2BtLii5gGt3DO-oGdlRw",
   authDomain: "ruedi-aebcb.firebaseapp.com",
   projectId: "ruedi-aebcb",
-  storageBucket: "ruedi-aebcb.firebasestorage.app",
+  storageBucket: "ruedi-aebcb.appspot.com", // ✅ Korrekt ersetzt!
   messagingSenderId: "784338413167",
   appId: "1:784338413167:web:13687c8f7825da1e168f9a"
 };
 
-// Initialisieren
+// 🔌 Firebase initialisieren
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// 🔓 LOGIN
+// 🔐 LOGIN
 const loginForm = document.getElementById("login-form");
 if (loginForm) {
   loginForm.addEventListener("submit", async (e) => {
@@ -29,11 +29,8 @@ if (loginForm) {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-
-      // Nutzername im LocalStorage speichern
       const username = email.split("@")[0];
       localStorage.setItem("user", username);
-
       window.location.href = "dashboard.html";
     } catch (error) {
       document.getElementById("error-msg").textContent = "Fehler: " + error.message;
@@ -41,7 +38,7 @@ if (loginForm) {
   });
 }
 
-// 🆕 REGISTRIERUNG
+// 📝 REGISTRIERUNG
 const registerForm = document.getElementById("register-form");
 if (registerForm) {
   registerForm.addEventListener("submit", async (e) => {
@@ -57,11 +54,8 @@ if (registerForm) {
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-
-      // Nutzername im LocalStorage speichern
       const username = email.split("@")[0];
       localStorage.setItem("user", username);
-
       window.location.href = "dashboard.html";
     } catch (error) {
       document.getElementById("error-msg").textContent = "Fehler: " + error.message;
