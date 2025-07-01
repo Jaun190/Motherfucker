@@ -4,79 +4,91 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GrowEmpire Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
   <style>
     body {
-      background: #001a00;
-      color: #fff;
-      font-family: sans-serif;
       margin: 0;
-      padding: 0;
+      font-family: "Segoe UI", sans-serif;
+      color: white;
       text-align: center;
+      background: url('assets/dashboard.png') no-repeat center center fixed;
+      background-size: cover;
+      backdrop-filter: blur(2px);
     }
-    .menu-toggle {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      font-size: 28px;
-      cursor: pointer;
-      z-index: 999;
-    }
+
     nav {
-      background: #003300;
+      background: rgba(0, 50, 0, 0.85);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
       padding: 10px 0;
+      box-shadow: 0 0 10px #00ff88;
+      flex-wrap: wrap;
     }
+
     nav a {
-      margin: 0 10px;
       color: #00ff99;
       font-weight: bold;
       text-decoration: none;
+      margin: 5px 10px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
+
     .title {
-      margin-top: 60px;
-      font-size: 30px;
+      margin-top: 30px;
+      font-size: 26px;
       font-weight: bold;
+      color: #bdfcc9;
+      text-shadow: 1px 1px 2px black;
     }
-    .section {
+
+    .ref-link {
+      color: #00ffcc;
+      font-weight: bold;
+      word-break: break-all;
+      padding: 0 20px;
+      text-shadow: 1px 1px 2px black;
+    }
+
+    .cards {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
       margin: 30px 0;
     }
-    .ref-link {
-      word-break: break-all;
-      color: #00ff99;
-      font-weight: bold;
-    }
-    .grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      padding: 20px;
-    }
+
     .card {
-      background: #004d00;
+      background: rgba(0, 100, 0, 0.6);
+      border: 1px solid #00ff99;
+      box-shadow: 0 0 15px rgba(0, 255, 153, 0.3);
+      border-radius: 20px;
       padding: 20px;
-      border-radius: 10px;
-      width: 150px;
+      width: 80%;
+      max-width: 320px;
+      backdrop-filter: blur(5px);
     }
-    .emoji {
-      font-size: 24px;
-      margin-bottom: 5px;
+
+    .card .emoji {
+      font-size: 28px;
     }
-    .value {
-      font-size: 20px;
+
+    .card .number {
+      font-size: 22px;
       font-weight: bold;
+      margin: 5px 0;
     }
-    .label {
+
+    .card .label {
+      color: #ddd;
       font-size: 14px;
-      color: #ccc;
     }
   </style>
 </head>
 <body>
 
-  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-
-  <nav id="navMenu">
+  <nav>
     <a href="dashboard.html">📊 Dashboard</a>
     <a href="plants.html">🌱 Pflanzen kaufen</a>
     <a href="starterbox.html">🎁 Starterbox</a>
@@ -85,47 +97,39 @@
 
   <div class="title">🌿 GrowEmpire Dashboard</div>
 
-  <div class="section">
-    <h3>🔗 Dein Referral-Link</h3>
-    <p class="ref-link" id="refLink"></p>
-  </div>
+  <h3>🔗 Dein Referral-Link</h3>
+  <p class="ref-link" id="refLink"></p>
 
-  <div class="grid">
+  <div class="cards">
     <div class="card">
       <div class="emoji">💰</div>
-      <div class="value">CHF 1'520.–</div>
+      <div class="number">CHF 1'520.–</div>
       <div class="label">Gesamteinnahmen</div>
     </div>
     <div class="card">
       <div class="emoji">🌿</div>
-      <div class="value">320</div>
+      <div class="number">320</div>
       <div class="label">Aktive Pflanzen</div>
     </div>
     <div class="card">
       <div class="emoji">👥</div>
-      <div class="value">1225</div>
+      <div class="number">1225</div>
       <div class="label">Downline-Nutzer</div>
     </div>
     <div class="card">
       <div class="emoji">⏳</div>
-      <div class="value">13 Tage</div>
+      <div class="number">13 Tage</div>
       <div class="label">Bis zur nächsten Ernte</div>
     </div>
   </div>
 
   <script>
-    function toggleMenu() {
-      const nav = document.getElementById("navMenu");
-      nav.style.display = nav.style.display === "none" ? "block" : "none";
-    }
-
-    // Redirect to login if not logged in
     const user = localStorage.getItem("user");
     if (!user) {
       window.location.href = "index.html";
     } else {
-      const refLink = `https://jaun190.github.io/Motherfucker/index.html?ref=${user}`;
-      document.getElementById("refLink").innerText = refLink;
+      document.getElementById("refLink").textContent =
+        "https://jaun190.github.io/Motherfucker/index.html?ref=" + user;
     }
   </script>
 
