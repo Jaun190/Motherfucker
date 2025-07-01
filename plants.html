@@ -7,10 +7,11 @@
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
-      background: #000 url('assets/dashboard.png') no-repeat center center fixed;
+      background: url("assets/dashboard.png") no-repeat center center fixed;
       background-size: cover;
-      color: white;
       font-family: sans-serif;
+      color: white;
+      margin: 0;
     }
     .menu-button {
       position: absolute;
@@ -29,7 +30,7 @@
       left: 20px;
       background: rgba(0, 0, 0, 0.9);
       padding: 15px;
-      border-radius: 6px;
+      border-radius: 8px;
       flex-direction: column;
     }
     .dropdown a {
@@ -39,42 +40,38 @@
     }
     h1 {
       text-align: center;
-      margin-top: 100px;
-      font-size: 2em;
+      margin-top: 80px;
     }
     .plant-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 20px;
-      padding: 30px;
+      padding: 20px;
       max-width: 800px;
-      margin: 0 auto;
+      margin: auto;
     }
-    .plant-card {
-      background: rgba(0, 0, 0, 0.6);
+    .plant {
+      background: rgba(0, 0, 0, 0.7);
       border-radius: 10px;
-      padding: 15px;
+      padding: 10px;
       text-align: center;
     }
-    .plant-card img {
-      max-width: 100%;
-      border-radius: 10px;
+    .plant img {
+      width: 100%;
+      border-radius: 8px;
     }
-    .plant-card h2 {
-      margin: 10px 0 5px;
-      color: #00ff99;
-    }
-    .plant-card p {
-      margin: 5px 0;
-    }
-    .plant-card button {
+    .plant button {
       margin-top: 10px;
       background: #00cc66;
       color: white;
       border: none;
-      padding: 8px 14px;
-      border-radius: 6px;
+      padding: 10px;
+      border-radius: 8px;
       cursor: pointer;
+    }
+    .plant button:disabled {
+      background: gray;
+      cursor: not-allowed;
     }
   </style>
 </head>
@@ -91,32 +88,31 @@
   <a href="index.html">🚪 Logout</a>
 </div>
 
-<h1>🌿 Pflanzen kaufen</h1>
-
+<h1>🌱 Pflanzen kaufen</h1>
 <div class="plant-grid">
-  <div class="plant-card">
+  <div class="plant">
     <img src="assets/kush2.png" alt="Kush #2">
-    <h2>Kush #2</h2>
+    <h3>Kush #2</h3>
     <p>CHF 180.– | 75 Tage</p>
-    <button>Kaufen</button>
+    <button onclick="buyPlant('Kush #2')">Kaufen</button>
   </div>
-  <div class="plant-card">
+  <div class="plant">
     <img src="assets/sativa1.png" alt="Sativa Dream">
-    <h2>Sativa Dream</h2>
+    <h3>Sativa Dream</h3>
     <p>CHF 195.– | 80 Tage</p>
-    <button>Kaufen</button>
+    <button onclick="buyPlant('Sativa Dream')">Kaufen</button>
   </div>
-  <div class="plant-card">
-    <img src="assets/haze1.png" alt="Haze">
-    <h2>Haze</h2>
-    <p>CHF 200.– | 85 Tage</p>
-    <button>Kaufen</button>
+  <div class="plant">
+    <img src="assets/haze1.png" alt="Purple Haze">
+    <h3>Purple Haze</h3>
+    <p>CHF 210.– | 85 Tage</p>
+    <button onclick="buyPlant('Purple Haze')">Kaufen</button>
   </div>
-  <div class="plant-card">
+  <div class="plant">
     <img src="assets/ogkush.png" alt="OG Kush">
-    <h2>OG Kush</h2>
-    <p>CHF 210.– | 90 Tage</p>
-    <button>Kaufen</button>
+    <h3>OG Kush</h3>
+    <p>CHF 220.– | 90 Tage</p>
+    <button onclick="buyPlant('OG Kush')">Kaufen</button>
   </div>
 </div>
 
@@ -124,6 +120,26 @@
   function toggleMenu() {
     const menu = document.getElementById("dropdown");
     menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+  }
+
+  function buyPlant(name) {
+    const lizenz = localStorage.getItem("lizenz") === "true";
+    const pro = localStorage.getItem("pro") === "true";
+    const premium = localStorage.getItem("premium") === "true";
+
+    let limit = 1;
+    if (lizenz) limit = 3;
+    if (pro) limit = 6;
+    if (premium) limit = 999;
+
+    const current = parseInt(localStorage.getItem("pflanzen") || "0");
+    if (current >= limit) {
+      alert("Du hast dein Limit erreicht. Upgrade deine Lizenz für mehr!");
+      return;
+    }
+
+    localStorage.setItem("pflanzen", current + 1);
+    alert(name + " wurde erfolgreich gepflanzt! 🌱");
   }
 </script>
 
