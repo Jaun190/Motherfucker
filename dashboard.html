@@ -4,106 +4,126 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GrowEmpire Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
     body {
-      background-color: #001e0f;
-      font-family: sans-serif;
-      color: white;
       margin: 0;
-      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #001e0f;
+      color: white;
     }
-    header {
-      background-color: #003317;
-      padding: 20px;
-      text-align: center;
-      font-size: 2rem;
+    .menu {
+      background-color: #002a17;
+      padding: 15px 20px;
+      font-size: 1.5rem;
       font-weight: bold;
+    }
+    .menu button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      margin-right: 15px;
     }
     .container {
       padding: 20px;
     }
-    .card {
-      background-color: #003d1a;
+    .section {
+      background-color: #00391d;
       border-radius: 12px;
       padding: 20px;
       margin-bottom: 20px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      box-shadow: 0 0 12px rgba(0,0,0,0.3);
     }
-    .card h2 {
+    .section h2 {
       margin-top: 0;
     }
-    .linkbox a {
-      color: #4ef58c;
+    .ref-link {
       word-break: break-all;
+      color: #66ff99;
     }
-    .stat-grid {
+    .dashboard-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      margin-top: 15px;
     }
-    .stat {
-      background-color: #005b2a;
-      padding: 16px;
+    .card {
+      background-color: #00572d;
+      padding: 20px;
       border-radius: 10px;
       text-align: center;
     }
-    .stat h3 {
-      margin: 8px 0;
+    .card h3 {
+      margin: 10px 0 5px;
+      font-size: 1.4rem;
     }
-    .emoji {
-      font-size: 1.5rem;
+    .card p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #ccc;
     }
   </style>
 </head>
 <body>
 
-  <header>🌱 GrowEmpire Dashboard</header>
+  <div class="menu">
+    <button onclick="location.href='dashboard.html'">🏠 Dashboard</button>
+    <button onclick="location.href='plants.html'">🌿 Pflanzen</button>
+    <button onclick="location.href='starterbox.html'">📦 Starterbox</button>
+    <button onclick="logout()">🚪 Logout</button>
+  </div>
 
   <div class="container">
 
-    <div class="card linkbox">
+    <div class="section">
       <h2>🔗 Dein Referral-Link</h2>
-      <p><span id="refLink">Wird geladen...</span></p>
+      <p class="ref-link" id="refLink">Wird geladen...</p>
     </div>
 
-    <div class="card">
+    <div class="section">
       <h2>📊 Übersicht</h2>
-      <div class="stat-grid">
-        <div class="stat">
-          <div class="emoji">💰</div>
+      <div class="dashboard-grid">
+        <div class="card">
           <h3>CHF 1'520.–</h3>
           <p>Gesamteinnahmen</p>
         </div>
-        <div class="stat">
-          <div class="emoji">🌿</div>
+        <div class="card">
           <h3>320</h3>
           <p>Aktive Pflanzen</p>
         </div>
-        <div class="stat">
-          <div class="emoji">👥</div>
+        <div class="card">
           <h3>1225</h3>
           <p>Downline-Nutzer</p>
         </div>
-        <div class="stat">
-          <div class="emoji">⏳</div>
+        <div class="card">
           <h3>13 Tage</h3>
           <p>Bis zur Ernte</p>
         </div>
       </div>
     </div>
 
-    <div class="card">
+    <div class="section">
       <h2>⬇️ Deine Downline</h2>
-      <p>👤 <span id="downline">12 aktive Partner</span></p>
+      <p>👥 12 aktive Partner</p>
     </div>
 
   </div>
 
   <script>
-    // Username aus localStorage holen (vorher beim Login gespeichert)
-    const username = localStorage.getItem("username") || "deinName";
-    const refLink = `https://jaun190.github.io/Motherfucker/register.html?ref=${username}`;
-    document.getElementById("refLink").innerHTML = `<a href="${refLink}" target="_blank">${refLink}</a>`;
+    // Redirect wenn nicht eingeloggt
+    const username = localStorage.getItem("username");
+    if (!username) {
+      window.location.href = "login.html";
+    } else {
+      const link = `https://jaun190.github.io/Motherfucker/register.html?ref=${username}`;
+      document.getElementById("refLink").innerHTML = `<a href="${link}" target="_blank">${link}</a>`;
+    }
+
+    function logout() {
+      localStorage.removeItem("username");
+      window.location.href = "login.html";
+    }
   </script>
 
 </body>
