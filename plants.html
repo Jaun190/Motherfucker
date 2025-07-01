@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GrowEmpire Dashboard</title>
+  <title>Pflanzen kaufen – GrowEmpire</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
@@ -56,49 +56,69 @@
       text-align: center;
       margin-top: 80px;
       font-size: 24px;
+      color: #00ff88;
     }
 
-    .box-info {
-      font-size: 1.1em;
-      font-weight: bold;
-      color: #0f0;
-      margin: 10px;
-      margin-bottom: 15px;
-      text-align: center;
-    }
-
-    .card {
-      background-color: rgba(0, 0, 0, 0.4);
-      margin: 20px auto;
+    .plant-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
       padding: 20px;
-      border-radius: 15px;
-      width: 85%;
-      max-width: 400px;
-      box-shadow: 0 0 10px #00ff00;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .plant-card {
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 20px;
+      overflow: hidden;
       text-align: center;
+      box-shadow: 0 0 12px #00ff88;
+      display: flex;
+      flex-direction: column;
     }
 
-    .card h3 {
-      font-size: 1.5em;
-      margin-bottom: 10px;
+    .plant-card img {
+      width: 100%;
+      height: auto;
+      border-bottom: 2px solid #00ff88;
     }
 
-    .card span {
-      display: block;
-      font-size: 1.2em;
+    .plant-card h3 {
+      margin: 10px 0 5px;
+      color: #00ff88;
+    }
+
+    .plant-card p {
+      margin: 4px 0;
+    }
+
+    .buy-btn {
+      margin: 10px auto 20px;
+      padding: 10px 20px;
+      background-color: #00ff88;
+      color: black;
       font-weight: bold;
-      color: #00ffcc;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .buy-btn:hover {
+      background-color: #00cc66;
     }
   </style>
 </head>
 <body>
 
+  <!-- Menü-Button -->
   <button class="menu-btn" onclick="toggleMenu()">
     <span></span>
     <span></span>
     <span></span>
   </button>
 
+  <!-- Menü -->
   <div class="nav" id="nav">
     <a href="dashboard.html">📊 Dashboard</a>
     <a href="plants.html">🌱 Pflanzen kaufen</a>
@@ -107,49 +127,42 @@
     <a href="index.html">📕 Logout</a>
   </div>
 
-  <h2>🌿 GrowEmpire Dashboard</h2>
-  <p id="box-status" class="box-info">Box-Status wird geladen…</p>
+  <h2>🌿 Pflanzen kaufen</h2>
 
-  <div class="card">
-    <span>💰</span>
-    <h3>CHF 1'520.–</h3>
-    <p>Gesamteinnahmen</p>
-  </div>
+  <div class="plant-grid">
+    <div class="plant-card">
+      <img src="assets/kush2.png" alt="Kush #2">
+      <h3>Kush #2</h3>
+      <p>CHF 180.– | 75 Tage</p>
+      <button class="buy-btn">Kaufen</button>
+    </div>
 
-  <div class="card">
-    <span>🌱</span>
-    <h3>320</h3>
-    <p>Aktive Pflanzen</p>
-  </div>
+    <div class="plant-card">
+      <img src="assets/sativa1.png" alt="Sativa Dream">
+      <h3>Sativa Dream</h3>
+      <p>CHF 195.– | 80 Tage</p>
+      <button class="buy-btn">Kaufen</button>
+    </div>
 
-  <div class="card">
-    <span>👥</span>
-    <h3>1225</h3>
-    <p>Downline-Nutzer</p>
-  </div>
+    <div class="plant-card">
+      <img src="assets/haze1.png" alt="Haze One">
+      <h3>Haze #1</h3>
+      <p>CHF 210.– | 85 Tage</p>
+      <button class="buy-btn">Kaufen</button>
+    </div>
 
-  <div class="card">
-    <span>⏳</span>
-    <h3>13 Tage</h3>
-    <p>Bis zur nächsten Ernte</p>
+    <div class="plant-card">
+      <img src="assets/ogkush.png" alt="OG Kush">
+      <h3>OG Kush</h3>
+      <p>CHF 230.– | 90 Tage</p>
+      <button class="buy-btn">Kaufen</button>
+    </div>
   </div>
 
   <script>
     function toggleMenu() {
       const nav = document.getElementById("nav");
       nav.style.display = nav.style.display === "block" ? "none" : "block";
-    }
-
-    // Box-Status aus localStorage auslesen
-    const box = localStorage.getItem("growempire_box");
-    const boxstatus = document.getElementById("box-status");
-
-    if (box === "pro") {
-      boxstatus.textContent = "🎁 Aktive Lizenz: Pro Box – +20 % Ertrag";
-    } else if (box === "premium") {
-      boxstatus.textContent = "🎁 Aktive Lizenz: Premium Box – +30 % Ertrag";
-    } else {
-      boxstatus.textContent = "❌ Keine Box aktiv – bitte Starterbox wählen";
     }
   </script>
 
