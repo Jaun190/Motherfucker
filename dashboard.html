@@ -12,7 +12,7 @@
   <nav id="sideMenu" class="hidden">
     <a href="dashboard.html">Dashboard</a>
     <a href="plants.html">Pflanzen kaufen</a>
-    <a href="logout.html">Logout</a>
+    <a href="index.html">Logout</a>
   </nav>
 
   <h1 class="center-title">🌱 GrowEmpire<br>Dashboard</h1>
@@ -54,4 +54,13 @@
     // Weiterleitung, wenn nicht eingeloggt
     const user = localStorage.getItem("user");
     if (!user) {
-      window.location.href = "login
+      window.location.href = "index.html"; // <- Hier ist jetzt der Login
+    }
+
+    // Referral-Link anzeigen
+    const username = localStorage.getItem("user");
+    const link = `https://jaun190.github.io/Motherfucker/register.html?ref=${username}`;
+    document.getElementById("refLink").innerText = link;
+  </script>
+</body>
+</html>
