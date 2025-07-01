@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verdienstmöglichkeiten – GrowEmpire</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background-image: url("assets/dashboard.png");
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+
+    .navbar {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 10px;
+      text-align: center;
+    }
+
+    .navbar a {
+      color: #00ff99;
+      margin: 0 12px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.75);
+      margin: 30px auto;
+      padding: 30px;
+      max-width: 800px;
+      border-radius: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #00ff99;
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .section h2 {
+      color: #00ffcc;
+      border-bottom: 2px solid #00ffcc;
+      padding-bottom: 5px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #444;
+    }
+
+    th {
+      background: #111;
+    }
+
+    .highlight {
+      color: #00ff99;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <a href="dashboard.html">📊 Dashboard</a>
+    <a href="pflanzen.html">🌱 Pflanzen kaufen</a>
+    <a href="starterbox.html">🎁 Starterbox</a>
+    <a href="partner.html">👥 Partner</a>
+    <a href="verdienst.html">💰 Verdienst</a>
+    <a href="#" onclick="logout()">📦 Logout</a>
+  </div>
+
+  <div class="container">
+    <h1>💰 Verdienstmöglichkeiten</h1>
+
+    <div class="section">
+      <h2>📦 Starterbox-Kosten vs. Einnahmen</h2>
+      <table>
+        <tr>
+          <th>Box</th>
+          <th>Kosten</th>
+          <th>Dauer</th>
+          <th>Max. Pflanzen</th>
+          <th>Möglicher Ertrag</th>
+        </tr>
+        <tr>
+          <td>Starterbox</td>
+          <td>CHF 99.–</td>
+          <td>3 Monate</td>
+          <td>10 Pflanzen</td>
+          <td>CHF 300.–</td>
+        </tr>
+        <tr>
+          <td>Pro Box</td>
+          <td>CHF 150.–</td>
+          <td>6 Monate</td>
+          <td>20 Pflanzen</td>
+          <td>CHF 600.–</td>
+        </tr>
+        <tr>
+          <td>Premium Box</td>
+          <td>CHF 199.–</td>
+          <td>12 Monate</td>
+          <td>30 Pflanzen</td>
+          <td>CHF 900.–</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>🌱 Ertrag durch Pflanzen</h2>
+      <p>Jede Pflanze kostet z. B. <span class="highlight">CHF 150.–</span> und bringt nach ca. 2,5 Monaten einen Ertrag von <span class="highlight">CHF 180.–</span>.</p>
+      <p>Beispiel: 10 Pflanzen → <span class="highlight">CHF 300.– Gewinn</span> in 3 Monaten.</p>
+    </div>
+
+    <div class="section">
+      <h2>👥 Referral-Bonus (Downline)</h2>
+      <p>Du erhältst für jeden geworbenen Nutzer, der eine Starterbox kauft, <span class="highlight">CHF 10.–</span> gutgeschrieben.</p>
+      <p>Ab 10 geworbenen Nutzern: <span class="highlight">CHF 15.– Bonus pro Box</span></p>
+      <p>Beispiel: 20 geworbene Nutzer → <span class="highlight">CHF 300.– Provision</span></p>
+    </div>
+
+    <div class="section">
+      <h2>♻️ Reinvest & Kombi-Verdienst</h2>
+      <p>Wenn du deine Ernte reinvestierst, kannst du laufend neue Pflanzen aktivieren – ohne zusätzliche Einzahlung.</p>
+      <p>So erreichst du z. B. mit 10 Reinvests jährlich bis zu <span class="highlight">CHF 1'800.–</span> aus einer einzigen Box!</p>
+    </div>
+  </div>
+
+  <script>
+    function logout() {
+      localStorage.clear();
+      window.location.href = "index.html";
+    }
+  </script>
+
+</body>
+</html>
