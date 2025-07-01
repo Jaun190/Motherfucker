@@ -3,40 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GrowEmpire Dashboard</title>
+  <title>Pflanzen kaufen – GrowEmpire</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: url('assets/dashboard.png') no-repeat center center fixed;
+      background: #000 url('assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
       color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
     }
 
-    .menu-btn {
-      position: fixed;
+    .menu-button {
+      position: absolute;
       top: 20px;
       left: 20px;
-      background-color: rgba(0, 128, 0, 0.8);
+      font-size: 30px;
+      background: none;
       border: none;
-      border-radius: 10px;
-      padding: 10px 14px;
+      color: white;
       cursor: pointer;
-      z-index: 1000;
+      z-index: 999;
     }
 
-    .menu-btn span {
-      display: block;
-      width: 25px;
-      height: 3px;
-      margin: 5px auto;
-      background-color: white;
-    }
-
-    .nav {
+    .dropdown {
       display: none;
-      position: fixed;
+      position: absolute;
       top: 60px;
       left: 20px;
-      background-color: rgba(0, 0, 0,
+      background: rgba(0, 0, 0, 0.9);
+      padding: 15px;
+      border-radius: 8px;
+      flex-direction: column;
+      z-index: 998;
+    }
