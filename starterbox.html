@@ -72,7 +72,7 @@
     }
   </style>
 </head>
-<body>  <div class="box">
+<body>  <div class="box" id="pro-box">
     <h2>Pro Box</h2>
     <div class="price">CHF 150.– / 6 Monate</div>
     <details>
@@ -87,8 +87,8 @@
         </ul>
       </div>
     </details>
-    <button class="button">Pro Box kaufen</button>
-  </div>  <div class="box">
+    <button class="button" onclick="selectBox('pro')">Pro Box kaufen</button>
+  </div>  <div class="box" id="premium-box">
     <h2>Premium Box</h2>
     <div class="price">CHF 199.– / 12 Monate</div>
     <details>
@@ -104,6 +104,12 @@
         </ul>
       </div>
     </details>
-    <button class="button">Premium Box kaufen</button>
-  </div></body>
+    <button class="button" onclick="selectBox('premium')">Premium Box kaufen</button>
+  </div>  <script>
+    function selectBox(type) {
+      localStorage.setItem('growempire_box', type);
+      alert('✅ Deine ' + (type === 'pro' ? 'Pro Box' : 'Premium Box') + ' wurde aktiviert.');
+      window.location.href = 'dashboard.html';
+    }
+  </script></body>
 </html>
