@@ -1,142 +1,109 @@
-<!DOCTYPE html>
-<html lang="de">
+<!DOCTYPE html><html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GrowEmpire Boxen</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
   <style>
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
       background-image: url('assets/dashboard.png');
       background-size: cover;
       background-position: center;
+      font-family: Arial, sans-serif;
       color: white;
+      margin: 0;
+      padding: 0;
     }
-
-    .menu-button {
-      position: absolute;
-      top: 15px;
-      left: 15px;
-      font-size: 28px;
-      cursor: pointer;
-      z-index: 2;
-    }
-
-    .menu {
-      display: none;
-      flex-direction: column;
-      position: absolute;
-      top: 50px;
-      left: 15px;
-      background-color: rgba(0, 0, 0, 0.8);
-      padding: 10px;
-      border-radius: 8px;
-      z-index: 2;
-    }
-
-    .menu a {
-      color: #00ff99;
-      text-decoration: none;
-      margin: 5px 0;
-      font-weight: bold;
-    }
-
-    .container {
-      padding: 100px 20px 40px;
-      max-width: 600px;
-      margin: auto;
-    }
-
     .box {
-      background-color: rgba(0, 0, 0, 0.7);
-      border: 2px solid #00ff99;
-      border-radius: 16px;
+      background-color: rgba(0, 0, 0, 0.8);
+      border: 2px solid #00ff66;
+      border-radius: 20px;
+      margin: 30px auto;
       padding: 20px;
-      margin-bottom: 30px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 0 10px #00ff66;
     }
-
     .box h2 {
-      color: #00ff99;
       text-align: center;
+      margin-top: 0;
+      color: #00ff66;
     }
-
-    .box p {
-      font-size: 18px;
+    .price {
+      font-size: 1.3em;
+      font-weight: bold;
       text-align: center;
+      margin-bottom: 10px;
     }
-
-    .box ul {
+    .benefits ul {
       list-style: none;
       padding: 0;
-      margin-top: 10px;
     }
-
-    .box ul li::before {
-      content: "✅ ";
-      margin-right: 5px;
+    .benefits li {
+      margin: 8px 0;
+      padding-left: 20px;
+      background: url('assets/check.svg') no-repeat left center;
+      background-size: 18px;
     }
-
-    .buy-button {
+    .button {
       display: block;
-      width: 100%;
-      margin-top: 20px;
-      padding: 12px;
-      font-size: 18px;
-      font-weight: bold;
-      background-color: #00ff99;
+      margin: 20px auto 0;
+      padding: 12px 25px;
+      background-color: #00ff66;
       color: black;
+      font-weight: bold;
       border: none;
       border-radius: 8px;
       cursor: pointer;
+      font-size: 1em;
     }
-
-    .buy-button:hover {
+    .button:hover {
       background-color: #00cc77;
+    }
+    details summary {
+      cursor: pointer;
+      padding: 10px;
+      background-color: rgba(0, 255, 102, 0.2);
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    details[open] summary {
+      background-color: rgba(0, 255, 102, 0.4);
     }
   </style>
 </head>
-<body>
-  <div class="menu-button" onclick="toggleMenu()">☰</div>
-  <div class="menu" id="nav-menu">
-    <a href="dashboard.html">📊 Dashboard</a>
-    <a href="pflanzen.html">🌱 Pflanzen kaufen</a>
-    <a href="starterbox.html">🎁 Starterbox</a>
-    <a href="partner.html">👬 Partner</a>
-    <a href="index.html" onclick="localStorage.clear()">📕 Logout</a>
-  </div>
-
-  <div class="container">
-    <div class="box">
-      <h2>Pro Box</h2>
-      <p><strong>CHF 150.–</strong> – für 6 Monate</p>
-      <ul>
-        <li>2 m² Anbaufläche</li>
-        <li>Exklusive Sorten freigeschaltet</li>
-        <li>Reinvest-Boni</li>
-        <li>Referral-Link aktiv</li>
-      </ul>
-      <button class="buy-button">Pro Box kaufen</button>
-    </div>
-
-    <div class="box">
-      <h2>Premium Box</h2>
-      <p><strong>CHF 199.–</strong> – für 12 Monate</p>
-      <ul>
-        <li>3 m² Anbaufläche</li>
-        <li>Alle Sorten & Module freigeschaltet</li>
-        <li>Extra Boni & Support</li>
-      </ul>
-      <button class="buy-button">Premium Box kaufen</button>
-    </div>
-  </div>
-
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById("nav-menu");
-      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
-    }
-  </script>
-</body>
+<body>  <div class="box">
+    <h2>Pro Box</h2>
+    <div class="price">CHF 150.– / 6 Monate</div>
+    <details>
+      <summary>Details anzeigen</summary>
+      <div class="benefits">
+        <ul>
+          <li>🌱 2 m² Anbaufläche</li>
+          <li>🌿 Exklusive Sorten freigeschaltet</li>
+          <li>♻️ 5 % Reinvest-Boni</li>
+          <li>👥 Referral-Link aktiv (10 % Provision)</li>
+          <li>💰 Pflanzenertrag +20 %</li>
+        </ul>
+      </div>
+    </details>
+    <button class="button">Pro Box kaufen</button>
+  </div>  <div class="box">
+    <h2>Premium Box</h2>
+    <div class="price">CHF 199.– / 12 Monate</div>
+    <details>
+      <summary>Details anzeigen</summary>
+      <div class="benefits">
+        <ul>
+          <li>🌱 3 m² Anbaufläche</li>
+          <li>🧬 Alle Sorten & Module freigeschaltet</li>
+          <li>♻️ 10 % Reinvest-Bonus</li>
+          <li>👑 Referral-Provision: 15 %</li>
+          <li>🎁 Support & monatliche Aktionen</li>
+          <li>💰 Pflanzenertrag +30 %</li>
+        </ul>
+      </div>
+    </details>
+    <button class="button">Premium Box kaufen</button>
+  </div></body>
 </html>
