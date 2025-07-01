@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Starterlizenz kaufen – GrowEmpire</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000 url('assets/dashboard.png') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    .container {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 40px;
+      max-width: 500px;
+      margin: 80px auto;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #00ff00;
+    }
+
+    h1 {
+      color: #00ff99;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+    }
+
+    li::before {
+      content: "✔️ ";
+    }
+
+    button {
+      margin-top: 30px;
+      background-color: #00cc66;
+      color: white;
+      font-size: 18px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #00994d;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>🔐 Starterlizenz – CHF 49.–</h1>
+    <p>Schalte dein Backoffice frei und erhalte Zugriff auf:</p>
+    <ul>
+      <li>Alle Pflanzensorten und mehr Pflanzen gleichzeitig</li>
+      <li>Auszahlung & Reinvest-Funktion aktivieren</li>
+      <li>Dashboard mit Echtzeit-Ertragsübersicht</li>
+      <li>Referral-Link für Provisionen</li>
+    </ul>
+
+    <button onclick="kaufeLizenz()">Jetzt freischalten</button>
+  </div>
+
+  <script>
+    function kaufeLizenz() {
+      localStorage.setItem("lizenz", "true");
+      alert("✅ Lizenz erfolgreich aktiviert!");
+      window.location.href = "dashboard.html";
+    }
+  </script>
+
+</body>
+</html>
