@@ -8,62 +8,82 @@
   <style>
     body {
       margin: 0;
+      padding: 0;
       font-family: Arial, sans-serif;
-      background: url('assets/dashboard.png') no-repeat center center fixed;
+      background: url("assets/dashboard.png") no-repeat center center fixed;
       background-size: cover;
       color: white;
       text-shadow: 0 0 4px #000;
     }
+
     .menu {
-      background-color: rgba(0, 0, 0, 0.8);
-      padding: 10px;
+      background: rgba(0, 0, 0, 0.85);
       display: flex;
-      gap: 15px;
       justify-content: center;
       align-items: center;
+      padding: 10px;
+      gap: 20px;
       flex-wrap: wrap;
     }
+
     .menu a {
       color: #00ff99;
       text-decoration: none;
       font-weight: bold;
     }
+
     .container {
+      max-width: 800px;
+      margin: 30px auto;
       padding: 20px;
-      text-align: center;
+      background-color: rgba(0, 0, 0, 0.65);
+      border-radius: 20px;
     }
+
     h1 {
+      text-align: center;
+      margin-bottom: 30px;
       font-size: 2em;
-      margin-bottom: 0.5em;
     }
+
     .box {
-      background-color: rgba(0, 0, 0, 0.7);
-      margin: 20px auto;
+      margin-bottom: 30px;
       padding: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      border: 2px solid #00ff99;
       border-radius: 15px;
-      max-width: 400px;
     }
+
     .box h2 {
-      margin-bottom: 10px;
       color: #00ff99;
+      margin-bottom: 10px;
     }
+
+    .box p {
+      font-size: 1.2em;
+    }
+
     .box ul {
-      list-style: none;
-      padding: 0;
+      padding-left: 20px;
       text-align: left;
     }
-    .box ul li::before {
-      content: "✅ ";
+
+    .box ul li {
+      margin-bottom: 5px;
     }
+
     button {
-      margin-top: 10px;
+      margin-top: 15px;
       padding: 10px 20px;
-      border: none;
       background-color: #00ff99;
-      color: black;
+      border: none;
+      border-radius: 10px;
       font-weight: bold;
-      border-radius: 8px;
       cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #00cc77;
     }
   </style>
 </head>
@@ -82,35 +102,35 @@
 
     <div class="box">
       <h2>Starterbox</h2>
-      <p><strong>CHF 99.–</strong> – für 3 Monate</p>
+      <p><strong>CHF 99.–</strong> für 3 Monate</p>
       <ul>
-        <li>1 m² virtuelle Anbaufläche</li>
-        <li>Zugang zum Pflanzen-Kaufen-Modul</li>
-        <li>Aktivierung deines Referral-Links</li>
-        <li>Teilnahme am Gewinnsystem</li>
+        <li>✅ 1 m² Anbaufläche</li>
+        <li>✅ Zugang zum Pflanzen-Kaufen-Modul</li>
+        <li>✅ Referral-Link aktiviert</li>
+        <li>✅ Teilnahme am Gewinnsystem</li>
       </ul>
       <button>Starterbox kaufen</button>
     </div>
 
     <div class="box">
       <h2>Pro Box</h2>
-      <p><strong>CHF 150.–</strong> – für 6 Monate</p>
+      <p><strong>CHF 150.–</strong> für 6 Monate</p>
       <ul>
-        <li>2 m² Anbaufläche</li>
-        <li>Exklusive Sorten freigeschaltet</li>
-        <li>Reinvest-Boni</li>
-        <li>Referral-Link aktiv</li>
+        <li>✅ 2 m² Anbaufläche</li>
+        <li>✅ Exklusive Sorten</li>
+        <li>✅ Reinvest-Boni</li>
+        <li>✅ Referral-Link aktiv</li>
       </ul>
       <button>Pro Box kaufen</button>
     </div>
 
     <div class="box">
       <h2>Premium Box</h2>
-      <p><strong>CHF 199.–</strong> – für 12 Monate</p>
+      <p><strong>CHF 199.–</strong> für 12 Monate</p>
       <ul>
-        <li>3 m² Anbaufläche</li>
-        <li>Alle Sorten & Module freigeschaltet</li>
-        <li>Reinvest & Bonusaktionen</li>
+        <li>✅ 3 m² Anbaufläche</li>
+        <li>✅ Alle Sorten & Module freigeschaltet</li>
+        <li>✅ Extra Boni & Support</li>
       </ul>
       <button>Premium Box kaufen</button>
     </div>
