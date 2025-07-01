@@ -3,75 +3,109 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Starterbox kaufen – GrowEmpire</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Dashboard Übersicht</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: #041e13;
-      color: white;
-      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background: #0b1e13;
+      color: #fff;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      text-align: left;
+      margin-bottom: 30px;
+      color: #ffffff;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: linear-gradient(135deg, #1d3b2c, #12291f);
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.3);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 15px rgba(0,255,100,0.4);
+    }
+
+    .card-title {
+      font-size: 0.95rem;
+      color: #a0a0a0;
+      margin-bottom: 8px;
+    }
+
+    .card-value {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #00ff88;
+    }
+
+    .icon {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px 10px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+        text-align: center;
+      }
+
+      .card {
+        padding: 16px;
+      }
     }
   </style>
-
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen text-center px-4">
-
-  <h1 class="text-3xl font-bold text-green-400 mb-4">📦 Starterbox kaufen</h1>
-  <p class="text-gray-300 mb-4">Aktiviere dein Konto mit der Starterbox für CHF 49.–</p>
-
-  <button onclick="activateStarterbox()" id="buyBtn"
-    class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded shadow mb-4 hidden">
-    ✅ Starterbox jetzt aktivieren
-  </button>
-
-  <p id="status" class="text-sm text-gray-400 mb-4"></p>
-  <a href="index.html" id="loginLink" class="underline text-blue-400 hidden">🔑 Jetzt einloggen</a>
-
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyC7iig94MmBzuu2BLLiSg6t3O0-cdGlRww",
-      authDomain: "ruedi-aebcb.firebaseapp.com",
-      projectId: "ruedi-aebcb",
-      storageBucket: "ruedi-aebcb.appspot.com",
-      messagingSenderId: "784038413167",
-      appId: "1:784038413167:web:1f4f78875d1e1a6f89a91b"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        document.getElementById("buyBtn").style.display = "inline-block";
-        document.getElementById("status").textContent = `✅ Eingeloggt als ${user.email}`;
-      } else {
-        document.getElementById("status").textContent = "❌ Nicht eingeloggt. Bitte zuerst anmelden.";
-        document.getElementById("loginLink").style.display = "inline-block";
-      }
-    });
-
-    async function activateStarterbox() {
-      const user = auth.currentUser;
-      if (!user) return;
-
-      try {
-        await db.collection("nutzer").doc(user.uid).set({
-          starterbox: true
-        }, { merge: true });
-
-        document.getElementById("status").textContent = "✅ Starterbox aktiviert! Weiterleitung...";
-        setTimeout(() => {
-          window.location.href = "dashboard.html";
-        }, 1500);
-      } catch (error) {
-        document.getElementById("status").textContent = "❌ Fehler: " + error.message;
-      }
-    }
-  </script>
+<body>
+  <div class="container">
+    <h1>📊 Dashboard Übersicht</h1>
+    <div class="grid">
+      <div class="card">
+        <div class="icon">💰</div>
+        <div class="card-title">Gesamteinnahmen</div>
+        <div class="card-value">CHF 1'520.–</div>
+      </div>
+      <div class="card">
+        <div class="icon">🌱</div>
+        <div class="card-title">Aktive Pflanzen</div>
+        <div class="card-value">320</div>
+      </div>
+      <div class="card">
+        <div class="icon">👥</div>
+        <div class="card-title">Downline-Nutzer</div>
+        <div class="card-value">1225</div>
+      </div>
+      <div class="card">
+        <div class="icon">⏳</div>
+        <div class="card-title">Bis zur nächsten Ernte</div>
+        <div class="card-value">13 Tage</div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
