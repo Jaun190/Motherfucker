@@ -3,105 +3,155 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pflanzen kaufen – GrowEmpire</title>
+  <title>GrowEmpire Dashboard</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="plants.css" />
-  <script defer src="plants.js"></script>
-  <script defer src="auth.js"></script>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-image: url("assets/dashboard.png");
+      background: url('assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
-      background-attachment: fixed;
-      background-position: center;
-      color: #fff;
+      color: white;
     }
 
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-      background-color: rgba(0, 0, 0, 0.7);
-    }
-
-    .navbar h1 {
-      font-size: 1.2rem;
-    }
-
-    .menu-button {
-      background-color: #25a244;
+    .menu-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: rgba(0, 128, 0, 0.8);
       border: none;
-      border-radius: 6px;
-      padding: 10px;
-      font-size: 18px;
+      border-radius: 10px;
+      padding: 10px 14px;
       cursor: pointer;
+      z-index: 1000;
     }
 
-    .menu {
-      position: absolute;
+    .menu-btn span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      margin: 5px auto;
+      background-color: white;
+    }
+
+    .nav {
+      display: none;
+      position: fixed;
       top: 60px;
       left: 20px;
-      background-color: rgba(0, 0, 0, 0.9);
-      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.8);
       padding: 15px;
-      display: none;
-      flex-direction: column;
+      border-radius: 10px;
       z-index: 999;
     }
 
-    .menu a {
-      color: #fff;
+    .nav a {
+      display: block;
+      color: #00ff99;
       text-decoration: none;
-      margin: 8px 0;
-      font-weight: bold;
+      margin: 10px 0;
     }
 
-    .menu a:hover {
-      color: #00ff88;
-    }
-
-    .plant-container {
-      max-width: 600px;
-      margin: 100px auto 50px;
-      padding: 20px;
-      background-color: rgba(0, 0, 0, 0.6);
-      border-radius: 15px;
-      box-shadow: 0 0 10px #00ff88;
-    }
-
-    .plant-container h2 {
+    h2 {
       text-align: center;
-      margin-bottom: 20px;
-      color: #00ff88;
+      margin-top: 80px;
+      font-size: 24px;
     }
 
-    .plant {
-      background-color: #003300;
-      margin-bottom: 15px;
-      padding: 15px;
-      border-radius: 12px;
-    }
-
-    .plant h3 {
-      margin-top: 0;
-      color: #00ff88;
-    }
-
-    .buy-btn {
-      background-color: #00ff88;
-      color: black;
-      padding: 10px;
-      border: none;
-      border-radius: 8px;
+    .box-info {
+      font-size: 1.1em;
       font-weight: bold;
-      cursor: pointer;
+      color: #0f0;
+      margin: 10px;
+      margin-bottom: 15px;
+      text-align: center;
     }
 
-    .buy-btn:hover {
-      background-color: #00cc66;
+    .card {
+      background-color: rgba(0, 0, 0, 0.4);
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 15px;
+      width: 85%;
+      max-width: 400px;
+      box-shadow: 0 0 10px #00ff00;
+      text-align: center;
+    }
+
+    .card h3 {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+    }
+
+    .card span {
+      display: block;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #00ffcc;
     }
   </style>
-</
+</head>
+<body>
+
+  <button class="menu-btn" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <div class="nav" id="nav">
+    <a href="dashboard.html">📊 Dashboard</a>
+    <a href="plants.html">🌱 Pflanzen kaufen</a>
+    <a href="starterbox.html">🎁 Starterbox</a>
+    <a href="partner.html">👬 Partner</a>
+    <a href="index.html">📕 Logout</a>
+  </div>
+
+  <h2>🌿 GrowEmpire Dashboard</h2>
+  <p id="box-status" class="box-info">Box-Status wird geladen…</p>
+
+  <div class="card">
+    <span>💰</span>
+    <h3>CHF 1'520.–</h3>
+    <p>Gesamteinnahmen</p>
+  </div>
+
+  <div class="card">
+    <span>🌱</span>
+    <h3>320</h3>
+    <p>Aktive Pflanzen</p>
+  </div>
+
+  <div class="card">
+    <span>👥</span>
+    <h3>1225</h3>
+    <p>Downline-Nutzer</p>
+  </div>
+
+  <div class="card">
+    <span>⏳</span>
+    <h3>13 Tage</h3>
+    <p>Bis zur nächsten Ernte</p>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById("nav");
+      nav.style.display = nav.style.display === "block" ? "none" : "block";
+    }
+
+    // Box-Status aus localStorage auslesen
+    const box = localStorage.getItem("growempire_box");
+    const boxstatus = document.getElementById("box-status");
+
+    if (box === "pro") {
+      boxstatus.textContent = "🎁 Aktive Lizenz: Pro Box – +20 % Ertrag";
+    } else if (box === "premium") {
+      boxstatus.textContent = "🎁 Aktive Lizenz: Premium Box – +30 % Ertrag";
+    } else {
+      boxstatus.textContent = "❌ Keine Box aktiv – bitte Starterbox wählen";
+    }
+  </script>
+
+</body>
+</html>
