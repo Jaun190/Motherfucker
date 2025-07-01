@@ -2,52 +2,109 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GrowEmpire Dashboard</title>
-  <link rel="stylesheet" href="dashboard.css" />
+  <style>
+    body {
+      background-color: #001e0f;
+      font-family: sans-serif;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #003317;
+      padding: 20px;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    .container {
+      padding: 20px;
+    }
+    .card {
+      background-color: #003d1a;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    .card h2 {
+      margin-top: 0;
+    }
+    .linkbox a {
+      color: #4ef58c;
+      word-break: break-all;
+    }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+    }
+    .stat {
+      background-color: #005b2a;
+      padding: 16px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .stat h3 {
+      margin: 8px 0;
+    }
+    .emoji {
+      font-size: 1.5rem;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Burger-Menü -->
-  <button class="menu-button" onclick="toggleMenu()">☰</button>
-  <div id="dropdown" class="dropdown">
-    <a href="plants.html">🌱 Pflanzen kaufen</a>
-    <a href="starterbox.html">📦 Starterbox</a>
-    <a href="partner.html">🤝 Partner</a>
-    <a href="settings.html">⚙️ Einstellungen</a>
-    <a href="index.html">🚪 Logout</a>
-  </div>
+  <header>🌱 GrowEmpire Dashboard</header>
 
-  <h1 style="text-align:center; margin-top: 100px;">📊 Dashboard Übersicht</h1>
+  <div class="container">
 
-  <div class="dashboard-grid">
-    <div class="card">
-      <span>💰</span>
-      <h2>CHF 1'520.–</h2>
-      <p>Gesamteinnahmen</p>
+    <div class="card linkbox">
+      <h2>🔗 Dein Referral-Link</h2>
+      <p><span id="refLink">Wird geladen...</span></p>
     </div>
+
     <div class="card">
-      <span>🌿</span>
-      <h2>320</h2>
-      <p>Aktive Pflanzen</p>
+      <h2>📊 Übersicht</h2>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="emoji">💰</div>
+          <h3>CHF 1'520.–</h3>
+          <p>Gesamteinnahmen</p>
+        </div>
+        <div class="stat">
+          <div class="emoji">🌿</div>
+          <h3>320</h3>
+          <p>Aktive Pflanzen</p>
+        </div>
+        <div class="stat">
+          <div class="emoji">👥</div>
+          <h3>1225</h3>
+          <p>Downline-Nutzer</p>
+        </div>
+        <div class="stat">
+          <div class="emoji">⏳</div>
+          <h3>13 Tage</h3>
+          <p>Bis zur Ernte</p>
+        </div>
+      </div>
     </div>
+
     <div class="card">
-      <span>👥</span>
-      <h2>1225</h2>
-      <p>Downline-Nutzer</p>
+      <h2>⬇️ Deine Downline</h2>
+      <p>👤 <span id="downline">12 aktive Partner</span></p>
     </div>
-    <div class="card">
-      <span>⏳</span>
-      <h2>13 Tage</h2>
-      <p>Bis zur nächsten Ernte</p>
-    </div>
+
   </div>
 
   <script>
-    function toggleMenu() {
-      const menu = document.getElementById("dropdown");
-      menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
-    }
+    // Username aus localStorage holen (vorher beim Login gespeichert)
+    const username = localStorage.getItem("username") || "deinName";
+    const refLink = `https://jaun190.github.io/Motherfucker/register.html?ref=${username}`;
+    document.getElementById("refLink").innerHTML = `<a href="${refLink}" target="_blank">${refLink}</a>`;
   </script>
+
 </body>
 </html>
