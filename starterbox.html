@@ -2,130 +2,81 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Starterbox | GrowEmpire</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: "Segoe UI", sans-serif;
-      background: url('assets/dashboard.png') center center / cover no-repeat fixed;
-      color: white;
-      text-align: center;
-      backdrop-filter: blur(3px);
-    }
-
-    .menu-button {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      font-size: 28px;
-      background: rgba(0, 100, 0, 0.6);
-      padding: 10px 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      z-index: 1000;
-      color: #00ff88;
-      font-weight: bold;
-    }
-
-    .dropdown-menu {
-      display: none;
-      flex-direction: column;
-      position: fixed;
-      top: 65px;
-      left: 20px;
-      background: rgba(0, 50, 0, 0.95);
-      border-radius: 10px;
-      padding: 10px;
-      z-index: 999;
-      box-shadow: 0 0 10px #00ff88;
-    }
-
-    .dropdown-menu a {
-      color: #00ff99;
-      text-decoration: none;
-      margin: 5px 0;
-      font-weight: bold;
-      display: block;
-    }
-
-    .dropdown-menu a:hover {
-      text-decoration: underline;
-    }
-
-    .box {
-      margin-top: 120px;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-      background: rgba(0, 100, 0, 0.6);
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0, 255, 153, 0.3);
-    }
-
-    .box h1 {
-      margin-bottom: 20px;
-      color: #00ffcc;
-    }
-
-    .box ul {
-      list-style: none;
-      padding: 0;
-      text-align: left;
-    }
-
-    .box ul li {
-      padding: 5px 0;
-      font-size: 16px;
-    }
-
-    .buy-button {
-      margin-top: 20px;
-      padding: 12px 30px;
-      background: #00ff88;
-      color: black;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-      box-shadow: 0 0 8px #00ff88;
-    }
-
-    .buy-button:hover {
-      background: #00ffaa;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Starterbox kaufen – GrowEmpire</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
-<body>
+<body class="starterbox-page">
 
-  <!-- ☰ Menü -->
-  <div class="menu-button" onclick="toggleMenu()">☰</div>
-  <div id="dropdownMenu" class="dropdown-menu">
-    <a href="dashboard.html">📊 Dashboard</a>
-    <a href="plants.html">🌱 Pflanzen kaufen</a>
-    <a href="starterbox.html">🎁 Starterbox</a>
-    <a href="partner.html">🤝 Partner</a>
-    <a href="index.html">🚪 Logout</a>
+  <!-- Menü -->
+  <div class="menu-bar">
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <div class="menu-items" id="menu">
+      <a href="dashboard.html">📊 Dashboard</a>
+      <a href="pflanzen.html">🌱 Pflanzen kaufen</a>
+      <a href="starterbox.html">🎁 Starterbox</a>
+      <a href="partner.html">👥 Partner</a>
+      <a href="index.html" onclick="logout()">🚪 Logout</a>
+    </div>
   </div>
 
-  <div class="box">
-    <h1>🎁 Deine Starterbox</h1>
-    <p>Für nur <strong>CHF 49.–</strong> erhältst du:</p>
-    <ul>
-      <li>✅ 1 m² virtuelle Anbaufläche</li>
-      <li>✅ Zugang zum Pflanzen-Kaufen-Modul</li>
-      <li>✅ Aktivierung deines Referral-Links</li>
-      <li>✅ Teilnahme am Gewinnsystem</li>
-    </ul>
-    <button class="buy-button">Starterbox kaufen</button>
+  <h1>🎁 Wähle deine GrowEmpire Box</h1>
+
+  <div class="box-grid">
+
+    <!-- Starterbox -->
+    <div class="box-card">
+      <h2>Starterbox</h2>
+      <p><strong>CHF 99.–</strong> für 3 Monate</p>
+      <ul>
+        <li>✅ 1 m² virtuelle Anbaufläche</li>
+        <li>✅ Zugang zum Pflanzen-Kaufen-Modul</li>
+        <li>✅ Aktivierung deines Referral-Links</li>
+        <li>✅ Teilnahme am Gewinnsystem</li>
+      </ul>
+      <button onclick="buyBox('starter')">Starterbox kaufen</button>
+    </div>
+
+    <!-- Pro Box -->
+    <div class="box-card">
+      <h2>Pro Box</h2>
+      <p><strong>CHF 150.–</strong> für 6 Monate</p>
+      <ul>
+        <li>✅ 2 m² Anbaufläche</li>
+        <li>✅ Exklusive Sorten freigeschaltet</li>
+        <li>✅ Reinvest-Boni</li>
+        <li>✅ Referral-Link aktiv</li>
+      </ul>
+      <button onclick="buyBox('pro')">Pro Box kaufen</button>
+    </div>
+
+    <!-- Premium Box -->
+    <div class="box-card">
+      <h2>Premium Box</h2>
+      <p><strong>CHF 199.–</strong> für 12 Monate</p>
+      <ul>
+        <li>✅ 3 m² Anbaufläche</li>
+        <li>✅ Alle Sorten & Module freigeschaltet</li>
+        <li>✅ Exklusiver Zugang zu Top-Pool</li>
+        <li>✅ VIP-Reinvest-Funktion</li>
+      </ul>
+      <button onclick="buyBox('premium')">Premium Box kaufen</button>
+    </div>
+
   </div>
 
   <script>
     function toggleMenu() {
-      const menu = document.getElementById("dropdownMenu");
-      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+      document.getElementById("menu").classList.toggle("active");
+    }
+
+    function buyBox(type) {
+      alert("Box gekauft: " + type + " (Demofunktion)");
+      // Hier später Stripe oder Supabase Logik einbauen
+    }
+
+    function logout() {
+      localStorage.removeItem("user");
     }
   </script>
 
