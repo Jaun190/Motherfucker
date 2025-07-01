@@ -2,71 +2,54 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Starterbox kaufen – GrowEmpire</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
   <style>
     body {
       background: #041e13;
       color: white;
+      font-family: sans-serif;
+      text-align: center;
+      padding: 30px;
     }
-    #loading {
-      position: fixed;
-      inset: 0;
-      background: #000000ee;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 50;
-      font-size: 1.2rem;
+    button {
+      padding: 10px 20px;
+      background: green;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
     }
   </style>
-
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 </head>
-<body class="flex items-center justify-center min-h-screen">
+<body>
 
-  <!-- Ladeanzeige -->
-  <div id="loading">🔒 Authentifizierung wird geprüft...</div>
-
-  <!-- Inhalt -->
-  <div id="mainContent" class="bg-neutral-900 p-8 rounded-xl shadow-lg max-w-md w-full text-center hidden">
-    <h1 class="text-3xl font-bold text-green-400 mb-4">🌱 Starterbox kaufen</h1>
-    <p class="mb-6 text-gray-300">Aktiviere deinen GrowEmpire-Account mit der Starterbox für CHF 49.–</p>
-
-    <button onclick="activateStarterbox()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded">
-      ✅ Starterbox jetzt aktivieren
-    </button>
-
-    <p id="status" class="mt-4 text-sm text-gray-400"></p>
-  </div>
+  <h1>📦 Starterbox kaufen</h1>
+  <p>Aktiviere dein Konto für CHF 49.–</p>
+  <button onclick="activateStarterbox()">✅ Starterbox aktivieren</button>
+  <p id="status"></p>
 
   <script>
     const firebaseConfig = {
-      apiKey: "AIzaSyC7i9q4MnzBwuu2BtLii5gGt3DO-oGdlRw",
+      apiKey: "AIzaSyC7i9q4MznBzauu2BLiL5g6t3D0-cdGlRw",
       authDomain: "ruedi-aebcb.firebaseapp.com",
       projectId: "ruedi-aebcb",
       storageBucket: "ruedi-aebcb.appspot.com",
-      messagingSenderId: "784338413167",
-      appId: "1:784338413167:web:13687c8f7825da1e168f9a"
+      messagingSenderId: "784383413167",
+      appId: "1:784383413167:web:1f87825da1e16f39a9"
     };
 
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
 
-    auth.onAuthStateChanged(async (user) => {
-      const loading = document.getElementById("loading");
-      const main = document.getElementById("mainContent");
-
-      if (user) {
-        loading.style.display = "none";
-        main.classList.remove("hidden");
-      } else {
-        loading.innerHTML = "⛔ Nicht eingeloggt. Weiterleitung...";
+    // ✅ sichere Prüfung, nicht sofort weiterleiten
+    auth.onAuthStateChanged(user => {
+      if (!user) {
+        // Warten 1 Sekunde für Sicherheit
         setTimeout(() => {
           window.location.href = "index.html";
         }, 1000);
@@ -74,21 +57,23 @@
     });
 
     async function activateStarterbox() {
-      const status = document.getElementById("status");
       const user = auth.currentUser;
-      if (!user) return;
+      if (!user) {
+        document.getElementById("status").textContent = "⚠️ Nicht eingeloggt.";
+        return;
+      }
 
       try {
-        await db.collection("nutzer").doc(user.uid).update({
+        await db.collection("nutzer").doc(user.uid).set({
           starterbox: true
-        });
+        }, { merge: true });
 
-        status.textContent = "✅ Starterbox erfolgreich aktiviert!";
+        document.getElementById("status").textContent = "✅ Starterbox aktiviert. Weiterleitung...";
         setTimeout(() => {
           window.location.href = "dashboard.html";
-        }, 1500);
+        }, 2000);
       } catch (error) {
-        status.textContent = "❌ Fehler: " + error.message;
+        document.getElementById("status").textContent = "❌ Fehler: " + error.message;
       }
     }
   </script>
