@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GrowEmpire Dashboard</title>
+  <title>🌱 GrowEmpire Dashboard</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body class="dashboard-body">
 
+  <!-- Menü -->
   <div class="menu-toggle" onclick="toggleMenu()">☰</div>
   <nav id="sideMenu" class="hidden">
-    <a href="dashboard.html">Dashboard</a>
-    <a href="plants.html">Pflanzen kaufen</a>
-    <a href="index.html">Logout</a>
+    <a href="dashboard.html">📊 Dashboard</a>
+    <a href="plants.html">🌿 Pflanzen kaufen</a>
+    <a href="index.html">🚪 Logout</a>
   </nav>
 
   <h1 class="center-title">🌱 GrowEmpire<br>Dashboard</h1>
@@ -46,21 +47,21 @@
   </section>
 
   <script>
-    // MENU
+    // Menü ein-/ausblenden
     function toggleMenu() {
       document.getElementById("sideMenu").classList.toggle("hidden");
     }
 
-    // Weiterleitung, wenn nicht eingeloggt
+    // Weiterleitung wenn nicht eingeloggt
     const user = localStorage.getItem("user");
     if (!user) {
-      window.location.href = "index.html"; // <- Hier ist jetzt der Login
+      window.location.href = "index.html";
     }
 
-    // Referral-Link anzeigen
-    const username = localStorage.getItem("user");
-    const link = `https://jaun190.github.io/Motherfucker/register.html?ref=${username}`;
-    document.getElementById("refLink").innerText = link;
+    // Referral-Link korrekt anzeigen
+    const refLink = `https://jaun190.github.io/Motherfucker/index.html?ref=${user}`;
+    document.getElementById("refLink").innerHTML = `<a href="${refLink}" target="_blank">${refLink}</a>`;
   </script>
+
 </body>
 </html>
