@@ -4,74 +4,70 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Starterbox kaufen – GrowEmpire</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #041e13;
+      color: white;
+      font-family: sans-serif;
+    }
+  </style>
+
+  <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-  <style>
-    body {
-      background: #041e13;
-      color: white;
-      font-family: sans-serif;
-      text-align: center;
-      padding: 30px;
-    }
-    button {
-      padding: 10px 20px;
-      background: green;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 18px;
-    }
-  </style>
 </head>
-<body>
+<body class="flex flex-col items-center justify-center min-h-screen text-center px-4">
 
-  <h1>📦 Starterbox kaufen</h1>
-  <p>Aktiviere dein Konto für CHF 49.–</p>
-  <button onclick="activateStarterbox()">✅ Starterbox aktivieren</button>
-  <p id="status"></p>
+  <h1 class="text-3xl font-bold text-green-400 mb-4">📦 Starterbox kaufen</h1>
+  <p class="text-gray-300 mb-4">Aktiviere dein Konto mit der Starterbox für CHF 49.–</p>
+
+  <button onclick="activateStarterbox()" id="buyBtn"
+    class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded shadow mb-4 hidden">
+    ✅ Starterbox jetzt aktivieren
+  </button>
+
+  <p id="status" class="text-sm text-gray-400 mb-4"></p>
+  <a href="index.html" id="loginLink" class="underline text-blue-400 hidden">🔑 Jetzt einloggen</a>
 
   <script>
     const firebaseConfig = {
-      apiKey: "AIzaSyC7i9q4MznBzauu2BLiL5g6t3D0-cdGlRw",
+      apiKey: "AIzaSyC7iig94MmBzuu2BLLiSg6t3O0-cdGlRww",
       authDomain: "ruedi-aebcb.firebaseapp.com",
       projectId: "ruedi-aebcb",
       storageBucket: "ruedi-aebcb.appspot.com",
-      messagingSenderId: "784383413167",
-      appId: "1:784383413167:web:1f87825da1e16f39a9"
+      messagingSenderId: "784038413167",
+      appId: "1:784038413167:web:1f4f78875d1e1a6f89a91b"
     };
 
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
 
-    // ✅ sichere Prüfung, nicht sofort weiterleiten
     auth.onAuthStateChanged(user => {
-      if (!user) {
-        // Warten 1 Sekunde für Sicherheit
-        setTimeout(() => {
-          window.location.href = "index.html";
-        }, 1000);
+      if (user) {
+        document.getElementById("buyBtn").style.display = "inline-block";
+        document.getElementById("status").textContent = `✅ Eingeloggt als ${user.email}`;
+      } else {
+        document.getElementById("status").textContent = "❌ Nicht eingeloggt. Bitte zuerst anmelden.";
+        document.getElementById("loginLink").style.display = "inline-block";
       }
     });
 
     async function activateStarterbox() {
       const user = auth.currentUser;
-      if (!user) {
-        document.getElementById("status").textContent = "⚠️ Nicht eingeloggt.";
-        return;
-      }
+      if (!user) return;
 
       try {
         await db.collection("nutzer").doc(user.uid).set({
           starterbox: true
         }, { merge: true });
 
-        document.getElementById("status").textContent = "✅ Starterbox aktiviert. Weiterleitung...";
+        document.getElementById("status").textContent = "✅ Starterbox aktiviert! Weiterleitung...";
         setTimeout(() => {
           window.location.href = "dashboard.html";
-        }, 2000);
+        }, 1500);
       } catch (error) {
         document.getElementById("status").textContent = "❌ Fehler: " + error.message;
       }
