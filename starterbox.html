@@ -1,24 +1,133 @@
-<!-- starterbox.html -->
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>Starterbox kaufen</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="style.css" rel="stylesheet">
-  <script>
-    const isLoggedIn = localStorage.getItem("userLoggedIn") === "true";
-    if (!isLoggedIn) {
-      window.location.href = "login.html";
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Starterbox | GrowEmpire</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: url('assets/dashboard.png') center center / cover no-repeat fixed;
+      color: white;
+      text-align: center;
+      backdrop-filter: blur(3px);
     }
-  </script>
+
+    .menu-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      font-size: 28px;
+      background: rgba(0, 100, 0, 0.6);
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 1000;
+      color: #00ff88;
+      font-weight: bold;
+    }
+
+    .dropdown-menu {
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      top: 65px;
+      left: 20px;
+      background: rgba(0, 50, 0, 0.95);
+      border-radius: 10px;
+      padding: 10px;
+      z-index: 999;
+      box-shadow: 0 0 10px #00ff88;
+    }
+
+    .dropdown-menu a {
+      color: #00ff99;
+      text-decoration: none;
+      margin: 5px 0;
+      font-weight: bold;
+      display: block;
+    }
+
+    .dropdown-menu a:hover {
+      text-decoration: underline;
+    }
+
+    .box {
+      margin-top: 120px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      background: rgba(0, 100, 0, 0.6);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 255, 153, 0.3);
+    }
+
+    .box h1 {
+      margin-bottom: 20px;
+      color: #00ffcc;
+    }
+
+    .box ul {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+    }
+
+    .box ul li {
+      padding: 5px 0;
+      font-size: 16px;
+    }
+
+    .buy-button {
+      margin-top: 20px;
+      padding: 12px 30px;
+      background: #00ff88;
+      color: black;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      box-shadow: 0 0 8px #00ff88;
+    }
+
+    .buy-button:hover {
+      background: #00ffaa;
+    }
+  </style>
 </head>
 <body>
-  <div class="starterbox-container">
-    <h1>📦 Starterbox kaufen</h1>
-    <p>Aktiviere dein Konto mit der Starterbox für CHF 49.–</p>
-    <p style="color: red;">❌ Nicht eingeloggt. Bitte zuerst anmelden.</p>
-    <a href="login.html" class="button">🔑 Jetzt einloggen</a>
+
+  <!-- ☰ Menü -->
+  <div class="menu-button" onclick="toggleMenu()">☰</div>
+  <div id="dropdownMenu" class="dropdown-menu">
+    <a href="dashboard.html">📊 Dashboard</a>
+    <a href="plants.html">🌱 Pflanzen kaufen</a>
+    <a href="starterbox.html">🎁 Starterbox</a>
+    <a href="partner.html">🤝 Partner</a>
+    <a href="index.html">🚪 Logout</a>
   </div>
+
+  <div class="box">
+    <h1>🎁 Deine Starterbox</h1>
+    <p>Für nur <strong>CHF 49.–</strong> erhältst du:</p>
+    <ul>
+      <li>✅ 1 m² virtuelle Anbaufläche</li>
+      <li>✅ Zugang zum Pflanzen-Kaufen-Modul</li>
+      <li>✅ Aktivierung deines Referral-Links</li>
+      <li>✅ Teilnahme am Gewinnsystem</li>
+    </ul>
+    <button class="buy-button">Starterbox kaufen</button>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("dropdownMenu");
+      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    }
+  </script>
+
 </body>
 </html>
