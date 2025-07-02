@@ -1,116 +1,137 @@
-<!DOCTYPE html><html lang="de">
+<!DOCTYPE html>
+<html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pflanzen kaufen – GrowEmpire</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     body {
       margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      background: #000;
-      background-image: url('assets/dashboard.png');
+      font-family: Arial, sans-serif;
+      background: url('assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
-      background-position: center;
-      color: #0f0;
-    }h1 {
-  text-align: center;
-  font-size: 3em;
-  margin-top: 30px;
-}
+      color: #00ff66;
+    }
 
-.plant-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 20px;
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 2.5em;
+    }
 
-.plant-card {
-  background: #000;
-  border: 2px solid #0f0;
-  border-radius: 10px;
-  padding: 10px;
-  text-align: center;
-  box-shadow: 0 0 15px #0f0;
-}
+    .plant-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
-.plant-card img {
-  width: 100%;
-  height: auto;
-  border-radius: 6px;
-  object-fit: contain;
-  margin-bottom: 10px;
-}
+    .plant-card {
+      background: rgba(0, 0, 0, 0.85);
+      border: 2px solid #00ff66;
+      border-radius: 12px;
+      box-shadow: 0 0 12px #00ff66;
+      text-align: center;
+      padding: 10px;
+      overflow: hidden;
+    }
 
-.plant-card h2 {
-  margin: 0;
-  font-size: 1.2em;
-}
+    .plant-card img {
+      width: 100%;
+      max-height: 160px;
+      object-fit: contain;
+      border-radius: 6px;
+    }
 
-.plant-card p {
-  margin: 5px 0;
-}
+    .plant-card h3 {
+      margin: 10px 0 5px;
+      color: #00ff66;
+    }
 
-.plant-card button {
-  background-color: #00ff66;
-  color: black;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 15px;
-  font-weight: bold;
-  cursor: pointer;
-}
+    .plant-card p {
+      margin: 2px 0;
+      font-size: 0.9em;
+    }
 
+    .plant-card button {
+      margin-top: 10px;
+      background: #00ff66;
+      color: black;
+      border: none;
+      padding: 8px 16px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .plant-card button:hover {
+      background: #00cc55;
+    }
+
+    @media (max-width: 600px) {
+      .plant-card img {
+        max-height: 140px;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>🌱 Pflanzen kaufen</h1>  <div class="plant-container">
+
+  <h1>🌱 Pflanzen kaufen</h1>
+
+  <div class="plant-grid">
     <div class="plant-card">
-      <img src="assets/sativa1.png" alt="Sativa">
-      <h2>Sativa Dream</h2>
+      <img src="assets/sativa1.png" alt="Sativa Dream" />
+      <h3>Sativa Dream</h3>
       <p>Dauer: 80 Tage</p>
       <p>Preis: CHF 195.–</p>
       <button>Kaufen</button>
     </div>
+
     <div class="plant-card">
-      <img src="assets/haze1.png" alt="Purple Haze">
-      <h2>Purple Haze</h2>
+      <img src="assets/haze1.png" alt="Purple Haze" />
+      <h3>Purple Haze</h3>
       <p>Dauer: 85 Tage</p>
       <p>Preis: CHF 210.–</p>
       <button>Kaufen</button>
     </div>
+
     <div class="plant-card">
-      <img src="assets/ogkush.png" alt="OG Kush">
-      <h2>OG Kush</h2>
+      <img src="assets/ogkush.png" alt="OG Kush" />
+      <h3>OG Kush</h3>
       <p>Dauer: 75 Tage</p>
       <p>Preis: CHF 180.–</p>
       <button>Kaufen</button>
     </div>
+
     <div class="plant-card">
-      <img src="assets/kush2.png" alt="Kush #2">
-      <h2>Kush #2</h2>
+      <img src="assets/kush2.png" alt="Kush #2" />
+      <h3>Kush #2</h3>
       <p>Dauer: 60 Tage</p>
       <p>Preis: CHF 170.–</p>
       <button>Kaufen</button>
     </div>
+
     <div class="plant-card">
-      <img src="assets/kiffen.png" alt="AutoFlow">
-      <h2>🎁 AutoFlow (Gratis)</h2>
+      <img src="assets/kiffen.png" alt="AutoFlow Gratis" />
+      <h3>🎁 AutoFlow (Gratis)</h3>
       <p>Dauer: 45 Tage</p>
       <p>Preis: CHF 0.–</p>
       <button>Kostenlos setzen</button>
     </div>
+
     <div class="plant-card">
-      <img src="assets/sativa1.png" alt="Master Weed">
-      <h2>Master Weed</h2>
+      <img src="assets/sativa1.png" alt="Master Weed" />
+      <h3>Master Weed</h3>
       <p>Dauer: 95 Tage</p>
       <p>Preis: CHF 240.–</p>
       <button>Kaufen</button>
     </div>
-    <!-- Weitere Pflanzen hier -->
+
+    <!-- Weitere Pflanzen kannst du einfach kopieren -->
   </div>
+
 </body>
 </html>
