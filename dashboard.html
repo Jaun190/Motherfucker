@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🌿 Pflanzen kaufen – GrowEmpire</title>
+  <title>Dashboard – GrowEmpire</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: url("assets/dashboard.png") no-repeat center center fixed;
+      background: url('assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
       color: white;
     }
@@ -18,142 +18,131 @@
       position: absolute;
       top: 20px;
       left: 20px;
-      background: #00ff90;
+      background-color: #00ff90;
       border: none;
       color: black;
-      font-size: 20px;
-      border-radius: 8px;
-      padding: 8px 12px;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
       z-index: 10;
     }
 
-    #dropdown {
+    .dropdown {
       display: none;
       position: absolute;
       top: 60px;
       left: 20px;
-      background-color: rgba(0, 0, 0, 0.9);
+      background: rgba(0, 0, 0, 0.9);
       padding: 10px;
-      border-radius: 8px;
-      z-index: 10;
+      border-radius: 10px;
     }
 
-    #dropdown a {
+    .dropdown a {
       display: block;
-      color: #00ff90;
+      color: #0f0;
       text-decoration: none;
-      padding: 5px 0;
+      margin: 5px 0;
     }
 
-    .plant-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      padding: 100px 20px 40px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .plant {
-      background: rgba(0, 0, 0, 0.7);
-      border-radius: 12px;
-      padding: 15px;
+    .container {
+      max-width: 600px;
+      margin: 100px auto;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px #00ff90;
       text-align: center;
-      box-shadow: 0 0 12px #00ff90;
     }
 
-    .plant img {
-      width: 100%;
-      height: auto;
-      max-height: 180px;
-      object-fit: contain;
-      border-radius: 8px;
-      background: #000;
-    }
-
-    .plant h3 {
-      margin-top: 12px;
-      margin-bottom: 8px;
+    h1 {
+      margin-bottom: 20px;
       color: #00ff90;
     }
 
-    .plant p {
-      margin: 4px 0 12px;
+    .info-box {
+      margin-bottom: 20px;
+      padding: 15px;
+      background-color: #111;
+      border-radius: 10px;
+      border: 1px solid #00ff90;
     }
 
-    .plant button {
-      background: #00ff90;
+    button {
+      background-color: #00ff90;
       color: black;
+      padding: 10px 20px;
       border: none;
-      padding: 10px 16px;
-      border-radius: 6px;
+      border-radius: 10px;
       font-weight: bold;
       cursor: pointer;
+      margin-top: 10px;
     }
 
-    .plant .gift {
-      color: #ff0;
-      font-weight: bold;
+    .locked {
+      color: #999;
+      font-style: italic;
     }
   </style>
 </head>
 <body>
 
-<!-- Menü -->
-<button class="menu-button" onclick="toggleMenu()">☰</button>
-<div id="dropdown">
-  <a href="dashboard.html">📊 Dashboard</a>
-  <a href="plants.html">🌱 Pflanzen kaufen</a>
-  <a href="lizens.html">🛡️ Lizenz kaufen</a>
-  <a href="partner.html">🤝 Partner</a>
-  <a href="settings.html">⚙️ Einstellungen</a>
-  <a href="index.html">🚪 Logout</a>
-</div>
-
-<!-- Pflanzen -->
-<div class="plant-grid">
-  <div class="plant">
-    <img src="assets/sativa1.png" alt="Sativa Dream" />
-    <h3>Sativa Dream</h3>
-    <p>CHF 195.– | 80 Tage</p>
-    <button>Kaufen</button>
+  <!-- Menü -->
+  <button class="menu-button" onclick="toggleMenu()">☰</button>
+  <div id="dropdown" class="dropdown">
+    <a href="dashboard.html">📊 Dashboard</a>
+    <a href="plants.html">🌱 Pflanzen kaufen</a>
+    <a href="lizens.html">💼 Lizenz</a>
+    <a href="partner.html">🤝 Partner</a>
+    <a href="settings.html">⚙️ Einstellungen</a>
+    <a href="index.html">🚪 Logout</a>
   </div>
 
-  <div class="plant">
-    <img src="assets/haze1.png" alt="Purple Haze" />
-    <h3>Purple Haze</h3>
-    <p>CHF 210.– | 85 Tage</p>
-    <button>Kaufen</button>
+  <div class="container">
+    <h1>Willkommen bei GrowEmpire</h1>
+
+    <div class="info-box" id="lizenzStatusBox"></div>
+    <div class="info-box" id="pflanzenBox"></div>
+    <div class="info-box" id="ertragBox"></div>
   </div>
 
-  <div class="plant">
-    <img src="assets/ogkush.png" alt="OG Kush" />
-    <h3>OG Kush</h3>
-    <p>CHF 180.– | 75 Tage</p>
-    <button>Kaufen</button>
-  </div>
+  <script>
+    const lizenz = localStorage.getItem("lizenz") === "true";
+    const pro = localStorage.getItem("pro") === "true";
+    const premium = localStorage.getItem("premium") === "true";
 
-  <div class="plant">
-    <img src="assets/kush2.png" alt="AutoFlow" />
-    <h3>🎁 AutoFlow<br><span class="gift">(Gratis)</span></h3>
-    <p>CHF 0.– | 45 Tage</p>
-    <button>Kostenlos setzen</button>
-  </div>
+    let pflanzenAnzahl = 1;
+    let limit = 1;
+    if (lizenz) limit = pro ? 6 : premium ? 10 : 3;
 
-  <div class="plant">
-    <img src="assets/masterweed.png" alt="Master Weed" />
-    <h3>Master Weed</h3>
-    <p>CHF 240.– | 95 Tage</p>
-    <button>Kaufen</button>
-  </div>
-</div>
+    const lizenzBox = document.getElementById("lizenzStatusBox");
+    if (lizenz) {
+      lizenzBox.innerHTML = `<h3>✅ Lizenzstatus: Aktiv</h3><p>Du kannst bis zu ${limit} Pflanzen verwalten.</p>`;
+    } else {
+      lizenzBox.innerHTML = `
+        <h3>🚫 Starterlizenz nicht aktiv</h3>
+        <p class="locked">Du hast nur eingeschränkten Zugriff. Aktiviere die Starterlizenz für CHF 49.–, um alle Funktionen freizuschalten.</p>
+        <button onclick="window.location.href='lizens.html'">Lizenz kaufen</button>`;
+    }
 
-<script>
-  function toggleMenu() {
-    const menu = document.getElementById("dropdown");
-    menu.style.display = menu.style.display === "block" ? "none" : "block";
-  }
-</script>
+    const pflanzenBox = document.getElementById("pflanzenBox");
+    pflanzenBox.innerHTML = `<h3>🌿 Aktive Pflanzen:</h3><p>${pflanzenAnzahl} / ${limit}</p>`;
 
+    const ertragBox = document.getElementById("ertragBox");
+    let ertrag = 30;
+    let bonus = premium ? 1.3 : pro ? 1.2 : 1.0;
+
+    if (!lizenz) {
+      ertragBox.innerHTML = `<h3>💸 Ertrag:</h3><p class="locked">Nur mit Lizenz sichtbar.</p>`;
+    } else {
+      const total = ertrag * pflanzenAnzahl * bonus;
+      ertragBox.innerHTML = `<h3>💸 Ertrag:</h3><p>CHF ${total.toFixed(2)} (${bonus > 1 ? "mit Bonus x" + bonus : "Standard"})</p>`;
+    }
+
+    function toggleMenu() {
+      const menu = document.getElementById("dropdown");
+      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+      menu.style.flexDirection = "column";
+    }
+  </script>
 </body>
 </html>
