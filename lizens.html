@@ -3,26 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Backoffice Lizenz & Upgrade</title>
+  <title>Backoffice Lizenz – GrowEmpire</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: url('assets/dashboard.png') no-repeat center center fixed;
+      background: url('assets/dashboard.png') no-repeat center center;
       background-size: cover;
-      color: #fff;
+      background-attachment: scroll;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: white;
     }
+
     .menu-toggle {
       position: absolute;
       top: 20px;
       left: 20px;
       background-color: #0f0;
+      color: black;
       padding: 10px;
       border-radius: 6px;
       cursor: pointer;
       z-index: 10;
     }
+
     .menu-content {
       display: none;
       position: absolute;
@@ -33,47 +38,50 @@
       padding: 10px;
       z-index: 10;
     }
+
     .menu-content a {
       display: block;
       color: #0f0;
       text-decoration: none;
       padding: 5px 0;
     }
+
     .menu-toggle:hover + .menu-content,
     .menu-content:hover {
       display: block;
     }
 
     .content {
-      max-width: 900px;
-      margin: 100px auto 50px;
+      max-width: 600px;
+      margin: 120px auto 50px;
       padding: 20px;
     }
 
-    .section {
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .box {
+      background-color: rgba(0, 0, 0, 0.6);
       border: 2px solid #00ff90;
       border-radius: 20px;
-      margin-bottom: 40px;
-      background-color: rgba(0, 0, 0, 0.6);
       padding: 20px;
+      margin-bottom: 40px;
       box-shadow: 0 0 20px #00ff90;
     }
 
-    .section h2 {
+    .box h2 {
       color: #00ff90;
       margin-bottom: 10px;
     }
 
-    .section p {
-      margin: 5px 0;
-    }
-
-    .section ul {
+    .box ul {
       list-style: none;
       padding-left: 0;
     }
 
-    .section li::before {
+    .box li::before {
       content: "🌱";
       margin-right: 8px;
     }
@@ -95,59 +103,54 @@
 </head>
 <body>
 
-<!-- ☰ Menü -->
-<div class="menu-toggle">☰</div>
-<div class="menu-content">
-  <a href="dashboard.html">📊 Dashboard</a>
-  <a href="plants.html">🌱 Pflanzen kaufen</a>
-  <a href="lizens.html">💎 Lizenz & Upgrade</a>
-  <a href="partner.html">🤝 Partner</a>
-  <a href="settings.html">⚙️ Einstellungen</a>
-  <a href="index.html">🚪 Logout</a>
-</div>
-
-<div class="content">
-
-  <!-- BACKOFFICE LIZENZ -->
-  <div class="section">
-    <h2>🔑 Backoffice Lizenz</h2>
-    <p><strong>CHF 49.–</strong> (einmalig, Pflicht zur Nutzung)</p>
-    <ul>
-      <li>Zugang zum Dashboard & allen Funktionen</li>
-      <li>1 gratis Pflanze im Wert von CHF 100.– (Autoflower, 45 Tage)</li>
-      <li>Demo-Modus entfällt, echter Ertrag möglich</li>
-      <li>Lizenz notwendig für Upgrades</li>
-    </ul>
-    <button class="buy-btn">Lizenz kaufen</button>
+  <div class="menu-toggle">☰</div>
+  <div class="menu-content">
+    <a href="dashboard.html">📊 Dashboard</a>
+    <a href="plants.html">🌱 Pflanzen kaufen</a>
+    <a href="lizens.html">📄 Lizenz</a>
+    <a href="partner.html">🤝 Partner</a>
+    <a href="settings.html">⚙️ Einstellungen</a>
+    <a href="index.html">🚪 Logout</a>
   </div>
 
-  <!-- PRO BOX -->
-  <div class="section">
-    <h2>🚀 Pro Box</h2>
-    <p><strong>CHF 199.–</strong> + Lizenz CHF 49.–</p>
-    <ul>
-      <li>2 m² Anbaufläche</li>
-      <li>+20 % Ertrag auf alle Pflanzen</li>
-      <li>Mehr Reinvest-Boni</li>
-      <li>Referral-Aktivierung</li>
-    </ul>
-    <button class="buy-btn">Pro Box kaufen</button>
-  </div>
+  <div class="content">
+    <h1>📄 Backoffice Lizenz</h1>
 
-  <!-- PREMIUM BOX -->
-  <div class="section">
-    <h2>👑 Premium Box</h2>
-    <p><strong>CHF 300.–</strong> (inkl. Lizenz & Vorteile)</p>
-    <ul>
-      <li>3 m² Anbaufläche</li>
-      <li>+30 % Ertrag auf alle Pflanzen</li>
-      <li>Gratis Lizenz + Extra Pflanze</li>
-      <li>Premium-Support & alle Sorten freigeschaltet</li>
-    </ul>
-    <button class="buy-btn">Premium Box kaufen</button>
-  </div>
+    <div class="box">
+      <h2>🎁 Obligatorische Lizenz</h2>
+      <p><strong>CHF 49.–</strong> (einmalig) – zum Start inkl. 1 Gratispflanze</p>
+      <ul>
+        <li>Voller Zugriff aufs Dashboard</li>
+        <li>1 Gratispflanze (AutoFlow)</li>
+        <li>Ertragsverfolgung aktiviert</li>
+      </ul>
+      <button class="buy-btn">Lizenz kaufen</button>
+    </div>
 
-</div>
+    <div class="box">
+      <h2>🚀 Pro Box</h2>
+      <p><strong>CHF 199.–</strong> + Lizenz CHF 49.–</p>
+      <ul>
+        <li>2 m² Anbaufläche</li>
+        <li>+20 % Ertrag auf alle Pflanzen</li>
+        <li>Mehr Reinvest-Boni</li>
+        <li>Referral-Aktivierung</li>
+      </ul>
+      <button class="buy-btn">Pro Box kaufen</button>
+    </div>
+
+    <div class="box">
+      <h2>👑 Premium Box</h2>
+      <p><strong>CHF 300.–</strong> (inkl. Lizenz & Vorteile)</p>
+      <ul>
+        <li>3 m² Anbaufläche</li>
+        <li>+30 % Ertrag auf alle Pflanzen</li>
+        <li>Gratis Lizenz + Extra Pflanze</li>
+        <li>Premium-Support & alle Sorten freigeschaltet</li>
+      </ul>
+      <button class="buy-btn">Premium Box kaufen</button>
+    </div>
+  </div>
 
 </body>
 </html>
