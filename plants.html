@@ -1,207 +1,73 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pflanzen kaufen – GrowEmpire</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: url('assets/dashboard.png') no-repeat center center fixed;
-      background-size: cover;
-      color: #fff;
-    }
+<!-- Inhalt bleibt identisch wie im letzten Code, nur zusätzlicher Block: -->
 
-    .menu-button {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background-color: #0f0;
-      padding: 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      z-index: 10;
-    }
-
-    .dropdown {
-      display: none;
-      position: absolute;
-      top: 60px;
-      left: 20px;
-      background-color: rgba(0, 0, 0, 0.9);
-      border-radius: 8px;
-      padding: 10px;
-      z-index: 10;
-      flex-direction: column;
-    }
-
-    .dropdown a {
-      color: #0f0;
-      text-decoration: none;
-      padding: 5px 0;
-    }
-
-    .dropdown.show {
-      display: flex;
-    }
-
-    h1 {
-      text-align: center;
-      margin-top: 80px;
-      font-size: 32px;
-      color: #0f0;
-    }
-
-    .plant-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      max-width: 1200px;
-      margin: 30px auto;
-      padding: 20px;
-    }
-
-    .plant {
-      background-color: rgba(0, 0, 0, 0.8);
-      border: 2px solid #0f0;
-      border-radius: 15px;
-      padding: 15px;
-      text-align: center;
-      box-shadow: 0 0 20px #00ff90;
-    }
-
-    .plant img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-
-    .plant h3 {
-      margin: 10px 0 5px;
-      color: #00ff90;
-    }
-
-    .plant p {
-      margin: 0;
-    }
-
-    .plant button {
-      margin-top: 10px;
-      padding: 10px 15px;
-      background-color: #00ff90;
-      color: #000;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-
-<!-- Menü -->
-<button class="menu-button" onclick="toggleMenu()">☰</button>
-<div id="dropdown" class="dropdown">
-  <a href="dashboard.html">📊 Dashboard</a>
-  <a href="plants.html">🌿 Pflanzen kaufen</a>
-  <a href="lizens.html">💼 Lizenz</a>
-  <a href="starterbox.html">🚀 Upgrade</a>
-  <a href="partner.html">🤝 Partner</a>
-  <a href="settings.html">⚙️ Einstellungen</a>
-  <a href="index.html">🚪 Logout</a>
+<!-- Dritte Reihe -->
+<div class="plant">
+  <img src="assets/placeholder.png" alt="Soon" />
+  <h3>Amnesia Gold</h3>
+  <p>CHF 230.– | 90 Tage</p>
+  <button>Kaufen</button>
 </div>
 
-<h1>🌱 Pflanzen kaufen</h1>
-
-<!-- Pflanzengrid -->
-<div class="plant-grid">
-
-  <!-- Hier erste Reihe -->
-  <div class="plant">
-    <img src="assets/sativa1.png" alt="Sativa Dream" />
-    <h3>Sativa Dream</h3>
-    <p>CHF 195.– | 80 Tage</p>
-    <button>Kaufen</button>
-  </div>
-
-  <div class="plant">
-    <img src="assets/haze1.png" alt="Purple Haze" />
-    <h3>Purple Haze</h3>
-    <p>CHF 210.– | 85 Tage</p>
-    <button>Kaufen</button>
-  </div>
-
-  <div class="plant">
-    <img src="assets/ogkush.png" alt="OG Kush" />
-    <h3>OG Kush</h3>
-    <p>CHF 180.– | 75 Tage</p>
-    <button>Kaufen</button>
-  </div>
-
-  <div class="plant">
-    <img src="assets/kush2.png" alt="AutoFlow" />
-    <h3>🎁 AutoFlow (Gratis)</h3>
-    <p>CHF 0.– | 45 Tage</p>
-    <button>Kostenlos setzen</button>
-  </div>
-
-  <div class="plant">
-    <img src="assets/kiffen.png" alt="Master Weed" />
-    <h3>Master Weed</h3>
-    <p>CHF 240.– | 95 Tage</p>
-    <button>Kaufen</button>
-  </div>
-
-  <!-- Zweite Reihe (Platzhalter) -->
-  <div class="plant">
-    <img src="assets/placeholder.png" alt="Bald verfügbar" />
-    <h3>White Widow</h3>
-    <p>CHF 190.– | 85 Tage</p>
-    <button>Kaufen</button>
-  </div>
-
-  <div class="plant">
-    <img src="assets/placeholder.png" alt="Bald verfügbar" />
-    <h3>Blue Dream</h3>
-    <p>CHF 200.– | 90 Tage</p>
-    <button>Kaufen</button>
-  </div>
-
-  <div class="plant">
-    <img src="assets/placeholder.png" alt="Bald verfügbar" />
-    <h3>Critical Mass</h3>
-    <p>CHF 175.– | 70 Tage</p>
-    <button>Kaufen</button>
-  </div>
-
-  <div class="plant">
-    <img src="assets/placeholder.png" alt="Bald verfügbar" />
-    <h3>Lemon Haze</h3>
-    <p>CHF 205.– | 80 Tage</p>
-    <button>Kaufen</button>
-  </div>
-
-  <div class="plant">
-    <img src="assets/placeholder.png" alt="Bald verfügbar" />
-    <h3>Gorilla Glue</h3>
-    <p>CHF 220.– | 85 Tage</p>
-    <button>Kaufen</button>
-  </div>
-
-  <!-- Weitere Pflanzen möglich (Reihe 3 & 4) -->
-  <!-- einfach Blöcke wie oben kopieren -->
-
+<div class="plant">
+  <img src="assets/placeholder.png" alt="Soon" />
+  <h3>Banana Punch</h3>
+  <p>CHF 210.– | 85 Tage</p>
+  <button>Kaufen</button>
 </div>
 
-<script>
-  function toggleMenu() {
-    const menu = document.getElementById("dropdown");
-    menu.classList.toggle("show");
-  }
-</script>
+<div class="plant">
+  <img src="assets/placeholder.png" alt="Soon" />
+  <h3>Moby Dick</h3>
+  <p>CHF 200.– | 80 Tage</p>
+  <button>Kaufen</button>
+</div>
 
-</body>
-</html>
+<div class="plant">
+  <img src="assets/placeholder.png" alt="Soon" />
+  <h3>Green Poison</h3>
+  <p>CHF 190.– | 75 Tage</p>
+  <button>Kaufen</button>
+</div>
+
+<div class="plant">
+  <img src="assets/placeholder.png" alt="Soon" />
+  <h3>AK-47</h3>
+  <p>CHF 180.– | 75 Tage</p>
+  <button>Kaufen</button>
+</div>
+
+<!-- Vierte Reihe -->
+<div class="plant">
+  <img src="assets/placeholder.png" alt="Soon" />
+  <h3>Durban Poison</h3>
+  <p>CHF 200.– | 80 Tage</p>
+  <button>Kaufen</button>
+</div>
+
+<div class="plant">
+  <img src="assets/placeholder.png" alt="Soon" />
+  <h3>Super Skunk</h3>
+  <p>CHF 190.– | 70 Tage</p>
+  <button>Kaufen</button>
+</div>
+
+<div class="plant">
+  <img src="assets/placeholder.png" alt="Soon" />
+  <h3>Jack Herer</h3>
+  <p>CHF 210.– | 85 Tage</p>
+  <button>Kaufen</button>
+</div>
+
+<div class="plant">
+  <img src="assets/placeholder.png" alt="Soon" />
+  <h3>Swiss Mix</h3>
+  <p>CHF 220.– | 95 Tage</p>
+  <button>Kaufen</button>
+</div>
+
+<div class="plant">
+  <img src="assets/placeholder.png" alt="Soon" />
+  <h3>Zombie OG</h3>
+  <p>CHF 240.– | 100 Tage</p>
+  <button>Kaufen</button>
+</div>
