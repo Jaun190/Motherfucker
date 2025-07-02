@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🌱 Pflanzen kaufen – GrowEmpire</title>
+  <title>Pflanzen kaufen – GrowEmpire</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
@@ -20,6 +20,7 @@
       left: 20px;
       background-color: #00ff90;
       padding: 10px;
+      border: none;
       border-radius: 6px;
       cursor: pointer;
       z-index: 10;
@@ -30,67 +31,75 @@
       position: absolute;
       top: 60px;
       left: 20px;
-      background-color: rgba(0, 0, 0, 0.95);
-      padding: 15px;
+      background-color: rgba(0, 0, 0, 0.9);
+      padding: 10px;
       border-radius: 8px;
+      flex-direction: column;
       z-index: 10;
     }
 
     .dropdown a {
-      color: #00ff90;
+      color: #0f0;
       text-decoration: none;
+      padding: 5px 0;
       display: block;
-      margin: 5px 0;
     }
 
     .plant-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 100px 10px 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
+      padding: 120px 20px 60px;
     }
 
     .plant {
-      background: rgba(0, 0, 0, 0.7);
-      border: 2px solid #00ff90;
-      border-radius: 16px;
-      padding: 15px;
-      width: 170px;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      border-radius: 15px;
       text-align: center;
       box-shadow: 0 0 15px #00ff90;
     }
 
     .plant img {
-      width: 100%;
-      border-radius: 8px;
+      max-width: 100%;
+      border-radius: 12px;
     }
 
     .plant h3 {
+      margin: 15px 0 5px;
       color: #00ff90;
-      margin: 10px 0 5px;
     }
 
     .plant p {
-      margin: 0;
-      margin-bottom: 10px;
+      margin: 5px 0 10px;
     }
 
     .plant button {
-      background: #00ff90;
+      background-color: #00cc66;
       border: none;
-      padding: 10px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      color: white;
       font-weight: bold;
       cursor: pointer;
-      border-radius: 6px;
+    }
+
+    .plant button.free {
+      background-color: #00ff90;
+      color: black;
+    }
+
+    .plant button:disabled {
+      background: gray;
+      cursor: not-allowed;
     }
   </style>
 </head>
 <body>
 
-<!-- ☰ Menü -->
-<div class="menu-button" onclick="toggleMenu()">☰</div>
-<div class="dropdown" id="menu">
+<!-- Menü -->
+<button class="menu-button" onclick="toggleMenu()">☰</button>
+<div id="dropdown" class="dropdown">
   <a href="dashboard.html">📊 Dashboard</a>
   <a href="plants.html">🌱 Pflanzen kaufen</a>
   <a href="lizens.html">💼 Lizenz</a>
@@ -99,46 +108,46 @@
   <a href="index.html">🚪 Logout</a>
 </div>
 
-<!-- Pflanzenübersicht -->
+<!-- Pflanzen -->
 <div class="plant-grid">
 
   <div class="plant">
-    <img src="assets/kush2.png" alt="Kush #2" />
+    <img src="assets/kush2.png" alt="Kush #2">
     <h3>Kush #2</h3>
     <p>CHF 170.– | 75 Tage</p>
     <button>Kaufen</button>
   </div>
 
   <div class="plant">
-    <img src="assets/sativa.png" alt="Sativa Dream" />
+    <img src="assets/sativa1.png" alt="Sativa Dream">
     <h3>Sativa Dream</h3>
     <p>CHF 195.– | 80 Tage</p>
     <button>Kaufen</button>
   </div>
 
   <div class="plant">
-    <img src="assets/purple.png" alt="Purple Haze" />
+    <img src="assets/haze1.png" alt="Purple Haze">
     <h3>Purple Haze</h3>
     <p>CHF 210.– | 85 Tage</p>
     <button>Kaufen</button>
   </div>
 
   <div class="plant">
-    <img src="assets/og.png" alt="OG Kush" />
+    <img src="assets/ogkush.png" alt="OG Kush">
     <h3>OG Kush</h3>
     <p>CHF 180.– | 75 Tage</p>
     <button>Kaufen</button>
   </div>
 
   <div class="plant">
-    <img src="assets/auto.png" alt="AutoFlow Gratis" />
+    <img src="assets/autoflow.png" alt="AutoFlow Gratis">
     <h3>🎁 AutoFlow (Gratis)</h3>
     <p>CHF 0.– | 45 Tage</p>
-    <button>Kostenlos setzen</button>
+    <button class="free">Kostenlos setzen</button>
   </div>
 
   <div class="plant">
-    <img src="assets/master.png" alt="Master Weed" />
+    <img src="assets/masterweed.png" alt="Master Weed">
     <h3>Master Weed</h3>
     <p>CHF 240.– | 95 Tage</p>
     <button>Kaufen</button>
@@ -148,8 +157,8 @@
 
 <script>
   function toggleMenu() {
-    const menu = document.getElementById("menu");
-    menu.style.display = menu.style.display === "block" ? "none" : "block";
+    const menu = document.getElementById("dropdown");
+    menu.style.display = menu.style.display === "flex" ? "none" : "flex";
   }
 </script>
 
