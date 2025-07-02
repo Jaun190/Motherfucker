@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pflanzen kaufen – GrowEmpire</title>
   <link rel="stylesheet" href="style.css" />
   <style>
@@ -14,103 +14,69 @@
       color: white;
     }
 
-    .menu-button {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      padding: 10px;
-      background-color: #0f0;
-      border-radius: 6px;
-      border: none;
-      cursor: pointer;
-      z-index: 10;
-    }
-
-    .dropdown {
-      display: none;
-      position: absolute;
-      top: 60px;
-      left: 20px;
-      background-color: rgba(0, 0, 0, 0.8);
-      border-radius: 8px;
-      padding: 10px;
-      z-index: 10;
-    }
-
-    .dropdown a {
-      display: block;
-      color: #0f0;
-      text-decoration: none;
-      margin: 5px 0;
-    }
-
-    .dropdown.show {
-      display: block;
-    }
-
     h1 {
       text-align: center;
-      margin-top: 90px;
-      color: #0f0;
+      margin-top: 80px;
+      margin-bottom: 30px;
+      font-size: 2em;
+      color: #00ff90;
     }
 
     .plant-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      padding: 40px;
+      gap: 30px;
+      padding: 0 20px 100px;
       max-width: 1200px;
-      margin: 0 auto;
+      margin: auto;
     }
 
     .plant {
-      background: black;
-      border: 2px solid #0f0;
-      border-radius: 15px;
-      padding: 10px;
+      background: rgba(0, 0, 0, 0.8);
+      border: 2px solid #00ff90;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #00ff90;
+      padding: 15px;
       text-align: center;
-      box-shadow: 0 0 15px #00ff90;
     }
 
     .plant img {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
+      max-width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
     }
 
     .plant h3 {
       margin: 10px 0 5px;
-      color: #0f0;
+      color: #00ff90;
     }
 
     .plant p {
       margin: 0 0 10px;
-      color: #ccc;
+      font-size: 14px;
     }
 
     .plant button {
-      padding: 8px 12px;
       background-color: #00ff90;
       color: black;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
+      padding: 10px 20px;
       font-weight: bold;
-    }
-
-    .plant button:hover {
-      background-color: #00cc66;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-<!-- Menü -->
-<button class="menu-button" onclick="toggleMenu()">☰</button>
-<div id="dropdown" class="dropdown">
+<!-- ☰ Menü -->
+<div class="menu-toggle">☰</div>
+<div class="menu-content">
   <a href="dashboard.html">📊 Dashboard</a>
-  <a href="plants.html">🌱 Pflanzen kaufen</a>
-  <a href="lizens.html">📋 Lizenz</a>
+  <a href="plants.html">🌿 Pflanzen kaufen</a>
+  <a href="lizens.html">💼 Lizenz</a>
   <a href="partner.html">🤝 Partner</a>
   <a href="settings.html">⚙️ Einstellungen</a>
   <a href="index.html">🚪 Logout</a>
@@ -119,31 +85,86 @@
 <h1>🌿 Pflanzen kaufen</h1>
 
 <div class="plant-grid">
+  <!-- Pflanze 1 -->
   <div class="plant">
     <img src="assets/sativa1.png" alt="Sativa Dream" />
     <h3>Sativa Dream</h3>
     <p>CHF 195.– | 80 Tage</p>
     <button>Kaufen</button>
   </div>
+
+  <!-- Pflanze 2 -->
   <div class="plant">
     <img src="assets/haze1.png" alt="Purple Haze" />
     <h3>Purple Haze</h3>
     <p>CHF 210.– | 85 Tage</p>
     <button>Kaufen</button>
   </div>
+
+  <!-- Pflanze 3 -->
   <div class="plant">
     <img src="assets/ogkush.png" alt="OG Kush" />
     <h3>OG Kush</h3>
     <p>CHF 180.– | 75 Tage</p>
     <button>Kaufen</button>
   </div>
+
+  <!-- Pflanze 4 -->
   <div class="plant">
     <img src="assets/kush2.png" alt="AutoFlow (Gratis)" />
     <h3>🎁 AutoFlow (Gratis)</h3>
     <p>CHF 0.– | 45 Tage</p>
     <button>Kostenlos setzen</button>
   </div>
+
+  <!-- Pflanze 5 -->
   <div class="plant">
-    <img src="assets/kiffen.png" alt="Master Weed" />
+    <img src="assets/masterweed.png" alt="Master Weed" />
     <h3>Master Weed</h3>
     <p>CHF 240.– | 95 Tage</p>
+    <button>Kaufen</button>
+  </div>
+
+  <!-- Pflanze 6 -->
+  <div class="plant">
+    <img src="assets/platzhalter1.png" alt="Neue Sorte A" />
+    <h3>Power Kush</h3>
+    <p>CHF 220.– | 85 Tage</p>
+    <button>Kaufen</button>
+  </div>
+
+  <!-- Pflanze 7 -->
+  <div class="plant">
+    <img src="assets/platzhalter2.png" alt="Neue Sorte B" />
+    <h3>White Widow</h3>
+    <p>CHF 190.– | 75 Tage</p>
+    <button>Kaufen</button>
+  </div>
+
+  <!-- Pflanze 8 -->
+  <div class="plant">
+    <img src="assets/platzhalter3.png" alt="Neue Sorte C" />
+    <h3>Green Punch</h3>
+    <p>CHF 230.– | 90 Tage</p>
+    <button>Kaufen</button>
+  </div>
+
+  <!-- Pflanze 9 -->
+  <div class="plant">
+    <img src="assets/platzhalter4.png" alt="Neue Sorte D" />
+    <h3>Fast Buds</h3>
+    <p>CHF 160.– | 60 Tage</p>
+    <button>Kaufen</button>
+  </div>
+
+  <!-- Pflanze 10 -->
+  <div class="plant">
+    <img src="assets/platzhalter5.png" alt="Neue Sorte E" />
+    <h3>Bubble Dream</h3>
+    <p>CHF 200.– | 70 Tage</p>
+    <button>Kaufen</button>
+  </div>
+
+</div>
+</body>
+</html>
