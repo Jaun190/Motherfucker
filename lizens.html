@@ -2,80 +2,108 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <title>Starterlizenz kaufen – GrowEmpire</title>
+  <title>Backoffice Lizenz – GrowEmpire</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      background: #000 url('assets/dashboard.png') no-repeat center center fixed;
+      background: url('assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
       color: white;
       font-family: Arial, sans-serif;
-      text-align: center;
     }
-
     .container {
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 40px;
-      max-width: 500px;
+      max-width: 700px;
       margin: 80px auto;
+      padding: 20px;
+      background-color: rgba(0,0,0,0.75);
+      border-radius: 20px;
+    }
+    .lizenz-box {
+      border: 2px solid #00ff90;
       border-radius: 15px;
-      box-shadow: 0 0 20px #00ff00;
+      margin-bottom: 30px;
+      padding: 20px;
     }
-
-    h1 {
-      color: #00ff99;
+    .lizenz-box h2 {
+      color: #00ff90;
     }
-
-    ul {
+    .lizenz-box ul {
       list-style: none;
-      padding: 0;
-      text-align: left;
+      padding-left: 0;
     }
-
-    li::before {
-      content: "✔️ ";
+    .lizenz-box li::before {
+      content: "✅ ";
     }
-
-    button {
-      margin-top: 30px;
-      background-color: #00cc66;
-      color: white;
-      font-size: 18px;
-      padding: 12px 24px;
+    .buy-btn {
+      background-color: #00ff90;
+      color: black;
+      padding: 10px 20px;
+      font-weight: bold;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
       cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #00994d;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1>🔐 Starterlizenz – CHF 49.–</h1>
-    <p>Schalte dein Backoffice frei und erhalte Zugriff auf:</p>
-    <ul>
-      <li>Alle Pflanzensorten und mehr Pflanzen gleichzeitig</li>
-      <li>Auszahlung & Reinvest-Funktion aktivieren</li>
-      <li>Dashboard mit Echtzeit-Ertragsübersicht</li>
-      <li>Referral-Link für Provisionen</li>
-    </ul>
+<!-- ☰ Menü -->
+<div class="menu-toggle">☰</div>
+<div class="menu-content">
+  <a href="dashboard.html">📊 Dashboard</a>
+  <a href="plants.html">🌱 Pflanzen kaufen</a>
+  <a href="lizenz.html">💎 Lizenz</a>
+  <a href="partner.html">🤝 Partner</a>
+  <a href="settings.html">⚙️ Einstellungen</a>
+  <a href="index.html">🚪 Logout</a>
+</div>
 
-    <button onclick="kaufeLizenz()">Jetzt freischalten</button>
+<div class="container">
+  <h1>💼 Backoffice Lizenzmodelle</h1>
+
+  <div class="lizenz-box">
+    <h2>Starter Lizenz</h2>
+    <p>CHF 49.– / 3 Monate</p>
+    <ul>
+      <li>1 m² Anbaufläche</li>
+      <li>Basisfunktionen freigeschaltet</li>
+      <li>Ertrag: 100 %</li>
+    </ul>
+    <button class="buy-btn">Lizenz kaufen</button>
   </div>
 
-  <script>
-    function kaufeLizenz() {
-      localStorage.setItem("lizenz", "true");
-      alert("✅ Lizenz erfolgreich aktiviert!");
-      window.location.href = "dashboard.html";
-    }
-  </script>
+  <div class="lizenz-box">
+    <h2>Pro Lizenz</h2>
+    <p>CHF 150.– / 6 Monate</p>
+    <ul>
+      <li>2 m² Anbaufläche</li>
+      <li>+20 % Ertrag</li>
+      <li>Partner-Ref-Provision</li>
+    </ul>
+    <button class="buy-btn">Pro kaufen</button>
+  </div>
 
+  <div class="lizenz-box">
+    <h2>Premium Lizenz</h2>
+    <p>CHF 199.– / 12 Monate</p>
+    <ul>
+      <li>3 m² Anbaufläche</li>
+      <li>+30 % Ertrag</li>
+      <li>Exklusive Sorten & Bonusmodule</li>
+    </ul>
+    <button class="buy-btn">Premium kaufen</button>
+  </div>
+</div>
+
+<script>
+  // Menü-Logik
+  const toggle = document.querySelector('.menu-toggle');
+  const menu = document.querySelector('.menu-content');
+  toggle.addEventListener('click', () => {
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+  });
+</script>
 </body>
 </html>
