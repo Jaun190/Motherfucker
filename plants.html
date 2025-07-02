@@ -1,94 +1,182 @@
-<!DOCTYPE html><html lang="de">
+<!DOCTYPE html>
+<html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pflanzen kaufen – GrowEmpire</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
   <style>
     body {
+      margin: 0;
+      font-family: Arial, sans-serif;
       background: url('assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
       color: white;
-      font-family: sans-serif;
-      margin: 0;
-      padding: 0;
     }
+
+    .menu-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 26px;
+      background: #00ff90;
+      color: black;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.9);
+      border-radius: 8px;
+      padding: 10px;
+      flex-direction: column;
+      z-index: 10;
+    }
+
+    .dropdown a {
+      color: white;
+      text-decoration: none;
+      margin: 5px 0;
+    }
+
     h1 {
       text-align: center;
-      padding: 20px;
-      font-size: 2.5rem;
+      margin-top: 80px;
+      font-size: 36px;
     }
-    .plant-grid {
+
+    .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 20px;
-      padding: 20px;
-      max-width: 1200px;
-      margin: auto;
+      padding: 40px;
     }
-    .plant-card {
-      background: rgba(0,0,0,0.7);
+
+    .card {
+      background-color: black;
       border: 2px solid #00ff90;
       border-radius: 12px;
-      padding: 15px;
+      padding: 10px;
       text-align: center;
       box-shadow: 0 0 10px #00ff90;
     }
-    .plant-card img {
+
+    .card img {
       width: 100%;
       height: auto;
       border-radius: 8px;
-      margin-bottom: 10px;
     }
-    .plant-card button {
-      background-color: #00cc66;
-      color: white;
+
+    .card h3 {
+      margin: 10px 0 5px;
+      color: #00ff90;
+    }
+
+    .card p {
+      margin: 0;
+    }
+
+    .card button {
+      margin-top: 10px;
+      background: #00ff90;
+      color: black;
       border: none;
-      padding: 10px 15px;
-      border-radius: 6px;
+      padding: 8px 15px;
+      border-radius: 5px;
       cursor: pointer;
-      font-weight: bold;
     }
+
   </style>
 </head>
 <body>
-  <h1>🌱 Pflanzen kaufen</h1>  <div class="plant-grid">
-    <div class="plant-card">
-      <img src="assets/sativa1.png" alt="Sativa">
-      <h3>Sativa</h3>
-      <p>Dauer: 75 Tage<br>Preis: CHF 120.&#x2013;</p>
-      <button onclick="kaufen('Sativa', 120, 75, 'assets/sativa1.png')">Kaufen</button>
+  <!-- Menü -->
+  <button class="menu-button" onclick="toggleMenu()">☰</button>
+  <div class="dropdown" id="menu">
+    <a href="dashboard.html">🏠 Dashboard</a>
+    <a href="plants.html">🌱 Pflanzen kaufen</a>
+    <a href="lizens.html">📦 Lizenz</a>
+    <a href="index.html">🚪 Logout</a>
+  </div>
+
+  <h1>🌱 Pflanzen kaufen</h1>
+
+  <div class="grid">
+    <!-- Erste Reihe -->
+    <div class="card">
+      <img src="assets/sativa1.png" alt="Sativa" />
+      <h3>Sativa Dream</h3>
+      <p>Dauer: 80 Tage<br>Preis: CHF 195.–</p>
+      <button>Kaufen</button>
     </div>
-    <div class="plant-card">
-      <img src="assets/haze1.png" alt="Haze">
-      <h3>Haze</h3>
-      <p>Dauer: 65 Tage<br>Preis: CHF 100.&#x2013;</p>
-      <button onclick="kaufen('Haze', 100, 65, 'assets/haze1.png')">Kaufen</button>
+    <div class="card">
+      <img src="assets/haze1.png" alt="Haze" />
+      <h3>Purple Haze</h3>
+      <p>Dauer: 85 Tage<br>Preis: CHF 210.–</p>
+      <button>Kaufen</button>
     </div>
-    <div class="plant-card">
-      <img src="assets/ogkush.png" alt="OG Kush">
+    <div class="card">
+      <img src="assets/ogkush.png" alt="OG Kush" />
       <h3>OG Kush</h3>
-      <p>Dauer: 80 Tage<br>Preis: CHF 140.&#x2013;</p>
-      <button onclick="kaufen('OG Kush', 140, 80, 'assets/ogkush.png')">Kaufen</button>
+      <p>Dauer: 75 Tage<br>Preis: CHF 180.–</p>
+      <button>Kaufen</button>
     </div>
-    <div class="plant-card">
-      <img src="assets/kush2.png" alt="Kush #2">
+    <div class="card">
+      <img src="assets/kush2.png" alt="Kush #2" />
       <h3>Kush #2</h3>
-      <p>Dauer: 60 Tage<br>Preis: CHF 90.&#x2013;</p>
-      <button onclick="kaufen('Kush #2', 90, 60, 'assets/kush2.png')">Kaufen</button>
+      <p>Dauer: 60 Tage<br>Preis: CHF 170.–</p>
+      <button>Kaufen</button>
     </div>
-  </div>  <script>
-    function kaufen(name, price, days, image) {
-      const plants = JSON.parse(localStorage.getItem("myPlants") || "[]");
-      plants.push({
-        name,
-        price,
-        days,
-        image,
-        plantedAt: Date.now()
-      });
-      localStorage.setItem("myPlants", JSON.stringify(plants));
-      alert(name + " wurde gesetzt!");
+    <div class="card">
+      <img src="assets/kiffen.png" alt="Master Weed" />
+      <h3>Master Weed</h3>
+      <p>Dauer: 95 Tage<br>Preis: CHF 240.–</p>
+      <button>Kaufen</button>
+    </div>
+
+    <!-- Zweite Reihe -->
+    <div class="card">
+      <img src="assets/haze1.png" alt="White Widow" />
+      <h3>White Widow</h3>
+      <p>Dauer: 85 Tage<br>Preis: CHF 190.–</p>
+      <button>Kaufen</button>
+    </div>
+    <div class="card">
+      <img src="assets/sativa1.png" alt="Blue Dream" />
+      <h3>Blue Dream</h3>
+      <p>Dauer: 90 Tage<br>Preis: CHF 200.–</p>
+      <button>Kaufen</button>
+    </div>
+    <div class="card">
+      <img src="assets/kush2.png" alt="Critical Mass" />
+      <h3>Critical Mass</h3>
+      <p>Dauer: 70 Tage<br>Preis: CHF 175.–</p>
+      <button>Kaufen</button>
+    </div>
+    <div class="card">
+      <img src="assets/haze1.png" alt="Lemon Haze" />
+      <h3>Lemon Haze</h3>
+      <p>Dauer: 80 Tage<br>Preis: CHF 205.–</p>
+      <button>Kaufen</button>
+    </div>
+    <div class="card">
+      <img src="assets/ogkush.png" alt="Gorilla Glue" />
+      <h3>Gorilla Glue</h3>
+      <p>Dauer: 85 Tage<br>Preis: CHF 220.–</p>
+      <button>Kaufen</button>
+    </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
     }
-  </script></body>
+  </script>
+</body>
 </html>
