@@ -3,160 +3,155 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pflanzen kaufen – GrowEmpire</title>
+  <title>🌱 Pflanzen kaufen – GrowEmpire</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
+      margin: 0;
+      font-family: Arial, sans-serif;
       background: url('assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
       color: white;
-      font-family: Arial, sans-serif;
     }
-    .menu-toggle {
+
+    .menu-button {
       position: absolute;
       top: 20px;
       left: 20px;
       background-color: #00ff90;
-      color: #000;
-      padding: 10px 15px;
+      padding: 10px;
       border-radius: 6px;
-      font-weight: bold;
       cursor: pointer;
       z-index: 10;
     }
-    .menu-content {
+
+    .dropdown {
       display: none;
       position: absolute;
       top: 60px;
       left: 20px;
-      background-color: rgba(0,0,0,0.9);
+      background-color: rgba(0, 0, 0, 0.95);
+      padding: 15px;
       border-radius: 8px;
-      padding: 10px;
       z-index: 10;
     }
-    .menu-content a {
-      display: block;
+
+    .dropdown a {
       color: #00ff90;
       text-decoration: none;
-      padding: 6px 0;
-    }
-    .menu-toggle:hover + .menu-content,
-    .menu-content:hover {
       display: block;
+      margin: 5px 0;
     }
 
-    .container {
-      max-width: 1000px;
-      margin: 120px auto;
-      padding: 20px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    .plant-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 100px 10px 40px;
       gap: 20px;
     }
-    .card {
-      background: rgba(0,0,0,0.6);
+
+    .plant {
+      background: rgba(0, 0, 0, 0.7);
       border: 2px solid #00ff90;
       border-radius: 16px;
       padding: 15px;
+      width: 170px;
       text-align: center;
-      box-shadow: 0 0 12px #00ff90;
+      box-shadow: 0 0 15px #00ff90;
     }
-    .card img {
+
+    .plant img {
       width: 100%;
-      border-radius: 12px;
-      height: 160px;
-      object-fit: cover;
+      border-radius: 8px;
     }
-    .card h3 {
-      margin: 10px 0 5px;
+
+    .plant h3 {
       color: #00ff90;
+      margin: 10px 0 5px;
     }
-    .buy-btn {
+
+    .plant p {
+      margin: 0;
+      margin-bottom: 10px;
+    }
+
+    .plant button {
       background: #00ff90;
-      color: #000;
       border: none;
-      padding: 8px 12px;
-      border-radius: 6px;
+      padding: 10px;
       font-weight: bold;
       cursor: pointer;
-      margin-top: 8px;
-    }
-    .buy-btn:disabled {
-      background: #666;
-      cursor: not-allowed;
+      border-radius: 6px;
     }
   </style>
 </head>
 <body>
 
 <!-- ☰ Menü -->
-<div class="menu-toggle">☰</div>
-<div class="menu-content">
+<div class="menu-button" onclick="toggleMenu()">☰</div>
+<div class="dropdown" id="menu">
   <a href="dashboard.html">📊 Dashboard</a>
   <a href="plants.html">🌱 Pflanzen kaufen</a>
-  <a href="starterbox.html">💎 Upgrade Box</a>
+  <a href="lizens.html">💼 Lizenz</a>
   <a href="partner.html">🤝 Partner</a>
   <a href="settings.html">⚙️ Einstellungen</a>
   <a href="index.html">🚪 Logout</a>
 </div>
 
-<div class="container">
-  <h1>🌿 Pflanzen kaufen</h1>
-  <p>Wähle deine Sorte. Aktive Pflanzen: <span id="pflanzenStatus">0</span></p>
+<!-- Pflanzenübersicht -->
+<div class="plant-grid">
 
-  <div class="grid">
-    <div class="card">
-      <img src="assets/sativa1.png" alt="Sativa" />
-      <h3>Sativa Dream</h3>
-      <p>CHF 150.–</p>
-      <button class="buy-btn" onclick="buyPlant()">Kaufen</button>
-    </div>
-    <div class="card">
-      <img src="assets/haze1.png" alt="Haze" />
-      <h3>Purple Haze</h3>
-      <p>CHF 160.–</p>
-      <button class="buy-btn" onclick="buyPlant()">Kaufen</button>
-    </div>
-    <div class="card">
-      <img src="assets/ogkush.png" alt="OG Kush" />
-      <h3>OG Kush</h3>
-      <p>CHF 180.–</p>
-      <button class="buy-btn" onclick="buyPlant()">Kaufen</button>
-    </div>
-    <div class="card">
-      <img src="assets/kush2.png" alt="Kush #2" />
-      <h3>Kush #2</h3>
-      <p>CHF 170.–</p>
-      <button class="buy-btn" onclick="buyPlant()">Kaufen</button>
-    </div>
+  <div class="plant">
+    <img src="assets/kush2.png" alt="Kush #2" />
+    <h3>Kush #2</h3>
+    <p>CHF 170.– | 75 Tage</p>
+    <button>Kaufen</button>
   </div>
+
+  <div class="plant">
+    <img src="assets/sativa.png" alt="Sativa Dream" />
+    <h3>Sativa Dream</h3>
+    <p>CHF 195.– | 80 Tage</p>
+    <button>Kaufen</button>
+  </div>
+
+  <div class="plant">
+    <img src="assets/purple.png" alt="Purple Haze" />
+    <h3>Purple Haze</h3>
+    <p>CHF 210.– | 85 Tage</p>
+    <button>Kaufen</button>
+  </div>
+
+  <div class="plant">
+    <img src="assets/og.png" alt="OG Kush" />
+    <h3>OG Kush</h3>
+    <p>CHF 180.– | 75 Tage</p>
+    <button>Kaufen</button>
+  </div>
+
+  <div class="plant">
+    <img src="assets/auto.png" alt="AutoFlow Gratis" />
+    <h3>🎁 AutoFlow (Gratis)</h3>
+    <p>CHF 0.– | 45 Tage</p>
+    <button>Kostenlos setzen</button>
+  </div>
+
+  <div class="plant">
+    <img src="assets/master.png" alt="Master Weed" />
+    <h3>Master Weed</h3>
+    <p>CHF 240.– | 95 Tage</p>
+    <button>Kaufen</button>
+  </div>
+
 </div>
 
 <script>
-  // Lizenz prüfen
-  const lizenz = localStorage.getItem("lizenz") === "true";
-  const pro = localStorage.getItem("pro") === "true";
-  const premium = localStorage.getItem("premium") === "true";
-
-  let limit = lizenz ? 3 : 1;
-  if (pro) limit = 6;
-  if (premium) limit = 999;
-
-  let gekauftePflanzen = parseInt(localStorage.getItem("pflanzen") || "0");
-  document.getElementById("pflanzenStatus").textContent = `${gekauftePflanzen}/${limit}`;
-
-  function buyPlant() {
-    if (gekauftePflanzen >= limit) {
-      alert("⚠️ Du hast das Pflanzenlimit deiner Lizenz erreicht!");
-      return;
-    }
-    gekauftePflanzen++;
-    localStorage.setItem("pflanzen", gekauftePflanzen);
-    document.getElementById("pflanzenStatus").textContent = `${gekauftePflanzen}/${limit}`;
-    alert("✅ Pflanze erfolgreich gekauft!");
+  function toggleMenu() {
+    const menu = document.getElementById("menu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
   }
 </script>
+
 </body>
 </html>
