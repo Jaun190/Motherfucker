@@ -1,129 +1,76 @@
-<!DOCTYPE html><html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GrowEmpire Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: url('assets/dashboard.png') no-repeat center center fixed;
-      background-size: cover;
-      color: #fff;
-    }.menu-button {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  background-color: #0f0;
-  color: black;
-  border: none;
-  border-radius: 6px;
-  padding: 10px 15px;
-  font-size: 20px;
-  cursor: pointer;
-  z-index: 10;
-}
+<!-- ... (Head und Menü wie gehabt, bleibt gleich) -->
 
-.dropdown {
-  display: none;
-  flex-direction: column;
-  position: absolute;
-  top: 60px;
-  left: 20px;
-  background-color: rgba(0, 0, 0, 0.9);
-  border-radius: 8px;
-  padding: 10px;
-  z-index: 10;
-}
+<!-- Pflanzen -->
+<div class="plant-grid">
+  <!-- Erste Reihe -->
+  <div class="plant">
+    <img src="assets/sativa1.png" alt="Sativa Dream" />
+    <h3>Sativa Dream</h3>
+    <p>CHF 195.– | 80 Tage</p>
+    <button>Kaufen</button>
+  </div>
 
-.dropdown a {
-  color: #0f0;
-  text-decoration: none;
-  padding: 6px 0;
-}
+  <div class="plant">
+    <img src="assets/haze1.png" alt="Purple Haze" />
+    <h3>Purple Haze</h3>
+    <p>CHF 210.– | 85 Tage</p>
+    <button>Kaufen</button>
+  </div>
 
-.container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  padding: 120px 20px 40px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
+  <div class="plant">
+    <img src="assets/ogkush.png" alt="OG Kush" />
+    <h3>OG Kush</h3>
+    <p>CHF 180.– | 75 Tage</p>
+    <button>Kaufen</button>
+  </div>
 
-.card {
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 20px;
-  border-radius: 15px;
-  text-align: center;
-  box-shadow: 0 0 10px #0f0;
-}
+  <div class="plant">
+    <img src="assets/kush2.png" alt="AutoFlow" />
+    <h3>🎁 AutoFlow<br><span class="gift">(Gratis)</span></h3>
+    <p>CHF 0.– | 45 Tage</p>
+    <button>Kostenlos setzen</button>
+  </div>
 
-.card span {
-  font-size: 40px;
-  display: block;
-  margin-bottom: 10px;
-}
+  <div class="plant">
+    <img src="assets/masterweed.png" alt="Master Weed" />
+    <h3>Master Weed</h3>
+    <p>CHF 240.– | 95 Tage</p>
+    <button>Kaufen</button>
+  </div>
 
-.card h2 {
-  font-size: 28px;
-  margin: 0;
-  color: #0f0;
-}
+  <!-- Zweite Reihe (Platzhalter für Mittag) -->
+  <div class="plant">
+    <img src="assets/newplant1.png" alt="New Plant 1" />
+    <h3>Neue Pflanze 1</h3>
+    <p>CHF 190.– | 78 Tage</p>
+    <button>Kaufen</button>
+  </div>
 
-.card p {
-  margin: 10px 0 0;
-}
+  <div class="plant">
+    <img src="assets/newplant2.png" alt="New Plant 2" />
+    <h3>Neue Pflanze 2</h3>
+    <p>CHF 200.– | 82 Tage</p>
+    <button>Kaufen</button>
+  </div>
 
-.card button {
-  margin-top: 15px;
-  background-color: #0f0;
-  color: black;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-}
+  <div class="plant">
+    <img src="assets/newplant3.png" alt="New Plant 3" />
+    <h3>Neue Pflanze 3</h3>
+    <p>CHF 185.– | 76 Tage</p>
+    <button>Kaufen</button>
+  </div>
 
-  </style>
-</head>
-<body><button class="menu-button" onclick="toggleMenu()">☰</button>
+  <div class="plant">
+    <img src="assets/newplant4.png" alt="New Plant 4" />
+    <h3>Neue Pflanze 4</h3>
+    <p>CHF 220.– | 88 Tage</p>
+    <button>Kaufen</button>
+  </div>
 
-  <div id="dropdown" class="dropdown">
-    <a href="dashboard.html">📊 Dashboard</a>
-    <a href="plants.html">🌱 Pflanzen kaufen</a>
-    <a href="lizens.html">💎 Lizenz kaufen</a>
-    <a href="partner.html">🤝 Partner</a>
-    <a href="settings.html">⚙️ Einstellungen</a>
-    <a href="index.html">🚪 Logout</a>
-  </div>  <div class="container">
-    <div class="card">
-      <span>📄</span>
-      <h2>Backoffice</h2>
-      <p>Status: Nicht lizenziert</p>
-      <button onclick="window.location.href='lizens.html'">Lizenz kaufen</button>
-    </div>
-    <div class="card">
-      <span>🌿</span>
-      <h2>1 / 1 Pflanze</h2>
-      <p>Demo-Modus aktiv</p>
-    </div>
-    <div class="card">
-      <span>💸</span>
-      <h2>CHF 20.–</h2>
-      <p>Ertrag sichtbar – Auszahlung gesperrt</p>
-    </div>
-    <div class="card">
-      <span>⏳</span>
-      <h2>45 Tage</h2>
-      <p>Bis zur Ernte</p>
-    </div>
-  </div>  <script>
-    function toggleMenu() {
-      const menu = document.getElementById("dropdown");
-      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
-    }
-  </script></body>
-</html>
+  <div class="plant">
+    <img src="assets/newplant5.png" alt="New Plant 5" />
+    <h3>Neue Pflanze 5</h3>
+    <p>CHF 250.– | 100 Tage</p>
+    <button>Kaufen</button>
+  </div>
+</div>
