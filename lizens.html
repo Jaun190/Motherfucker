@@ -2,8 +2,8 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <title>Backoffice Lizenz – GrowEmpire</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Backoffice Lizenz – GrowEmpire</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
@@ -11,39 +11,94 @@
       background-size: cover;
       color: white;
       font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
     }
+
+    .menu-toggle {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: #00ff90;
+      color: black;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .menu-content {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 20px;
+      background-color: rgba(0, 0, 0, 0.9);
+      border-radius: 8px;
+      padding: 10px;
+      z-index: 10;
+    }
+
+    .menu-content a {
+      display: block;
+      color: #00ff90;
+      text-decoration: none;
+      padding: 5px 0;
+    }
+
+    .menu-toggle:hover + .menu-content,
+    .menu-content:hover {
+      display: block;
+    }
+
     .container {
       max-width: 700px;
-      margin: 80px auto;
+      margin: 100px auto;
       padding: 20px;
-      background-color: rgba(0,0,0,0.75);
+      background-color: rgba(0, 0, 0, 0.75);
       border-radius: 20px;
+      text-align: center;
     }
-    .lizenz-box {
+
+    .box {
       border: 2px solid #00ff90;
-      border-radius: 15px;
-      margin-bottom: 30px;
+      border-radius: 20px;
+      margin-bottom: 40px;
+      background-color: rgba(0, 0, 0, 0.6);
       padding: 20px;
+      box-shadow: 0 0 20px #00ff90;
     }
-    .lizenz-box h2 {
+
+    .box h2 {
       color: #00ff90;
+      margin-bottom: 10px;
     }
-    .lizenz-box ul {
+
+    .box p {
+      margin: 5px 0;
+    }
+
+    .box ul {
       list-style: none;
       padding-left: 0;
     }
-    .lizenz-box li::before {
-      content: "✅ ";
+
+    .box li::before {
+      content: "🌱";
+      margin-right: 8px;
     }
+
     .buy-btn {
+      display: block;
       background-color: #00ff90;
       color: black;
-      padding: 10px 20px;
-      font-weight: bold;
+      padding: 12px;
       border: none;
-      border-radius: 8px;
-      margin-top: 10px;
+      border-radius: 10px;
+      margin-top: 20px;
+      font-size: 16px;
+      font-weight: bold;
       cursor: pointer;
+      text-align: center;
     }
   </style>
 </head>
@@ -54,56 +109,43 @@
 <div class="menu-content">
   <a href="dashboard.html">📊 Dashboard</a>
   <a href="plants.html">🌱 Pflanzen kaufen</a>
-  <a href="lizenz.html">💎 Lizenz</a>
+  <a href="lizenz.html">💼 Lizenz</a>
   <a href="partner.html">🤝 Partner</a>
   <a href="settings.html">⚙️ Einstellungen</a>
   <a href="index.html">🚪 Logout</a>
 </div>
 
+<!-- Lizenz-Angebote -->
 <div class="container">
-  <h1>💼 Backoffice Lizenzmodelle</h1>
+  <h1>💼 Backoffice Lizenz</h1>
+  <p>Wähle dein Lizenzpaket und schalte mehr Pflanzen & Ertrag frei!</p>
 
-  <div class="lizenz-box">
-    <h2>Starter Lizenz</h2>
-    <p>CHF 49.– / 3 Monate</p>
-    <ul>
-      <li>1 m² Anbaufläche</li>
-      <li>Basisfunktionen freigeschaltet</li>
-      <li>Ertrag: 100 %</li>
-    </ul>
-    <button class="buy-btn">Lizenz kaufen</button>
-  </div>
-
-  <div class="lizenz-box">
+  <!-- PRO BOX -->
+  <div class="box">
     <h2>Pro Lizenz</h2>
-    <p>CHF 150.– / 6 Monate</p>
+    <p><strong>CHF 150.–</strong> – 6 Monate</p>
     <ul>
-      <li>2 m² Anbaufläche</li>
-      <li>+20 % Ertrag</li>
-      <li>Partner-Ref-Provision</li>
+      <li>2 m² Anbaufläche</li>
+      <li>+20 % Ertrag auf Pflanzen</li>
+      <li>Reinvest-Boni</li>
+      <li>Referral-Link aktiv</li>
     </ul>
-    <button class="buy-btn">Pro kaufen</button>
+    <button class="buy-btn" onclick="alert('Zahlungssystem folgt')">Pro Lizenz kaufen</button>
   </div>
 
-  <div class="lizenz-box">
+  <!-- PREMIUM BOX -->
+  <div class="box">
     <h2>Premium Lizenz</h2>
-    <p>CHF 199.– / 12 Monate</p>
+    <p><strong>CHF 199.–</strong> – 12 Monate</p>
     <ul>
-      <li>3 m² Anbaufläche</li>
-      <li>+30 % Ertrag</li>
-      <li>Exklusive Sorten & Bonusmodule</li>
+      <li>3 m² Anbaufläche</li>
+      <li>+30 % Ertrag auf Pflanzen</li>
+      <li>Alle Sorten & Module</li>
+      <li>Exklusive Support & Funktionen</li>
     </ul>
-    <button class="buy-btn">Premium kaufen</button>
+    <button class="buy-btn" onclick="alert('Zahlungssystem folgt')">Premium Lizenz kaufen</button>
   </div>
 </div>
 
-<script>
-  // Menü-Logik
-  const toggle = document.querySelector('.menu-toggle');
-  const menu = document.querySelector('.menu-content');
-  toggle.addEventListener('click', () => {
-    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-  });
-</script>
 </body>
 </html>
