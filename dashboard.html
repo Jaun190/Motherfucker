@@ -1,32 +1,28 @@
-<!DOCTYPE html>
-<html lang="de">
+<!DOCTYPE html><html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <title>Dashboard – GrowEmpire</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard – GrowEmpire</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
       background: url('assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
-      color: white;
-      font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
+      font-family: Arial, sans-serif;
+      color: white;
     }
-
     .menu-toggle {
       position: absolute;
       top: 20px;
       left: 20px;
-      background-color: #00ff90;
-      color: black;
+      background-color: #0f0;
       padding: 10px;
       border-radius: 6px;
       cursor: pointer;
       z-index: 10;
     }
-
     .menu-content {
       display: none;
       position: absolute;
@@ -37,95 +33,76 @@
       padding: 10px;
       z-index: 10;
     }
-
     .menu-content a {
       display: block;
-      color: #00ff90;
+      color: #0f0;
       text-decoration: none;
       padding: 5px 0;
     }
-
     .menu-toggle:hover + .menu-content,
     .menu-content:hover {
       display: block;
     }
-
-    .container {
-      max-width: 800px;
-      margin: 100px auto;
-      padding: 20px;
-      background-color: rgba(0, 0, 0, 0.75);
-      border-radius: 20px;
+    .content {
+      padding: 80px 20px 40px;
       text-align: center;
     }
-
-    .info-box {
-      margin: 20px 0;
-      padding: 15px;
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
+    .warning {
+      background-color: rgba(255, 0, 0, 0.7);
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      font-weight: bold;
     }
-
+    .demo-box {
+      background-color: rgba(0, 0, 0, 0.6);
+      border: 2px dashed #fff;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 20px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
     .buy-btn {
       background-color: #00ff90;
       color: black;
-      padding: 10px 20px;
-      font-weight: bold;
+      padding: 12px 20px;
       border: none;
-      border-radius: 8px;
-      margin-top: 10px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
       cursor: pointer;
-    }
-
-    h1 {
-      margin-top: 0;
+      margin-top: 20px;
     }
   </style>
 </head>
-<body>
-
-<!-- ☰ Menü -->
-<div class="menu-toggle">☰</div>
+<body><!-- ☰ Menü --><div class="menu-toggle">☰</div>
 <div class="menu-content">
   <a href="dashboard.html">📊 Dashboard</a>
   <a href="plants.html">🌱 Pflanzen kaufen</a>
-  <a href="lizenz.html">💼 Lizenz</a>
+  <a href="lizens.html">💼 Lizenz kaufen</a>
   <a href="partner.html">🤝 Partner</a>
   <a href="settings.html">⚙️ Einstellungen</a>
   <a href="index.html">🚪 Logout</a>
-</div>
+</div><div class="content">
+  <div class="warning">⚠️ Demo-Version aktiv – keine echten Erträge. <a href="lizens.html" style="color:#0f0; text-decoration:underline;">Jetzt Lizenz kaufen</a></div>  <h1>Willkommen bei GrowEmpire</h1>  <div class="demo-box">
+    <h2>🌱 Auto Kush – Demo Pflanze</h2>
+    <p id="tage"></p>
+    <img src="assets/autokush.png" alt="Auto Kush" style="max-width: 200px; margin: 10px auto; display:block;" />
+    <p>Diese Pflanze ist Teil deiner kostenlosen Demo und bringt keinen echten Ertrag.</p>
+  </div>
+</div><script>
+  // Timer für Demo-Pflanze
+  const demoKey = 'demoStart';
+  if (!localStorage.getItem(demoKey)) {
+    localStorage.setItem(demoKey, Date.now());
+  }
 
-<!-- Dashboard-Inhalt -->
-<div class="container">
-  <h1>Willkommen bei GrowEmpire</h1>
-
-  <div class="info-box" id="lizenzStatusBox"></div>
-  <div class="info-box" id="pflanzenBox"></div>
-  <div class="info-box" id="ertragBox"></div>
-</div>
-
-<script>
-  const lizenz = localStorage.getItem("lizenz") === "true";
-  const pro = localStorage.getItem("pro") === "true";
-  const premium = localStorage.getItem("premium") === "true";
-
-  let limit = lizenz ? 3 : 1;
-  if (pro) limit = 6;
-  if (premium) limit = 999;
-
-  document.getElementById("lizenzStatusBox").innerHTML = lizenz || pro || premium
-    ? `<h3>🔓 Lizenz: Aktiv</h3><p>Limit: ${limit} Pflanzen</p>`
-    : `<h3>🔒 Keine aktive Lizenz</h3><button onclick="window.location.href='lizenz.html'" class="buy-btn">🔐 Lizenz kaufen</button>`;
-
-  document.getElementById("pflanzenBox").innerHTML = `<h3>🌿 Aktive Pflanzen</h3><p>1 / ${limit}</p>`;
-
-  const bonus = premium ? 1.3 : pro ? 1.2 : 1.0;
-  const ertrag = 30 * bonus;
-
-  document.getElementById("ertragBox").innerHTML = lizenz || pro || premium
-    ? `<h3>💸 Ertrag</h3><p>CHF ${ertrag.toFixed(2)}</p>`
-    : `<h3>💸 Ertrag</h3><p>CHF 0.00 (Lizenz erforderlich)</p>`;
-</script>
-
-</body>
+  const start = parseInt(localStorage.getItem(demoKey));
+  const now = Date.now();
+  const tage = 45 - Math.floor((now - start) / (1000 * 60 * 60 * 24));
+  const tageText = tage > 0 ? `⏳ Noch ${tage} Tage bis zur Ernte` : '✅ Demo-Zeit beendet';
+  document.getElementById("tage").textContent = tageText;
+</script></body>
 </html>
