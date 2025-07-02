@@ -2,166 +2,158 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🌱 Pflanzen kaufen – GrowEmpire</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🌿 Pflanzen kaufen – GrowEmpire</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: url('assets/dashboard.png') no-repeat center center fixed;
+      background: url("assets/dashboard.png") no-repeat center center fixed;
       background-size: cover;
       color: white;
-      overflow-y: auto;
-      min-height: 100vh;
     }
 
     .menu-button {
       position: absolute;
       top: 20px;
       left: 20px;
-      background-color: #00ff90;
+      background: #00ff90;
+      border: none;
       color: black;
-      padding: 10px;
-      border-radius: 6px;
-      cursor: pointer;
+      font-size: 20px;
+      border-radius: 8px;
+      padding: 8px 12px;
       z-index: 10;
     }
 
-    .dropdown {
+    #dropdown {
       display: none;
       position: absolute;
       top: 60px;
       left: 20px;
       background-color: rgba(0, 0, 0, 0.9);
-      border-radius: 8px;
       padding: 10px;
+      border-radius: 8px;
       z-index: 10;
     }
 
-    .dropdown a {
+    #dropdown a {
       display: block;
       color: #00ff90;
       text-decoration: none;
       padding: 5px 0;
     }
 
-    .menu-button:hover + .dropdown,
-    .dropdown:hover {
-      display: block;
-    }
-
-    h1 {
-      text-align: center;
-      margin-top: 100px;
-      color: #00ff90;
-    }
-
     .plant-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-      padding: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 100px 20px 40px;
       max-width: 1200px;
       margin: 0 auto;
     }
 
-    .plant-card {
-      background-color: rgba(0, 0, 0, 0.7);
-      border: 2px solid #00ff90;
-      border-radius: 15px;
+    .plant {
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 12px;
+      padding: 15px;
       text-align: center;
-      box-shadow: 0 0 20px #00ff90;
-      padding: 20px;
+      box-shadow: 0 0 12px #00ff90;
     }
 
-    .plant-card img {
+    .plant img {
       width: 100%;
+      height: auto;
       max-height: 180px;
-      border-radius: 10px;
-      object-fit: cover;
-      margin-bottom: 10px;
+      object-fit: contain;
+      border-radius: 8px;
+      background: #000;
     }
 
-    .plant-card h3 {
-      margin: 10px 0 5px;
+    .plant h3 {
+      margin-top: 12px;
+      margin-bottom: 8px;
       color: #00ff90;
     }
 
-    .plant-card p {
-      margin: 5px 0;
+    .plant p {
+      margin: 4px 0 12px;
     }
 
-    .buy-button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      background-color: #00ff90;
-      border: none;
-      border-radius: 8px;
+    .plant button {
+      background: #00ff90;
       color: black;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
       font-weight: bold;
       cursor: pointer;
     }
 
-    .gratis {
-      background-color: #00cc66 !important;
-      color: white !important;
+    .plant .gift {
+      color: #ff0;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
 
-<!-- ☰ Menü -->
-<button class="menu-button">☰</button>
-<div class="dropdown">
+<!-- Menü -->
+<button class="menu-button" onclick="toggleMenu()">☰</button>
+<div id="dropdown">
   <a href="dashboard.html">📊 Dashboard</a>
   <a href="plants.html">🌱 Pflanzen kaufen</a>
-  <a href="lizens.html">💼 Lizenz</a>
+  <a href="lizens.html">🛡️ Lizenz kaufen</a>
   <a href="partner.html">🤝 Partner</a>
   <a href="settings.html">⚙️ Einstellungen</a>
   <a href="index.html">🚪 Logout</a>
 </div>
 
-<h1>🌿 Pflanzen kaufen</h1>
-
+<!-- Pflanzen -->
 <div class="plant-grid">
-
-  <div class="plant-card">
+  <div class="plant">
     <img src="assets/sativa1.png" alt="Sativa Dream" />
     <h3>Sativa Dream</h3>
-    <p>CHF 195.–<br>80 Tage</p>
-    <button class="buy-button">Kaufen</button>
+    <p>CHF 195.– | 80 Tage</p>
+    <button>Kaufen</button>
   </div>
 
-  <div class="plant-card">
+  <div class="plant">
     <img src="assets/haze1.png" alt="Purple Haze" />
     <h3>Purple Haze</h3>
-    <p>CHF 210.–<br>85 Tage</p>
-    <button class="buy-button">Kaufen</button>
+    <p>CHF 210.– | 85 Tage</p>
+    <button>Kaufen</button>
   </div>
 
-  <div class="plant-card">
+  <div class="plant">
     <img src="assets/ogkush.png" alt="OG Kush" />
     <h3>OG Kush</h3>
-    <p>CHF 180.–<br>75 Tage</p>
-    <button class="buy-button">Kaufen</button>
+    <p>CHF 180.– | 75 Tage</p>
+    <button>Kaufen</button>
   </div>
 
-  <div class="plant-card">
-    <img src="assets/kush2.png" alt="AutoFlow Gratis" />
-    <h3>🎁 AutoFlow</h3>
-    <p>CHF 0.–<br>45 Tage</p>
-    <button class="buy-button gratis">Kostenlos setzen</button>
+  <div class="plant">
+    <img src="assets/kush2.png" alt="AutoFlow" />
+    <h3>🎁 AutoFlow<br><span class="gift">(Gratis)</span></h3>
+    <p>CHF 0.– | 45 Tage</p>
+    <button>Kostenlos setzen</button>
   </div>
 
-  <div class="plant-card">
+  <div class="plant">
     <img src="assets/masterweed.png" alt="Master Weed" />
     <h3>Master Weed</h3>
-    <p>CHF 240.–<br>95 Tage</p>
-    <button class="buy-button">Kaufen</button>
+    <p>CHF 240.– | 95 Tage</p>
+    <button>Kaufen</button>
   </div>
-
 </div>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById("dropdown");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+  }
+</script>
 
 </body>
 </html>
