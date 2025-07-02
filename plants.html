@@ -24,7 +24,7 @@
       grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       gap: 20px;
       padding: 20px;
-      max-width: 1200px;
+      max-width: 1300px;
       margin: 0 auto;
     }
 
@@ -35,7 +35,6 @@
       box-shadow: 0 0 12px #00ff66;
       text-align: center;
       padding: 10px;
-      overflow: hidden;
     }
 
     .plant-card img {
@@ -71,8 +70,8 @@
     }
 
     @media (max-width: 600px) {
-      .plant-card img {
-        max-height: 140px;
+      .plant-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
   </style>
@@ -82,6 +81,8 @@
   <h1>🌱 Pflanzen kaufen</h1>
 
   <div class="plant-grid">
+    <!-- 🔽 Pflanzeneinträge hier einfügen -->
+
     <div class="plant-card">
       <img src="assets/sativa1.png" alt="Sativa Dream" />
       <h3>Sativa Dream</h3>
@@ -98,39 +99,8 @@
       <button>Kaufen</button>
     </div>
 
-    <div class="plant-card">
-      <img src="assets/ogkush.png" alt="OG Kush" />
-      <h3>OG Kush</h3>
-      <p>Dauer: 75 Tage</p>
-      <p>Preis: CHF 180.–</p>
-      <button>Kaufen</button>
-    </div>
+    <!-- Kopiere weitere Blöcke identisch hier drunter -->
 
-    <div class="plant-card">
-      <img src="assets/kush2.png" alt="Kush #2" />
-      <h3>Kush #2</h3>
-      <p>Dauer: 60 Tage</p>
-      <p>Preis: CHF 170.–</p>
-      <button>Kaufen</button>
-    </div>
-
-    <div class="plant-card">
-      <img src="assets/kiffen.png" alt="AutoFlow Gratis" />
-      <h3>🎁 AutoFlow (Gratis)</h3>
-      <p>Dauer: 45 Tage</p>
-      <p>Preis: CHF 0.–</p>
-      <button>Kostenlos setzen</button>
-    </div>
-
-    <div class="plant-card">
-      <img src="assets/sativa1.png" alt="Master Weed" />
-      <h3>Master Weed</h3>
-      <p>Dauer: 95 Tage</p>
-      <p>Preis: CHF 240.–</p>
-      <button>Kaufen</button>
-    </div>
-
-    <!-- Weitere Pflanzen kannst du einfach kopieren -->
   </div>
 
 </body>
