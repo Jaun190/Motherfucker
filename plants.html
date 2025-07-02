@@ -8,11 +8,10 @@
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: sans-serif;
       background: url('assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
       color: #fff;
-      overflow-x: hidden;
     }
 
     .menu-toggle {
@@ -49,141 +48,114 @@
       display: block;
     }
 
-    h1 {
-      text-align: center;
-      margin: 100px 0 20px;
-      font-size: 2.5em;
-      color: #0f0;
-    }
-
-    .plant-grid {
+    .plants-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 20px;
-      padding: 0 20px 50px;
-      max-width: 1200px;
-      margin: 0 auto;
+      padding: 100px 20px 40px;
+      max-width: 1000px;
+      margin: auto;
     }
 
-    .plant {
-      background-color: rgba(0, 0, 0, 0.6);
-      border: 2px solid #00ff90;
-      border-radius: 20px;
-      box-shadow: 0 0 15px #00ff90;
-      padding: 15px;
+    .plant-card {
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+      padding: 10px;
       text-align: center;
+      box-shadow: 0 0 10px #00ff90;
     }
 
-    .plant img {
+    .plant-card img {
       width: 100%;
-      border-radius: 10px;
-      margin-bottom: 10px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 6px;
     }
 
-    .plant h3 {
+    .plant-card h3 {
       margin: 10px 0 5px;
-      color: #00ff90;
     }
 
-    .plant p {
-      margin: 5px 0;
-    }
-
-    .plant button {
+    .plant-card button {
       background-color: #00ff90;
-      color: #000;
-      padding: 10px 20px;
+      color: black;
       border: none;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;
+      padding: 8px 12px;
       margin-top: 10px;
-    }
-
-    .plant button:hover {
-      background-color: #00cc66;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
 
-  <div class="menu-toggle">☰</div>
-  <div class="menu-content">
-    <a href="dashboard.html">📊 Dashboard</a>
-    <a href="plants.html">🌱 Pflanzen kaufen</a>
-    <a href="lizens.html">💼 Lizenz</a>
-    <a href="partner.html">🤝 Partner</a>
-    <a href="settings.html">⚙️ Einstellungen</a>
-    <a href="index.html">🚪 Logout</a>
+<!-- ☰ Menü -->
+<div class="menu-toggle">☰</div>
+<div class="menu-content">
+  <a href="dashboard.html">📊 Dashboard</a>
+  <a href="plants.html">🌱 Pflanzen kaufen</a>
+  <a href="lizens.html">💎 Backoffice Lizenz</a>
+  <a href="partner.html">🤝 Partner</a>
+  <a href="settings.html">⚙️ Einstellungen</a>
+  <a href="index.html">🚪 Logout</a>
+</div>
+
+<h1 style="text-align:center; margin-top:80px;">🌱 Pflanzen kaufen</h1>
+
+<div class="plants-grid">
+  <!-- Pflanze 1 -->
+  <div class="plant-card">
+    <img src="assets/sativa1.png" alt="Sativa">
+    <h3>Sativa</h3>
+    <p>Dauer: 75 Tage</p>
+    <p>Preis: CHF 120.–</p>
+    <button onclick="buyPlant('Sativa', 'assets/sativa1.png', 75)">Kaufen</button>
   </div>
 
-  <h1>🌿 Pflanzen kaufen</h1>
-
-  <div class="plant-grid">
-    <!-- Beispielpflanzen -->
-    <div class="plant">
-      <img src="assets/sativa1.png" alt="Sativa Dream">
-      <h3>Sativa Dream</h3>
-      <p>CHF 195.– | 80 Tage</p>
-      <button>Kaufen</button>
-    </div>
-    <div class="plant">
-      <img src="assets/haze1.png" alt="Purple Haze">
-      <h3>Purple Haze</h3>
-      <p>CHF 210.– | 85 Tage</p>
-      <button>Kaufen</button>
-    </div>
-    <div class="plant">
-      <img src="assets/ogkush.png" alt="OG Kush">
-      <h3>OG Kush</h3>
-      <p>CHF 180.– | 75 Tage</p>
-      <button>Kaufen</button>
-    </div>
-    <div class="plant">
-      <img src="assets/kush2.png" alt="AutoFlow (Gratis)">
-      <h3>🎁 AutoFlow (Gratis)</h3>
-      <p>CHF 0.– | 45 Tage</p>
-      <button>Kostenlos setzen</button>
-    </div>
-    <div class="plant">
-      <img src="assets/kiffen.png" alt="Master Weed">
-      <h3>Master Weed</h3>
-      <p>CHF 240.– | 95 Tage</p>
-      <button>Kaufen</button>
-    </div>
-
-    <!-- Platz für weitere Pflanzen -->
-    <div class="plant">
-      <img src="assets/haze1.png" alt="White Widow">
-      <h3>White Widow</h3>
-      <p>CHF 190.– | 85 Tage</p>
-      <button>Kaufen</button>
-    </div>
-    <div class="plant">
-      <img src="assets/sativa1.png" alt="Blue Dream">
-      <h3>Blue Dream</h3>
-      <p>CHF 200.– | 90 Tage</p>
-      <button>Kaufen</button>
-    </div>
-    <div class="plant">
-      <img src="assets/kush2.png" alt="Critical Mass">
-      <h3>Critical Mass</h3>
-      <p>CHF 175.– | 70 Tage</p>
-      <button>Kaufen</button>
-    </div>
-    <div class="plant">
-      <img src="assets/ogkush.png" alt="Lemon Haze">
-      <h3>Lemon Haze</h3>
-      <p>CHF 205.– | 80 Tage</p>
-      <button>Kaufen</button>
-    </div>
-    <div class="plant">
-      <img src="assets/sativa1.png" alt="Gorilla Glue">
-      <h3>Gorilla Glue</h3>
-      <p>CHF 220.– | 85 Tage</p>
-      <button>Kaufen</button>
-    </div>
+  <!-- Pflanze 2 -->
+  <div class="plant-card">
+    <img src="assets/haze1.png" alt="Haze">
+    <h3>Haze</h3>
+    <p>Dauer: 65 Tage</p>
+    <p>Preis: CHF 100.–</p>
+    <button onclick="buyPlant('Haze', 'assets/haze1.png', 65)">Kaufen</button>
   </div>
+
+  <!-- Pflanze 3 -->
+  <div class="plant-card">
+    <img src="assets/ogkush.png" alt="OG Kush">
+    <h3>OG Kush</h3>
+    <p>Dauer: 80 Tage</p>
+    <p>Preis: CHF 140.–</p>
+    <button onclick="buyPlant('OG Kush', 'assets/ogkush.png', 80)">Kaufen</button>
+  </div>
+
+  <!-- Pflanze 4 -->
+  <div class="plant-card">
+    <img src="assets/kush2.png" alt="Kush #2">
+    <h3>Kush #2</h3>
+    <p>Dauer: 60 Tage</p>
+    <p>Preis: CHF 90.–</p>
+    <button onclick="buyPlant('Kush #2', 'assets/kush2.png', 60)">Kaufen</button>
+  </div>
+</div>
+
+<script>
+  function buyPlant(name, image, days) {
+    const plants = JSON.parse(localStorage.getItem("myPlants") || "[]");
+
+    plants.push({
+      name,
+      image,
+      days,
+      plantedAt: Date.now()
+    });
+
+    localStorage.setItem("myPlants", JSON.stringify(plants));
+    alert(`${name} wurde erfolgreich gepflanzt!`);
+  }
+</script>
 
 </body>
 </html>
