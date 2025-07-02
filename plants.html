@@ -110,4 +110,37 @@
         { name: 'Kush #2', days: 60, price: 170, img: 'kush2.png' },
         { name: 'Master Weed', days: 95, price: 240, img: 'kiffen.png' },
         { name: 'AutoFlow Gratis', days: 45, price: 0, img: 'ogkush.png' },
-        { name: 'Lemon Haze',
+        { name: 'Lemon Haze', days: 80, price: 205, img: 'sativa1.png' },
+        { name: 'White Widow', days: 85, price: 190, img: 'haze1.png' },
+        { name: 'Blue Dream', days: 90, price: 200, img: 'ogkush.png' },
+        { name: 'Amnesia Gold', days: 90, price: 230, img: 'sativa1.png' },
+        { name: 'Green Poison', days: 75, price: 190, img: 'ogkush.png' },
+        { name: 'Moby Dick', days: 80, price: 200, img: 'haze1.png' },
+        { name: 'AK-47', days: 75, price: 180, img: 'ogkush.png' },
+        { name: 'Jack Herer', days: 85, price: 210, img: 'sativa1.png' },
+        { name: 'Durban Poison', days: 80, price: 200, img: 'ogkush.png' },
+        { name: 'Critical Mass', days: 70, price: 175, img: 'kush2.png' },
+        { name: 'Super Skunk', days: 70, price: 190, img: 'ogkush.png' },
+        { name: 'Banana Punch', days: 85, price: 210, img: 'haze1.png' },
+        { name: 'Gorilla Glue', days: 85, price: 220, img: 'ogkush.png' },
+        { name: 'Skunk XL', days: 75, price: 195, img: 'sativa1.png' },
+        { name: 'Cheese Auto', days: 60, price: 160, img: 'ogkush.png' },
+        { name: 'Bubble Gum', days: 70, price: 185, img: 'haze1.png' },
+        { name: 'Northern Light', days: 90, price: 215, img: 'sativa1.png' },
+        { name: 'Pineapple Express', days: 75, price: 190, img: 'ogkush.png' },
+      ];
+      document.write(
+        plants.map(p => `
+          <div class="card">
+            <img src="assets/${p.img}" alt="${p.name}" />
+            <h3>${p.name}</h3>
+            <p>Dauer: ${p.days} Tage</p>
+            <p>Preis: CHF ${p.price}.–</p>
+            <button>${p.price === 0 ? 'Kostenlos setzen' : 'Kaufen'}</button>
+          </div>
+        `).join('')
+      );
+    </script>
+  </div>
+</body>
+</html>
