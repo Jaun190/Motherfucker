@@ -1,87 +1,50 @@
-<!DOCTYPE html>
-<html lang="de">
+<!DOCTYPE html><html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pflanzen kaufen – GrowEmpire</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
   <style>
     body {
-      margin: 0;
-      font-family: sans-serif;
       background: url('assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
-      color: #fff;
+      color: white;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
     }
-
-    .menu-toggle {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background-color: #0f0;
-      padding: 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      z-index: 10;
+    h1 {
+      text-align: center;
+      padding: 20px;
+      font-size: 2.5rem;
     }
-
-    .menu-content {
-      display: none;
-      position: absolute;
-      top: 60px;
-      left: 20px;
-      background-color: rgba(0, 0, 0, 0.9);
-      border-radius: 8px;
-      padding: 10px;
-      z-index: 10;
-    }
-
-    .menu-content a {
-      display: block;
-      color: #0f0;
-      text-decoration: none;
-      padding: 5px 0;
-    }
-
-    .menu-toggle:hover + .menu-content,
-    .menu-content:hover {
-      display: block;
-    }
-
-    .plants-grid {
+    .plant-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
       gap: 20px;
-      padding: 100px 20px 40px;
-      max-width: 1000px;
+      padding: 20px;
+      max-width: 1200px;
       margin: auto;
     }
-
     .plant-card {
-      background-color: rgba(0, 0, 0, 0.7);
-      border-radius: 10px;
-      padding: 10px;
+      background: rgba(0,0,0,0.7);
+      border: 2px solid #00ff90;
+      border-radius: 12px;
+      padding: 15px;
       text-align: center;
       box-shadow: 0 0 10px #00ff90;
     }
-
     .plant-card img {
       width: 100%;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 6px;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 10px;
     }
-
-    .plant-card h3 {
-      margin: 10px 0 5px;
-    }
-
     .plant-card button {
-      background-color: #00ff90;
-      color: black;
+      background-color: #00cc66;
+      color: white;
       border: none;
-      padding: 8px 12px;
-      margin-top: 10px;
+      padding: 10px 15px;
       border-radius: 6px;
       cursor: pointer;
       font-weight: bold;
@@ -89,73 +52,43 @@
   </style>
 </head>
 <body>
-
-<!-- ☰ Menü -->
-<div class="menu-toggle">☰</div>
-<div class="menu-content">
-  <a href="dashboard.html">📊 Dashboard</a>
-  <a href="plants.html">🌱 Pflanzen kaufen</a>
-  <a href="lizens.html">💎 Backoffice Lizenz</a>
-  <a href="partner.html">🤝 Partner</a>
-  <a href="settings.html">⚙️ Einstellungen</a>
-  <a href="index.html">🚪 Logout</a>
-</div>
-
-<h1 style="text-align:center; margin-top:80px;">🌱 Pflanzen kaufen</h1>
-
-<div class="plants-grid">
-  <!-- Pflanze 1 -->
-  <div class="plant-card">
-    <img src="assets/sativa1.png" alt="Sativa">
-    <h3>Sativa</h3>
-    <p>Dauer: 75 Tage</p>
-    <p>Preis: CHF 120.–</p>
-    <button onclick="buyPlant('Sativa', 'assets/sativa1.png', 75)">Kaufen</button>
-  </div>
-
-  <!-- Pflanze 2 -->
-  <div class="plant-card">
-    <img src="assets/haze1.png" alt="Haze">
-    <h3>Haze</h3>
-    <p>Dauer: 65 Tage</p>
-    <p>Preis: CHF 100.–</p>
-    <button onclick="buyPlant('Haze', 'assets/haze1.png', 65)">Kaufen</button>
-  </div>
-
-  <!-- Pflanze 3 -->
-  <div class="plant-card">
-    <img src="assets/ogkush.png" alt="OG Kush">
-    <h3>OG Kush</h3>
-    <p>Dauer: 80 Tage</p>
-    <p>Preis: CHF 140.–</p>
-    <button onclick="buyPlant('OG Kush', 'assets/ogkush.png', 80)">Kaufen</button>
-  </div>
-
-  <!-- Pflanze 4 -->
-  <div class="plant-card">
-    <img src="assets/kush2.png" alt="Kush #2">
-    <h3>Kush #2</h3>
-    <p>Dauer: 60 Tage</p>
-    <p>Preis: CHF 90.–</p>
-    <button onclick="buyPlant('Kush #2', 'assets/kush2.png', 60)">Kaufen</button>
-  </div>
-</div>
-
-<script>
-  function buyPlant(name, image, days) {
-    const plants = JSON.parse(localStorage.getItem("myPlants") || "[]");
-
-    plants.push({
-      name,
-      image,
-      days,
-      plantedAt: Date.now()
-    });
-
-    localStorage.setItem("myPlants", JSON.stringify(plants));
-    alert(`${name} wurde erfolgreich gepflanzt!`);
-  }
-</script>
-
-</body>
+  <h1>🌱 Pflanzen kaufen</h1>  <div class="plant-grid">
+    <div class="plant-card">
+      <img src="assets/sativa1.png" alt="Sativa">
+      <h3>Sativa</h3>
+      <p>Dauer: 75 Tage<br>Preis: CHF 120.&#x2013;</p>
+      <button onclick="kaufen('Sativa', 120, 75, 'assets/sativa1.png')">Kaufen</button>
+    </div>
+    <div class="plant-card">
+      <img src="assets/haze1.png" alt="Haze">
+      <h3>Haze</h3>
+      <p>Dauer: 65 Tage<br>Preis: CHF 100.&#x2013;</p>
+      <button onclick="kaufen('Haze', 100, 65, 'assets/haze1.png')">Kaufen</button>
+    </div>
+    <div class="plant-card">
+      <img src="assets/ogkush.png" alt="OG Kush">
+      <h3>OG Kush</h3>
+      <p>Dauer: 80 Tage<br>Preis: CHF 140.&#x2013;</p>
+      <button onclick="kaufen('OG Kush', 140, 80, 'assets/ogkush.png')">Kaufen</button>
+    </div>
+    <div class="plant-card">
+      <img src="assets/kush2.png" alt="Kush #2">
+      <h3>Kush #2</h3>
+      <p>Dauer: 60 Tage<br>Preis: CHF 90.&#x2013;</p>
+      <button onclick="kaufen('Kush #2', 90, 60, 'assets/kush2.png')">Kaufen</button>
+    </div>
+  </div>  <script>
+    function kaufen(name, price, days, image) {
+      const plants = JSON.parse(localStorage.getItem("myPlants") || "[]");
+      plants.push({
+        name,
+        price,
+        days,
+        image,
+        plantedAt: Date.now()
+      });
+      localStorage.setItem("myPlants", JSON.stringify(plants));
+      alert(name + " wurde gesetzt!");
+    }
+  </script></body>
 </html>
