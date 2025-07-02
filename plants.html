@@ -3,105 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pflanzen kaufen – GrowEmpire</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: url('assets/dashboard.png') no-repeat center center fixed;
-      background-size: cover;
-      color: #00ff66;
-    }
-
-    h1 {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 2.5em;
-    }
-
-    .plant-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 20px;
-      padding: 20px;
-      max-width: 1300px;
-      margin: 0 auto;
-    }
-
-    .plant-card {
-      background: rgba(0, 0, 0, 0.85);
-      border: 2px solid #00ff66;
-      border-radius: 12px;
-      box-shadow: 0 0 12px #00ff66;
-      text-align: center;
-      padding: 10px;
-    }
-
-    .plant-card img {
-      width: 100%;
-      max-height: 160px;
-      object-fit: contain;
-      border-radius: 6px;
-    }
-
-    .plant-card h3 {
-      margin: 10px 0 5px;
-      color: #00ff66;
-    }
-
-    .plant-card p {
-      margin: 2px 0;
-      font-size: 0.9em;
-    }
-
-    .plant-card button {
-      margin-top: 10px;
-      background: #00ff66;
-      color: black;
-      border: none;
-      padding: 8px 16px;
-      font-weight: bold;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-
-    .plant-card button:hover {
-      background: #00cc55;
-    }
-
-    @media (max-width: 600px) {
-      .plant-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-  </style>
+  <title>GrowEmpire – Pflanzen kaufen</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <h1>🌱 Pflanzen kaufen</h1>
-
-  <div class="plant-grid">
-    <!-- 🔽 Pflanzeneinträge hier einfügen -->
-
-    <div class="plant-card">
-      <img src="assets/sativa1.png" alt="Sativa Dream" />
-      <h3>Sativa Dream</h3>
-      <p>Dauer: 80 Tage</p>
-      <p>Preis: CHF 195.–</p>
-      <button>Kaufen</button>
-    </div>
-
-    <div class="plant-card">
-      <img src="assets/haze1.png" alt="Purple Haze" />
-      <h3>Purple Haze</h3>
-      <p>Dauer: 85 Tage</p>
-      <p>Preis: CHF 210.–</p>
-      <button>Kaufen</button>
-    </div>
-
-    <!-- Kopiere weitere Blöcke identisch hier drunter -->
-
-  </div>
-
-</body>
-</html>
+  <div class="background">
+    <h1 class="title">🌱 Pflanzen kaufen</h1>
+    <div class="plant-grid">
+      <div class="plant-card">
+        <img src="img/sativa.png" alt="Sativa Dream">
+        <h2>Sativa Dream</h2>
+        <p>Dauer: 80 Tage</p>
+        <p>Preis: CHF 195.–</p>
+        <button>Kaufen</button>
+      </div>
+      <div class="plant-card">
+        <img src="img/haze.png" alt="Purple Haze">
+        <h2>Purple Haze</h2>
+        <p>Dauer: 85 Tage</p>
+        <p>Preis: CHF 210.–</p>
+        <button>Kaufen</button>
