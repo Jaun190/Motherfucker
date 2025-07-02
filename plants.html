@@ -1,120 +1,113 @@
-<!DOCTYPE html>
-<html lang="de">
+<!DOCTYPE html><html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🌿 Pflanzen kaufen – GrowEmpire</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pflanzen kaufen – GrowEmpire</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
     body {
+      background: url('assets/dashboard.png') no-repeat center center fixed;
+      background-size: cover;
       margin: 0;
       font-family: Arial, sans-serif;
-      background: url("assets/dashboard.png") no-repeat center center fixed;
-      background-size: cover;
-      color: white;
+      color: #0f0;
     }
-
     .menu-toggle {
-      position: fixed;
+      position: absolute;
       top: 20px;
       left: 20px;
       background-color: #00ff90;
       color: black;
-      padding: 10px 14px;
-      font-size: 20px;
-      border-radius: 8px;
+      padding: 10px;
+      border-radius: 6px;
       cursor: pointer;
-      z-index: 999;
+      z-index: 10;
     }
-
-    h1 {
+    .menu-content {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 20px;
+      background-color: #111;
+      border: 1px solid #00ff90;
+      border-radius: 6px;
+      padding: 10px;
+    }
+    .menu-content a {
+      color: #0f0;
+      text-decoration: none;
+      display: block;
+      margin: 5px 0;
+    }
+    .menu-toggle:focus + .menu-content,
+    .menu-content:hover {
+      display: block;
+    }
+    .title {
       text-align: center;
-      font-size: 36px;
-      margin: 60px 0 20px;
-      color: #00ff90;
+      font-size: 2.5rem;
+      padding-top: 80px;
+      margin-bottom: 30px;
     }
-
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(6, 1fr);
       gap: 20px;
-      padding: 30px;
-      max-width: 1400px;
-      margin: 0 auto 60px;
+      padding: 0 20px 100px;
+      justify-items: center;
     }
-
     .card {
-      background-color: #000000cc;
+      background: black;
       border: 2px solid #00ff90;
-      border-radius: 12px;
+      border-radius: 10px;
       padding: 10px;
       text-align: center;
+      width: 140px;
       box-shadow: 0 0 10px #00ff90;
     }
-
     .card img {
       width: 100%;
-      height: 180px;
+      height: 160px;
       object-fit: cover;
-      border-radius: 8px;
+      border-radius: 6px;
     }
-
-    .card h2 {
+    .card h3 {
       margin: 10px 0 5px;
-      font-size: 18px;
-      color: #00ff90;
+      color: #0f0;
     }
-
     .card p {
       margin: 3px 0;
       font-size: 14px;
     }
-
     .card button {
-      margin-top: 10px;
-      padding: 10px 16px;
-      background-color: #00ff90;
+      margin-top: 8px;
+      padding: 6px 10px;
+      background: #00ff90;
       color: black;
       border: none;
-      border-radius: 6px;
-      font-weight: bold;
+      border-radius: 5px;
       cursor: pointer;
-    }
-
-    .card button:hover {
-      background-color: #00cc70;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-
   <div class="menu-toggle">☰</div>
-  <h1>🌱 Pflanzen kaufen</h1>
-
-  <div class="grid">
-    <div class="card"><img src="assets/sativa1.png"><h2>Sativa Dream</h2><p>Dauer: 80 Tage</p><p>CHF 195.–</p><button>Kaufen</button></div>
-    <div class="card"><img src="assets/haze1.png"><h2>Purple Haze</h2><p>Dauer: 85 Tage</p><p>CHF 210.–</p><button>Kaufen</button></div>
-    <div class="card"><img src="assets/ogkush.png"><h2>OG Kush</h2><p>Dauer: 75 Tage</p><p>CHF 180.–</p><button>Kaufen</button></div>
-    <div class="card"><img src="assets/kush2.png"><h2>Kush #2</h2><p>Dauer: 60 Tage</p><p>CHF 170.–</p><button>Kaufen</button></div>
-    <div class="card"><img src="assets/kiffen.png"><h2>🎁 AutoFlow (Gratis)</h2><p>Dauer: 45 Tage</p><p>CHF 0.–</p><button>Kostenlos setzen</button></div>
-
-    <div class="card"><img src="assets/masterweed.png"><h2>Master Weed</h2><p>Dauer: 95 Tage</p><p>CHF 240.–</p><button>Kaufen</button></div>
-    <div class="card"><img src="assets/gorillaglue.png"><h2>Gorilla Glue</h2><p>Dauer: 85 Tage</p><p>CHF 220.–</p><button>Kaufen</button></div>
-    <div class="card"><img src="assets/lemonhaze.png"><h2>Lemon Haze</h2><p>Dauer: 80 Tage</p><p>CHF 205.–</p><button>Kaufen</button></div>
-    <div class="card"><img src="assets/whitelabel.png"><h2>White Widow</h2><p>Dauer: 85 Tage</p><p>CHF 190.–</p><button>Kaufen</button></div>
-    <div class="card"><img src="assets/bluedream.png"><h2>Blue Dream</h2><p>Dauer: 90 Tage</p><p>CHF 200.–</p><button>Kaufen</button></div>
-
-    <div class="card"><img src="assets/amnesia.png"><h2>Amnesia Gold</h2><p>Dauer: 90 Tage</p><p>CHF 230.–</p><button>Kaufen</button></div>
-    <div class="card"><img src="assets/banana.png"><h2>Banana Punch</h2><p>Dauer: 85 Tage</p><p>CHF 210.–</p><button>Kaufen</button></div>
-    <div class="card"><img src="assets/moby.png"><h2>Moby Dick</h2><p>Dauer: 80 Tage</p><p>CHF 200.–</p><button>Kaufen</button></div>
-    <div class="card"><img src="assets/greenpoison.png"><h2>Green Poison</h2><p>Dauer: 75 Tage</p><p>CHF 190.–</p><button>Kaufen</button></div>
-    <div class="card"><img src="assets/ak47.png"><h2>AK-47</h2><p>Dauer: 75 Tage</p><p>CHF 180.–</p><button>Kaufen</button></div>
-
-    <div class="card"><img src="assets/durban.png"><h2>Durban Poison</h2><p>Dauer: 80 Tage</p><p>CHF 200.–</p><button>Kaufen</button></div>
-    <div class="card"><img src="assets/skunk.png"><h2>Super Skunk</h2><p>Dauer: 70 Tage</p><p>CHF 190.–</p><button>Kaufen</button></div>
-    <div class="card"><img src="assets/jackherer.png"><h2>Jack Herer</h2><p>Dauer: 85 Tage</p><p>CHF 210.–</p><button>Kaufen</button></div>
-    <div class="card"><img src="assets/critical.png"><h2>Critical Mass</h2><p>Dauer: 70 Tage</p><p>CHF 175.–</p><button>Kaufen</button></div>
-    <div class="card"><img src="assets/zkit.png"><h2>Zkittlez</h2><p>Dauer: 80 Tage</p><p>CHF 215.–</p><button>Kaufen</button></div>
-  </div>
-
-</body>
-</html>
+  <div class="menu-content">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="lizens.html">Lizenz</a>
+    <a href="plants.html">Pflanzen</a>
+  </div>  <div class="title">
+    <span style="font-size: 1.2rem; color: #90ff90">🌱 Pflanzen kaufen</span><br />
+    GrowEmpire
+  </div>  <div class="grid">
+    <!-- Duplikate der Karten, Beispielhaft 24 Stück -->
+    <script>
+      const plants = [
+        { name: 'Sativa Dream', days: 80, price: 195, img: 'sativa1.png' },
+        { name: 'Purple Haze', days: 85, price: 210, img: 'haze1.png' },
+        { name: 'OG Kush', days: 75, price: 180, img: 'ogkush.png' },
+        { name: 'Kush #2', days: 60, price: 170, img: 'kush2.png' },
+        { name: 'Master Weed', days: 95, price: 240, img: 'kiffen.png' },
+        { name: 'AutoFlow Gratis', days: 45, price: 0, img: 'ogkush.png' },
+        { name: 'Lemon Haze',
