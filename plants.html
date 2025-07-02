@@ -1,73 +1,122 @@
-<!-- Inhalt bleibt identisch wie im letzten Code, nur zusätzlicher Block: -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pflanzen kaufen</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('assets/dashboard.png') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
 
-<!-- Dritte Reihe -->
-<div class="plant">
-  <img src="assets/placeholder.png" alt="Soon" />
-  <h3>Amnesia Gold</h3>
-  <p>CHF 230.– | 90 Tage</p>
-  <button>Kaufen</button>
+    .menu-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: #00ff90;
+      color: black;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 20px;
+      background-color: rgba(0, 0, 0, 0.9);
+      border-radius: 8px;
+      padding: 10px;
+      z-index: 10;
+      flex-direction: column;
+    }
+
+    .dropdown a {
+      color: #0f0;
+      text-decoration: none;
+      padding: 5px 0;
+    }
+
+    .menu-button:hover + .dropdown,
+    .dropdown:hover {
+      display: flex;
+    }
+
+    h1 {
+      text-align: center;
+      color: #0f0;
+      margin-top: 80px;
+    }
+
+    .plant-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .plant {
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 15px;
+      padding: 10px;
+      text-align: center;
+      box-shadow: 0 0 10px #00ff90;
+    }
+
+    .plant img {
+      max-width: 100%;
+      border-radius: 10px;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .plant h3 {
+      margin: 10px 0 5px;
+      color: #0f0;
+    }
+
+    .plant p {
+      margin: 5px 0;
+    }
+
+    .plant button {
+      background-color: #00ff90;
+      color: black;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .plant .free {
+      background-color: #00ff90;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Menü -->
+<button class="menu-button">☰</button>
+<div class="dropdown">
+  <a href="dashboard.html">📊 Dashboard</a>
+  <a href="plants.html">🌱 Pflanzen kaufen</a>
+  <a href="lizens.html">💼 Lizenz</a>
+  <a href="starterbox.html">🚀 Upgrade</a>
+  <a href="partner.html">🤝 Partner</a>
+  <a href="settings.html">⚙️ Einstellungen</a>
+  <a href="index.html">🚪 Logout</a>
 </div>
 
-<div class="plant">
-  <img src="assets/placeholder.png" alt="Soon" />
-  <h3>Banana Punch</h3>
-  <p>CHF 210.– | 85 Tage</p>
-  <button>Kaufen</button>
-</div>
-
-<div class="plant">
-  <img src="assets/placeholder.png" alt="Soon" />
-  <h3>Moby Dick</h3>
-  <p>CHF 200.– | 80 Tage</p>
-  <button>Kaufen</button>
-</div>
-
-<div class="plant">
-  <img src="assets/placeholder.png" alt="Soon" />
-  <h3>Green Poison</h3>
-  <p>CHF 190.– | 75 Tage</p>
-  <button>Kaufen</button>
-</div>
-
-<div class="plant">
-  <img src="assets/placeholder.png" alt="Soon" />
-  <h3>AK-47</h3>
-  <p>CHF 180.– | 75 Tage</p>
-  <button>Kaufen</button>
-</div>
-
-<!-- Vierte Reihe -->
-<div class="plant">
-  <img src="assets/placeholder.png" alt="Soon" />
-  <h3>Durban Poison</h3>
-  <p>CHF 200.– | 80 Tage</p>
-  <button>Kaufen</button>
-</div>
-
-<div class="plant">
-  <img src="assets/placeholder.png" alt="Soon" />
-  <h3>Super Skunk</h3>
-  <p>CHF 190.– | 70 Tage</p>
-  <button>Kaufen</button>
-</div>
-
-<div class="plant">
-  <img src="assets/placeholder.png" alt="Soon" />
-  <h3>Jack Herer</h3>
-  <p>CHF 210.– | 85 Tage</p>
-  <button>Kaufen</button>
-</div>
-
-<div class="plant">
-  <img src="assets/placeholder.png" alt="Soon" />
-  <h3>Swiss Mix</h3>
-  <p>CHF 220.– | 95 Tage</p>
-  <button>Kaufen</button>
-</div>
-
-<div class="plant">
-  <img src="assets/placeholder.png" alt="Soon" />
-  <h3>Zombie OG</h3>
-  <p>CHF 240.– | 100 Tage</p>
-  <button>Kaufen</button>
-</div>
+<h1>🌱 Pflanzen kaufen
