@@ -2,107 +2,128 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard – GrowEmpire</title>
+  <title>GrowEmpire Dashboard</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
+      margin: 0;
+      font-family: Arial, sans-serif;
       background: url('assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      color: white;
-    }
-    .menu-toggle {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background-color: #0f0;
-      padding: 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      z-index: 10;
-    }
-    .menu-content {
-      display: none;
-      position: absolute;
-      top: 60px;
-      left: 20px;
-      background-color: rgba(0, 0, 0, 0.9);
-      border-radius: 8px;
-      padding: 10px;
-      z-index: 10;
-    }
-    .menu-content a {
-      display: block;
-      color: #0f0;
-      text-decoration: none;
-      padding: 5px 0;
-    }
-    .menu-toggle:hover + .menu-content,
-    .menu-content:hover {
-      display: block;
-    }
-    .content {
-      padding: 80px 20px 40px;
-      text-align: center;
-    }
-    .warning {
-      background-color: rgba(255, 0, 0, 0.7);
-      padding: 10px;
-      margin-bottom: 20px;
-      border-radius: 6px;
-      font-weight: bold;
-    }
-    .demo-box {
-      background-color: rgba(0, 0, 0, 0.6);
-      border: 2px dashed #fff;
-      border-radius: 12px;
-      padding: 20px;
-      margin-top: 20px;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .buy-btn {
-      background-color: #00ff90;
-      color: black;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 20px;
-    }
+      color: #fff;
+    }.menu-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: #0f0;
+  color: black;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 15px;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.dropdown {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 60px;
+  left: 20px;
+  background-color: rgba(0, 0, 0, 0.9);
+  border-radius: 8px;
+  padding: 10px;
+  z-index: 10;
+}
+
+.dropdown a {
+  color: #0f0;
+  text-decoration: none;
+  padding: 6px 0;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 120px 20px 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.card {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 0 10px #0f0;
+}
+
+.card span {
+  font-size: 40px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.card h2 {
+  font-size: 28px;
+  margin: 0;
+  color: #0f0;
+}
+
+.card p {
+  margin: 10px 0 0;
+}
+
+.card button {
+  margin-top: 15px;
+  background-color: #0f0;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
   </style>
 </head>
-<body><!-- ☰ Menü --><div class="menu-toggle">☰</div>
-<div class="menu-content">
-  <a href="dashboard.html">📊 Dashboard</a>
-  <a href="plants.html">🌱 Pflanzen kaufen</a>
-  <a href="lizens.html">💼 Lizenz kaufen</a>
-  <a href="partner.html">🤝 Partner</a>
-  <a href="settings.html">⚙️ Einstellungen</a>
-  <a href="index.html">🚪 Logout</a>
-</div><div class="content">
-  <div class="warning">⚠️ Demo-Version aktiv – keine echten Erträge. <a href="lizens.html" style="color:#0f0; text-decoration:underline;">Jetzt Lizenz kaufen</a></div>  <h1>Willkommen bei GrowEmpire</h1>  <div class="demo-box">
-    <h2>🌱 Auto Kush – Demo Pflanze</h2>
-    <p id="tage"></p>
-    <img src="assets/autokush.png" alt="Auto Kush" style="max-width: 200px; margin: 10px auto; display:block;" />
-    <p>Diese Pflanze ist Teil deiner kostenlosen Demo und bringt keinen echten Ertrag.</p>
-  </div>
-</div><script>
-  // Timer für Demo-Pflanze
-  const demoKey = 'demoStart';
-  if (!localStorage.getItem(demoKey)) {
-    localStorage.setItem(demoKey, Date.now());
-  }
+<body><button class="menu-button" onclick="toggleMenu()">☰</button>
 
-  const start = parseInt(localStorage.getItem(demoKey));
-  const now = Date.now();
-  const tage = 45 - Math.floor((now - start) / (1000 * 60 * 60 * 24));
-  const tageText = tage > 0 ? `⏳ Noch ${tage} Tage bis zur Ernte` : '✅ Demo-Zeit beendet';
-  document.getElementById("tage").textContent = tageText;
-</script></body>
+  <div id="dropdown" class="dropdown">
+    <a href="dashboard.html">📊 Dashboard</a>
+    <a href="plants.html">🌱 Pflanzen kaufen</a>
+    <a href="lizens.html">💎 Lizenz kaufen</a>
+    <a href="partner.html">🤝 Partner</a>
+    <a href="settings.html">⚙️ Einstellungen</a>
+    <a href="index.html">🚪 Logout</a>
+  </div>  <div class="container">
+    <div class="card">
+      <span>📄</span>
+      <h2>Backoffice</h2>
+      <p>Status: Nicht lizenziert</p>
+      <button onclick="window.location.href='lizens.html'">Lizenz kaufen</button>
+    </div>
+    <div class="card">
+      <span>🌿</span>
+      <h2>1 / 1 Pflanze</h2>
+      <p>Demo-Modus aktiv</p>
+    </div>
+    <div class="card">
+      <span>💸</span>
+      <h2>CHF 20.–</h2>
+      <p>Ertrag sichtbar – Auszahlung gesperrt</p>
+    </div>
+    <div class="card">
+      <span>⏳</span>
+      <h2>45 Tage</h2>
+      <p>Bis zur Ernte</p>
+    </div>
+  </div>  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("dropdown");
+      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    }
+  </script></body>
 </html>
