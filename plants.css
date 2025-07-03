@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Arial', sans-serif;
+  font-family: Arial, sans-serif;
   color: #00ff99;
   background: black;
 }
@@ -24,9 +24,8 @@ body {
 
 .plant-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr); /* 6 Karten pro Reihe */
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 20px;
-  padding: 0 10px;
   max-width: 100%;
 }
 
@@ -53,23 +52,23 @@ body {
 
 .plant-card h2 {
   color: #00ff66;
-  margin: 5px 0;
   font-size: 1.1em;
+  margin: 5px 0;
 }
 
 .plant-card p {
-  margin: 2px 0;
-  font-size: 0.95em;
   color: #ccc;
+  font-size: 0.95em;
+  margin: 5px 0;
 }
 
 .plant-card button {
   margin-top: 10px;
   padding: 8px 16px;
   background: #00ff66;
+  color: black;
   border: none;
   border-radius: 5px;
-  color: black;
   font-weight: bold;
   cursor: pointer;
   transition: background 0.2s;
