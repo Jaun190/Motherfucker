@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
   color: #00ff99;
   background: black;
 }
@@ -9,8 +9,8 @@ body {
 .background {
   background-image: url('../assets/dashboard.png');
   background-size: cover;
+  background-position: top center;
   background-repeat: no-repeat;
-  background-position: center;
   background-attachment: fixed;
   min-height: 100vh;
   padding: 30px;
@@ -21,32 +21,29 @@ body {
   font-size: 2.5em;
   color: #00ff66;
   margin-bottom: 30px;
-  text-shadow: 0 0 8px #00ff66;
+  text-shadow: 0 0 6px #00ff66;
 }
 
 .plant-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 20px;
   padding: 0 10px;
   max-width: 100%;
-  justify-items: center;
 }
 
 .plant-card {
-  width: 100%;
-  max-width: 160px;
-  height: 320px;
   background: rgba(0, 0, 0, 0.8);
   border: 2px solid #00ff99;
   border-radius: 10px;
   padding: 10px;
-  box-shadow: 0 0 10px #00ff66;
   text-align: center;
+  box-shadow: 0 0 10px #00ff66;
+  transition: transform 0.2s;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform 0.2s;
+  min-height: 300px;
 }
 
 .plant-card:hover {
@@ -55,7 +52,7 @@ body {
 
 .plant-card img {
   width: 100%;
-  height: 100px;
+  height: 140px;
   object-fit: contain;
   margin-bottom: 10px;
 }
