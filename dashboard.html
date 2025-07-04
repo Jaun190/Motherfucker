@@ -3,154 +3,124 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GrowEmpire Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <title>Dashboard – GrowEmpire</title>
   <style>
     body {
+      background-color: #000;
+      font-family: Arial, sans-serif;
+      color: white;
       margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      background: url('assets/dashboard.png') no-repeat center center fixed;
-      background-size: cover;
-      color: #00ff99;
+      padding: 0;
     }
-
-    .menu-btn {
-      position: absolute;
+    .menu-button {
+      position: fixed;
       top: 20px;
       left: 20px;
-      background: none;
-      border: 2px solid #00ff99;
-      border-radius: 10px;
-      padding: 8px;
-      cursor: pointer;
-    }
-
-    .menu-btn:hover {
-      background-color: rgba(0, 255, 153, 0.1);
-    }
-
-    .menu-icon {
-      font-size: 24px;
-    }
-
-    .dropdown {
-      display: none;
-      position: absolute;
-      top: 60px;
-      left: 20px;
-      background-color: black;
-      border: 2px solid #00ff99;
+      background-color: #00ff88;
+      border: none;
       border-radius: 10px;
       padding: 10px;
-      z-index: 999;
+      cursor: pointer;
+      z-index: 100;
     }
-
-    .dropdown a {
-      display: block;
-      padding: 8px 0;
-      text-decoration: none;
-      color: #00ff99;
-    }
-
-    .dropdown a:hover {
-      text-decoration: underline;
-    }
-
-    .title {
-      text-align: center;
-      font-size: 2.5em;
-      color: #00ff99;
-      margin-top: 60px;
-      margin-bottom: 20px;
-    }
-
-    #plant-list {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-      padding: 0 15px 50px 15px;
-    }
-
-    .plant-box {
-      background-color: rgba(0, 0, 0, 0.8);
-      border: 2px solid #00ff99;
-      border-radius: 15px;
+    .menu {
+      display: none;
+      position: fixed;
+      top: 60px;
+      left: 20px;
+      background-color: rgba(0,0,0,0.9);
       padding: 15px;
-      width: 90%;
-      max-width: 400px;
-      color: #00ff99;
-      box-shadow: 0 0 20px #00ff99;
+      border-radius: 10px;
+      z-index: 100;
     }
-
-    .plant-box h2 {
-      margin: 0 0 8px 0;
+    .menu a {
+      display: block;
+      color: #00ff88;
+      text-decoration: none;
+      margin-bottom: 10px;
     }
-
-    .plant-box p {
+    .plant-entry {
+      background-color: #111;
+      margin: 20px;
+      padding: 15px;
+      border-radius: 15px;
+      border: 2px solid #00ff88;
+      box-shadow: 0 0 10px #00ff88;
+    }
+    .plant-entry h2 {
+      margin: 0 0 10px 0;
+      color: #00ff88;
+    }
+    .plant-entry p {
       margin: 5px 0;
     }
   </style>
 </head>
 <body>
-  <button class="menu-btn" onclick="toggleDropdown()">
-    <span class="menu-icon">☰</span>
-  </button>
 
-  <div class="dropdown" id="dropdown">
-    <a href="dashboard.html">🌿 Dashboard</a>
-    <a href="plants.html">🧬 Pflanzen</a>
-    <a href="partner.html">🤝 Partner</a>
-    <a href="lizenz.html">🪪 Lizenz</a>
-    <a href="settings.html">⚙️ Einstellungen</a>
-    <a href="#" onclick="logout()">🚪 Logout</a>
-  </div>
+<button class="menu-button" onclick="toggleMenu()">☰</button>
+<div class="menu" id="menu">
+  <a href="dashboard.html">📊 Dashboard</a>
+  <a href="plants.html">🌱 Pflanzen</a>
+  <a href="partner.html">🤝 Partner</a>
+  <a href="lizenz.html">🎫 Lizenz</a>
+  <a href="settings.html">⚙️ Einstellungen</a>
+  <a href="#" onclick="logout()">🚪 Logout</a>
+</div>
 
-  <h1 class="title">GrowEmpire</h1>
+<div id="plantContainer"></div>
 
-  <div id="plant-list">
-    <!-- Pflanzen werden hier dynamisch eingefügt -->
-  </div>
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById("menu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+  }
 
-  <script>
-    function toggleDropdown() {
-      const dropdown = document.getElementById("dropdown");
-      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+  function logout() {
+    localStorage.clear();
+    window.location.href = "index.html";
+  }
+
+  const plantData = {
+    "Sativa": 75,
+    "Haze": 80,
+    "Kush 2": 90,
+    "OG Kush": 85
+  };
+
+  function renderPlants() {
+    const container = document.getElementById("plantContainer");
+    container.innerHTML = "";
+
+    const purchases = JSON.parse(localStorage.getItem("purchases") || "[]");
+    if (purchases.length === 0) {
+      container.innerHTML = "<p style='text-align:center; color:#00ff88;'>Keine gekauften Pflanzen.</p>";
+      return;
     }
 
-    function logout() {
-      localStorage.clear();
-      window.location.href = "index.html";
-    }
+    purchases.forEach(p => {
+      const gekauftDatum = new Date(p.date);
+      const heute = new Date();
+      const diff = Math.floor((heute - gekauftDatum) / (1000 * 60 * 60 * 24));
+      const restTage = plantData[p.name] - diff;
 
-    function renderPlants() {
-      const plantList = document.getElementById("plant-list");
-      plantList.innerHTML = "";
-      const purchases = JSON.parse(localStorage.getItem("purchases") || "[]");
+      const eintrag = document.createElement("div");
+      eintrag.className = "plant-entry";
+      eintrag.innerHTML = `
+        <h2>🌱 ${p.name}</h2>
+        <p>📅 Gekauft am: ${gekauftDatum.toLocaleDateString('de-CH')}</p>
+        <p>⏳ ${
+          restTage > 0
+            ? `Noch ${restTage} Tage bis zur Ernte`
+            : "✅ Bereit zur Ernte!"
+        }</p>
+      `;
+      container.appendChild(eintrag);
+    });
+  }
 
-      if (purchases.length === 0) {
-        plantList.innerHTML = "<p style='text-align:center;'>Keine gekauften Pflanzen.</p>";
-        return;
-      }
+  window.onload = renderPlants;
+</script>
 
-      purchases.forEach(p => {
-        const purchaseDate = new Date(p.date);
-        const now = new Date();
-        const diff = Math.ceil((purchaseDate.getTime() + p.duration * 86400000 - now.getTime()) / 86400000);
-        const remaining = diff > 0 ? `Noch ${diff} Tage bis zur Ernte` : "Bereit zur Ernte!";
-
-        const box = document.createElement("div");
-        box.className = "plant-box";
-        box.innerHTML = `
-          <h2>🌱 ${p.name}</h2>
-          <p>📅 Gekauft am: ${purchaseDate.toLocaleDateString("de-CH")}</p>
-          <p>⏳ ${remaining}</p>
-        `;
-        plantList.appendChild(box);
-      });
-    }
-
-    renderPlants();
-  </script>
 </body>
 </html>
