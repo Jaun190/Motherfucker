@@ -7,11 +7,11 @@
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
       background: url('assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
       color: white;
-      margin: 0;
     }
 
     .menu-button {
@@ -47,8 +47,8 @@
 
     .container {
       max-width: 600px;
-      margin: 100px auto;
-      background: rgba(0, 0, 0, 0.6);
+      margin: 160px auto 50px auto;
+      background-color: rgba(0, 0, 0, 0.6);
       padding: 30px;
       border-radius: 15px;
       box-shadow: 0 0 15px #00ff90;
@@ -61,42 +61,106 @@
     }
 
     .info-box {
-      margin-bottom: 20px;
+      margin: 20px 0;
       padding: 15px;
-      background: #111;
+      background-color: #111;
       border-radius: 10px;
       border: 1px solid #00ff90;
+      text-align: left;
     }
 
-    button {
-      background: #00ff90;
-      color: black;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .locked {
-      color: #999;
-      font-style: italic;
+    .info-box h3 {
+      margin: 0 0 10px 0;
+      color: #00ff90;
     }
   </style>
 </head>
 <body>
-  <!-- Menü -->
-  <button class="menu-button" onclick="toggleMenu()">☰</button>
-  <div id="dropdown" class="dropdown">
-    <a href="dashboard.html">📊 Dashboard</a>
-    <a href="pflanzen.html">🌱 Pflanzen kaufen</a>
-    <a href="lizenz.html">📦 Lizenz</a>
-    <a href="partner.html">🧑‍🤝‍🧑 Partner</a>
-    <a href="settings.html">⚙️ Einstellungen</a>
-    <a href="index.html">🔒 Logout</a>
-  </div>
 
-  <div class="container">
-    <h1>Willkommen bei GrowEmpire</h1>
+<!-- Menü -->
+<button class="menu-button" onclick="toggleMenu()">☰</button>
+<div id="dropdown" class="dropdown">
+  <a href="dashboard.html">🏠 Dashboard</a>
+  <a href="pflanzen.html">🌱 Pflanzen kaufen</a>
+  <a href="lizens.html">📦 Lizenz</a>
+  <a href="partner.html">🤝 Partner</a>
+  <a href="settings.html">⚙️ Einstellungen</a>
+  <a href="index.html">🚪 Logout</a>
+</div>
 
-    <
+<div class="container">
+  <h1>Willkommen bei GrowEmpire</h1>
+
+  <div class="info-box" id="lizenzBox"></div>
+  <div class="info-box" id="pflanzenBox"></div>
+  <div class="info-box" id="ertragBox"></div>
+</div>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById("dropdown");
+    menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+  }
+
+  const lizenz = localStorage.getItem("lizenz") === "true";
+  const pro = localStorage.getItem("pro") === "true";
+  const premium = localStorage.getItem("premium") === "true";
+
+  // Anzahl Pflanzen
+  let gekaufte = parseInt(localStorage.getItem("pflanzen") || "0");
+  let gratis = 0;
+  let limit = 1;
+  let bonus = 0.2;
+
+  let boxtyp = "Keine Lizenz";
+
+  if (premium) {
+    gratis = 2;
+    limit = 999;
+    bonus = 0.3;
+    boxtyp = "Premium";
+  } else if (pro) {
+    gratis = 0;
+    limit = 6;
+    bonus = 0.2;
+    boxtyp = "Pro";
+  } else if (lizenz) {
+    gratis = 1;
+    limit = 1;
+    bonus = 0.2;
+    boxtyp = "Basic";
+  }
+
+  const gesamt = gekaufte + gratis;
+
+  // Lizenz Box
+  const lizenzBox = document.getElementById("lizenzBox");
+  if (lizenz) {
+    lizenzBox.innerHTML = `
+      <h3>🔒 Lizenz: Aktiv</h3>
+      <p>Typ: <strong>${boxtyp}</strong></p>
+      <p>Limit: ${limit === 999 ? "Unbegrenzt" : limit} Pflanzen</p>
+    `;
+  } else {
+    lizenzBox.innerHTML = `<h3>🔒 Lizenz: Nicht aktiviert</h3><p>Bitte Starterlizenz kaufen.</p>`;
+  }
+
+  // Pflanzen Box
+  const pflanzenBox = document.getElementById("pflanzenBox");
+  pflanzenBox.innerHTML = `
+    <h3>🌿 Aktive Pflanzen:</h3>
+    <p>${gesamt} / ${limit === 999 ? "∞" : limit}</p>
+  `;
+
+  // Ertrag Box
+  const ertragBox = document.getElementById("ertragBox");
+  const pflanzwert = 150;
+  const ertrag = gesamt * pflanzwert * bonus;
+  ertragBox.innerHTML = `
+    <h3>💸 Ertrag:</h3>
+    <p>CHF ${ertrag.toFixed(2)}</p>
+  `;
+</script>
+
+</body>
+</html>
