@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Beim Klick auf Button speichern
+  // Button-Klick aktivieren
   document.querySelectorAll(".buy-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       const box = btn.closest(".box");
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Beim Laden prüfen
+  // Bereits gekaufte markieren
   const bought = getBoughtBoxes();
   document.querySelectorAll(".box").forEach(box => {
     const boxType = box.getAttribute("data-box");
@@ -34,5 +34,4 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.disabled = true;
     }
   });
-  
 });
