@@ -12,6 +12,7 @@
       color: white;
       font-family: Arial, sans-serif;
     }
+
     .plant-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -20,18 +21,21 @@
       max-width: 1000px;
       margin: auto;
     }
+
     .plant-card {
       background: rgba(0, 0, 0, 0.7);
       border-radius: 12px;
       padding: 12px;
       text-align: center;
     }
+
     .plant-card img {
       width: 100%;
       height: 120px;
       object-fit: cover;
       border-radius: 8px;
     }
+
     .buy-btn {
       margin-top: 10px;
       background: #00ff90;
@@ -42,6 +46,7 @@
       border-radius: 8px;
       cursor: pointer;
     }
+
     .buy-btn:disabled {
       background: gray;
       cursor: not-allowed;
@@ -49,66 +54,69 @@
   </style>
 </head>
 <body>
+  <h1 style="text-align:center;">🌱 Pflanzen kaufen</h1>
 
-<h1 style="text-align:center;">🌿 Pflanzen kaufen</h1>
+  <div class="plant-grid">
+    <div class="plant-card" data-name="Sativa">
+      <img src="assets/sativa1.png" alt="Sativa" />
+      <h3>Sativa</h3>
+      <button class="buy-btn">Kaufen</button>
+    </div>
 
-<div class="plant-grid">
-  <div class="plant-card" data-name="Sativa">
-    <img src="assets/sativa1.png" alt="Sativa">
-    <h3>Sativa</h3>
-    <button class="buy-btn">Kaufen</button>
+    <div class="plant-card" data-name="Haze">
+      <img src="assets/haze1.png" alt="Haze" />
+      <h3>Haze</h3>
+      <button class="buy-btn">Kaufen</button>
+    </div>
+
+    <div class="plant-card" data-name="OG Kush">
+      <img src="assets/ogkush.png" alt="OG Kush" />
+      <h3>OG Kush</h3>
+      <button class="buy-btn">Kaufen</button>
+    </div>
+
+    <div class="plant-card" data-name="Kush 2">
+      <img src="assets/kush2.png" alt="Kush 2" />
+      <h3>Kush 2</h3>
+      <button class="buy-btn">Kaufen</button>
+    </div>
   </div>
-  <div class="plant-card" data-name="Haze">
-    <img src="assets/haze1.png" alt="Haze">
-    <h3>Haze</h3>
-    <button class="buy-btn">Kaufen</button>
-  </div>
-  <div class="plant-card" data-name="OG Kush">
-    <img src="assets/ogkush.png" alt="OG Kush">
-    <h3>OG Kush</h3>
-    <button class="buy-btn">Kaufen</button>
-  </div>
-  <div class="plant-card" data-name="Kush 2">
-    <img src="assets/kush2.png" alt="Kush 2">
-    <h3>Kush 2</h3>
-    <button class="buy-btn">Kaufen</button>
-  </div>
-</div>
 
-<script>
-// JS komplett mit localStorage-Logik
-function getBoughtPlants() {
-  const data = localStorage.getItem('user_plants');
-  return data ? JSON.parse(data) : [];
-}
+  <script>
+    // Pflanzendaten lokal speichern
+    function getBoughtPlants() {
+      const data = localStorage.getItem("user_plants");
+      return data ? JSON.parse(data) : [];
+    }
 
-function savePlant(name) {
-  const bought = getBoughtPlants();
-  if (!bought.includes(name)) {
-    bought.push(name);
-    localStorage.setItem('user_plants', JSON.stringify(bought));
-  }
-}
+    function savePlant(name) {
+      const bought = getBoughtPlants();
+      if (!bought.includes(name)) {
+        bought.push(name);
+        localStorage.setItem("user_plants", JSON.stringify(bought));
+      }
+    }
 
-document.querySelectorAll('.buy-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const name = btn.closest('.plant-card').dataset.name;
-    savePlant(name);
-    btn.textContent = "Gekauft";
-    btn.disabled = true;
-  });
-});
+    // Buttons aktivieren
+    document.querySelectorAll(".buy-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const name = btn.closest(".plant-card").dataset.name;
+        savePlant(name);
+        btn.textContent = "Gekauft";
+        btn.disabled = true;
+      });
+    });
 
-const bought = getBoughtPlants();
-document.querySelectorAll('.plant-card').forEach(card => {
-  const name = card.dataset.name;
-  if (bought.includes(name)) {
-    const btn = card.querySelector('button');
-    btn.textContent = "Gekauft";
-    btn.disabled = true;
-  }
-});
-</script>
-
+    // Bereits gekaufte Pflanzen deaktivieren
+    const bought = getBoughtPlants();
+    document.querySelectorAll(".plant-card").forEach(card => {
+      const name = card.dataset.name;
+      if (bought.includes(name)) {
+        const btn = card.querySelector("button");
+        btn.textContent = "Gekauft";
+        btn.disabled = true;
+      }
+    });
+  </script>
 </body>
 </html>
