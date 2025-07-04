@@ -1,170 +1,97 @@
-<!DOCTYPE html><html lang="de">
+<!-- dashboard.html --><!DOCTYPE html><html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GrowEmpire Dashboard</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="assets/style.css" rel="stylesheet" />
+  <script defer src="assets/dashboard.js"></script>
   <style>
     body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
       background: url('assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
-      color: white;
-    }
-    .topbar {
-      display: flex;
-      align-items: center;
-      padding: 1rem;
-      background-color: rgba(0, 0, 0, 0.6);
-    }
-    .menu-btn {
-      font-size: 1.5rem;
-      cursor: pointer;
-      background: none;
-      border: 2px solid #00ff99;
-      border-radius: 10px;
-      color: #00ff99;
-      padding: 6px 12px;
-    }
-    .menu {
-      position: absolute;
-      top: 60px;
-      left: 20px;
-      background: rgba(0, 0, 0, 0.9);
-      border: 2px solid #00ff99;
-      border-radius: 12px;
-      padding: 10px 20px;
-      display: none;
-      flex-direction: column;
-      gap: 12px;
-      z-index: 999;
-    }
-    .menu a {
-      color: #00ff99;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1.1rem;
-    }
-    .dashboard-container {
-      padding: 2rem;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      margin: 0;
     }
     .plant-box {
       background: rgba(0, 0, 0, 0.6);
-      border: 2px solid #00ff99;
-      border-radius: 15px;
-      padding: 1rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 0 12px #00ff99;
+      border: 2px solid lime;
+      border-radius: 12px;
+      padding: 15px;
+      margin: 20px;
+      box-shadow: 0 0 15px lime;
     }
-    .plant-box h2 {
-      margin-top: 0;
+    .plant-name {
+      font-size: 22px;
       color: #00ff99;
-    }
-    .plant-box p {
-      margin: 0.3rem 0;
-    }
-    .plant-box button {
-      margin-top: 0.5rem;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      border: none;
       font-weight: bold;
-      cursor: pointer;
     }
-    .btn-download {
-      background-color: #00ff99;
+    .reinvest-btn {
+      background: #00ff99;
+      border: none;
+      padding: 8px 14px;
       color: black;
-    }
-    .btn-reinvest {
-      background-color: #009944;
-      color: white;
-      margin-left: 10px;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-top: 8px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div class="topbar">
-    <button class="menu-btn" onclick="toggleMenu()">
-      <i class="fas fa-bars"></i>
-    </button>
-  </div>
-  <div class="menu" id="menu">
-    <a href="dashboard.html"><i class="fas fa-brain"></i> Dashboard</a>
-    <a href="plants.html"><i class="fas fa-seedling"></i> Pflanzen</a>
-    <a href="partner.html"><i class="fas fa-handshake"></i> Partner</a>
-    <a href="lizenz.html"><i class="fas fa-id-card"></i> Lizenz</a>
-    <a href="settings.html"><i class="fas fa-gear"></i> Einstellungen</a>
-    <a href="#"><i class="fas fa-door-closed"></i> Logout</a>
-  </div>  <div class="dashboard-container" id="dashboard"></div>  <script>
-    const pflanzen = JSON.parse(localStorage.getItem('gekauft') || '[]');
+  <!-- Menüleiste -->
+  <div id="menu-container"></div>  <!-- Pflanzenliste -->  <div id="plants-dashboard"></div>  <script>
+    // Lade Menüleiste rein
+    fetch('menu.html')
+      .then(res => res.text())
+      .then(html => document.getElementById('menu-container').innerHTML = html);
 
-    function tageBisErnte(pflanze) {
-      const start = new Date(pflanze.datum.split('.').reverse().join('-'));
-      const heute = new Date();
-      const diff = Math.ceil((heute - start) / (1000 * 60 * 60 * 24));
-      return pflanze.dauer - diff;
-    }
+    const dashboard = document.getElementById('plants-dashboard');
+    const user = JSON.parse(localStorage.getItem("growUser")) || { license: "demo" };
+    const gekauftePflanzen = JSON.parse(localStorage.getItem("gekauftePflanzen")) || [];
 
     function renderDashboard() {
-      const dashboard = document.getElementById("dashboard");
-      dashboard.innerHTML = "";
+      dashboard.innerHTML = '';
+      const heute = new Date();
 
-      if (pflanzen.length === 0) {
-        dashboard.innerHTML = '<p>Keine gekauften Pflanzen vorhanden.</p>';
-        return;
-      }
+      gekauftePflanzen.forEach((pflanze, index) => {
+        const gekauftAm = new Date(pflanze.gekauftAm);
+        const tageDifferenz = Math.ceil((pflanze.erntedatum - heute.getTime()) / (1000 * 60 * 60 * 24));
+        const istGeerntet = tageDifferenz <= 0;
 
-      pflanzen.forEach((p, index) => {
-        const tage = tageBisErnte(p);
         const box = document.createElement("div");
         box.className = "plant-box";
         box.innerHTML = `
-          <h2>${p.name}</h2>
-          <p>Gekauft am: ${p.datum}</p>
-          <p>${tage > 0 ? `Noch ${tage} Tage bis zur Ernte` : '✅ Ernte abgeschlossen'}</p>
+          <div class="plant-name">${pflanze.name}</div>
+          <div>Gekauft am: ${gekauftAm.toLocaleDateString()}</div>
+          <div>${istGeerntet ? "Bereit zur Ernte!" : `Noch ${tageDifferenz} Tage bis zur Ernte`}</div>
         `;
 
-        if (tage <= 0) {
-          const downloadBtn = document.createElement("button");
-          downloadBtn.className = "btn-download";
-          downloadBtn.textContent = "🧾 PDF herunterladen";
-          downloadBtn.onclick = () => pdfErzeugen(p);
-
+        if (istGeerntet && ["pro", "premium"].includes(user.license)) {
           const reinvestBtn = document.createElement("button");
-          reinvestBtn.className = "btn-reinvest";
-          reinvestBtn.textContent = "♻️ Reinvest starten";
+          reinvestBtn.className = "reinvest-btn";
+          reinvestBtn.innerText = "🌱 Reinvest starten";
           reinvestBtn.onclick = () => reinvest(index);
-
-          box.appendChild(downloadBtn);
           box.appendChild(reinvestBtn);
         }
+
         dashboard.appendChild(box);
       });
     }
 
-    function toggleMenu() {
-      const menu = document.getElementById('menu');
-      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-    }
-
     function reinvest(index) {
-      pflanzen[index].datum = new Date().toLocaleDateString('de-CH');
-      localStorage.setItem('gekauft', JSON.stringify(pflanzen));
+      const alte = gekauftePflanzen[index];
+      const neuDatum = new Date();
+      const neuePflanze = {
+        ...alte,
+        gekauftAm: neuDatum.toISOString(),
+        erntedatum: new Date(neuDatum.getTime() + alte.dauer * 24 * 60 * 60 * 1000).getTime()
+      };
+      gekauftePflanzen[index] = neuePflanze;
+      localStorage.setItem("gekauftePflanzen", JSON.stringify(gekauftePflanzen));
       renderDashboard();
     }
 
-    function pdfErzeugen(p) {
-      const doc = new window.jspdf.jsPDF();
-      doc.setFontSize(18);
-      doc.text("Ernte-Bestätigung", 20, 20);
-      doc.setFontSize(12);
-      doc.text(`Pflanze: ${p.name}`, 20, 40);
-      doc.text(`Gekauft am: ${p.datum}`, 20, 50);
-      doc.text(`Status: Ernte abgeschlossen`, 20, 60);
-      doc.save(`${p.name}_Ernte.pdf`);
-    }
-
     renderDashboard();
-  </script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script></body>
+  </script></body>
 </html>
