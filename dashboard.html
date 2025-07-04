@@ -2,158 +2,152 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GrowEmpire – Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      color: #0f0;
-      background: url('assets/dashboard.png') no-repeat center center fixed;
+      font-family: 'Inter', sans-serif;
+      background: url('./assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
+      color: #00ff88;
     }
 
-    #menu-btn {
-      position: fixed;
-      top: 15px;
-      left: 15px;
-      background-color: #0f0;
-      color: black;
-      border: none;
-      border-radius: 8px;
-      width: 40px;
-      height: 40px;
-      font-size: 24px;
-      cursor: pointer;
-      z-index: 1100;
-    }
-
-    #sidebar {
+    .topbar {
       position: fixed;
       top: 0;
-      left: -240px;
-      width: 200px;
+      left: 0;
+      width: 100%;
+      height: 64px;
+      background: rgba(0, 0, 0, 0.9);
+      border-bottom: 2px solid #00ff88;
+      box-shadow: 0 0 12px #00ff88;
+      z-index: 998;
+    }
+
+    .menu-wrapper {
+      position: relative;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.95);
-      transition: left 0.3s ease;
-      padding: 20px;
-      z-index: 1000;
+      display: flex;
+      align-items: center;
+      padding-left: 20px;
     }
 
-    #sidebar ul {
-      list-style: none;
-      padding: 0;
+    .menu-icon {
+      background: rgba(0, 255, 136, 0.1);
+      border: 2px solid #00ff88;
+      color: #00ff88;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00ff88;
     }
 
-    #sidebar ul li {
-      margin: 15px 0;
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.95);
+      border: 2px solid #00ff88;
+      border-radius: 12px;
+      padding: 0.5rem 0;
+      min-width: 200px;
+      box-shadow: 0 0 12px #00ff88;
+      animation: fadeIn 0.2s ease-out;
+      z-index: 999;
     }
 
-    #sidebar ul li a {
-      color: #0f0;
+    .dropdown-menu a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      color: #00ff88;
       text-decoration: none;
       font-weight: bold;
+      font-size: 1rem;
+      transition: background 0.2s;
     }
 
-    .container {
-      padding: 20px;
-      padding-left: 80px;
-      margin-top: 360px;
+    .dropdown-menu a:hover {
+      background: rgba(0, 255, 136, 0.08);
     }
 
-    .section {
-      background-color: rgba(0, 0, 0, 0.8);
-      border: 2px solid #0f0;
-      border-radius: 12px;
-      padding: 16px;
-      margin: 20px 0;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .section h2 {
-      color: #0f0;
-      margin-bottom: 10px;
+    .dashboard-content {
+      margin-top: 100px;
+      padding: 2rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .warn {
-      color: red;
-      font-weight: bold;
+    .dashboard-box {
+      background: rgba(0, 0, 0, 0.75);
+      border: 2px solid #00ff88;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 0 12px #00ff88;
+      color: white;
+      text-align: center;
     }
 
-    .emoji {
-      font-size: 20px;
-      margin-right: 5px;
+    .dashboard-box h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .dashboard-box p {
+      font-size: 1.1rem;
+      color: #ccc;
     }
   </style>
 </head>
 <body>
 
-  <!-- Menü-Button -->
-  <button id="menu-btn">☰</button>
-
-  <!-- Sidebar-Menü -->
-  <div id="sidebar">
-    <ul>
-      <li><a href="dashboard.html">🏠 Dashboard</a></li>
-      <li><a href="lizenz.html">📦 Lizenz</a></li>
-      <li><a href="plants.html">🌿 Pflanzen</a></li> <!-- ← Jetzt wirklich drin -->
-      <li><a href="partner.html">👥 Partner</a></li>
-      <li><a href="settings.html">⚙️ Einstellungen</a></li>
-      <li><a href="#" onclick="logout()">🚪 Logout</a></li>
-    </ul>
+  <!-- Topbar mit Menü -->
+  <div class="topbar">
+    <div class="menu-wrapper">
+      <div class="menu-icon" onclick="toggleMenu()">☰</div>
+      <div class="dropdown-menu" id="dropdown">
+        <a href="dashboard.html"><span>🧠</span> Dashboard</a>
+        <a href="plants.html"><span>🧬</span> Pflanzen</a>
+        <a href="partner.html"><span>🤝</span> Partner</a>
+        <a href="lizenz.html"><span>🪪</span> Lizenz</a>
+        <a href="settings.html"><span>⚙️</span> Einstellungen</a>
+        <a href="logout.html"><span>📕</span> Logout</a>
+      </div>
+    </div>
   </div>
 
   <!-- Dashboard-Inhalt -->
-  <div class="container">
-    <div class="section">
-      <h2><span class="emoji">🕹️</span>Demo Version</h2>
-      <p>Nur Testsystem, kein echter Ertrag.</p>
-      <p><span class="emoji">📦</span>Box-Level: <span id="boxLevelText">demo</span></p>
-      <p id="demoWarn" class="warn">In Demo-Version nicht auszahlbar</p>
-    </div>
-
-    <div class="section">
-      <h2><span class="emoji">🌱</span>Pflanzenübersicht</h2>
-      <p>Aktive Pflanzen: <span id="activePlants">0</span></p>
-      <p>Gratispflanzen: <span id="freePlantsText">0</span></p>
-      <p>Limit: <span id="plantLimitText">1</span></p>
-    </div>
-
-    <div class="section">
-      <h2><span class="emoji">💰</span>Ertrag</h2>
-      <p>Gesamter Ertrag: <span id="ertragText">CHF 0.00</span></p>
+  <div class="dashboard-content">
+    <div class="dashboard-box">
+      <h1>Willkommen bei GrowEmpire</h1>
+      <p>Dein Grow- und Partner-Dashboard ist aktiv. Hier siehst du bald deine Lizenz, deine Pflanzen, dein Team und deine Einnahmen.</p>
     </div>
   </div>
 
-  <!-- JS Logik -->
+  <!-- Menü-Logik -->
   <script>
-    // Menü öffnen/schließen
-    const menuBtn = document.getElementById("menu-btn");
-    const sidebar = document.getElementById("sidebar");
+    function toggleMenu() {
+      const menu = document.getElementById('dropdown');
+      menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+    }
 
-    menuBtn.addEventListener("click", () => {
-      sidebar.style.left = (sidebar.style.left === "0px") ? "-240px" : "0px";
-    });
-
-    // Dashboard-Daten laden
-    window.addEventListener("DOMContentLoaded", () => {
-      const boxLevel = localStorage.getItem("boxLevel") || "demo";
-      const plantLimit = localStorage.getItem("plantLimit") || "1";
-      const freePlants = localStorage.getItem("freePlants") || "0";
-
-      document.getElementById("boxLevelText").textContent = boxLevel;
-      document.getElementById("plantLimitText").textContent = plantLimit;
-      document.getElementById("freePlantsText").textContent = freePlants;
-
-      if (boxLevel !== "demo") {
-        document.getElementById("demoWarn").style.display = "none";
+    window.addEventListener('click', function (e) {
+      const menu = document.getElementById('dropdown');
+      if (!e.target.closest('.menu-wrapper')) {
+        menu.style.display = 'none';
       }
     });
-
-    // Logout
-    function logout() {
-      localStorage.clear();
-      alert("Du wurdest ausgeloggt.");
-      window.location.href = "index.html";
-    }
   </script>
 
 </body>
