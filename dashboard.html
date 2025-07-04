@@ -2,15 +2,14 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard – GrowEmpire</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
       margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: url('dashboard.png') no-repeat center center fixed;
+      font-family: Arial, sans-serif;
+      background: url('assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
       color: #00ffcc;
     }
@@ -25,33 +24,30 @@
     }
 
     .menu {
-      display: none;
-      flex-direction: column;
       position: absolute;
       top: 60px;
       left: 20px;
-      background-color: #111;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 0 10px #00ffcc;
-      z-index: 1000;
+      background-color: rgba(0, 0, 0, 0.9);
+      border-radius: 10px;
+      padding: 15px;
+      display: none;
+      z-index: 999;
     }
 
     .menu a {
+      display: block;
       color: #00ffcc;
       text-decoration: none;
       margin: 10px 0;
-      display: flex;
-      align-items: center;
       font-size: 18px;
     }
 
     .menu a:hover {
-      color: #ffffff;
+      text-decoration: underline;
     }
 
     .plant-card {
-      background-color: rgba(0, 0, 0, 0.85);
+      background-color: rgba(0, 0, 0, 0.8);
       border: 2px solid #00ffcc;
       border-radius: 15px;
       padding: 15px;
@@ -60,15 +56,24 @@
     }
 
     .plant-name {
-      font-size: 22px;
+      font-size: 24px;
       font-weight: bold;
-      margin-bottom: 10px;
       color: #00ff99;
     }
 
     .info {
+      margin-top: 10px;
       font-size: 16px;
-      margin: 5px 0;
+    }
+
+    #plants-container {
+      padding: 80px 20px 20px;
+    }
+
+    .no-plants {
+      text-align: center;
+      margin-top: 100px;
+      font-size: 20px;
     }
   </style>
 </head>
@@ -82,34 +87,41 @@
     <a href="partner.html">🤝 Partner</a>
   </div>
 
-  <div id="plantContainer" style="margin-top: 80px;"></div>
+  <div id="plants-container">
+    <div id="plantList" class="plant-list"></div>
+    <div id="noPlants" class="no-plants">Keine gekauften Pflanzen.</div>
+  </div>
 
   <script>
     function toggleMenu() {
       const menu = document.getElementById("menu");
-      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
     }
 
-    const container = document.getElementById("plantContainer");
-    const plants = JSON.parse(localStorage.getItem("gekauftePflanzen")) || [];
+    const plantData = JSON.parse(localStorage.getItem("purchasedPlants")) || [];
+    const container = document.getElementById("plantList");
+    const noPlants = document.getElementById("noPlants");
 
-    if (plants.length === 0) {
-      container.innerHTML = "<p style='text-align:center;'>Keine gekauften Pflanzen.</p>";
+    if (plantData.length === 0) {
+      noPlants.style.display = "block";
     } else {
-      plants.forEach(p => {
-        const gekauft = new Date(p.datum);
-        const heute = new Date();
-        const diff = Math.ceil((gekauft.getTime() + (p.dauer * 24 * 60 * 60 * 1000) - heute.getTime()) / (1000 * 60 * 60 * 24));
-        const ernteText = diff <= 0 ? "✅ Bereit zur Ernte!" : `⏳ Noch ${diff} Tage bis zur Ernte`;
+      noPlants.style.display = "none";
+      plantData.forEach((plant) => {
+        const card = document.createElement("div");
+        card.className = "plant-card";
 
-        const card = `
-          <div class="plant-card">
-            <div class="plant-name">🌱 ${p.name}</div>
-            <div class="info">📅 Gekauft am: ${p.datum}</div>
-            <div class="info">${ernteText}</div>
-          </div>
+        const boughtDate = new Date(plant.date);
+        const today = new Date();
+        const diffTime = boughtDate.getTime() + plant.duration * 24 * 60 * 60 * 1000 - today.getTime();
+        const daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        const ready = daysLeft <= 0;
+
+        card.innerHTML = `
+          <div class="plant-name">🌿 ${plant.name}</div>
+          <div class="info">📅 Gekauft am: ${boughtDate.toLocaleDateString("de-DE")}</div>
+          <div class="info">⏳ ${ready ? "Bereit zur Ernte!" : `Noch ${daysLeft} Tage bis zur Ernte`}</div>
         `;
-        container.innerHTML += card;
+        container.appendChild(card);
       });
     }
   </script>
