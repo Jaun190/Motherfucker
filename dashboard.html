@@ -105,6 +105,11 @@
       const purchases = JSON.parse(localStorage.getItem('purchases') || '[]');
       list.innerHTML = '';
 
+      if (purchases.length === 0) {
+        list.innerHTML = "<p style='text-align:center; padding:20px;'>Keine gekauften Pflanzen.</p>";
+        return;
+      }
+
       purchases.forEach(p => {
         const purchaseDate = new Date(p.date);
         const today = new Date();
