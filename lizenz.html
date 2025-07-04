@@ -1,128 +1,151 @@
-<!DOCTYPE html><html lang="de">
+<!DOCTYPE html>
+<html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lizenz kaufen – GrowEmpire</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Lizenz kaufen</title>
   <style>
     body {
-      background: url('assets/dashboard.png') no-repeat center center fixed;
-      background-size: cover;
       margin: 0;
       font-family: Arial, sans-serif;
+      background: #0c0c0c;
       color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
     }
-    .menu-toggle {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background-color: #00ff90;
-      padding: 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      z-index: 10;
-    }
-    .menu-content {
-      display: none;
-      position: absolute;
-      top: 60px;
-      left: 20px;
-      background-color: rgba(0, 0, 0, 0.9);
-      border-radius: 8px;
-      padding: 10px;
-      z-index: 10;
-    }
-    .menu-content a {
-      display: block;
+    h1 {
       color: #00ff90;
-      text-decoration: none;
-      padding: 5px 0;
-    }
-    .menu-toggle:hover + .menu-content,
-    .menu-content:hover {
-      display: block;
+      margin-bottom: 20px;
     }
     .box-container {
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
       gap: 30px;
-      max-width: 800px;
-      margin: 120px auto 50px;
-      padding: 0 20px;
+      justify-content: center;
+      max-width: 1200px;
+      width: 100%;
     }
     .box {
+      background: #111;
       border: 2px solid #00ff90;
       border-radius: 20px;
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 20px;
+      padding: 30px;
+      width: 320px;
       box-shadow: 0 0 20px #00ff90;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
     .box h2 {
+      margin-top: 0;
       color: #00ff90;
-    }
-    .box p,
-    .box li {
-      margin: 5px 0;
+      font-size: 1.5em;
     }
     .box ul {
+      padding: 0;
       list-style: none;
-      padding-left: 0;
+      margin-bottom: 20px;
     }
-    .box li::before {
-      content: "🌱 ";
+    .box li {
+      margin: 10px 0;
     }
-    .buy-btn {
-      display: block;
-      background-color: #00ff90;
-      color: #000;
-      padding: 12px;
+    .btn {
+      background: #00ff90;
+      color: black;
       border: none;
+      padding: 12px;
       border-radius: 10px;
-      margin-top: 20px;
-      font-size: 16px;
       font-weight: bold;
       cursor: pointer;
+      font-size: 1em;
+    }
+    .btn:disabled {
+      background: #444;
+      cursor: not-allowed;
     }
   </style>
 </head>
-<body><!-- ☰ Menü --><div class="menu-toggle">☰</div>
-<div class="menu-content">
-  <a href="dashboard.html">📊 Dashboard</a>
-  <a href="plants.html">🌱 Pflanzen kaufen</a>
-  <a href="lizenz.html">💼 Lizenz</a>
-  <a href="partner.html">🤝 Partner</a>
-  <a href="settings.html">⚙️ Einstellungen</a>
-  <a href="index.html">🚪 Logout</a>
-</div><div class="box-container">  <!-- BASIC Lizenz -->  <div class="box">
-    <h2>Basic Lizenz – CHF 49.–</h2>
-    <ul>
-      <li>Zugang zum Backoffice</li>
-      <li>1 Gratispflanze (im Wert von CHF 200.–)</li>
-      <li>1 Pflanze max.</li>
-      <li>20 % Ertrag (nur auf Pflanze)</li>
-      <li>Demo-Funktion wird deaktiviert</li>
-    </ul>
-    <button class="buy-btn">Basic Lizenz kaufen</button>
-  </div>  <!-- PRO Box -->  <div class="box">
-    <h2>Pro Box – CHF 199.–</h2>
-    <ul>
-      <li>Nur mit Basic Lizenz nutzbar</li>
-      <li>6 Pflanzenfläche</li>
-      <li>20 % Ertrag</li>
-      <li>Ref-Bonus: 10 % / 3 %</li>
-      <li>Reinvest-Funktion</li>
-    </ul>
-    <button class="buy-btn">Pro Box kaufen</button>
-  </div>  <!-- PREMIUM Box -->  <div class="box">
-    <h2>Premium Box – CHF 299.–</h2>
-    <ul>
-      <li>Lizenz inklusive</li>
-      <li>Unbegrenzte Fläche</li>
-      <li>2 Gratispflanzen</li>
-      <li>30 % Ertrag</li>
-      <li>Ref-Bonus: 10 % / 5 % / 3 % / 1 %</li>
-      <li>Voller Zugriff & Support</li>
-    </ul>
-    <button class="buy-btn">Premium Box kaufen</button>
-  </div></div></body>
+<body>
+  <h1>🎁 Deine Starterbox</h1>
+  <div class="box-container">
+    <div class="box">
+      <h2>Basic Lizenz – CHF 49.–</h2>
+      <ul>
+        <li>🌱 Starterlizenz fürs Backoffice</li>
+        <li>🌱 Demo wird deaktiviert</li>
+        <li>🌱 1 Gratispflanze (Wert: CHF 200.–)</li>
+        <li>🌱 1 Pflanze max.</li>
+        <li>🌱 20 % Ertrag (nur auf Gratispflanze)</li>
+      </ul>
+      <button id="buyBasic" class="btn" onclick="buyBox('lizenz')">Basic Lizenz kaufen</button>
+    </div>
+    <div class="box">
+      <h2>Pro Box – CHF 199.–</h2>
+      <ul>
+        <li>🌱 Nur mit Basic Lizenz nutzbar</li>
+        <li>🌱 6 Pflanzenfläche</li>
+        <li>🌱 20 % Ertrag</li>
+        <li>🌱 Ref-Bonus: 10 % / 3 %</li>
+        <li>🌱 Reinvest-Funktion</li>
+      </ul>
+      <button id="buyPro" class="btn" onclick="buyBox('pro')">Pro Box kaufen</button>
+    </div>
+    <div class="box">
+      <h2>Premium Box – CHF 299.–</h2>
+      <ul>
+        <li>🌱 Lizenz inklusive</li>
+        <li>🌱 Unbegrenzte Fläche</li>
+        <li>🌱 2 Gratispflanzen</li>
+        <li>🌱 30 % Ertrag</li>
+        <li>🌱 Ref-Bonus: 10 % / 5 % / 3 % / 1 %</li>
+        <li>🌱 Voller Zugriff & Support</li>
+      </ul>
+      <button id="buyPremium" class="btn" onclick="buyBox('premium')">Premium Box kaufen</button>
+    </div>
+  </div>
+
+  <script>
+    function buyBox(type) {
+      if (type === 'lizenz') {
+        localStorage.setItem('lizenz', 'true');
+        alert('✅ Basic Lizenz aktiviert!');
+        location.reload();
+      } else if (type === 'pro') {
+        if (localStorage.getItem('lizenz') !== 'true') {
+          alert('❗ Bitte zuerst die Basic Lizenz kaufen.');
+          return;
+        }
+        localStorage.setItem('pro', 'true');
+        alert('✅ Pro Box aktiviert!');
+        location.reload();
+      } else if (type === 'premium') {
+        localStorage.setItem('lizenz', 'true');
+        localStorage.setItem('premium', 'true');
+        alert('✅ Premium Box aktiviert!');
+        location.reload();
+      }
+    }
+
+    // Gekauft-Status anzeigen
+    window.onload = () => {
+      if (localStorage.getItem('lizenz') === 'true') {
+        const btn = document.getElementById('buyBasic');
+        btn.innerText = '✅ Gekauft';
+        btn.disabled = true;
+      }
+      if (localStorage.getItem('pro') === 'true') {
+        const btn = document.getElementById('buyPro');
+        btn.innerText = '✅ Gekauft';
+        btn.disabled = true;
+      }
+      if (localStorage.getItem('premium') === 'true') {
+        const btn = document.getElementById('buyPremium');
+        btn.innerText = '✅ Gekauft';
+        btn.disabled = true;
+      }
+    }
+  </script>
+</body>
 </html>
