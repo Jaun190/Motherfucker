@@ -4,102 +4,106 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GrowEmpire Dashboard</title>
-  <link rel="stylesheet" href="assets/dashboard.css" />
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: url("assets/dashboard.png") no-repeat center center fixed;
+      color: #00ff99;
+      background: url('assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
-      color: #fff;
     }
 
-    .menu {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      z-index: 1000;
-    }
-
-    .plant-card {
-      background-color: rgba(0, 0, 0, 0.85);
-      border: 2px solid #00ff84;
-      border-radius: 16px;
-      margin: 20px;
+    .menu-icon {
+      font-size: 28px;
       padding: 16px;
-      box-shadow: 0 0 20px #00ff84;
-    }
-
-    .plant-card h2 {
-      margin: 0 0 10px;
-      color: #00ff84;
-      display: flex;
-      align-items: center;
-      font-size: 22px;
-    }
-
-    .plant-card h2 span {
-      margin-right: 8px;
-    }
-
-    .plant-card p {
-      margin: 6px 0;
-      font-size: 16px;
+      cursor: pointer;
     }
 
     .plant-container {
-      padding-top: 120px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    .placeholder {
-      text-align: center;
-      padding-top: 140px;
-      font-size: 20px;
-      color: #00ff84;
+    .plant-box {
+      background-color: rgba(0, 0, 0, 0.85);
+      border: 2px solid #00ff99;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 16px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 0 20px #00ff99;
+    }
+
+    .plant-box h2 {
+      margin: 0 0 8px 0;
+      font-size: 22px;
+    }
+
+    .plant-box p {
+      margin: 4px 0;
+      font-size: 16px;
+    }
+
+    .hidden-heading {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <!-- Menü -->
-  <div class="menu">
-    <img src="assets/menu-icon.png" alt="Menü" width="40" />
-  </div>
 
-  <!-- Pflanzen Container -->
-  <div class="plant-container" id="plantContainer">
-    <p class="placeholder">Keine gekauften Pflanzen.</p>
+  <!-- Menü Icon -->
+  <div class="menu-icon">☰</div>
+
+  <!-- Unsichtbare Überschrift -->
+  <h1 class="hidden-heading">GrowEmpire</h1>
+
+  <!-- Pflanzenbereich -->
+  <div class="plant-container" id="plantList">
+    <!-- Dynamische Einträge -->
   </div>
 
   <script>
-    // Pflanzenliste mit Dauer
-    const plants = JSON.parse(localStorage.getItem("boughtPlants") || "[]");
-    const container = document.getElementById("plantContainer");
-    const placeholder = document.querySelector(".placeholder");
+    const plantData = JSON.parse(localStorage.getItem("boughtPlants")) || [];
 
-    if (plants.length > 0) {
-      placeholder.style.display = "none";
-      plants.forEach(p => {
-        const daysToHarvest = p.duration;
-        const purchaseDate = new Date(p.date);
+    const plantDurations = {
+      "Sativa": 75,
+      "Haze": 80,
+      "Kush 2": 90,
+      "OG Kush": 85
+    };
+
+    const plantList = document.getElementById("plantList");
+
+    if (plantData.length === 0) {
+      const emptyMessage = document.createElement("p");
+      emptyMessage.style.fontSize = "18px";
+      emptyMessage.style.marginTop = "100px";
+      emptyMessage.textContent = "Keine gekauften Pflanzen.";
+      plantList.appendChild(emptyMessage);
+    } else {
+      plantData.forEach(item => {
+        const { name, date } = item;
+        const duration = plantDurations[name] || 75;
+        const boughtDate = new Date(date);
         const today = new Date();
-        const timeDiff = today - purchaseDate;
-        const daysPassed = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-        const daysRemaining = daysToHarvest - daysPassed;
+        const diff = Math.ceil((boughtDate.getTime() + duration * 86400000 - today.getTime()) / 86400000);
+        const daysLeft = Math.max(diff, 0);
 
-        const card = document.createElement("div");
-        card.className = "plant-card";
-        card.innerHTML = `
-          <h2>🌱 ${p.name}</h2>
-          <p>📅 Gekauft am: ${purchaseDate.toLocaleDateString("de-CH")}</p>
-          <p>⏳ ${
-            daysRemaining > 0
-              ? `Noch ${daysRemaining} Tage bis zur Ernte`
-              : "Bereit zur Ernte!"
-          }</p>
+        const box = document.createElement("div");
+        box.className = "plant-box";
+
+        box.innerHTML = `
+          <h2>🌱 ${name}</h2>
+          <p>📅 Gekauft am: ${boughtDate.toLocaleDateString("de-CH")}</p>
+          <p>⏳ ${daysLeft > 0 ? `Noch ${daysLeft} Tage bis zur Ernte` : 'Bereit zur Ernte!'}</p>
         `;
-        container.appendChild(card);
+        plantList.appendChild(box);
       });
     }
   </script>
+
 </body>
 </html>
