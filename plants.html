@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>GrowEmpire – Pflanzen</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
     body {
@@ -59,7 +59,6 @@
     .dropdown-menu a:hover {
       background: #00ff8866;
     }
-
     .container {
       padding-top: 80px;
       max-width: 1000px;
@@ -69,7 +68,6 @@
       gap: 1.5rem;
       padding: 1rem;
     }
-
     .plant-card {
       background: rgba(0, 0, 0, 0.6);
       border-radius: 16px;
@@ -78,7 +76,6 @@
       text-align: center;
       box-shadow: 0 0 15px #00ff88;
     }
-
     .plant-card img {
       width: 100%;
       max-height: 200px;
@@ -86,18 +83,15 @@
       border-radius: 10px;
       margin-bottom: 10px;
     }
-
     .plant-card h3 {
       color: #00ff88;
       margin: 0.5rem 0;
     }
-
     .plant-card p {
       margin: 0.3rem 0;
       font-size: 14px;
       color: #ccc;
     }
-
     .plant-card button {
       margin-top: 0.5rem;
       background: #00ff88;
@@ -108,12 +102,10 @@
       font-weight: bold;
       cursor: pointer;
     }
-
     .plant-card button:disabled {
       background: #00ff88;
       color: black;
     }
-
   </style>
 </head>
 <body>
@@ -134,30 +126,10 @@
 
   <script>
     const plants = [
-      {
-        name: "Sativa",
-        img: "assets/sativa1.png",
-        days: 75,
-        price: 190
-      },
-      {
-        name: "Haze",
-        img: "assets/haze1.png",
-        days: 80,
-        price: 180
-      },
-      {
-        name: "OG Kush",
-        img: "assets/ogkush.png",
-        days: 85,
-        price: 210
-      },
-      {
-        name: "Kush 2",
-        img: "assets/kush2.png",
-        days: 90,
-        price: 195
-      }
+      { name: "Sativa", img: "assets/sativa1.png", days: 75, price: 190 },
+      { name: "Haze", img: "assets/haze1.png", days: 80, price: 180 },
+      { name: "OG Kush", img: "assets/ogkush.png", days: 85, price: 210 },
+      { name: "Kush 2", img: "assets/kush2.png", days: 90, price: 195 }
     ];
 
     const container = document.getElementById("plantList");
@@ -181,14 +153,19 @@
 
       const button = document.createElement("button");
 
-      const gekauft = localStorage.getItem(`plant_${plant.name}`);
-      if (gekauft === "true") {
+      const saved = JSON.parse(localStorage.getItem(`plant_${plant.name}`));
+      if (saved?.bought) {
         button.textContent = "✅ Gekauft";
         button.disabled = true;
       } else {
         button.textContent = "Kaufen";
         button.onclick = () => {
-          localStorage.setItem(`plant_${plant.name}`, "true");
+          const data = {
+            bought: true,
+            boughtAt: new Date().toISOString(),
+            days: plant.days
+          };
+          localStorage.setItem(`plant_${plant.name}`, JSON.stringify(data));
           button.textContent = "✅ Gekauft";
           button.disabled = true;
           generatePDF(plant.name, plant.days, plant.price);
@@ -200,14 +177,17 @@
       card.appendChild(duration);
       card.appendChild(price);
       card.appendChild(button);
-
       container.appendChild(card);
     });
+
+    function toggleMenu() {
+      const menu = document.getElementById("dropdown");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
 
     async function generatePDF(name, days, price) {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
-
       doc.setFontSize(18);
       doc.text("GrowEmpire – Kaufbestätigung", 20, 20);
       doc.setFontSize(12);
@@ -215,13 +195,7 @@
       doc.text(`Dauer: ${days} Tage`, 20, 50);
       doc.text(`Preis: CHF ${price}.–`, 20, 60);
       doc.text(`Datum: ${new Date().toLocaleDateString()}`, 20, 70);
-
       doc.save(`Kaufbestaetigung_${name}.pdf`);
-    }
-
-    function toggleMenu() {
-      const menu = document.getElementById("dropdown");
-      menu.style.display = menu.style.display === "block" ? "none" : "block";
     }
   </script>
 </body>
