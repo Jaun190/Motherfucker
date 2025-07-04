@@ -10,19 +10,6 @@
       color: #0f0;
       background: url('assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
-      position: relative;
-    }
-
-    /* Dunkler Overlay für bessere Lesbarkeit */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.7);
-      z-index: -1;
     }
 
     #menu-btn {
@@ -70,7 +57,7 @@
     .container {
       padding: 20px;
       padding-left: 80px;
-      margin-top: 160px; /* ⬅️ damit alles unter dem GrowEmpire-Bild startet */
+      margin-top: 140px; /* Abstand zum Hintergrundtext */
     }
 
     .section {
@@ -99,16 +86,20 @@
 </head>
 <body>
 
+  <!-- Menü-Button -->
   <button id="menu-btn">☰</button>
 
+  <!-- Sidebar Menü -->
   <div id="sidebar">
     <ul>
       <li><a href="dashboard.html">🏠 Dashboard</a></li>
       <li><a href="lizenz.html">📦 Lizenz</a></li>
-      <li><a href="#">⚙️ Einstellungen</a></li>
+      <li><a href="settings.html">⚙️ Einstellungen</a></li>
+      <li><a href="#" onclick="logout()">🚪 Logout</a></li>
     </ul>
   </div>
 
+  <!-- Dashboard Inhalt -->
   <div class="container">
     <div class="section">
       <h2><span class="emoji">🕹️</span>Demo Version</h2>
@@ -130,7 +121,9 @@
     </div>
   </div>
 
+  <!-- Script -->
   <script>
+    // Menü öffnen/schließen
     const menuBtn = document.getElementById("menu-btn");
     const sidebar = document.getElementById("sidebar");
 
@@ -138,6 +131,7 @@
       sidebar.style.left = (sidebar.style.left === "0px") ? "-240px" : "0px";
     });
 
+    // Dynamische Daten laden
     window.addEventListener("DOMContentLoaded", () => {
       const boxLevel = localStorage.getItem("boxLevel") || "demo";
       const plantLimit = localStorage.getItem("plantLimit") || "1";
@@ -147,11 +141,17 @@
       document.getElementById("plantLimitText").textContent = plantLimit;
       document.getElementById("freePlantsText").textContent = freePlants;
 
-      const demoWarn = document.getElementById("demoWarn");
       if (boxLevel !== "demo") {
-        demoWarn.style.display = "none";
+        document.getElementById("demoWarn").style.display = "none";
       }
     });
+
+    // Logout-Funktion
+    function logout() {
+      localStorage.clear();
+      alert("Du wurdest ausgeloggt.");
+      window.location.href = "index.html";
+    }
   </script>
 
 </body>
