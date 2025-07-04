@@ -1,131 +1,236 @@
-<!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Registrieren | Grow Empire</title>
+  <title>Partner – GrowEmpire</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GrowEmpire – Partner</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #001f14;
-      color: white;
-      text-align: center;
-      padding: 30px;
-    }
-    h1 {
-      color: #32cd32;
-    }
-    .ref-info, .your-ref {
-      margin: 15px 0;
-      font-weight: bold;
+@@ -12,7 +12,9 @@
+      background: url('./assets/dashboard.png') no-repeat center center fixed;
+      background-size: cover;
       color: #00ff88;
+      padding: 2rem;
     }
-    .ref-box {
-      background: #002a1d;
-      padding: 10px;
-      margin: 10px auto;
-      border-radius: 10px;
-      max-width: 400px;
-      word-break: break-all;
+
+    .topbar {
+      position: fixed;
+      top: 0;
+@@ -24,13 +26,15 @@
+      box-shadow: 0 0 12px #00ff88;
+      z-index: 998;
     }
-    input, button {
-      padding: 12px;
-      font-size: 16px;
-      margin: 10px 0;
-      width: 90%;
-      max-width: 400px;
+
+    .menu-wrapper {
+      position: relative;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding-left: 20px;
     }
-    .copy-btn {
-      background: #00ff88;
-      border: none;
-      color: black;
-      font-weight: bold;
-      padding: 8px 14px;
-      border-radius: 6px;
+
+    .menu-icon {
+      background: rgba(0, 255, 136, 0.1);
+      border: 2px solid #00ff88;
+@@ -41,6 +45,7 @@
       cursor: pointer;
+      box-shadow: 0 0 10px #00ff88;
     }
-    .copy-btn:hover {
-      background: #00cc66;
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+@@ -52,9 +57,9 @@
+      padding: 0.5rem;
+      min-width: 200px;
+      box-shadow: 0 0 12px #00ff88;
+      animation: fadeIn 0.2s ease-out;
+      z-index: 999;
+    }
+
+    .dropdown-menu a {
+      display: flex;
+      align-items: center;
+@@ -64,68 +69,96 @@
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: background 0.25s;
+      transition: background 0.2s;
+    }
+
+    .dropdown-menu a:hover {
+      background: rgba(0, 255, 136, 0.08);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .partner-content {
+
+    .referral-box {
+      margin-top: 100px;
+      padding: 2rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .partner-box {
+      background: rgba(0, 0, 0, 0.75);
+
+    .referral-box input {
+      width: 80%;
+      max-width: 500px;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .tree {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .node {
+      background-color: rgba(0, 255, 136, 0.1);
+      border: 2px solid #00ff88;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 0 12px #00ff88;
+      color: white;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      margin: 1rem;
+      box-shadow: 0 0 10px #00ff88;
+      position: relative;
+      text-align: center;
+      font-size: 1rem;
+    }
+    .partner-box h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+
+    .children {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .node::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 20px;
+      border-left: 2px solid #00ff88;
+    }
+    .partner-box p {
+      font-size: 1.1rem;
+      color: #ccc;
+
+    .node:only-child::after {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <h1>Registriere dich bei<br>Grow Empire 🌱</h1>
 
-  <div class="ref-info" id="refInfo">⏳ Lade Referral...</div>
-
-  <form id="registerForm">
-    <input type="text" placeholder="Dein Name" id="name" required><br>
-    <input type="email" placeholder="E-Mail" id="email" required><br>
-    <input type="password" placeholder="Passwort" id="password" required><br>
-    <button type="submit">Jetzt registrieren</button>
-  </form>
-
-  <div class="your-ref" id="yourRefSection" style="display:none;">
-    Dein persönlicher Referral-Link:<br>
-    <div class="ref-box" id="yourRefLink"></div>
-    <button class="copy-btn" onclick="copyLink()">📋 Kopieren</button>
+  <!-- Topbar mit Menu -->
+  <div class="topbar">
+    <div class="menu-wrapper">
+      <div class="menu-icon" onclick="toggleMenu()">≡</div>
+      <div class="dropdown-menu" id="dropdown">
+        <a href="dashboard.html"><span>🌿</span> Dashboard</a>
+        <a href="plants.html"><span>🧪</span> Pflanzen</a>
+        <a href="partner.html"><span>💼</span> Partner</a>
+        <a href="lizenz.html"><span>📄</span> Lizenz</a>
+        <a href="settings.html"><span>⚙️</span> Einstellungen</a>
+        <a href="payout.html"><span>💸</span> Auszahlung</a>
+        <a href="logout.html"><span>🔴</span> Logout</a>
+        <a href="dashboard.html">🌿 Dashboard</a>
+        <a href="plants.html">🧪 Pflanzen</a>
+        <a href="partner.html">💼 Partner</a>
+        <a href="lizenz.html">📄 Lizenz</a>
+        <a href="settings.html">⚙️ Einstellungen</a>
+        <a href="payout.html">💸 Auszahlung</a>
+        <a href="logout.html">🔴 Logout</a>
+      </div>
+    </div>
   </div>
 
+  <!-- Partner-Inhalt -->
+  <div class="partner-content">
+    <div class="partner-box">
+      <h1>Partnerübersicht</h1>
+      <p>Hier findest du bald deine geworbenen Partner, die Downline-Struktur, Provisionen und dein Partnerlink.</p>
+    </div>
+  <div class="referral-box">
+    <h2>🔗 Dein persönlicher Referral-Link</h2>
+    <input id="refLink" readonly />
+  </div>
+
+  <div class="tree" id="treeContainer">
+    <h2>👥 Deine Partnerstruktur</h2>
+  </div>
+
+  <!-- Menü-Logik -->
   <script>
-    // Dummy "Datenbank" für Referral-Namen (lokal, später Supabase)
-    const users = [
-      { email: "fomi@example.com", name: "Fomi" },
-      { email: "jaun190@gmail.com", name: "Dominique" },
-      { email: "admin@growempire.ch", name: "Admin" }
-    ];
-
-    // Referral-ID aus URL speichern
-    window.onload = () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const refId = urlParams.get("ref");
-      if (refId) {
-        localStorage.setItem("ref", refId);
+    function toggleMenu() {
+      const menu = document.getElementById("dropdown");
+@@ -138,7 +171,46 @@ <h1>Partnerübersicht</h1>
+        menu.style.display = "none";
       }
-
-      const savedRef = localStorage.getItem("ref");
-      let refName = "Unbekannt";
-
-      if (savedRef) {
-        const refUser = users.find(u => u.email.split("@")[0] === savedRef);
-        refName = refUser ? refUser.name : savedRef;
-        document.getElementById("refInfo").textContent = "Du wurdest geworben von: " + refName;
-      } else {
-        document.getElementById("refInfo").textContent = "Kein Referral erkannt.";
-      }
-    };
-
-    document.getElementById("registerForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-
-      const name = document.getElementById("name").value;
-      const email = document.getElementById("email").value.trim().toLowerCase();
-      const password = document.getElementById("password").value;
-      const ref = localStorage.getItem("ref") || null;
-
-      // Nutzer speichern
-      const user = { name, email, password, referrer: ref };
-      let usersList = JSON.parse(localStorage.getItem("users") || "[]");
-      usersList.push(user);
-      localStorage.setItem("users", JSON.stringify(usersList));
-      localStorage.setItem("user_email", email);
-
-      // Referral-Link anzeigen
-      const username = email.split("@")[0];
-      const base = window.location.origin + window.location.pathname;
-      const fullLink = base + "?ref=" + username;
-
-      document.getElementById("yourRefLink").textContent = fullLink;
-      document.getElementById("yourRefSection").style.display = "block";
     });
+  </script>
 
-    // Copy-Funktion
-    function copyLink() {
-      const link = document.getElementById("yourRefLink").textContent;
-      navigator.clipboard.writeText(link).then(() => {
-        alert("Referral-Link kopiert!");
-      });
+    // === Demo: Benutzername & Partnerdaten ===
+    const email = localStorage.getItem("user_email") || "dominique@example.com";
+    const user = email.split("@")[0];
+    const lizenz = localStorage.getItem("lizenz") || "demo";
+
+    document.getElementById("refLink").value = `${location.origin}/register.html?ref=${email}`;
+
+    const partnerData = JSON.parse(localStorage.getItem("partnerData") || "[]");
+
+    // === Rekursive Baumgenerierung ===
+    function buildTree(data, parentEmail, level = 1, maxLevel = 1) {
+      if (level > maxLevel) return null;
+
+      const children = data.filter(p => p.referrer === parentEmail);
+      if (children.length === 0) return null;
+
+      const childrenContainer = document.createElement("div");
+      childrenContainer.className = "children";
+
+      for (const child of children) {
+        const node = document.createElement("div");
+        node.className = "node";
+        node.textContent = child.email.split("@")[0];
+        const sub = buildTree(data, child.email, level + 1, maxLevel);
+        if (sub) node.appendChild(sub);
+        childrenContainer.appendChild(node);
+      }
+      return childrenContainer;
     }
+
+    const rootNode = document.createElement("div");
+    rootNode.className = "node";
+    rootNode.textContent = user;
+
+    const maxDepth = lizenz === "premium" ? 5 : lizenz === "pro" ? 3 : lizenz === "lizenz" ? 1 : 0;
+    const subtree = buildTree(partnerData, email, 1, maxDepth);
+    if (subtree) rootNode.appendChild(subtree);
+
+    document.getElementById("treeContainer").appendChild(rootNode);
   </script>
 </body>
-</html>
