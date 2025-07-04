@@ -2,83 +2,159 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>GrowEmpire – Pflanzen kaufen</title>
+  <title>GrowEmpire – Dashboard</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
+      color: #0f0;
       background: url('assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
+    }
+
+    #menu-btn {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      background-color: #0f0;
+      color: black;
+      border: none;
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 1100;
+    }
+
+    #sidebar {
+      position: fixed;
+      top: 0;
+      left: -240px;
+      width: 200px;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.95);
+      transition: left 0.3s ease;
+      padding: 20px;
+      z-index: 1000;
+    }
+
+    #sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    #sidebar ul li {
+      margin: 15px 0;
+    }
+
+    #sidebar ul li a {
       color: #0f0;
+      text-decoration: none;
+      font-weight: bold;
     }
 
-    h1 {
-      font-size: 20px;
+    .container {
       padding: 20px;
-      margin: 0;
+      padding-left: 80px;
+      margin-top: 320px;
     }
 
-    .plant-grid {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      padding: 20px;
-    }
-
-    .plant-card {
-      background-color: rgba(0, 0, 0, 0.85);
+    .section {
+      background-color: rgba(0, 0, 0, 0.8);
       border: 2px solid #0f0;
       border-radius: 12px;
-      width: 120px;
-      text-align: center;
-      padding: 10px;
+      padding: 16px;
+      margin: 20px 0;
     }
 
-    .plant-card img {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-      margin-bottom: 8px;
+    .section h2 {
+      color: #0f0;
+      margin-bottom: 10px;
     }
 
-    .plant-card button {
-      background-color: #444;
-      color: #ccc;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 6px;
+    .warn {
+      color: red;
       font-weight: bold;
-      cursor: not-allowed;
+    }
+
+    .emoji {
+      font-size: 20px;
+      margin-right: 5px;
     }
   </style>
 </head>
 <body>
 
-  <h1>🌱 Pflanzen kaufen</h1>
+  <!-- Menü-Button -->
+  <button id="menu-btn">☰</button>
 
-  <div class="plant-grid">
-    <div class="plant-card">
-      <img src="assets/plant_sativa.png" alt="Sativa">
-      <p>Sativa</p>
-      <button disabled>Gekauft</button>
+  <!-- Sidebar Menü -->
+  <div id="sidebar">
+    <ul>
+      <li><a href="dashboard.html">🏠 Dashboard</a></li>
+      <li><a href="lizenz.html">📦 Lizenz</a></li>
+      <li><a href="plants.html">🌿 Pflanzen</a></li>
+      <li><a href="partner.html">👥 Partner</a></li>
+      <li><a href="settings.html">⚙️ Einstellungen</a></li>
+      <li><a href="#" onclick="logout()">🚪 Logout</a></li>
+    </ul>
+  </div>
+
+  <!-- Dashboard Inhalt -->
+  <div class="container">
+    <div class="section">
+      <h2><span class="emoji">🕹️</span>Demo Version</h2>
+      <p>Nur Testsystem, kein echter Ertrag.</p>
+      <p><span class="emoji">📦</span>Box-Level: <span id="boxLevelText">demo</span></p>
+      <p id="demoWarn" class="warn">In Demo-Version nicht auszahlbar</p>
     </div>
-    <div class="plant-card">
-      <img src="assets/plant_haze.png" alt="Haze">
-      <p>Haze</p>
-      <button disabled>Gekauft</button>
+
+    <div class="section">
+      <h2><span class="emoji">🌿</span>Pflanzenübersicht</h2>
+      <p>Aktive Pflanzen: <span id="activePlants">0</span></p>
+      <p>Gratispflanzen: <span id="freePlantsText">0</span></p>
+      <p>Limit: <span id="plantLimitText">1</span></p>
     </div>
-    <div class="plant-card">
-      <img src="assets/plant_ogkush.png" alt="OG Kush">
-      <p>OG Kush</p>
-      <button disabled>Gekauft</button>
-    </div>
-    <div class="plant-card">
-      <img src="assets/plant_kush2.png" alt="Kush 2">
-      <p>Kush 2</p>
-      <button disabled>Gekauft</button>
+
+    <div class="section">
+      <h2><span class="emoji">💰</span>Ertrag</h2>
+      <p>Gesamter Ertrag: <span id="ertragText">CHF 0.00</span></p>
     </div>
   </div>
+
+  <!-- Script -->
+  <script>
+    // Menü öffnen/schließen
+    const menuBtn = document.getElementById("menu-btn");
+    const sidebar = document.getElementById("sidebar");
+
+    menuBtn.addEventListener("click", () => {
+      sidebar.style.left = (sidebar.style.left === "0px") ? "-240px" : "0px";
+    });
+
+    // Dashboard-Werte laden
+    window.addEventListener("DOMContentLoaded", () => {
+      const boxLevel = localStorage.getItem("boxLevel") || "demo";
+      const plantLimit = localStorage.getItem("plantLimit") || "1";
+      const freePlants = localStorage.getItem("freePlants") || "0";
+
+      document.getElementById("boxLevelText").textContent = boxLevel;
+      document.getElementById("plantLimitText").textContent = plantLimit;
+      document.getElementById("freePlantsText").textContent = freePlants;
+
+      if (boxLevel !== "demo") {
+        document.getElementById("demoWarn").style.display = "none";
+      }
+    });
+
+    // Logout
+    function logout() {
+      localStorage.clear();
+      alert("Du wurdest ausgeloggt.");
+      window.location.href = "index.html";
+    }
+  </script>
 
 </body>
 </html>
