@@ -71,12 +71,6 @@
       padding: 2rem;
     }
 
-    h1 {
-      color: #00ff88;
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
     .plant-list {
       list-style: none;
       padding: 0;
@@ -94,7 +88,6 @@
 </head>
 <body>
 
-  <!-- 3-Punkte-Menü oben -->
   <div class="topbar">
     <div class="menu-icon" onclick="toggleMenu()">☰</div>
     <div class="dropdown-menu" id="dropdown">
@@ -108,7 +101,6 @@
   </div>
 
   <div class="content">
-    <h1>🌱 Deine gekauften Pflanzen</h1>
     <ul class="plant-list" id="plantList"></ul>
   </div>
 
@@ -118,33 +110,43 @@
       menu.style.display = menu.style.display === "block" ? "none" : "block";
     }
 
-    // Pflanzen-Namen synchron mit plants.html
-    const pflanzen = ["Sativa", "Haze", "OG Kush", "Kush 2"];
-
-    const list = document.getElementById("plantList");
-    let gekaufte = 0;
-
-    pflanzen.forEach(name => {
-      const gekauft = localStorage.getItem(`plant_${name}`);
-      if (gekauft === "true") {
-        gekaufte++;
-        const li = document.createElement("li");
-        li.textContent = `✅ ${name} wurde gekauft`;
-        list.appendChild(li);
-      }
-    });
-
-    if (gekaufte === 0) {
-      list.innerHTML = "<li style='color:#ccc;'>Keine Pflanzen gekauft.</li>";
-    }
-
-    // Klick außerhalb des Menüs schließt Dropdown
     window.addEventListener("click", function (e) {
       if (!e.target.closest(".topbar")) {
         document.getElementById("dropdown").style.display = "none";
       }
     });
-  </script>
 
+    const list = document.getElementById("plantList");
+    let found = false;
+
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key.startsWith("plant_")) {
+        const data = JSON.parse(localStorage.getItem(key));
+        if (data && data.bought && data.boughtAt && data.days) {
+          found = true;
+          const boughtDate = new Date(data.boughtAt);
+          const today = new Date();
+          const elapsed = Math.floor((today - boughtDate) / (1000 * 60 * 60 * 24));
+          const remaining = data.days - elapsed;
+
+          const name = key.replace("plant_", "");
+          const li = document.createElement("li");
+          li.innerHTML = `🌱 <b>${name}</b><br>
+            📅 Gekauft am: ${boughtDate.toLocaleDateString()}<br>
+            ⏳ ${
+              remaining > 0
+                ? `${remaining} Tage bis zur Ernte`
+                : `✅ Ernte bereit!`
+            }`;
+          list.appendChild(li);
+        }
+      }
+    }
+
+    if (!found) {
+      list.innerHTML = "<li style='color:#ccc;'>Noch keine Pflanzen gekauft.</li>";
+    }
+  </script>
 </body>
 </html>
