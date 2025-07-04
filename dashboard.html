@@ -2,114 +2,150 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard – GrowEmpire</title>
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: url('assets/dashboard.png') no-repeat center center fixed;
+      font-family: 'Inter', sans-serif;
+      background: url('./assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
-      color: #00ffcc;
+      color: #00ff88;
     }
 
-    .menu-btn {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      font-size: 30px;
-      cursor: pointer;
-      z-index: 1000;
-      padding: 10px 14px;
-      border: 2px solid #00ffcc;
-      border-radius: 12px;
-      color: #00ffcc;
-      background-color: black;
-      box-shadow: 0 0 10px #00ffcc;
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background: rgba(0, 0, 0, 0.6);
+      border-bottom: 2px solid #00ff88;
+      box-shadow: 0 0 12px #00ff88;
+      z-index: 998;
     }
 
-    .menu-content {
-      display: none;
-      position: absolute;
-      top: 70px;
-      left: 20px;
-      background-color: rgba(0, 0, 0, 0.95);
-      border: 2px solid #00ffcc;
-      border-radius: 20px;
-      padding: 20px;
-      z-index: 999;
-      box-shadow: 0 0 15px #00ffcc;
-    }
-
-    .menu-content a {
+    .menu-wrapper {
+      position: relative;
+      height: 100%;
       display: flex;
       align-items: center;
-      margin-bottom: 14px;
+      padding-left: 20px;
+    }
+
+    .menu-icon {
+      background: rgba(0, 255, 136, 0.1);
+      color: #00ff88;
+      border: 2px solid #00ff88;
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00ff88;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.95);
+      border: 2px solid #00ff88;
+      border-radius: 12px;
+      padding: 0.5rem;
+      min-width: 200px;
+      box-shadow: 0 0 12px #00ff88;
+      z-index: 999;
+    }
+
+    .dropdown-menu a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      color: #00ff88;
       text-decoration: none;
-      color: #00ffcc;
-      font-size: 18px;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: background 0.2s;
     }
 
-    .menu-content a:last-child {
-      margin-bottom: 0;
+    .dropdown-menu a:hover {
+      background: rgba(0, 255, 136, 0.08);
     }
 
-    .menu-content a span {
-      margin-left: 10px;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .dashboard-content {
+      margin-top: 100px;
+      padding: 2rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .plant-box {
-      background-color: rgba(0, 0, 0, 0.8);
-      padding: 20px;
-      border-radius: 20px;
-      border: 2px solid #00ffcc;
-      margin: 20px;
+      background: rgba(0, 0, 0, 0.75);
+      border: 2px solid #00ff88;
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 0 12px #00ff88;
+      color: white;
+      text-align: center;
+    }
+
+    .plant-box h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .plant-box p {
+      font-size: 1.1rem;
+      color: #ccc;
     }
   </style>
 </head>
 <body>
-  <div class="menu-btn" onclick="toggleMenu()">☰</div>
-  <div class="menu-content" id="menu">
-    <a href="dashboard.html">🧠 <span>Dashboard</span></a>
-    <a href="plants.html">🪴 <span>Pflanzen</span></a>
-    <a href="partner.html">🤝 <span>Partner</span></a>
-    <a href="lizenz.html">🪪 <span>Lizenz</span></a>
-    <a href="settings.html">⚙️ <span>Einstellungen</span></a>
-    <a href="index.html">🔴 <span>Logout</span></a>
+
+<!-- Menü (EXAKT wie partner.html) -->
+<div class="topbar">
+  <div class="menu-wrapper">
+    <div class="menu-icon" onclick="toggleMenu()">≡</div>
+    <div class="dropdown-menu" id="dropdown">
+      <a href="dashboard.html"><span>🧠</span> Dashboard</a>
+      <a href="plants.html"><span>🌿</span> Pflanzen</a>
+      <a href="partner.html"><span>🤝</span> Partner</a>
+      <a href="lizenz.html"><span>🪪</span> Lizenz</a>
+      <a href="settings.html"><span>⚙️</span> Einstellungen</a>
+      <a href="index.html"><span>🔴</span> Logout</a>
+    </div>
   </div>
+</div>
 
-  <div id="plantsContainer" style="margin-top: 140px;"></div>
+<!-- Dashboard Inhalt -->
+<div class="dashboard-content" id="plantContainer">
+  <p style="text-align:center;">Keine gekauften Pflanzen.</p>
+</div>
 
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById("menu");
-      menu.style.display = menu.style.display === "block" ? "none" : "block";
+<!-- Menü-Logik -->
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('dropdown');
+    menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+  }
+
+  window.addEventListener('click', function (e) {
+    const menu = document.getElementById('dropdown');
+    if (!e.target.closest('.menu-wrapper')) {
+      menu.style.display = 'none';
     }
+  });
+</script>
 
-    const container = document.getElementById("plantsContainer");
-    const plants = JSON.parse(localStorage.getItem("plants")) || [];
-
-    if (plants.length === 0) {
-      container.innerHTML = "<h3 style='text-align: center;'>Keine gekauften Pflanzen.</h3>";
-    } else {
-      plants.forEach(p => {
-        const box = document.createElement("div");
-        box.className = "plant-box";
-        const gekauft = new Date(p.kaufdatum);
-        const ernte = new Date(p.kaufdatum);
-        ernte.setDate(ernte.getDate() + p.ernteTage);
-        const heute = new Date();
-        const diff = Math.max(0, Math.ceil((ernte - heute) / (1000 * 60 * 60 * 24)));
-
-        box.innerHTML = `
-          <h2>🌱 ${p.name}</h2>
-          <p>📅 Gekauft am: ${gekauft.toLocaleDateString("de-CH")}</p>
-          <p>⏳ Noch ${diff} Tage bis zur Ernte</p>
-        `;
-        container.appendChild(box);
-      });
-    }
-  </script>
 </body>
 </html>
