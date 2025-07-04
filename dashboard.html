@@ -1,133 +1,157 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GrowEmpire Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
       background: url('assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
-      color: white;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #fff;
     }
+
     .menu-button {
       position: absolute;
       top: 20px;
       left: 20px;
-      background-color: #00ff90;
-      border: none;
-      color: black;
+      background-color: #0f0;
       padding: 10px;
       border-radius: 6px;
       cursor: pointer;
       z-index: 10;
     }
+
     .dropdown {
       display: none;
       position: absolute;
       top: 60px;
       left: 20px;
-      background: rgba(0, 0, 0, 0.9);
+      background-color: rgba(0, 0, 0, 0.9);
+      border-radius: 8px;
       padding: 10px;
-      border-radius: 10px;
-      flex-direction: column;
+      z-index: 10;
     }
+
     .dropdown a {
-      color: #00ff90;
-      padding: 8px 0;
+      display: block;
+      color: #0f0;
       text-decoration: none;
+      padding: 5px 0;
     }
-    .card {
+
+    .container {
       max-width: 600px;
-      margin: 20px auto;
-      background: #000000c0;
-      padding: 20px;
-      border-radius: 20px;
-      border: 2px solid #00ff90;
+      margin: 100px auto;
       text-align: center;
-      box-shadow: 0 0 15px #00ff90;
     }
-    .card h2 {
-      margin-bottom: 10px;
+
+    .box {
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 15px;
+      padding: 20px;
+      margin: 20px 0;
+      box-shadow: 0 0 10px #00ff90;
     }
-    .green {
+
+    .box h2 {
       color: #00ff90;
     }
   </style>
 </head>
 <body>
 
-  <button class="menu-button" onclick="toggleMenu()">☰</button>
-  <div id="dropdown" class="dropdown">
-    <a href="dashboard.html">🏠 Dashboard</a>
-    <a href="pflanzen.html">🌱 Pflanzen</a>
-    <a href="lizenz.html">📦 Lizenz</a>
-    <a href="partner.html">🧑‍🤝‍🧑 Partner</a>
-    <a href="settings.html">⚙️ Einstellungen</a>
-    <a href="index.html">🚪 Logout</a>
-  </div>
+<!-- ☰ Menü -->
+<div class="menu-button" onclick="toggleMenu()">☰</div>
+<div id="dropdown" class="dropdown">
+  <a href="dashboard.html">📊 Dashboard</a>
+  <a href="plants.html">🌱 Pflanzen kaufen</a>
+  <a href="lizenz.html">💼 Lizenz</a>
+  <a href="partner.html">🤝 Partner</a>
+  <a href="settings.html">⚙️ Einstellungen</a>
+  <a href="index.html">🚪 Logout</a>
+</div>
 
-  <div class="card">
-    <h2>Willkommen bei <span class="green">GrowEmpire</span></h2>
-  </div>
+<div class="container">
+  <h1>Willkommen bei GrowEmpire</h1>
 
-  <div class="card">
-    <h3>🌿 <span class="green">Pflanzenübersicht</span></h3>
-    <p>Gekaufte Pflanzen: <span id="gekauft">0</span></p>
-    <p>Gratis-Pflanzen: <span id="gratis">0</span></p>
-    <p>Gesamt: <span id="gesamt">0</span></p>
-  </div>
+  <div class="box" id="boxInfo"></div>
+  <div class="box" id="pflanzenInfo"></div>
+  <div class="box" id="ertragInfo"></div>
+</div>
 
-  <div class="card">
-    <h3>💸 <span class="green">Ertragsanzeige</span></h3>
-    <p>Auszahlbar (nur Gratispflanzen): <strong>CHF <span id="auszahlbar">0.00</span></strong></p>
-    <p>Gesamtertrag: <strong>CHF <span id="gesamtErtrag">0.00</span></strong></p>
-  </div>
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById("dropdown");
+    menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+  }
 
-  <div class="card" id="boxInfo">
-    <h3>🎁 <span class="green">Aktive Box:</span> <span id="boxTyp">-</span></h3>
-    <p><span id="boxVorteil"></span></p>
-  </div>
+  // Simulierte Daten aus localStorage (Box-Status, Pflanzen usw.)
+  const box = localStorage.getItem("box") || "demo"; // "basic", "pro", "premium", "demo"
+  const pflanzen = parseInt(localStorage.getItem("pflanzen") || "0");
+  const gratis = parseInt(localStorage.getItem("gratis") || "0");
 
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById("dropdown");
-      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
-    }
+  let limit = 1;
+  let bonus = 0;
+  let refLevels = 0;
+  let boxName = "🕹️ Demo Version";
+  let boxErklaerung = "Nur Testsystem, kein echter Ertrag.";
+  let ertrag = 0;
 
-    const gekauft = parseInt(localStorage.getItem("gekauft") || "3");
-    const gratis = parseInt(localStorage.getItem("gratis") || "2");
-    const typ = localStorage.getItem("premium") === "true"
-      ? "Premium"
-      : localStorage.getItem("pro") === "true"
-        ? "Pro"
-        : localStorage.getItem("lizenz") === "true"
-          ? "Basic"
-          : "Keine";
+  if (box === "basic") {
+    limit = 1;
+    bonus = 0;
+    refLevels = 0;
+    boxName = "🎫 Basic Lizenz";
+    boxErklaerung = "Backoffice freigeschaltet. Gratispflanze aktiv.";
+    ertrag = gratis * 30;
+  }
 
-    const ertragProPflanze = 45;
-    const auszahlbar = gratis * ertragProPflanze;
-    const gesamt = gekauft + gratis;
-    const gesamtErtrag = gesamt * ertragProPflanze;
+  if (box === "pro") {
+    limit = 5;
+    bonus = 0.2;
+    refLevels = 2;
+    boxName = "📦 Pro Box";
+    boxErklaerung = "20 % Bonus-Ertrag, bis 2 Ebenen Ref-Boni";
+    ertrag = (pflanzen * 30 * (1 + bonus)) + (gratis * 30);
+  }
 
-    document.getElementById("gekauft").textContent = gekauft;
-    document.getElementById("gratis").textContent = gratis;
-    document.getElementById("gesamt").textContent = gesamt;
-    document.getElementById("auszahlbar").textContent = auszahlbar.toFixed(2);
-    document.getElementById("gesamtErtrag").textContent = gesamtErtrag.toFixed(2);
-    document.getElementById("boxTyp").textContent = typ;
+  if (box === "premium") {
+    limit = 999;
+    bonus = 0.3;
+    refLevels = 4;
+    boxName = "💎 Premium Box";
+    boxErklaerung = "30 % Bonus-Ertrag, bis 4 Ebenen Ref-Boni";
+    ertrag = (pflanzen * 30 * (1 + bonus)) + (gratis * 30);
+  }
 
-    const boxText = {
-      "Keine": "Noch keine Lizenz aktiv.",
-      "Basic": "1 Pflanze erlaubt, 20 % Bonus, Gratispflanze inkl.",
-      "Pro": "6 Pflanzen möglich, 20 % Bonus, Ref-Boni aktiv.",
-      "Premium": "Unbegrenzte Pflanzen, 30 % Bonus, volle Boni + Support."
-    };
-    document.getElementById("boxVorteil").textContent = boxText[typ];
-  </script>
+  // Demo-Box zeigt keine Auszahlung
+  const auszahlbar = box === "demo" ? 0 : ertrag;
+
+  document.getElementById("boxInfo").innerHTML = `
+    <h2>${boxName}</h2>
+    <p>${boxErklaerung}</p>
+    <p>📦 Box-Level: ${box}</p>
+  `;
+
+  document.getElementById("pflanzenInfo").innerHTML = `
+    <h2>🌿 Pflanzenübersicht</h2>
+    <p>Aktive Pflanzen: ${pflanzen}</p>
+    <p>Gratispflanzen: ${gratis}</p>
+    <p>Limit: ${limit === 999 ? "∞" : limit}</p>
+  `;
+
+  document.getElementById("ertragInfo").innerHTML = `
+    <h2>💰 Ertrag</h2>
+    <p>Gesamter Ertrag: CHF ${ertrag.toFixed(2)}</p>
+    <p style="color:${box === "demo" ? "#f55" : "#0f0"}">
+      ${box === "demo" ? "In Demo-Version nicht auszahlbar" : "Direkt auszahlbar"}
+    </p>
+  `;
+</script>
 
 </body>
 </html>
