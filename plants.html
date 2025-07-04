@@ -9,7 +9,7 @@
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: url('./assets/background.jpg') no-repeat center center fixed;
+      background: url('./assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
       color: #00ff88;
     }
@@ -38,27 +38,27 @@
 
     .plant-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 1.5rem;
       padding: 2rem;
-      max-width: 1200px;
+      max-width: 1000px;
       margin: 0 auto;
     }
 
     .plant-card {
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(32, 32, 32, 0.8);
       border: 2px solid #00ff88;
-      border-radius: 12px;
+      border-radius: 16px;
       text-align: center;
       padding: 1rem;
       color: white;
-      box-shadow: 0 0 10px #00ff88;
+      box-shadow: 0 0 12px #00ff88;
       transition: transform 0.2s;
     }
 
     .plant-card:hover {
       transform: scale(1.03);
-      box-shadow: 0 0 20px #00ff88;
+      box-shadow: 0 0 18px #00ff88;
     }
 
     .plant-card img {
@@ -70,13 +70,13 @@
 
     .plant-name {
       font-weight: bold;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       margin-top: 0.5rem;
       color: #00ff88;
     }
 
     .plant-details {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       margin: 0.3rem 0;
       color: #ccc;
     }
@@ -99,7 +99,7 @@
 </head>
 <body>
 
-  <!-- 3-Punkte-Menü -->
+  <!-- Menü oben links -->
   <div class="menu-icon" onclick="toggleMenu()">☰</div>
 
   <h1>GrowEmpire</h1>
@@ -125,13 +125,11 @@
       <div class="plant-details">Dauer: 75 Tage<br>Preis: CHF 190.–</div>
       <button class="buy-button">Kaufen</button>
     </div>
-
-    <!-- Weitere Karten kannst du einfach duplizieren -->
   </div>
 
   <script>
     function toggleMenu() {
-      alert("Menü geöffnet – hier kommen später Logout, Dashboard usw. rein.");
+      alert("Menü geöffnet – hier kommen bald: Logout, Dashboard, Hilfe usw.");
     }
   </script>
 
