@@ -88,10 +88,10 @@
       border: 2px solid #00ff88;
       border-radius: 16px;
       padding: 2rem;
-      margin-bottom: 2rem;
       box-shadow: 0 0 12px #00ff88;
       color: white;
       text-align: center;
+      margin-bottom: 2rem;
     }
 
     .plant-box h1 {
@@ -110,7 +110,7 @@
       background-color: rgba(255, 255, 255, 0.1);
       border-radius: 10px;
       overflow: hidden;
-      height: 16px;
+      height: 10px;
       margin-top: 10px;
       border: 1px solid #00ff88;
     }
@@ -120,6 +120,17 @@
       background: linear-gradient(90deg, #00ff88, #00cc66);
       width: 0%;
       transition: width 0.3s ease;
+    }
+
+    .btn {
+      background-color: #00ff88;
+      border: none;
+      color: black;
+      padding: 8px 16px;
+      margin-top: 10px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
     }
 
     .license-box {
@@ -133,117 +144,116 @@
       box-shadow: 0 0 10px #00ff88;
       max-width: 500px;
     }
-
-    .btn {
-      background-color: #00ff88;
-      border: none;
-      color: black;
-      padding: 8px 16px;
-      margin-top: 10px;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-    }
   </style>
 </head>
 <body>
-
-<!-- Menü -->
-<div class="topbar">
-  <div class="menu-wrapper">
-    <div class="menu-icon" onclick="toggleMenu()">≡</div>
-    <div class="dropdown-menu" id="dropdown">
-      <a href="dashboard.html"><span>🧠</span> Dashboard</a>
-      <a href="plants.html"><span>🌿</span> Pflanzen</a>
-      <a href="partner.html"><span>🤝</span> Partner</a>
-      <a href="lizenz.html"><span>🪪</span> Lizenz</a>
-      <a href="settings.html"><span>⚙️</span> Einstellungen</a>
-      <a href="index.html"><span>🔴</span> Logout</a>
+  <!-- Menu -->
+  <div class="topbar">
+    <div class="menu-wrapper">
+      <div class="menu-icon" onclick="toggleMenu()">☰</div>
+      <div class="dropdown-menu" id="dropdown">
+        <a href="dashboard.html"><span>🌿</span> Dashboard</a>
+        <a href="plants.html"><span>🧪</span> Pflanzen</a>
+        <a href="partner.html"><span>💼</span> Partner</a>
+        <a href="lizenz.html"><span>📄</span> Lizenz</a>
+        <a href="settings.html"><span>⚙️</span> Einstellungen</a>
+        <a href="index.html"><span>🔴</span> Logout</a>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Lizenz-Anzeige -->
-<div class="license-box" id="licenseInfo"></div>
+  <!-- Lizenz-Anzeige -->
+  <div class="license-box" id="licenseInfo"></div>
 
-<!-- Pflanzenbereich -->
-<div class="dashboard-content" id="plantContainer">
-  <p style="text-align:center;">Keine gekauften Pflanzen.</p>
-</div>
+  <!-- Pflanzenbereich -->
+  <div class="dashboard-content" id="plantContainer">
+    <p style="text-align:center;">Keine gekauften Pflanzen.</p>
+  </div>
 
-<!-- Logik -->
-<script>
-  function toggleMenu() {
-    const menu = document.getElementById('dropdown');
-    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-  }
-
-  window.addEventListener('click', function (e) {
-    const menu = document.getElementById('dropdown');
-    if (!e.target.closest('.menu-wrapper')) {
-      menu.style.display = 'none';
+  <!-- Logik -->
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("dropdown");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
     }
-  });
 
-  const container = document.getElementById("plantContainer");
-  const data = JSON.parse(localStorage.getItem("purchases") || "[]");
-  const lizenz = localStorage.getItem("lizenz") || "demo";
-  const licenseInfoBox = document.getElementById("licenseInfo");
-  licenseInfoBox.textContent = `Aktive Lizenz: ${lizenz.toUpperCase()}`;
-
-  function createPDF(pflanze) {
-    const doc = new Blob([`Bestätigung: ${pflanze.name}\\nGekauft am: ${new Date(pflanze.date).toLocaleDateString("de-CH")}`], { type: "application/pdf" });
-    const url = URL.createObjectURL(doc);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `${pflanze.name}_Bestätigung.pdf`;
-    link.click();
-  }
-
-  if (data.length > 0) {
-    container.innerHTML = "";
-    data.forEach(p => {
-      const box = document.createElement("div");
-      box.className = "plant-box";
-
-      const gekauft = new Date(p.date);
-      const ernte = new Date(p.date);
-      ernte.setDate(ernte.getDate() + p.tage);
-      const heute = new Date();
-      const diff = Math.max(0, Math.ceil((ernte - heute) / (1000 * 60 * 60 * 24)));
-      const total = p.tage;
-      const passed = total - diff;
-      const percent = Math.round((passed / total) * 100);
-
-      box.innerHTML = `
-        <h1>🌱 ${p.name}</h1>
-        <p>📅 Gekauft am: ${gekauft.toLocaleDateString("de-CH")}</p>
-        <p>⏳ Noch ${diff} Tage bis zur Ernte</p>
-        <div class="progress-bar">
-          <div class="progress-fill" style="width:${percent}%"></div>
-        </div>
-      `;
-
-      if (diff === 0) {
-        const pdfBtn = document.createElement("button");
-        pdfBtn.className = "btn";
-        pdfBtn.textContent = "📄 PDF Bestätigung";
-        pdfBtn.onclick = () => createPDF(p);
-        box.appendChild(pdfBtn);
-
-        if (lizenz === "pro" || lizenz === "premium") {
-          const reinvestBtn = document.createElement("button");
-          reinvestBtn.className = "btn";
-          reinvestBtn.textContent = "🔁 Reinvest";
-          reinvestBtn.onclick = () => alert("Reinvest durchgeführt für " + p.name);
-          box.appendChild(reinvestBtn);
-        }
+    window.addEventListener("click", function (e) {
+      const menu = document.getElementById("dropdown");
+      if (!e.target.closest(".menu-wrapper")) {
+        menu.style.display = "none";
       }
-
-      container.appendChild(box);
     });
-  }
-</script>
 
+    const container = document.getElementById("plantContainer");
+    const data = JSON.parse(localStorage.getItem("purchases") || "[]");
+    const lizenz = localStorage.getItem("lizenz") || "demo";
+    const licenseInfoBox = document.getElementById("licenseInfo");
+    licenseInfoBox.textContent = "Aktive Lizenz: " + lizenz.toUpperCase();
+
+    function createPDF(pflanze) {
+      const doc = new Blob([`Bestätigung: ${pflanze.name}\nGekauft am: ${new Date(pflanze.date).toLocaleDateString("de-CH")}`], { type: "application/pdf" });
+      const url = URL.createObjectURL(doc);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `${pflanze.name}_Bestätigung.pdf`;
+      link.click();
+    }
+
+    if (data.length > 0) {
+      container.innerHTML = "";
+      data.forEach((p) => {
+        const box = document.createElement("div");
+        box.className = "plant-box";
+
+        const gekauft = new Date(p.date);
+        const heute = new Date();
+        const ende = new Date(p.date);
+        ende.setDate(gekauft.getDate() + p.tage);
+
+        const diff = Math.max(0, Math.ceil((ende - heute) / (1000 * 60 * 60 * 24)));
+        const passed = Math.min(p.tage, Math.ceil((heute - gekauft) / (1000 * 60 * 60 * 24)));
+        const percent = Math.round((passed / p.tage) * 100);
+
+        box.innerHTML = `
+          <h1>🌱 ${p.name}</h1>
+          <p>📅 Gekauft am: ${gekauft.toLocaleDateString("de-CH")}</p>
+          <p>⏳ Noch ${diff} Tage bis zur Ernte</p>
+        `;
+
+        const progress = document.createElement("div");
+        progress.className = "progress-bar";
+
+        const fill = document.createElement("div");
+        fill.className = "progress-fill";
+        fill.style.width = percent + "%";
+
+        if (diff === 0) {
+          fill.style.cursor = "pointer";
+          fill.onclick = () => window.location.href = "payout.html";
+        }
+
+        progress.appendChild(fill);
+        box.appendChild(progress);
+
+        if (diff === 0) {
+          const pdfBtn = document.createElement("button");
+          pdfBtn.className = "btn";
+          pdfBtn.textContent = "📄 PDF Bestätigung";
+          pdfBtn.onclick = () => createPDF(p);
+          box.appendChild(pdfBtn);
+
+          if (lizenz === "pro" || lizenz === "premium") {
+            const reinvestBtn = document.createElement("button");
+            reinvestBtn.className = "btn";
+            reinvestBtn.textContent = "🔁 Reinvest";
+            reinvestBtn.onclick = () => alert("Reinvest durchgeführt für " + p.name);
+            box.appendChild(reinvestBtn);
+          }
+        }
+
+        container.appendChild(box);
+      });
+    }
+  </script>
 </body>
 </html>
