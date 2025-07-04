@@ -6,7 +6,7 @@
   <title>GrowEmpire – Pflanzen</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- jsPDF für PDF-Export -->
+  <!-- jsPDF einbinden -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
   <style>
@@ -220,7 +220,7 @@
       localStorage.setItem("plants", JSON.stringify(plants));
       renderPlants();
 
-      const { jsPDF } = window.jspdf;
+      const jsPDF = window.jspdf.jsPDF;
       const doc = new jsPDF();
 
       const plant = plants[index];
