@@ -57,7 +57,7 @@
     .container {
       padding: 20px;
       padding-left: 80px;
-      margin-top: 320px; /* GrowEmpire sichtbar */
+      margin-top: 360px; /* nach unten versetzt */
     }
 
     .section {
@@ -89,18 +89,19 @@
   <!-- Menü-Button -->
   <button id="menu-btn">☰</button>
 
-  <!-- Seitenmenü -->
+  <!-- Sidebar-Menü -->
   <div id="sidebar">
     <ul>
       <li><a href="dashboard.html">🏠 Dashboard</a></li>
       <li><a href="lizenz.html">📦 Lizenz</a></li>
+      <li><a href="plants.html">🌿 Pflanzen</a></li> <!-- Jetzt sichtbar -->
       <li><a href="partner.html">👥 Partner</a></li>
       <li><a href="settings.html">⚙️ Einstellungen</a></li>
       <li><a href="#" onclick="logout()">🚪 Logout</a></li>
     </ul>
   </div>
 
-  <!-- Dashboard Inhalt -->
+  <!-- Dashboard-Inhalt -->
   <div class="container">
     <div class="section">
       <h2><span class="emoji">🕹️</span>Demo Version</h2>
@@ -110,7 +111,7 @@
     </div>
 
     <div class="section">
-      <h2><span class="emoji">🌿</span>Pflanzenübersicht</h2>
+      <h2><span class="emoji">🌱</span>Pflanzenübersicht</h2>
       <p>Aktive Pflanzen: <span id="activePlants">0</span></p>
       <p>Gratispflanzen: <span id="freePlantsText">0</span></p>
       <p>Limit: <span id="plantLimitText">1</span></p>
@@ -132,7 +133,7 @@
       sidebar.style.left = (sidebar.style.left === "0px") ? "-240px" : "0px";
     });
 
-    // Werte laden aus localStorage
+    // Dashboard-Werte laden
     window.addEventListener("DOMContentLoaded", () => {
       const boxLevel = localStorage.getItem("boxLevel") || "demo";
       const plantLimit = localStorage.getItem("plantLimit") || "1";
