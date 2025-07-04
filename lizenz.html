@@ -2,21 +2,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lizenz & Upgrades – GrowEmpire</title>
+  <title>Lizenz kaufen – GrowEmpire</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
       background: url('assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
+      margin: 0;
+      font-family: Arial, sans-serif;
       color: #fff;
     }
     .menu-toggle {
       position: absolute;
       top: 20px;
       left: 20px;
-      background-color: #0f0;
+      background-color: #00ff90;
       padding: 10px;
       border-radius: 6px;
       cursor: pointer;
@@ -34,7 +34,7 @@
     }
     .menu-content a {
       display: block;
-      color: #0f0;
+      color: #00ff90;
       text-decoration: none;
       padding: 5px 0;
     }
@@ -43,12 +43,12 @@
       display: block;
     }
     .box-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      max-width: 1200px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      max-width: 800px;
       margin: 120px auto 50px;
-      padding: 20px;
+      padding: 0 20px;
     }
     .box {
       border: 2px solid #00ff90;
@@ -59,7 +59,10 @@
     }
     .box h2 {
       color: #00ff90;
-      margin-bottom: 10px;
+    }
+    .box p,
+    .box li {
+      margin: 5px 0;
     }
     .box ul {
       list-style: none;
@@ -79,60 +82,47 @@
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
-      text-align: center;
     }
   </style>
 </head>
-<body>
-  <div class="menu-toggle">☰</div>
-  <div class="menu-content">
-    <a href="dashboard.html">📊 Dashboard</a>
-    <a href="plants.html">🌱 Pflanzen kaufen</a>
-    <a href="lizenz.html">💼 Lizenz & Boxen</a>
-    <a href="partner.html">🤝 Partner</a>
-    <a href="settings.html">⚙️ Einstellungen</a>
-    <a href="index.html">🚪 Logout</a>
-  </div>  <div class="box-container">
-    <!-- Basic Lizenz -->
-    <div class="box">
-      <h2>💼 Basic Lizenz</h2>
-      <p><strong>CHF 49.– einmalig</strong></p>
-      <ul>
-        <li>1 m² Anbaufläche</li>
-        <li>1 Gratis-Pflanze im Wert von CHF 200.–</li>
-        <li>20 % Ertrag auf Gratispflanze</li>
-        <li>Zugang zu Dashboard & Statistik</li>
-        <li>Kein Referral-Bonus</li>
-      </ul>
-      <button class="buy-btn">Lizenz kaufen</button>
-    </div><!-- Pro Box -->
-<div class="box">
-  <h2>📦 Pro Box</h2>
-  <p><strong>CHF 199.– (6 Monate inkl. Lizenz)</strong></p>
-  <ul>
-    <li>5 m² Anbaufläche</li>
-    <li>20 % Ertrag</li>
-    <li>Referral-Bonus: 10 % / 3 %</li>
-    <li>Reinvest-System aktiv</li>
-    <li>Bonusaktionen</li>
-  </ul>
-  <button class="buy-btn">Pro Box aktivieren</button>
-</div>
-
-<!-- Premium Box -->
-<div class="box">
-  <h2>💎 Premium Box</h2>
-  <p><strong>CHF 299.– (12 Monate inkl. Lizenz)</strong></p>
-  <ul>
-    <li>Unbegrenzte Anbaufläche</li>
-    <li>30 % Ertrag</li>
-    <li>Referral-Bonus: 10 % / 5 % / 3 % / 1 %</li>
-    <li>Exklusive Sorten</li>
-    <li>Reinvest-Cashback bis 10 %</li>
-  </ul>
-  <button class="buy-btn">Premium starten</button>
-</div>
-
-  </div>
-</body>
+<body><!-- ☰ Menü --><div class="menu-toggle">☰</div>
+<div class="menu-content">
+  <a href="dashboard.html">📊 Dashboard</a>
+  <a href="plants.html">🌱 Pflanzen kaufen</a>
+  <a href="lizenz.html">💼 Lizenz</a>
+  <a href="partner.html">🤝 Partner</a>
+  <a href="settings.html">⚙️ Einstellungen</a>
+  <a href="index.html">🚪 Logout</a>
+</div><div class="box-container">  <!-- BASIC Lizenz -->  <div class="box">
+    <h2>Basic Lizenz – CHF 49.–</h2>
+    <ul>
+      <li>Zugang zum Backoffice</li>
+      <li>1 Gratispflanze (im Wert von CHF 200.–)</li>
+      <li>1 Pflanze max.</li>
+      <li>20 % Ertrag (nur auf Pflanze)</li>
+      <li>Demo-Funktion wird deaktiviert</li>
+    </ul>
+    <button class="buy-btn">Basic Lizenz kaufen</button>
+  </div>  <!-- PRO Box -->  <div class="box">
+    <h2>Pro Box – CHF 199.–</h2>
+    <ul>
+      <li>Nur mit Basic Lizenz nutzbar</li>
+      <li>6 Pflanzenfläche</li>
+      <li>20 % Ertrag</li>
+      <li>Ref-Bonus: 10 % / 3 %</li>
+      <li>Reinvest-Funktion</li>
+    </ul>
+    <button class="buy-btn">Pro Box kaufen</button>
+  </div>  <!-- PREMIUM Box -->  <div class="box">
+    <h2>Premium Box – CHF 299.–</h2>
+    <ul>
+      <li>Lizenz inklusive</li>
+      <li>Unbegrenzte Fläche</li>
+      <li>2 Gratispflanzen</li>
+      <li>30 % Ertrag</li>
+      <li>Ref-Bonus: 10 % / 5 % / 3 % / 1 %</li>
+      <li>Voller Zugriff & Support</li>
+    </ul>
+    <button class="buy-btn">Premium Box kaufen</button>
+  </div></div></body>
 </html>
