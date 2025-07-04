@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pflanzen kaufen – GrowEmpire</title>
+  <title>GrowEmpire – Pflanzen kaufen</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -11,61 +11,54 @@
       font-family: 'Inter', sans-serif;
       background: url('./assets/background.jpg') no-repeat center center fixed;
       background-size: cover;
-      color: white;
+      color: #00ff88;
     }
 
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 1.5rem;
-      background: rgba(0, 0, 0, 0.6);
-    }
-
-    .topbar .title {
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-    }
-
-    .topbar .title img {
-      height: 20px;
-      margin-right: 8px;
-    }
-
-    .menu-button {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 24px;
+    .menu-icon {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(0, 255, 136, 0.1);
+      border: 2px solid #00ff88;
+      color: #00ff88;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 20px;
       cursor: pointer;
+      z-index: 999;
     }
 
     h1 {
       text-align: center;
-      font-size: 2.5rem;
-      margin-top: 1rem;
+      margin-top: 80px;
+      font-size: 2.8rem;
+      color: #00ff88;
+      text-shadow: 0 0 10px #00ff88;
     }
 
     .plant-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 1.5rem;
       padding: 2rem;
-      max-width: 1000px;
+      max-width: 1200px;
       margin: 0 auto;
     }
 
     .plant-card {
       background: rgba(0, 0, 0, 0.6);
+      border: 2px solid #00ff88;
       border-radius: 12px;
-      padding: 1rem;
       text-align: center;
+      padding: 1rem;
+      color: white;
+      box-shadow: 0 0 10px #00ff88;
       transition: transform 0.2s;
     }
 
     .plant-card:hover {
       transform: scale(1.03);
+      box-shadow: 0 0 20px #00ff88;
     }
 
     .plant-card img {
@@ -77,64 +70,68 @@
 
     .plant-name {
       font-weight: bold;
+      font-size: 1.1rem;
       margin-top: 0.5rem;
+      color: #00ff88;
     }
 
-    .plant-status {
-      margin-top: 0.3rem;
+    .plant-details {
       font-size: 0.9rem;
-      background: #444;
-      padding: 0.3rem 0.6rem;
-      border-radius: 6px;
-      display: inline-block;
+      margin: 0.3rem 0;
+      color: #ccc;
+    }
+
+    .buy-button {
+      margin-top: 0.8rem;
+      background: #00ff88;
+      color: black;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .buy-button:hover {
+      background: #00cc66;
     }
   </style>
 </head>
 <body>
 
-  <!-- Topbar mit Titel & Menü -->
-  <div class="topbar">
-    <div class="title">
-      <img src="./assets/leaf-icon.png" alt="Leaf Icon">
-      Pflanzen kaufen
-    </div>
-    <button class="menu-button" onclick="toggleMenu()">⋮</button>
-  </div>
+  <!-- 3-Punkte-Menü -->
+  <div class="menu-icon" onclick="toggleMenu()">☰</div>
 
-  <!-- Überschrift -->
   <h1>GrowEmpire</h1>
 
-  <!-- Pflanzen-Grid -->
   <div class="plant-grid">
     <div class="plant-card">
-      <img src="./assets/sativa.jpg" alt="Sativa">
-      <div class="plant-name">Sativa</div>
-      <div class="plant-status">Gekauft</div>
+      <img src="./assets/blue-dream.jpg" alt="Blue Dream">
+      <div class="plant-name">Blue Dream</div>
+      <div class="plant-details">Dauer: 90 Tage<br>Preis: CHF 200.–</div>
+      <button class="buy-button">Kaufen</button>
     </div>
 
     <div class="plant-card">
-      <img src="./assets/haze.jpg" alt="Haze">
-      <div class="plant-name">Haze</div>
-      <div class="plant-status">Gekauft</div>
+      <img src="./assets/amnesia-gold.jpg" alt="Amnesia Gold">
+      <div class="plant-name">Amnesia Gold</div>
+      <div class="plant-details">Dauer: 90 Tage<br>Preis: CHF 230.–</div>
+      <button class="buy-button">Kaufen</button>
     </div>
 
     <div class="plant-card">
-      <img src="./assets/ogkush.jpg" alt="OG Kush">
-      <div class="plant-name">OG Kush</div>
-      <div class="plant-status">Gekauft</div>
+      <img src="./assets/green-poison.jpg" alt="Green Poison">
+      <div class="plant-name">Green Poison</div>
+      <div class="plant-details">Dauer: 75 Tage<br>Preis: CHF 190.–</div>
+      <button class="buy-button">Kaufen</button>
     </div>
 
-    <div class="plant-card">
-      <img src="./assets/kush2.jpg" alt="Kush 2">
-      <div class="plant-name">Kush 2</div>
-      <div class="plant-status">Gekauft</div>
-    </div>
+    <!-- Weitere Karten kannst du einfach duplizieren -->
   </div>
 
-  <!-- Optionales Dropdown-Menü -->
   <script>
     function toggleMenu() {
-      alert("Menü geöffnet – hier kannst du z. B. Logout, Hilfe oder Einstellungen einbauen.");
+      alert("Menü geöffnet – hier kommen später Logout, Dashboard usw. rein.");
     }
   </script>
 
