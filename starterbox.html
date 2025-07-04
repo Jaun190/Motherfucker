@@ -55,16 +55,16 @@
     }
 
     .box {
-      border: 2px solid #0ff90;
+      border: 2px solid #00ff90;
       border-radius: 20px;
       margin-bottom: 40px;
       background-color: rgba(0, 0, 0, 0.6);
       padding: 20px;
-      box-shadow: 0 0 20px #0ff90;
+      box-shadow: 0 0 20px #00ff90;
     }
 
     .box h2 {
-      color: #0ff90;
+      color: #00ff90;
       margin-bottom: 10px;
     }
 
@@ -78,13 +78,13 @@
     }
 
     .box li:before {
-      content: "🌿";
+      content: "🟢";
       margin-right: 8px;
     }
 
     .buy-btn {
       display: block;
-      background-color: #0ff90;
+      background-color: #00ff90;
       color: #000;
       padding: 12px;
       border: none;
@@ -104,23 +104,23 @@
 </head>
 <body>
 
-<!-- 🍔 Menü -->
+<!-- Menü -->
 <div class="menu-toggle">☰</div>
 <div class="menu-content">
   <a href="dashboard.html">📊 Dashboard</a>
-  <a href="plants.html">🌱 Pflanzen kaufen</a>
+  <a href="plants.html">🌿 Pflanzen kaufen</a>
   <a href="starterbox.html">📦 Starterbox</a>
-  <a href="partner.html">👥 Partner</a>
+  <a href="partner.html">🧑‍🤝‍🧑 Partner</a>
   <a href="settings.html">⚙️ Einstellungen</a>
-  <a href="index.html">🚪 Logout</a>
+  <a href="index.html">🔒 Logout</a>
 </div>
 
-<!-- 📦 Boxen -->
+<!-- Boxen -->
 <div class="box-container">
 
   <!-- PRO BOX -->
   <div class="box" data-box="pro">
-    <h2>🥈 Pro Box</h2>
+    <h2>📦 Pro Box</h2>
     <p><strong>CHF 150.–</strong> – für 6 Monate</p>
     <ul>
       <li>2 m² Anbaufläche</li>
@@ -134,7 +134,7 @@
 
   <!-- PREMIUM BOX -->
   <div class="box" data-box="premium">
-    <h2>🥇 Premium Box</h2>
+    <h2>🎁 Premium Box</h2>
     <p><strong>CHF 199.–</strong> – für 12 Monate</p>
     <ul>
       <li>3 m² Anbaufläche</li>
@@ -148,43 +148,7 @@
 
 </div>
 
-<script>
-  // Speichern
-  function getBoughtBoxes() {
-    return JSON.parse(localStorage.getItem('user_boxes')) || [];
-  }
-
-  function saveBox(name) {
-    const bought = getBoughtBoxes();
-    if (!bought.includes(name)) {
-      bought.push(name);
-      localStorage.setItem('user_boxes', JSON.stringify(bought));
-    }
-  }
-
-  // Klick-Event
-  document.querySelectorAll('.buy-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const box = btn.closest('.box').dataset.box;
-      saveBox(box);
-      btn.textContent = "Gekauft";
-      btn.classList.add("disabled");
-      btn.disabled = true;
-    });
-  });
-
-  // Beim Laden prüfen
-  const bought = getBoughtBoxes();
-  document.querySelectorAll('.box').forEach(box => {
-    const name = box.dataset.box;
-    if (bought.includes(name)) {
-      const btn = box.querySelector('.buy-btn');
-      btn.textContent = "Gekauft";
-      btn.classList.add("disabled");
-      btn.disabled = true;
-    }
-  });
-</script>
-
+<!-- SCRIPT -->
+<script src="starterbox.js"></script>
 </body>
 </html>
