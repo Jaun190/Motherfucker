@@ -11,7 +11,7 @@
       font-family: 'Inter', sans-serif;
       background: url('./assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
-      color: #00ff88;
+      color: white;
     }
 
     .topbar {
@@ -56,7 +56,6 @@
       padding: 0.5rem 0;
       min-width: 200px;
       box-shadow: 0 0 12px #00ff88;
-      animation: fadeIn 0.2s ease-out;
       z-index: 999;
     }
 
@@ -69,16 +68,10 @@
       text-decoration: none;
       font-weight: bold;
       font-size: 1rem;
-      transition: background 0.2s;
     }
 
     .dropdown-menu a:hover {
       background: rgba(0, 255, 136, 0.08);
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-5px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     .dashboard-content {
@@ -89,53 +82,66 @@
       margin-right: auto;
     }
 
-    .dashboard-box {
+    .plant-box {
       background: rgba(0, 0, 0, 0.75);
       border: 2px solid #00ff88;
       border-radius: 16px;
-      padding: 2rem;
+      padding: 1.5rem;
       box-shadow: 0 0 12px #00ff88;
-      color: white;
-      text-align: center;
     }
 
-    .dashboard-box h1 {
-      font-size: 2rem;
+    .plant-box h1 {
+      font-size: 1.8rem;
       margin-bottom: 1rem;
+      color: #00ff88;
     }
 
-    .dashboard-box p {
-      font-size: 1.1rem;
+    .plant-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    .plant-list li {
+      margin-bottom: 0.7rem;
+      background: rgba(0, 255, 136, 0.08);
+      padding: 10px;
+      border-radius: 8px;
+      border-left: 4px solid #00ff88;
+    }
+
+    .no-plants {
       color: #ccc;
+      font-style: italic;
     }
   </style>
 </head>
 <body>
 
-  <!-- Topbar mit Menü -->
+  <!-- Menü -->
   <div class="topbar">
     <div class="menu-wrapper">
       <div class="menu-icon" onclick="toggleMenu()">☰</div>
       <div class="dropdown-menu" id="dropdown">
-        <a href="dashboard.html"><span>🧠</span> Dashboard</a>
-        <a href="plants.html"><span>🧬</span> Pflanzen</a>
-        <a href="partner.html"><span>🤝</span> Partner</a>
-        <a href="lizenz.html"><span>🪪</span> Lizenz</a>
-        <a href="settings.html"><span>⚙️</span> Einstellungen</a>
-        <a href="logout.html"><span>📕</span> Logout</a>
+        <a href="dashboard.html">🧠 Dashboard</a>
+        <a href="plants.html">🧬 Pflanzen</a>
+        <a href="partner.html">🤝 Partner</a>
+        <a href="lizenz.html">🪪 Lizenz</a>
+        <a href="settings.html">⚙️ Einstellungen</a>
+        <a href="logout.html">📕 Logout</a>
       </div>
     </div>
   </div>
 
-  <!-- Dashboard-Inhalt -->
+  <!-- Dashboard Inhalt -->
   <div class="dashboard-content">
-    <div class="dashboard-box">
-      <h1>Willkommen bei GrowEmpire</h1>
-      <p>Dein Grow- und Partner-Dashboard ist aktiv. Hier siehst du bald deine Lizenz, deine Pflanzen, dein Team und deine Einnahmen.</p>
+    <div class="plant-box">
+      <h1>🌱 Gekaufte Pflanzen</h1>
+      <ul class="plant-list" id="dashboardPlants"></ul>
     </div>
   </div>
 
-  <!-- Menü-Logik -->
+  <!-- JS -->
   <script>
     function toggleMenu() {
       const menu = document.getElementById('dropdown');
@@ -148,6 +154,22 @@
         menu.style.display = 'none';
       }
     });
+
+    // Pflanzen anzeigen
+    const list = document.getElementById("dashboardPlants");
+    const savedPlants = JSON.parse(localStorage.getItem("plants") || "[]");
+
+    if (savedPlants.length === 0 || savedPlants.every(p => !p.bought)) {
+      list.innerHTML = `<li class="no-plants">Keine Pflanzen gekauft.</li>`;
+    } else {
+      savedPlants.forEach(p => {
+        if (p.bought) {
+          const item = document.createElement("li");
+          item.innerText = `✅ ${p.name} – ${p.duration} Tage – CHF ${p.price}.–`;
+          list.appendChild(item);
+        }
+      });
+    }
   </script>
 
 </body>
