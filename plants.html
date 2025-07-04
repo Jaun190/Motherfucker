@@ -2,161 +2,176 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GrowEmpire - Pflanzen</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GrowEmpire – Pflanzen</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: Arial, sans-serif;
       background: url('assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
-      color: white;
+      color: #0f0;
     }
-    .topbar {
-      display: flex;
-      align-items: center;
-      padding: 1rem;
-      background-color: rgba(0, 0, 0, 0.6);
-    }
+
     .menu-btn {
-      font-size: 1.5rem;
-      cursor: pointer;
-      background: none;
-      border: 2px solid #00ff99;
-      border-radius: 10px;
-      color: #00ff99;
-      padding: 6px 12px;
-    }
-    .menu {
       position: absolute;
-      top: 60px;
+      top: 20px;
       left: 20px;
-      background: rgba(0, 0, 0, 0.9);
-      border: 2px solid #00ff99;
-      border-radius: 12px;
-      padding: 10px 20px;
-      display: none;
-      flex-direction: column;
-      gap: 12px;
-      z-index: 999;
+      background: none;
+      border: 2px solid #0f0;
+      padding: 10px;
+      border-radius: 10px;
+      cursor: pointer;
     }
+
+    .menu {
+      display: none;
+      position: absolute;
+      top: 70px;
+      left: 20px;
+      background-color: #000;
+      border: 2px solid #0f0;
+      border-radius: 10px;
+      padding: 10px;
+      z-index: 1000;
+    }
+
     .menu a {
-      color: #00ff99;
+      display: block;
+      color: #0f0;
+      padding: 8px 0;
       text-decoration: none;
       font-weight: bold;
-      font-size: 1.1rem;
     }
+
     .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      padding: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding-top: 100px;
     }
-    .card {
-      background: rgba(0, 0, 0, 0.6);
-      border: 2px solid #00ff99;
-      border-radius: 14px;
+
+    .pflanze {
+      background-color: rgba(0, 0, 0, 0.85);
+      border: 2px solid #0f0;
+      border-radius: 15px;
+      margin: 15px;
+      padding: 15px;
+      width: 250px;
       text-align: center;
-      padding: 1rem;
-      box-shadow: 0 0 18px #00ff99;
+      box-shadow: 0 0 15px #0f0;
     }
-    .card img {
-      width: 100%;
-      max-height: 220px;
-      object-fit: contain;
+
+    .pflanze img {
+      max-width: 100%;
+      height: auto;
       border-radius: 10px;
-      margin-bottom: 1rem;
+      margin-bottom: 10px;
     }
-    .card h2 {
-      margin: 0.5rem 0 0.2rem;
-      color: #00ff99;
-    }
-    .card p {
-      margin: 0.2rem;
-    }
-    .buy-btn {
-      background: #00ff99;
-      color: black;
+
+    .pflanze button {
+      background-color: #00ff66;
       border: none;
-      padding: 0.5rem 1.2rem;
-      font-weight: bold;
+      padding: 10px 15px;
       border-radius: 8px;
-      margin-top: 0.8rem;
+      color: #000;
+      font-weight: bold;
       cursor: pointer;
+      margin-top: 10px;
     }
-    .buy-btn:disabled {
-      background: #009944;
-      color: white;
-      cursor: default;
+
+    .gekauft-btn {
+      background-color: #0f0 !important;
+      color: #000 !important;
     }
   </style>
 </head>
 <body>
-  <div class="topbar">
-    <button class="menu-btn" onclick="toggleMenu()">
-      <i class="fas fa-bars"></i>
-    </button>
-  </div>
+
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
   <div class="menu" id="menu">
-    <a href="dashboard.html"><i class="fas fa-brain"></i> Dashboard</a>
-    <a href="plants.html"><i class="fas fa-seedling"></i> Pflanzen</a>
-    <a href="partner.html"><i class="fas fa-handshake"></i> Partner</a>
-    <a href="lizenz.html"><i class="fas fa-id-card"></i> Lizenz</a>
-    <a href="settings.html"><i class="fas fa-gear"></i> Einstellungen</a>
-    <a href="#"><i class="fas fa-door-closed"></i> Logout</a>
+    <a href="dashboard.html">📊 Dashboard</a>
+    <a href="plants.html">🧬 Pflanzen</a>
+    <a href="partner.html">🤝 Partner</a>
+    <a href="lizenz.html">💳 Lizenz</a>
+    <a href="settings.html">⚙️ Einstellungen</a>
+    <a href="#" onclick="logout()">📕 Logout</a>
   </div>
 
-  <div class="grid" id="plantGrid"></div>
+  <div class="grid" id="pflanzenContainer"></div>
 
   <script>
     const pflanzen = [
-      { name: 'Sativa', dauer: 75, preis: 190, bild: 'assets/sativa1.png' },
-      { name: 'Haze', dauer: 80, preis: 180, bild: 'assets/haze1.png' },
-      { name: 'Kush 2', dauer: 90, preis: 200, bild: 'assets/kush2.png' },
-      { name: 'OG Kush', dauer: 85, preis: 210, bild: 'assets/ogkush.png' },
-      { name: 'Kiffen', dauer: 70, preis: 195, bild: 'assets/kiffen.png' },
+      { name: "Sativa", tage: 75, preis: 190, bild: "assets/sativa1.png" },
+      { name: "Haze", tage: 80, preis: 180, bild: "assets/haze1.png" },
+      { name: "Kush 2", tage: 90, preis: 200, bild: "assets/kush2.png" },
+      { name: "OG Kush", tage: 85, preis: 210, bild: "assets/ogkush.png" },
     ];
 
-    const gekauft = JSON.parse(localStorage.getItem('gekauft') || '[]');
-
-    function speichern(pflanze) {
-      gekauft.push({
-        name: pflanze.name,
-        datum: new Date().toLocaleDateString('de-CH'),
-        dauer: pflanze.dauer
-      });
-      localStorage.setItem('gekauft', JSON.stringify(gekauft));
-      render();
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.style.display = (menu.style.display === "block") ? "none" : "block";
     }
 
-    function render() {
-      const grid = document.getElementById('plantGrid');
-      grid.innerHTML = '';
+    function logout() {
+      localStorage.clear();
+      alert("Erfolgreich ausgeloggt.");
+      window.location.href = "index.html";
+    }
+
+    function kaufen(name, tage) {
+      let gekauft = JSON.parse(localStorage.getItem("purchases") || "[]");
+      if (!gekauft.find(p => p.name === name)) {
+        gekauft.push({
+          name,
+          date: new Date().toISOString(),
+          tage
+        });
+        localStorage.setItem("purchases", JSON.stringify(gekauft));
+        window.location.reload();
+      }
+    }
+
+    function renderPflanzen() {
+      const container = document.getElementById("pflanzenContainer");
+      const gekauft = JSON.parse(localStorage.getItem("purchases") || "[]");
+      const gekauftSet = new Set(gekauft.map(p => p.name));
 
       pflanzen.forEach(p => {
-        const gekauftSchon = gekauft.find(g => g.name === p.name);
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-          <img src="${p.bild}" alt="${p.name}" />
-          <h2>${p.name}</h2>
-          <p>Dauer: ${p.dauer} Tage</p>
-          <p>Preis: CHF ${p.preis}.–</p>
-          <button class="buy-btn" onclick="speichern(${JSON.stringify(p).replace(/\"/g, '&quot;')})" ${gekauftSchon ? 'disabled' : ''}>
-            ${gekauftSchon ? '✅ Gekauft' : 'Kaufen'}
-          </button>
-        `;
-        grid.appendChild(card);
+        const div = document.createElement("div");
+        div.className = "pflanze";
+        div.setAttribute("data-name", p.name);
+
+        const img = document.createElement("img");
+        img.src = p.bild;
+        img.alt = p.name;
+
+        const name = document.createElement("h2");
+        name.textContent = p.name;
+
+        const info = document.createElement("p");
+        info.innerHTML = `Dauer: ${p.tage} Tage<br>Preis: CHF ${p.preis}.–`;
+
+        const btn = document.createElement("button");
+        if (gekauftSet.has(p.name)) {
+          btn.textContent = "✅ Gekauft";
+          btn.className = "gekauft-btn";
+          btn.disabled = true;
+        } else {
+          btn.textContent = "Kaufen";
+          btn.onclick = () => kaufen(p.name, p.tage);
+        }
+
+        div.appendChild(img);
+        div.appendChild(name);
+        div.appendChild(info);
+        div.appendChild(btn);
+
+        container.appendChild(div);
       });
     }
 
-    function toggleMenu() {
-      const menu = document.getElementById('menu');
-      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-    }
-
-    render();
+    renderPflanzen();
   </script>
 </body>
 </html>
