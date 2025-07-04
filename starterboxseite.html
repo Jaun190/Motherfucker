@@ -41,7 +41,7 @@
     }
 
     .box li:before {
-      content: "🟢";
+      content: "🌱";
       margin-right: 8px;
     }
 
@@ -66,52 +66,36 @@
   </style>
 </head>
 <body>
+  <div class="box-container">
+    <!-- PRO BOX -->
+    <div class="box" data-box="pro">
+      <h2>📦 Pro Box</h2>
+      <p><strong>CHF 150.–</strong> – für 6 Monate</p>
+      <ul>
+        <li>2 m² Anbaufläche</li>
+        <li>Exklusive Sorten freigeschaltet</li>
+        <li>Reinvest-Bonus</li>
+        <li>+20 % Ertrag auf Pflanzen</li>
+        <li>Referral-Link aktiv</li>
+      </ul>
+      <button class="buy-btn">Pro Box kaufen</button>
+    </div>
 
-<!-- Menü -->
-<div class="menu-toggle">≡</div>
-<div class="menu-content">
-  <a href="dashboard.html">📊 Dashboard</a>
-  <a href="plants.html">🌿 Pflanzen kaufen</a>
-  <a href="starterbox.html">📦 Starterbox</a>
-  <a href="partner.html">👥 Partner</a>
-  <a href="settings.html">⚙️ Einstellungen</a>
-  <a href="index.html">🔒 Logout</a>
-</div>
-
-<!-- Boxen -->
-<div class="box-container">
-
-  <!-- PRO BOX -->
-  <div class="box" data-box="pro">
-    <h2>📦 Pro Box</h2>
-    <p><strong>CHF 150.–</strong> – für 6 Monate</p>
-    <ul>
-      <li>2 m² Anbaufläche</li>
-      <li>Exklusive Sorten freigeschaltet</li>
-      <li>Reinvest-Bonus</li>
-      <li>+20 % Ertrag auf Pflanzen</li>
-      <li>Referral-Link aktiv</li>
-    </ul>
-    <button class="buy-btn">Pro Box kaufen</button>
+    <!-- PREMIUM BOX -->
+    <div class="box" data-box="premium">
+      <h2>🎁 Premium Box</h2>
+      <p><strong>CHF 199.–</strong> – für 12 Monate</p>
+      <ul>
+        <li>3 m² Anbaufläche</li>
+        <li>Alle Sorten & Module freigeschaltet</li>
+        <li>Reinvest & Bonusaktionen</li>
+        <li>+30 % Ertrag auf Pflanzen</li>
+        <li>Extra Support</li>
+      </ul>
+      <button class="buy-btn">Premium Box kaufen</button>
+    </div>
   </div>
 
-  <!-- PREMIUM BOX -->
-  <div class="box" data-box="premium">
-    <h2>🎁 Premium Box</h2>
-    <p><strong>CHF 199.–</strong> – für 12 Monate</p>
-    <ul>
-      <li>3 m² Anbaufläche</li>
-      <li>Alle Sorten & Module freigeschaltet</li>
-      <li>Reinvest & Bonusaktionen</li>
-      <li>+30 % Ertrag auf Pflanzen</li>
-      <li>Extra Support</li>
-    </ul>
-    <button class="buy-btn">Premium Box kaufen</button>
-  </div>
-
-</div>
-
-<!-- Script -->
-<script src="starterbox.js"></script>
+  <script src="starterbox.js"></script>
 </body>
 </html>
