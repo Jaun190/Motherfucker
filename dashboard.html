@@ -75,11 +75,6 @@
       background: rgba(0, 255, 136, 0.08);
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-5px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     .dashboard-content {
       margin-top: 100px;
       padding: 2rem;
@@ -100,19 +95,60 @@
     }
 
     .plant-box h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #00ff88;
     }
 
     .plant-box p {
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: #ccc;
+    }
+
+    .progress-bar {
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      height: 16px;
+      margin-top: 10px;
+      border: 1px solid #00ff88;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #00ff88, #00cc66);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .license-box {
+      background: rgba(0,0,0,0.5);
+      border: 2px solid #00ff88;
+      padding: 10px 20px;
+      margin: 20px auto;
+      text-align: center;
+      color: #00ff88;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #00ff88;
+      max-width: 500px;
+    }
+
+    .btn {
+      background-color: #00ff88;
+      border: none;
+      color: black;
+      padding: 8px 16px;
+      margin-top: 10px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-<!-- Menü (EXAKT wie partner.html) -->
+<!-- Menü -->
 <div class="topbar">
   <div class="menu-wrapper">
     <div class="menu-icon" onclick="toggleMenu()">≡</div>
@@ -127,16 +163,19 @@
   </div>
 </div>
 
-<!-- Dashboard Inhalt -->
+<!-- Lizenz-Anzeige -->
+<div class="license-box" id="licenseInfo"></div>
+
+<!-- Pflanzenbereich -->
 <div class="dashboard-content" id="plantContainer">
   <p style="text-align:center;">Keine gekauften Pflanzen.</p>
 </div>
 
-<!-- Menü-Logik -->
+<!-- Logik -->
 <script>
   function toggleMenu() {
     const menu = document.getElementById('dropdown');
-    menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
   }
 
   window.addEventListener('click', function (e) {
@@ -145,6 +184,65 @@
       menu.style.display = 'none';
     }
   });
+
+  const container = document.getElementById("plantContainer");
+  const data = JSON.parse(localStorage.getItem("purchases") || "[]");
+  const lizenz = localStorage.getItem("lizenz") || "demo";
+  const licenseInfoBox = document.getElementById("licenseInfo");
+  licenseInfoBox.textContent = `Aktive Lizenz: ${lizenz.toUpperCase()}`;
+
+  function createPDF(pflanze) {
+    const doc = new Blob([`Bestätigung: ${pflanze.name}\\nGekauft am: ${new Date(pflanze.date).toLocaleDateString("de-CH")}`], { type: "application/pdf" });
+    const url = URL.createObjectURL(doc);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `${pflanze.name}_Bestätigung.pdf`;
+    link.click();
+  }
+
+  if (data.length > 0) {
+    container.innerHTML = "";
+    data.forEach(p => {
+      const box = document.createElement("div");
+      box.className = "plant-box";
+
+      const gekauft = new Date(p.date);
+      const ernte = new Date(p.date);
+      ernte.setDate(ernte.getDate() + p.tage);
+      const heute = new Date();
+      const diff = Math.max(0, Math.ceil((ernte - heute) / (1000 * 60 * 60 * 24)));
+      const total = p.tage;
+      const passed = total - diff;
+      const percent = Math.round((passed / total) * 100);
+
+      box.innerHTML = `
+        <h1>🌱 ${p.name}</h1>
+        <p>📅 Gekauft am: ${gekauft.toLocaleDateString("de-CH")}</p>
+        <p>⏳ Noch ${diff} Tage bis zur Ernte</p>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width:${percent}%"></div>
+        </div>
+      `;
+
+      if (diff === 0) {
+        const pdfBtn = document.createElement("button");
+        pdfBtn.className = "btn";
+        pdfBtn.textContent = "📄 PDF Bestätigung";
+        pdfBtn.onclick = () => createPDF(p);
+        box.appendChild(pdfBtn);
+
+        if (lizenz === "pro" || lizenz === "premium") {
+          const reinvestBtn = document.createElement("button");
+          reinvestBtn.className = "btn";
+          reinvestBtn.textContent = "🔁 Reinvest";
+          reinvestBtn.onclick = () => alert("Reinvest durchgeführt für " + p.name);
+          box.appendChild(reinvestBtn);
+        }
+      }
+
+      container.appendChild(box);
+    });
+  }
 </script>
 
 </body>
