@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GrowEmpire – Pflanzen</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- jsPDF für PDF-Export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
   <style>
     body {
       margin: 0;
@@ -74,20 +78,11 @@
       background: rgba(0, 255, 136, 0.08);
     }
 
-    .headline {
-      text-align: center;
-      font-size: 2.5rem;
-      color: #00ff88;
-      text-shadow: 0 0 8px #00ff88;
-      margin-top: 100px;
-      margin-bottom: 2rem;
-    }
-
     .plant-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1.5rem;
-      padding: 2rem;
+      padding: 6rem 2rem 2rem;
       max-width: 1200px;
       margin: auto;
     }
@@ -164,8 +159,7 @@
     </div>
   </div>
 
-  <h1 class="headline">Meine Pflanzen</h1>
-
+  <!-- Pflanzenliste -->
   <div class="plant-grid" id="plantGrid"></div>
 
   <script>
@@ -181,7 +175,6 @@
       }
     });
 
-    // Pflanzenliste
     const plants = [
       { name: "Sativa", price: 190, duration: 75, image: "assets/sativa1.png", bought: false },
       { name: "Haze", price: 180, duration: 80, image: "assets/haze1.png", bought: false },
@@ -191,6 +184,14 @@
     ];
 
     function renderPlants() {
+      const saved = localStorage.getItem("plants");
+      if (saved) {
+        const savedPlants = JSON.parse(saved);
+        savedPlants.forEach((p, i) => {
+          if (plants[i]) plants[i].bought = p.bought;
+        });
+      }
+
       const grid = document.getElementById("plantGrid");
       grid.innerHTML = "";
 
@@ -214,10 +215,33 @@
       });
     }
 
-    function buyPlant(index) {
+    async function buyPlant(index) {
       plants[index].bought = true;
-      alert("✅ Du hast „" + plants[index].name + "“ gekauft!");
+      localStorage.setItem("plants", JSON.stringify(plants));
       renderPlants();
+
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      const plant = plants[index];
+      const now = new Date().toLocaleDateString();
+
+      doc.setFont("helvetica", "bold");
+      doc.setTextColor(0, 255, 136);
+      doc.text("🌱 GrowEmpire – Kaufbeleg", 20, 20);
+      doc.setFontSize(12);
+      doc.setTextColor(0);
+
+      doc.text(`Pflanze: ${plant.name}`, 20, 40);
+      doc.text(`Preis: CHF ${plant.price}.–`, 20, 50);
+      doc.text(`Kaufdatum: ${now}`, 20, 60);
+      doc.text(`Status: Gekauft ✅`, 20, 70);
+
+      doc.setFontSize(10);
+      doc.setTextColor(150);
+      doc.text("Hinweis: Virtueller Grow – Testbeleg, keine echte Ware.", 20, 90);
+
+      doc.save(`Kaufbeleg_${plant.name}_${now.replace(/\./g, '-')}.pdf`);
     }
 
     renderPlants();
