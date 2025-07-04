@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GrowEmpire – Pflanzen kaufen</title>
+  <title>GrowEmpire – Pflanzen</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -14,11 +14,26 @@
       color: #00ff88;
     }
 
-    .menu-wrapper {
+    /* Schwarzer Balken oben */
+    .topbar {
       position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 64px;
+      background: rgba(0, 0, 0, 0.9);
+      border-bottom: 2px solid #00ff88;
+      box-shadow: 0 0 12px #00ff88;
+      z-index: 998;
+    }
+
+    /* Menü links oben */
+    .menu-wrapper {
+      position: relative;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding-left: 20px;
     }
 
     .menu-icon {
@@ -27,35 +42,48 @@
       color: #00ff88;
       padding: 8px 12px;
       border-radius: 10px;
-      font-size: 20px;
+      font-size: 22px;
       cursor: pointer;
+      box-shadow: 0 0 10px #00ff88;
     }
 
     .dropdown-menu {
       display: none;
       position: absolute;
-      top: 50px;
-      left: 0;
-      background: rgba(0, 0, 0, 0.85);
-      border: 1px solid #00ff88;
-      border-radius: 10px;
+      top: 60px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.95);
+      border: 2px solid #00ff88;
+      border-radius: 12px;
       padding: 0.5rem 0;
-      min-width: 150px;
-      box-shadow: 0 0 10px #00ff88;
+      min-width: 180px;
+      box-shadow: 0 0 12px #00ff88;
+      animation: fadeIn 0.2s ease-out;
+      z-index: 999;
     }
 
     .dropdown-menu a {
-      display: block;
-      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
       color: #00ff88;
       text-decoration: none;
       font-weight: bold;
+      font-size: 1rem;
+      transition: background 0.2s;
     }
 
     .dropdown-menu a:hover {
-      background: rgba(0, 255, 136, 0.1);
+      background: rgba(0, 255, 136, 0.08);
     }
 
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Pflanzenkarten */
     .plant-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -119,17 +147,21 @@
 </head>
 <body>
 
-  <!-- Menü mit Dropdown -->
-  <div class="menu-wrapper">
-    <div class="menu-icon" onclick="toggleMenu()">☰</div>
-    <div class="dropdown-menu" id="dropdown">
-      <a href="dashboard.html">📊 Dashboard</a>
-      <a href="profil.html">👤 Mein Profil</a>
-      <a href="logout.html">🚪 Logout</a>
+  <!-- Obere schwarze Menüleiste -->
+  <div class="topbar">
+    <div class="menu-wrapper">
+      <div class="menu-icon" onclick="toggleMenu()">☰</div>
+      <div class="dropdown-menu" id="dropdown">
+        <a href="plants.html"><span>🧬</span> Pflanzen</a>
+        <a href="partner.html"><span>🤝</span> Partner</a>
+        <a href="lizenz.html"><span>🪪</span> Lizenz</a>
+        <a href="settings.html"><span>⚙️</span> Einstellungen</a>
+        <a href="logout.html"><span>🚪</span> Logout</a>
+      </div>
     </div>
   </div>
 
-  <!-- Pflanzen-Grid -->
+  <!-- Pflanzenliste -->
   <div class="plant-grid">
     <div class="plant-card">
       <img src="./assets/blue-dream.jpg" alt="Blue Dream">
@@ -156,11 +188,10 @@
   <script>
     function toggleMenu() {
       const menu = document.getElementById('dropdown');
-      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+      menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
     }
 
-    // Menü schließen, wenn man außerhalb klickt
-    window.addEventListener('click', function(e) {
+    window.addEventListener('click', function (e) {
       const menu = document.getElementById('dropdown');
       if (!e.target.closest('.menu-wrapper')) {
         menu.style.display = 'none';
