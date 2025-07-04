@@ -3,124 +3,115 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard</title>
+  <title>Dashboard – GrowEmpire</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: url("img/dashboard.png") no-repeat center center fixed;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('dashboard.png') no-repeat center center fixed;
       background-size: cover;
-      color: white;
+      color: #00ffcc;
     }
 
-    .menu-button {
+    .menu-btn {
       position: absolute;
       top: 20px;
       left: 20px;
-      z-index: 1000;
-      background: none;
-      border: none;
-      font-size: 28px;
-      color: #00ffcc;
+      font-size: 30px;
       cursor: pointer;
+      z-index: 1000;
     }
 
     .menu {
       display: none;
+      flex-direction: column;
       position: absolute;
       top: 60px;
       left: 20px;
-      background: rgba(0, 0, 0, 0.9);
-      padding: 10px;
-      border-radius: 12px;
-      z-index: 999;
+      background-color: #111;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px #00ffcc;
+      z-index: 1000;
     }
 
     .menu a {
-      display: block;
       color: #00ffcc;
       text-decoration: none;
-      padding: 8px 0;
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
       font-size: 18px;
     }
 
-    .container {
-      margin-top: 100px;
-      padding: 20px;
+    .menu a:hover {
+      color: #ffffff;
     }
 
-    .plant-box {
-      background: rgba(0, 0, 0, 0.85);
+    .plant-card {
+      background-color: rgba(0, 0, 0, 0.85);
       border: 2px solid #00ffcc;
-      border-radius: 12px;
+      border-radius: 15px;
       padding: 15px;
-      margin-bottom: 20px;
-      box-shadow: 0 0 12px #00ffcc;
+      margin: 20px;
+      box-shadow: 0 0 15px #00ffcc;
     }
 
-    .plant-box h2 {
-      margin: 0 0 10px;
-      color: #00ffcc;
+    .plant-name {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #00ff99;
     }
 
-    .no-plants {
-      text-align: center;
-      margin-top: 100px;
-      font-size: 18px;
-      color: #00ffcc;
+    .info {
+      font-size: 16px;
+      margin: 5px 0;
     }
   </style>
 </head>
 <body>
-
-  <button class="menu-button" onclick="toggleMenu()">☰</button>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
   <div class="menu" id="menu">
     <a href="index.html">🏠 Startseite</a>
     <a href="plants.html">🌱 Pflanzen kaufen</a>
     <a href="dashboard.html">📊 Dashboard</a>
-    <a href="lizens.html">🪪 Lizenz</a>
+    <a href="lizenz.html">🪪 Lizenz</a>
     <a href="partner.html">🤝 Partner</a>
   </div>
 
-  <div class="container" id="dashboardContainer">
-    <p class="no-plants">Keine gekauften Pflanzen.</p>
-  </div>
+  <div id="plantContainer" style="margin-top: 80px;"></div>
 
   <script>
     function toggleMenu() {
       const menu = document.getElementById("menu");
-      menu.style.display = menu.style.display === "block" ? "none" : "block";
+      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
     }
 
-    function renderDashboard() {
-      const container = document.getElementById("dashboardContainer");
-      const data = localStorage.getItem("purchasedPlants");
-      if (!data) return;
+    const container = document.getElementById("plantContainer");
+    const plants = JSON.parse(localStorage.getItem("gekauftePflanzen")) || [];
 
-      const plants = JSON.parse(data);
-      if (plants.length === 0) return;
+    if (plants.length === 0) {
+      container.innerHTML = "<p style='text-align:center;'>Keine gekauften Pflanzen.</p>";
+    } else {
+      plants.forEach(p => {
+        const gekauft = new Date(p.datum);
+        const heute = new Date();
+        const diff = Math.ceil((gekauft.getTime() + (p.dauer * 24 * 60 * 60 * 1000) - heute.getTime()) / (1000 * 60 * 60 * 24));
+        const ernteText = diff <= 0 ? "✅ Bereit zur Ernte!" : `⏳ Noch ${diff} Tage bis zur Ernte`;
 
-      container.innerHTML = "";
-
-      plants.forEach(plant => {
-        const date = new Date(plant.date);
-        const today = new Date();
-        const diff = Math.floor((today - date) / (1000 * 60 * 60 * 24));
-        const rest = plant.duration - diff;
-        const ready = rest <= 0;
-
-        const box = document.createElement("div");
-        box.className = "plant-box";
-        box.innerHTML = `
-          <h2>🌱 ${plant.name}</h2>
-          <p>📅 Gekauft am: ${date.toLocaleDateString("de-CH")}</p>
-          <p>${ready ? '🌾 Bereit zur Ernte!' : `⏳ Noch ${rest} Tage bis zur Ernte`}</p>
+        const card = `
+          <div class="plant-card">
+            <div class="plant-name">🌱 ${p.name}</div>
+            <div class="info">📅 Gekauft am: ${p.datum}</div>
+            <div class="info">${ernteText}</div>
+          </div>
         `;
-        container.appendChild(box);
+        container.innerHTML += card;
       });
     }
-
-    renderDashboard();
   </script>
 </body>
 </html>
