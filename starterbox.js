@@ -11,10 +11,11 @@ supabase.auth.getUser().then(({ data, error }) => {
     window.location.href = "index.html";
   } else {
     currentUser = data.user;
+    checkExistingBox();
   }
 });
 
-document.querySelectorAll(".buy-btn").forEach((btn) => {
+document.querySelectorAll(".buy-btn").forEach(btn => {
   btn.addEventListener("click", async () => {
     const boxType = btn.textContent.includes("Premium") ? "premium" : "pro";
 
@@ -31,3 +32,22 @@ document.querySelectorAll(".buy-btn").forEach((btn) => {
     }
   });
 });
+
+async function checkExistingBox() {
+  const { data, error } = await supabase
+    .from("user_starterbox")
+    .select("starterbox")
+    .eq("user_id", currentUser.id);
+
+  if (error) return;
+
+  const bought = data.map(d => d.starterbox);
+
+  document.querySelectorAll(".buy-btn").forEach(btn => {
+    const type = btn.textContent.includes("Premium") ? "premium" : "pro";
+    if (bought.includes(type)) {
+      btn.textContent = "Gekauft";
+      btn.disabled = true;
+    }
+  });
+}
