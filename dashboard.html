@@ -1,97 +1,131 @@
-<!-- dashboard.html --><!DOCTYPE html><html lang="de">
+<!DOCTYPE html>
+<html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GrowEmpire Dashboard</title>
-  <link href="assets/style.css" rel="stylesheet" />
-  <script defer src="assets/dashboard.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <style>
     body {
-      background: url('assets/dashboard.png') no-repeat center center fixed;
-      background-size: cover;
-      font-family: Arial, sans-serif;
-      color: #fff;
       margin: 0;
-    }
-    .plant-box {
-      background: rgba(0, 0, 0, 0.6);
-      border: 2px solid lime;
-      border-radius: 12px;
-      padding: 15px;
-      margin: 20px;
-      box-shadow: 0 0 15px lime;
-    }
-    .plant-name {
-      font-size: 22px;
+      font-family: Arial, sans-serif;
+      background-image: url('assets/dashboard.png');
+      background-size: cover;
+      background-attachment: fixed;
       color: #00ff99;
+    }
+
+    .menu-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: transparent;
+      border: 2px solid #00ff99;
+      border-radius: 10px;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .menu-icon {
+      font-size: 20px;
+      color: #00ff99;
+    }
+
+    .menu {
+      position: fixed;
+      top: 60px;
+      left: 20px;
+      background-color: #000000cc;
+      border: 2px solid #00ff99;
+      border-radius: 10px;
+      padding: 10px;
+      display: none;
+      z-index: 1000;
+    }
+
+    .menu a {
+      display: block;
+      padding: 8px 12px;
+      color: #00ff99;
+      text-decoration: none;
       font-weight: bold;
     }
-    .reinvest-btn {
-      background: #00ff99;
-      border: none;
-      padding: 8px 14px;
-      color: black;
-      border-radius: 8px;
+
+    .menu a:hover {
+      background-color: #00ff9955;
+    }
+
+    .plant-card {
+      background-color: #000000cc;
+      border: 2px solid #00ff99;
+      border-radius: 15px;
+      margin: 20px;
+      padding: 15px;
+      text-align: left;
+      box-shadow: 0 0 10px #00ff99;
+    }
+
+    .plant-name {
+      font-size: 20px;
       font-weight: bold;
-      margin-top: 8px;
-      cursor: pointer;
+      margin-bottom: 8px;
+    }
+
+    .icon {
+      margin-right: 8px;
     }
   </style>
 </head>
 <body>
-  <!-- Menüleiste -->
-  <div id="menu-container"></div>  <!-- Pflanzenliste -->  <div id="plants-dashboard"></div>  <script>
-    // Lade Menüleiste rein
-    fetch('menu.html')
-      .then(res => res.text())
-      .then(html => document.getElementById('menu-container').innerHTML = html);
 
-    const dashboard = document.getElementById('plants-dashboard');
-    const user = JSON.parse(localStorage.getItem("growUser")) || { license: "demo" };
-    const gekauftePflanzen = JSON.parse(localStorage.getItem("gekauftePflanzen")) || [];
+  <button class="menu-btn" onclick="toggleMenu()">
+    <i class="fas fa-bars menu-icon"></i>
+  </button>
 
-    function renderDashboard() {
-      dashboard.innerHTML = '';
-      const heute = new Date();
+  <div class="menu" id="menu">
+    <a href="dashboard.html"><i class="fas fa-brain icon"></i> Dashboard</a>
+    <a href="plants.html"><i class="fas fa-seedling icon"></i> Pflanzen</a>
+    <a href="partner.html"><i class="fas fa-users icon"></i> Partner</a>
+    <a href="lizenz.html"><i class="fas fa-id-card icon"></i> Lizenz</a>
+    <a href="settings.html"><i class="fas fa-cog icon"></i> Einstellungen</a>
+    <a href="#"><i class="fas fa-door-open icon"></i> Logout</a>
+  </div>
 
-      gekauftePflanzen.forEach((pflanze, index) => {
-        const gekauftAm = new Date(pflanze.gekauftAm);
-        const tageDifferenz = Math.ceil((pflanze.erntedatum - heute.getTime()) / (1000 * 60 * 60 * 24));
-        const istGeerntet = tageDifferenz <= 0;
+  <div id="plantList"></div>
 
-        const box = document.createElement("div");
-        box.className = "plant-box";
-        box.innerHTML = `
-          <div class="plant-name">${pflanze.name}</div>
-          <div>Gekauft am: ${gekauftAm.toLocaleDateString()}</div>
-          <div>${istGeerntet ? "Bereit zur Ernte!" : `Noch ${tageDifferenz} Tage bis zur Ernte`}</div>
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function loadPlants() {
+      const list = document.getElementById('plantList');
+      const purchases = JSON.parse(localStorage.getItem('purchases') || '[]');
+      list.innerHTML = '';
+
+      purchases.forEach(p => {
+        const purchaseDate = new Date(p.date);
+        const today = new Date();
+        const diffTime = Math.max(0, purchaseDate.getTime() + p.days * 86400000 - today.getTime());
+        const daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        const card = document.createElement('div');
+        card.className = 'plant-card';
+
+        card.innerHTML = `
+          <div class="plant-name">🌱 ${p.name}</div>
+          <div><i class="fas fa-calendar-day icon"></i> Gekauft am: ${purchaseDate.toLocaleDateString('de-CH')}</div>
+          <div><i class="fas fa-hourglass-half icon"></i> Noch ${daysLeft} Tage bis zur Ernte</div>
         `;
 
-        if (istGeerntet && ["pro", "premium"].includes(user.license)) {
-          const reinvestBtn = document.createElement("button");
-          reinvestBtn.className = "reinvest-btn";
-          reinvestBtn.innerText = "🌱 Reinvest starten";
-          reinvestBtn.onclick = () => reinvest(index);
-          box.appendChild(reinvestBtn);
-        }
-
-        dashboard.appendChild(box);
+        list.appendChild(card);
       });
     }
 
-    function reinvest(index) {
-      const alte = gekauftePflanzen[index];
-      const neuDatum = new Date();
-      const neuePflanze = {
-        ...alte,
-        gekauftAm: neuDatum.toISOString(),
-        erntedatum: new Date(neuDatum.getTime() + alte.dauer * 24 * 60 * 60 * 1000).getTime()
-      };
-      gekauftePflanzen[index] = neuePflanze;
-      localStorage.setItem("gekauftePflanzen", JSON.stringify(gekauftePflanzen));
-      renderDashboard();
-    }
+    loadPlants();
+  </script>
 
-    renderDashboard();
-  </script></body>
+</body>
 </html>
