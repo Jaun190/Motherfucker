@@ -2,8 +2,8 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <title>Registrieren | Grow Empire</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registrieren | Grow Empire</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -14,12 +14,18 @@
     }
     h1 {
       color: #32cd32;
+      margin-bottom: 10px;
+    }
+    .ref-info, .your-ref {
+      margin: 10px 0 25px;
+      font-weight: bold;
+      color: #00ff99;
     }
     input, button {
       padding: 12px;
       font-size: 16px;
       margin: 10px 0;
-      width: 80%;
+      width: 90%;
       max-width: 400px;
     }
     button {
@@ -29,66 +35,72 @@
       font-weight: bold;
       cursor: pointer;
     }
-    .ref-info {
-      color: #00e090;
-      margin-bottom: 20px;
-      font-weight: bold;
+    .ref-box {
+      background: #002a1d;
+      padding: 10px;
+      border-radius: 10px;
+      word-break: break-all;
     }
   </style>
 </head>
 <body>
+  <h1>Registriere dich bei<br>Grow Empire 🌱</h1>
 
-  <h1>Registriere dich bei Grow Empire 🌱</h1>
-  <div class="ref-info" id="refInfo"></div>
+  <div class="ref-info" id="refInfoBox"></div>
 
-  <form onsubmit="registerUser(event)">
+  <form id="regForm">
     <input type="text" id="username" placeholder="Dein Name" required><br>
     <input type="email" id="email" placeholder="E-Mail" required><br>
     <input type="password" id="password" placeholder="Passwort" required><br>
     <button type="submit">Jetzt registrieren</button>
   </form>
 
+  <div class="your-ref" id="yourRefLinkBox" style="display:none;">
+    Dein Referral-Link:<br>
+    <div class="ref-box" id="yourRefLink"></div>
+  </div>
+
   <script>
-    // Referral aus URL holen und speichern
-    const urlParams = new URLSearchParams(window.location.search);
-    const ref = urlParams.get("ref");
-    if (ref) {
-      localStorage.setItem("referrer", ref);
-    }
+    // Ref aus URL speichern
+    window.onload = () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const ref = urlParams.get("ref");
+      if (ref) {
+        localStorage.setItem("ref", ref);
+        document.getElementById("refInfoBox").innerText = "Du wurdest geworben von: " + ref;
+      }
+    };
 
-    // Referrer anzeigen
-    const savedRef = localStorage.getItem("referrer");
-    if (savedRef) {
-      document.getElementById("refInfo").textContent =
-        "Du wurdest geworben von: " + savedRef;
-    }
-
-    // Registrierung + Referral speichern
-    function registerUser(e) {
+    document.getElementById("regForm").addEventListener("submit", function(e) {
       e.preventDefault();
-      const name = document.getElementById("username").value;
-      const email = document.getElementById("email").value;
-      const pass = document.getElementById("password").value;
-      const referrer = localStorage.getItem("referrer") || "keiner";
 
-      const user = {
-        name,
-        email,
-        password: pass,
-        referrer,
-        created: new Date().toISOString()
-      };
+      const name = document.getElementById("username").value.trim();
+      const email = document.getElementById("email").value.trim().toLowerCase();
+      const password = document.getElementById("password").value;
+      const ref = localStorage.getItem("ref") || null;
 
+      // Nutzer lokal speichern (in "users"-Liste)
       let users = JSON.parse(localStorage.getItem("users") || "[]");
-      users.push(user);
+      users.push({ email: email, name: name, password: password, referrer: ref });
       localStorage.setItem("users", JSON.stringify(users));
 
-      alert("Registrierung erfolgreich! 🎉");
+      // Angemeldeten Nutzer merken
+      localStorage.setItem("user_email", email);
+      localStorage.setItem("user_name", name);
 
-      // Weiterleitung ins Dashboard
-      window.location.href = "dashboard.html";
-    }
+      // Referral-Link anzeigen
+      const refBox = document.getElementById("yourRefLinkBox");
+      const refLink = document.getElementById("yourRefLink");
+      const baseUrl = window.location.origin + window.location.pathname;
+      const yourRefLink = `${baseUrl}?ref=${email.split("@")[0]}`;
+      refLink.innerText = yourRefLink;
+      refBox.style.display = "block";
+
+      // Automatisch weiterleiten in 3 Sek
+      setTimeout(() => {
+        window.location.href = "dashboard.html";
+      }, 3000);
+    });
   </script>
-
 </body>
 </html>
