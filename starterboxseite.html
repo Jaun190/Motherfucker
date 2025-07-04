@@ -11,6 +11,38 @@
       background: url("assets/dashboard.png") no-repeat center center fixed;
       background-size: cover;
       color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .box-container {
+      max-width: 600px;
+      margin: 100px auto 50px;
+      padding: 20px;
+    }
+
+    .box {
+      border: 2px solid #00ff90;
+      border-radius: 20px;
+      margin-bottom: 40px;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      box-shadow: 0 0 20px #00ff90;
+    }
+
+    .box h2 {
+      color: #00ff90;
+      margin-bottom: 10px;
+    }
+
+    .box ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .box li::before {
+      content: "🌱 ";
+      margin-right: 8px;
     }
 
     .buy-btn {
@@ -93,7 +125,7 @@
     }
   }
 
-  // Klick-Event
+  // Klick-Event aktivieren
   document.querySelectorAll(".buy-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       const box = btn.closest(".box").dataset.box;
@@ -104,7 +136,7 @@
     });
   });
 
-  // Beim Laden prüfen ob Box schon gekauft
+  // Bereits gekaufte Boxen beim Laden markieren
   const bought = getBoughtBoxes();
   document.querySelectorAll(".box").forEach(box => {
     const name = box.dataset.box;
