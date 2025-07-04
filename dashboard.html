@@ -6,46 +6,67 @@
   <style>
     body {
       margin: 0;
-      background: linear-gradient(to bottom, #002000, #000000);
+      background: url('dashboard.png') no-repeat center center fixed;
+      background-size: cover;
       color: #0f0;
       font-family: Arial, sans-serif;
     }
 
-    .sidebar {
+    /* Sidebar Menü */
+    #sidebar {
       position: fixed;
       top: 0;
-      left: 0;
-      width: 60px;
+      left: -240px;
+      width: 200px;
       height: 100%;
-      background-color: #111;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 20px;
-      z-index: 10;
+      background-color: rgba(0, 0, 0, 0.95);
+      transition: left 0.3s ease;
+      padding: 20px;
+      z-index: 1000;
     }
 
-    .sidebar button {
+    #sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    #sidebar ul li {
+      margin: 15px 0;
+    }
+
+    #sidebar ul li a {
+      color: #0f0;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* Hamburger Button */
+    #menu-btn {
+      position: fixed;
+      top: 15px;
+      left: 15px;
       background-color: #0f0;
+      color: black;
       border: none;
-      margin: 10px 0;
-      border-radius: 10px;
+      border-radius: 8px;
       width: 40px;
       height: 40px;
-      font-size: 20px;
-      color: black;
+      font-size: 24px;
       cursor: pointer;
+      z-index: 1100;
     }
 
+    /* Content */
     .container {
-      margin-left: 70px;
       padding: 20px;
+      padding-left: 80px;
     }
 
     h1 {
-      font-size: 24px;
       text-align: center;
       margin-top: 20px;
+      text-shadow: 0 0 8px #0f0;
     }
 
     .section {
@@ -57,7 +78,7 @@
     }
 
     .section h2 {
-      color: #00ff00;
+      color: #0f0;
       margin-bottom: 10px;
     }
 
@@ -74,13 +95,19 @@
 </head>
 <body>
 
-  <div class="sidebar">
-    <button>☰</button>
-    <button>🔊</button>
-    <button>🎵</button>
-    <button>🧪</button>
+  <!-- Menü-Button -->
+  <button id="menu-btn">☰</button>
+
+  <!-- Sidebar Menü -->
+  <div id="sidebar">
+    <ul>
+      <li><a href="dashboard.html">🏠 Dashboard</a></li>
+      <li><a href="lizenz.html">📦 Lizenz</a></li>
+      <li><a href="#">⚙️ Einstellungen</a></li>
+    </ul>
   </div>
 
+  <!-- Dashboard Inhalt -->
   <div class="container">
     <h1>Willkommen bei<br><span style="font-size: 1.5em;">GrowEmpire</span></h1>
 
@@ -104,7 +131,17 @@
     </div>
   </div>
 
+  <!-- JavaScript -->
   <script>
+    // Sidebar toggeln
+    const menuBtn = document.getElementById("menu-btn");
+    const sidebar = document.getElementById("sidebar");
+
+    menuBtn.addEventListener("click", () => {
+      sidebar.style.left = (sidebar.style.left === "0px") ? "-240px" : "0px";
+    });
+
+    // Dashboard-Daten laden
     window.addEventListener("DOMContentLoaded", () => {
       const boxLevel = localStorage.getItem("boxLevel") || "demo";
       const plantLimit = localStorage.getItem("plantLimit") || "1";
