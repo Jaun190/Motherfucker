@@ -5,56 +5,103 @@
   <title>GrowEmpire – Dashboard</title>
   <style>
     body {
-      background-color: #000;
+      margin: 0;
+      background: linear-gradient(to bottom, #002000, #000000);
       color: #0f0;
       font-family: Arial, sans-serif;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 60px;
+      height: 100%;
+      background-color: #111;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 20px;
+      z-index: 10;
+    }
+
+    .sidebar button {
+      background-color: #0f0;
+      border: none;
+      margin: 10px 0;
+      border-radius: 10px;
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+      color: black;
+      cursor: pointer;
+    }
+
+    .container {
+      margin-left: 70px;
       padding: 20px;
-      background-image: url('dashboard.png');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
     }
 
     h1 {
+      font-size: 24px;
       text-align: center;
-      text-shadow: 0 0 10px #0f0;
+      margin-top: 20px;
     }
 
-    .panel {
+    .section {
+      background-color: rgba(0, 0, 0, 0.8);
       border: 2px solid #0f0;
-      padding: 20px;
-      margin-bottom: 30px;
-      border-radius: 10px;
-      background-color: rgba(0, 0, 0, 0.85);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 20px 0;
+    }
+
+    .section h2 {
+      color: #00ff00;
+      margin-bottom: 10px;
     }
 
     .warn {
       color: red;
       font-weight: bold;
     }
+
+    .emoji {
+      font-size: 20px;
+      margin-right: 5px;
+    }
   </style>
 </head>
 <body>
 
-  <h1>Willkommen bei<br><span style="font-size: 1.5em;">GrowEmpire</span></h1>
-
-  <div class="panel">
-    <h2>🎮 Demo Version</h2>
-    <p>Nur Testsystem, kein echter Ertrag.</p>
-    <p>📦 Box-Level: <span id="boxLevelText">demo</span></p>
-    <p id="demoWarn" class="warn">In Demo-Version nicht auszahlbar</p>
+  <div class="sidebar">
+    <button>☰</button>
+    <button>🔊</button>
+    <button>🎵</button>
+    <button>🧪</button>
   </div>
 
-  <div class="panel">
-    <h2>🌿 Pflanzenübersicht</h2>
-    <p>Aktive Pflanzen: <span id="activePlants">0</span></p>
-    <p>Gratispflanzen: <span id="freePlantsText">0</span></p>
-    <p>Limit: <span id="plantLimitText">1</span></p>
-  </div>
+  <div class="container">
+    <h1>Willkommen bei<br><span style="font-size: 1.5em;">GrowEmpire</span></h1>
 
-  <div class="panel">
-    <h2>💰 Ertrag</h2>
-    <p>Gesamter Ertrag: <span id="ertragText">CHF 0.00</span></p>
+    <div class="section">
+      <h2><span class="emoji">🕹️</span>Demo Version</h2>
+      <p>Nur Testsystem, kein echter Ertrag.</p>
+      <p><span class="emoji">📦</span>Box-Level: <span id="boxLevelText">demo</span></p>
+      <p id="demoWarn" class="warn">In Demo-Version nicht auszahlbar</p>
+    </div>
+
+    <div class="section">
+      <h2><span class="emoji">🌿</span>Pflanzenübersicht</h2>
+      <p>Aktive Pflanzen: <span id="activePlants">0</span></p>
+      <p>Gratispflanzen: <span id="freePlantsText">0</span></p>
+      <p>Limit: <span id="plantLimitText">1</span></p>
+    </div>
+
+    <div class="section">
+      <h2><span class="emoji">💰</span>Ertrag</h2>
+      <p>Gesamter Ertrag: <span id="ertragText">CHF 0.00</span></p>
+    </div>
   </div>
 
   <script>
@@ -70,8 +117,6 @@
       const demoWarn = document.getElementById("demoWarn");
       if (boxLevel !== "demo") {
         demoWarn.style.display = "none";
-      } else {
-        demoWarn.style.display = "block";
       }
     });
   </script>
