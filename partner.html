@@ -2,215 +2,127 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <title>Partner – GrowEmpire</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <title>Partnerbereich – GrowEmpire</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: url('./assets/dashboard.png') no-repeat center center fixed;
-      background-size: cover;
+      background: #001e14;
       color: #00ff88;
-      padding: 2rem;
+      text-align: center;
+      padding: 20px;
     }
-
     .topbar {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      height: 64px;
-      background: rgba(0, 0, 0, 0.9);
+      height: 60px;
+      background: rgba(0, 0, 0, 0.95);
       border-bottom: 2px solid #00ff88;
       box-shadow: 0 0 12px #00ff88;
-      z-index: 998;
-    }
-
-    .menu-wrapper {
-      position: relative;
-      height: 100%;
+      z-index: 999;
       display: flex;
       align-items: center;
-      padding-left: 20px;
+      justify-content: space-between;
+      padding: 0 20px;
     }
-
     .menu-icon {
+      font-size: 28px;
+      color: #00ff88;
+      cursor: pointer;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-top: 80px;
+    }
+    .ref-box {
+      margin: 20px auto;
+      padding: 10px;
+      background: white;
+      color: black;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 500px;
+      font-weight: bold;
+    }
+    .baum-container {
+      margin-top: 40px;
+    }
+    .node {
+      display: inline-block;
+      padding: 10px 20px;
       background: rgba(0, 255, 136, 0.1);
       border: 2px solid #00ff88;
-      color: #00ff88;
-      padding: 6px 12px;
-      border-radius: 10px;
-      font-size: 22px;
-      cursor: pointer;
-      box-shadow: 0 0 10px #00ff88;
-    }
-
-    .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 60px;
-      left: 20px;
-      background: rgba(0, 0, 0, 0.95);
-      border: 2px solid #00ff88;
       border-radius: 12px;
-      padding: 0.5rem;
-      min-width: 200px;
-      box-shadow: 0 0 12px #00ff88;
-      z-index: 999;
-    }
-
-    .dropdown-menu a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 18px;
-      color: #00ff88;
-      text-decoration: none;
+      margin: 10px;
       font-weight: bold;
-      font-size: 1rem;
-      transition: background 0.2s;
-    }
-
-    .dropdown-menu a:hover {
-      background: rgba(0, 255, 136, 0.08);
-    }
-
-    .referral-box {
-      margin-top: 100px;
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    .referral-box input {
-      width: 80%;
-      max-width: 500px;
-      padding: 10px;
-      border-radius: 8px;
-      border: none;
-      font-size: 1rem;
-      margin-top: 10px;
-      text-align: center;
-    }
-
-    .tree {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .node {
-      background-color: rgba(0, 255, 136, 0.1);
-      border: 2px solid #00ff88;
-      border-radius: 8px;
-      padding: 0.5rem 1rem;
-      margin: 1rem;
-      box-shadow: 0 0 10px #00ff88;
+      color: white;
       position: relative;
-      text-align: center;
-      font-size: 1rem;
     }
-
-    .children {
-      display: flex;
-      justify-content: center;
-      margin-top: 1rem;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
     .node::after {
       content: "";
       position: absolute;
       top: 100%;
       left: 50%;
-      transform: translateX(-50%);
       height: 20px;
       border-left: 2px solid #00ff88;
     }
-
-    .node:only-child::after {
-      display: none;
+    .children {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
     }
   </style>
 </head>
 <body>
+
   <div class="topbar">
-    <div class="menu-wrapper">
-      <div class="menu-icon" onclick="toggleMenu()">≡</div>
-      <div class="dropdown-menu" id="dropdown">
-        <a href="dashboard.html">🌿 Dashboard</a>
-        <a href="plants.html">🧪 Pflanzen</a>
-        <a href="partner.html">💼 Partner</a>
-        <a href="lizenz.html">📄 Lizenz</a>
-        <a href="settings.html">⚙️ Einstellungen</a>
-        <a href="payout.html">💸 Auszahlung</a>
-        <a href="logout.html">🔴 Logout</a>
-      </div>
-    </div>
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    <div><strong>GrowEmpire</strong></div>
   </div>
 
-  <div class="referral-box">
-    <h2>🔗 Dein persönlicher Referral-Link</h2>
-    <input id="refLink" readonly />
-  </div>
+  <h1>🌱 Dein persönlicher<br><span style="color:#00ff88">Referral-Link</span></h1>
+  <div class="ref-box" id="refLinkBox">Wird geladen...</div>
 
-  <div class="tree" id="treeContainer">
-    <h2>👥 Deine Partnerstruktur</h2>
-  </div>
+  <h2>👥 Deine Partnerstruktur</h2>
+  <div class="baum-container" id="baumContainer"></div>
 
   <script>
-    function toggleMenu() {
-      const menu = document.getElementById("dropdown");
-      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    const email = localStorage.getItem("user_email") || "user@example.com";
+    const userId = email.split("@")[0];
+    const refLink = `${window.location.origin.replace("/Motherfucker", "")}/register.html?ref=${userId}`;
+    document.getElementById("refLinkBox").textContent = refLink;
+
+    const baum = {
+      name: userId,
+      children: [
+        { name: "max123", children: [
+          { name: "lea88", children: [] },
+          { name: "timmy", children: [] }
+        ]},
+        { name: "jules", children: [] }
+      ]
+    };
+
+    function renderBaum(node, container) {
+      const nodeDiv = document.createElement("div");
+      nodeDiv.className = "node";
+      nodeDiv.textContent = node.name;
+      container.appendChild(nodeDiv);
+
+      if (node.children && node.children.length > 0) {
+        const childrenDiv = document.createElement("div");
+        childrenDiv.className = "children";
+        node.children.forEach(child => renderBaum(child, childrenDiv));
+        container.appendChild(childrenDiv);
+      }
     }
 
-    window.addEventListener("click", function (e) {
-      const menu = document.getElementById("dropdown");
-      if (!e.target.closest(".menu-wrapper")) {
-        menu.style.display = "none";
-      }
-    });
-
-    // === Demo: Benutzername & Partnerdaten ===
-    const email = localStorage.getItem("user_email") || "dominique@example.com";
-    const user = email.split("@")[0];
-    const lizenz = localStorage.getItem("lizenz") || "demo";
-
-    document.getElementById("refLink").value = `${location.origin}/register.html?ref=${email}`;
-
-    const partnerData = JSON.parse(localStorage.getItem("partnerData") || "[]");
-
-    // === Rekursive Baumgenerierung ===
-    function buildTree(data, parentEmail, level = 1, maxLevel = 1) {
-      if (level > maxLevel) return null;
-
-      const children = data.filter(p => p.referrer === parentEmail);
-      if (children.length === 0) return null;
-
-      const childrenContainer = document.createElement("div");
-      childrenContainer.className = "children";
-
-      for (const child of children) {
-        const node = document.createElement("div");
-        node.className = "node";
-        node.textContent = child.email.split("@")[0];
-        const sub = buildTree(data, child.email, level + 1, maxLevel);
-        if (sub) node.appendChild(sub);
-        childrenContainer.appendChild(node);
-      }
-      return childrenContainer;
-    }
-
-    const rootNode = document.createElement("div");
-    rootNode.className = "node";
-    rootNode.textContent = user;
-
-    const maxDepth = lizenz === "premium" ? 5 : lizenz === "pro" ? 3 : lizenz === "lizenz" ? 1 : 0;
-    const subtree = buildTree(partnerData, email, 1, maxDepth);
-    if (subtree) rootNode.appendChild(subtree);
-
-    document.getElementById("treeContainer").appendChild(rootNode);
+    renderBaum(baum, document.getElementById("baumContainer"));
   </script>
+
 </body>
 </html>
