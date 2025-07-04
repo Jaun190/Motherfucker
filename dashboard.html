@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>GrowEmpire – Dashboard</title>
   <style>
     body {
@@ -17,7 +17,7 @@
 
     h1 {
       text-align: center;
-      text-shadow: 0 0 5px #0f0;
+      text-shadow: 0 0 10px #0f0;
     }
 
     .panel {
@@ -36,17 +36,20 @@
 </head>
 <body>
 
-  <h1>🌱 Dein GrowEmpire Dashboard</h1>
+  <h1>Willkommen bei<br><span style="font-size: 1.5em;">GrowEmpire</span></h1>
 
   <div class="panel">
-    <h2>📦 Box-Level: <span id="boxLevelText">demo</span></h2>
+    <h2>🎮 Demo Version</h2>
+    <p>Nur Testsystem, kein echter Ertrag.</p>
+    <p>📦 Box-Level: <span id="boxLevelText">demo</span></p>
     <p id="demoWarn" class="warn">In Demo-Version nicht auszahlbar</p>
   </div>
 
   <div class="panel">
     <h2>🌿 Pflanzenübersicht</h2>
-    <p>Limit: <span id="plantLimitText">1</span></p>
+    <p>Aktive Pflanzen: <span id="activePlants">0</span></p>
     <p>Gratispflanzen: <span id="freePlantsText">0</span></p>
+    <p>Limit: <span id="plantLimitText">1</span></p>
   </div>
 
   <div class="panel">
@@ -65,14 +68,10 @@
       document.getElementById("freePlantsText").textContent = freePlants;
 
       const demoWarn = document.getElementById("demoWarn");
-      const ertragText = document.getElementById("ertragText");
-
       if (boxLevel !== "demo") {
         demoWarn.style.display = "none";
-        ertragText.textContent = "CHF 0.00"; // Platzhalter – später dynamisch
       } else {
         demoWarn.style.display = "block";
-        ertragText.textContent = "CHF 0.00";
       }
     });
   </script>
