@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>GrowEmpire – Dashboard</title>
   <style>
     body {
@@ -57,7 +57,7 @@
     .container {
       padding: 20px;
       padding-left: 80px;
-      margin-top: 360px; /* nach unten versetzt */
+      margin-top: 360px;
     }
 
     .section {
@@ -94,7 +94,7 @@
     <ul>
       <li><a href="dashboard.html">🏠 Dashboard</a></li>
       <li><a href="lizenz.html">📦 Lizenz</a></li>
-      <li><a href="plants.html">🌿 Pflanzen</a></li> <!-- Jetzt sichtbar -->
+      <li><a href="plants.html">🌿 Pflanzen</a></li> <!-- ← Jetzt wirklich drin -->
       <li><a href="partner.html">👥 Partner</a></li>
       <li><a href="settings.html">⚙️ Einstellungen</a></li>
       <li><a href="#" onclick="logout()">🚪 Logout</a></li>
@@ -123,7 +123,7 @@
     </div>
   </div>
 
-  <!-- Script -->
+  <!-- JS Logik -->
   <script>
     // Menü öffnen/schließen
     const menuBtn = document.getElementById("menu-btn");
@@ -133,7 +133,7 @@
       sidebar.style.left = (sidebar.style.left === "0px") ? "-240px" : "0px";
     });
 
-    // Dashboard-Werte laden
+    // Dashboard-Daten laden
     window.addEventListener("DOMContentLoaded", () => {
       const boxLevel = localStorage.getItem("boxLevel") || "demo";
       const plantLimit = localStorage.getItem("plantLimit") || "1";
