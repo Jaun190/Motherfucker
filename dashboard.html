@@ -20,26 +20,28 @@
       left: 20px;
       font-size: 30px;
       cursor: pointer;
-      z-index: 1000;
+      color: #00ffcc;
+      z-index: 1001;
     }
 
     .menu {
+      display: none;
       position: absolute;
       top: 60px;
       left: 20px;
-      background-color: rgba(0, 0, 0, 0.9);
-      border-radius: 10px;
-      padding: 15px;
-      display: none;
-      z-index: 999;
+      background-color: rgba(0, 0, 0, 0.95);
+      border-radius: 15px;
+      padding: 20px;
+      z-index: 1000;
+      box-shadow: 0 0 15px #00ffcc;
     }
 
     .menu a {
       display: block;
       color: #00ffcc;
       text-decoration: none;
-      margin: 10px 0;
       font-size: 18px;
+      margin: 10px 0;
     }
 
     .menu a:hover {
@@ -47,7 +49,7 @@
     }
 
     .plant-card {
-      background-color: rgba(0, 0, 0, 0.8);
+      background-color: rgba(0, 0, 0, 0.85);
       border: 2px solid #00ffcc;
       border-radius: 15px;
       padding: 15px;
@@ -80,11 +82,12 @@
 <body>
   <div class="menu-btn" onclick="toggleMenu()">☰</div>
   <div class="menu" id="menu">
-    <a href="index.html">🏠 Startseite</a>
-    <a href="plants.html">🌱 Pflanzen kaufen</a>
-    <a href="dashboard.html">📊 Dashboard</a>
-    <a href="lizenz.html">🪪 Lizenz</a>
+    <a href="dashboard.html">🧠 Dashboard</a>
+    <a href="plants.html">🧬 Pflanzen</a>
     <a href="partner.html">🤝 Partner</a>
+    <a href="lizenz.html">🪪 Lizenz</a>
+    <a href="einstellungen.html">⚙️ Einstellungen</a>
+    <a href="logout.html">🔴 Logout</a>
   </div>
 
   <div id="plants-container">
