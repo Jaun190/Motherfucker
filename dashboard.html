@@ -2,8 +2,8 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard – GrowEmpire</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - GrowEmpire</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
@@ -85,16 +85,15 @@
   </style>
 </head>
 <body>
-
   <!-- Menü -->
   <button class="menu-button" onclick="toggleMenu()">☰</button>
   <div id="dropdown" class="dropdown">
-    <a href="dashboard.html">📊 Dashboard</a>
-    <a href="plants.html">🌱 Pflanzen kaufen</a>
-    <a href="lizens.html">💼 Lizenz</a>
-    <a href="partner.html">🤝 Partner</a>
+    <a href="dashboard.html">🏠 Dashboard</a>
+    <a href="plants.html">🌿 Pflanzen kaufen</a>
+    <a href="starterboxseite.html">💳 Lizenz</a> <!-- ✅ LINK GEÄNDERT -->
+    <a href="partner.html">🧑‍🤝‍🧑 Partner</a>
     <a href="settings.html">⚙️ Einstellungen</a>
-    <a href="index.html">🚪 Logout</a>
+    <a href="index.html">🔒 Logout</a>
   </div>
 
   <div class="container">
@@ -115,27 +114,22 @@
     if (lizenz) limit = pro ? 6 : premium ? 10 : 3;
 
     const lizenzBox = document.getElementById("lizenzStatusBox");
-    if (lizenz) {
-      lizenzBox.innerHTML = `<h3>✅ Lizenzstatus: Aktiv</h3><p>Du kannst bis zu ${limit} Pflanzen verwalten.</p>`;
-    } else {
-      lizenzBox.innerHTML = `
-        <h3>🚫 Starterlizenz nicht aktiv</h3>
-        <p class="locked">Du hast nur eingeschränkten Zugriff. Aktiviere die Starterlizenz für CHF 49.–, um alle Funktionen freizuschalten.</p>
-        <button onclick="window.location.href='lizens.html'">Lizenz kaufen</button>`;
-    }
+    lizenzBox.innerHTML = lizenz
+      ? `<h3>✅ Lizenzstatus: Aktiv</h3><p>Du kannst bis zu ${limit} Pflanzen verwalten.</p>`
+      : `<h3>🚫 Starterlizenz nicht aktiv</h3><p class="locked">Du hast nur eingeschränkten Zugriff. Aktiviere die Starterlizenz für CHF 49.–, um alle Funktionen freizuschalten.</p><button onclick="window.location.href='starterboxseite.html'">💳 Lizenz kaufen</button>`;
 
     const pflanzenBox = document.getElementById("pflanzenBox");
-    pflanzenBox.innerHTML = `<h3>🌿 Aktive Pflanzen:</h3><p>${pflanzenAnzahl} / ${limit}</p>`;
+    pflanzenBox.innerHTML = `<h3>🌱 Aktive Pflanzen:</h3><p>${pflanzenAnzahl} / ${limit}</p>`;
 
     const ertragBox = document.getElementById("ertragBox");
-    let ertrag = 30;
+    let ertrag = 0;
     let bonus = premium ? 1.3 : pro ? 1.2 : 1.0;
 
-    if (!lizenz) {
-      ertragBox.innerHTML = `<h3>💸 Ertrag:</h3><p class="locked">Nur mit Lizenz sichtbar.</p>`;
+    if (lizenz) {
+      ertragBox.innerHTML = `<h3>💰 Ertrag:</h3><p class="locked">Nur mit Lizenz sichtbar.</p>`;
     } else {
       const total = ertrag * pflanzenAnzahl * bonus;
-      ertragBox.innerHTML = `<h3>💸 Ertrag:</h3><p>CHF ${total.toFixed(2)} (${bonus > 1 ? "mit Bonus x" + bonus : "Standard"})</p>`;
+      ertragBox.innerHTML = `<h3>💰 Ertrag:</h3><p>CHF ${total.toFixed(2)} ${bonus > 1 ? "(mit Bonus × " + bonus + ")" : ""}</p>`;
     }
 
     function toggleMenu() {
