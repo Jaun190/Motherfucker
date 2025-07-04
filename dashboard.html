@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html lang="de">
+<!DOCTYPE html><html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>GrowEmpire – Dashboard</title>
+  <title>GrowEmpire – Pflanzen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
     body {
       margin: 0;
@@ -58,28 +58,56 @@
     .dropdown-menu a:hover {
       background: #00ff8866;
     }
-    .content {
+    .container {
       padding-top: 80px;
-      max-width: 800px;
+      max-width: 1000px;
       margin: auto;
-      padding: 2rem;
-    }
-    .plant-list {
-      list-style: none;
-      padding: 0;
-    }
-    .plant-list li {
-      background: rgba(0, 0, 0, 0.7);
-      border-left: 4px solid #00ff88;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
       padding: 1rem;
-      margin-bottom: 1rem;
+    }
+    .plant-card {
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 16px;
+      border: 2px solid #00ff88;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 0 15px #00ff88;
+    }
+    .plant-card img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: contain;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .plant-card h3 {
+      color: #00ff88;
+      margin: 0.5rem 0;
+    }
+    .plant-card p {
+      margin: 0.3rem 0;
+      font-size: 14px;
+      color: #ccc;
+    }
+    .plant-card button {
+      margin-top: 0.5rem;
+      background: #00ff88;
+      color: black;
+      padding: 8px 16px;
+      border: none;
       border-radius: 8px;
-      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .plant-card button:disabled {
+      background: #00ff88;
+      color: black;
     }
   </style>
 </head>
 <body>
-
   <div class="topbar">
     <div class="menu-icon" onclick="toggleMenu()">☰</div>
     <div class="dropdown-menu" id="dropdown">
@@ -90,54 +118,73 @@
       <a href="settings.html">⚙️ Einstellungen</a>
       <a href="logout.html">📕 Logout</a>
     </div>
-  </div>
+  </div>  <div class="container" id="plantList"></div>  <script>
+    const userStatus = localStorage.getItem("user_status") || "demo";
+    const plants = [
+      { name: "Sativa", img: "assets/sativa1.png", days: 75, price: 190 },
+      { name: "Haze", img: "assets/haze1.png", days: 80, price: 180 },
+      { name: "OG Kush", img: "assets/ogkush.png", days: 85, price: 210 },
+      { name: "Kush 2", img: "assets/kush2.png", days: 90, price: 195 }
+    ];
 
-  <div class="content">
-    <ul class="plant-list" id="plantList"></ul>
-  </div>
+    const container = document.getElementById("plantList");
 
-  <script>
+    function alreadyBought(name) {
+      const data = JSON.parse(localStorage.getItem(`plant_${name}`));
+      return data?.bought;
+    }
+
+    plants.forEach(plant => {
+      const card = document.createElement("div");
+      card.className = "plant-card";
+
+      const img = document.createElement("img");
+      img.src = plant.img;
+      img.alt = plant.name;
+
+      const title = document.createElement("h3");
+      title.textContent = plant.name;
+
+      const duration = document.createElement("p");
+      duration.textContent = `Dauer: ${plant.days} Tage`;
+
+      const price = document.createElement("p");
+      price.textContent = `Preis: CHF ${plant.price}.–`;
+
+      const button = document.createElement("button");
+      const gekauft = alreadyBought(plant.name);
+
+      if (gekauft) {
+        button.textContent = "✅ Gekauft";
+        button.disabled = true;
+      } else {
+        button.textContent = "Kaufen";
+        button.disabled = false;
+        button.onclick = () => {
+          const data = {
+            bought: true,
+            boughtAt: new Date().toISOString(),
+            days: plant.days,
+            price: plant.price,
+            status: "growing"
+          };
+          localStorage.setItem(`plant_${plant.name}`, JSON.stringify(data));
+          button.textContent = "✅ Gekauft";
+          button.disabled = true;
+        };
+      }
+
+      card.appendChild(img);
+      card.appendChild(title);
+      card.appendChild(duration);
+      card.appendChild(price);
+      card.appendChild(button);
+      container.appendChild(card);
+    });
+
     function toggleMenu() {
       const menu = document.getElementById("dropdown");
       menu.style.display = menu.style.display === "block" ? "none" : "block";
     }
-
-    window.addEventListener("click", function (e) {
-      if (!e.target.closest(".topbar")) {
-        document.getElementById("dropdown").style.display = "none";
-      }
-    });
-
-    const list = document.getElementById("plantList");
-    let found = false;
-
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      if (key.startsWith("plant_")) {
-        const data = JSON.parse(localStorage.getItem(key));
-        if (data?.bought && data.boughtAt && data.days) {
-          found = true;
-          const boughtDate = new Date(data.boughtAt);
-          const today = new Date();
-          const elapsed = Math.floor((today - boughtDate) / (1000 * 60 * 60 * 24));
-          const remaining = data.days - elapsed;
-          const name = key.replace("plant_", "");
-          const li = document.createElement("li");
-          li.innerHTML = `🌱 <b>${name}</b><br>
-            📅 Gekauft am: ${boughtDate.toLocaleDateString()}<br>
-            ⏳ ${
-              remaining > 0
-                ? `${remaining} Tage bis zur Ernte`
-                : `✅ Ernte bereit!`
-            }`;
-          list.appendChild(li);
-        }
-      }
-    }
-
-    if (!found) {
-      list.innerHTML = "<li style='color:#ccc;'>Noch keine Pflanzen gekauft.</li>";
-    }
-  </script>
-</body>
+  </script></body>
 </html>
