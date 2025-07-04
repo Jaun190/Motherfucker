@@ -57,7 +57,7 @@
     .container {
       padding: 20px;
       padding-left: 80px;
-      margin-top: 320px; /* Abstand vergrößert für mehr Sicht auf Hintergrund-Logo */
+      margin-top: 320px; /* GrowEmpire sichtbar */
     }
 
     .section {
@@ -89,17 +89,18 @@
   <!-- Menü-Button -->
   <button id="menu-btn">☰</button>
 
-  <!-- Sidebar -->
+  <!-- Seitenmenü -->
   <div id="sidebar">
     <ul>
       <li><a href="dashboard.html">🏠 Dashboard</a></li>
       <li><a href="lizenz.html">📦 Lizenz</a></li>
+      <li><a href="partner.html">👥 Partner</a></li>
       <li><a href="settings.html">⚙️ Einstellungen</a></li>
       <li><a href="#" onclick="logout()">🚪 Logout</a></li>
     </ul>
   </div>
 
-  <!-- Inhalt -->
+  <!-- Dashboard Inhalt -->
   <div class="container">
     <div class="section">
       <h2><span class="emoji">🕹️</span>Demo Version</h2>
@@ -131,7 +132,7 @@
       sidebar.style.left = (sidebar.style.left === "0px") ? "-240px" : "0px";
     });
 
-    // Dynamische Werte aus localStorage laden
+    // Werte laden aus localStorage
     window.addEventListener("DOMContentLoaded", () => {
       const boxLevel = localStorage.getItem("boxLevel") || "demo";
       const plantLimit = localStorage.getItem("plantLimit") || "1";
