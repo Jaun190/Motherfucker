@@ -56,7 +56,7 @@
       border: 2px solid #00ff88;
       border-radius: 12px;
       padding: 0.5rem 0;
-      min-width: 180px;
+      min-width: 200px;
       box-shadow: 0 0 12px #00ff88;
       animation: fadeIn 0.2s ease-out;
       z-index: 999;
@@ -152,6 +152,7 @@
     <div class="menu-wrapper">
       <div class="menu-icon" onclick="toggleMenu()">☰</div>
       <div class="dropdown-menu" id="dropdown">
+        <a href="dashboard.html"><span>🧠</span> Dashboard</a>
         <a href="plants.html"><span>🧬</span> Pflanzen</a>
         <a href="partner.html"><span>🤝</span> Partner</a>
         <a href="lizenz.html"><span>🪪</span> Lizenz</a>
@@ -185,6 +186,7 @@
     </div>
   </div>
 
+  <!-- Menü-Logik -->
   <script>
     function toggleMenu() {
       const menu = document.getElementById('dropdown');
