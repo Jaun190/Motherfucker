@@ -53,7 +53,7 @@
       background: rgba(0, 0, 0, 0.95);
       border: 2px solid #00ff88;
       border-radius: 12px;
-      padding: 0.5rem;
+      padding: 0.5rem 0;
       min-width: 200px;
       box-shadow: 0 0 12px #00ff88;
       animation: fadeIn 0.2s ease-out;
@@ -136,21 +136,26 @@
     .submit-btn:hover {
       background: #00cc66;
     }
+
+    #upload-status {
+      color: #ccc;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
   </style>
 </head>
 <body>
-
   <!-- Topbar mit Menü -->
   <div class="topbar">
     <div class="menu-wrapper">
-      <div class="menu-icon" onclick="toggleMenu()">≡</div>
+      <div class="menu-icon" onclick="toggleMenu()">☰</div>
       <div class="dropdown-menu" id="dropdown">
         <a href="dashboard.html"><span>🌿</span> Dashboard</a>
         <a href="plants.html"><span>🧪</span> Pflanzen</a>
         <a href="partner.html"><span>💼</span> Partner</a>
-        <a href="lizenz.html"><span>📄</span> Lizenz</a>
+        <a href="lizenz.html"><span>🪪</span> Lizenz</a>
         <a href="settings.html"><span>⚙️</span> Einstellungen</a>
-        <a href="payout.html"><span>💸</span> Auszahlung</a>
+        <a href="auszahlung.html"><span>💸</span> Auszahlung</a>
         <a href="logout.html"><span>🔴</span> Logout</a>
       </div>
     </div>
@@ -168,24 +173,48 @@
         <input type="email" id="email" placeholder="deinname@email.com" />
 
         <label for="password">Neues Passwort:</label>
-        <input type="password" id="password" placeholder="**********" />
+        <input type="password" id="password" placeholder="*********" />
+
+        <!-- Ausweis-Upload -->
+        <label for="ausweis">Identitätsnachweis (Foto oder PDF):</label>
+        <input type="file" id="ausweis" accept=".jpg,.jpeg,.png,.pdf" />
+        <p id="upload-status">❌ Kein Ausweis hochgeladen</p>
 
         <button class="submit-btn" type="submit">Speichern</button>
       </form>
     </div>
   </div>
 
-  <!-- Menü-Logik -->
+  <!-- Menü-Logik + Ausweis-Upload -->
   <script>
     function toggleMenu() {
       const menu = document.getElementById("dropdown");
-      menu.style.display = menu.style.display === "block" ? "none" : "block";
+      menu.style.display = (menu.style.display === "block") ? "none" : "block";
     }
 
     window.addEventListener("click", function (e) {
       const menu = document.getElementById("dropdown");
       if (!e.target.closest(".menu-wrapper")) {
         menu.style.display = "none";
+      }
+    });
+
+    // Ausweis Upload Logik
+    const ausweisInput = document.getElementById("ausweis");
+    const statusText = document.getElementById("upload-status");
+
+    const gespeicherterAusweis = localStorage.getItem("ausweisDatei");
+    if (gespeicherterAusweis) {
+      statusText.textContent = "✅ Ausweis hochgeladen: " + gespeicherterAusweis;
+      statusText.style.color = "#00cc66";
+    }
+
+    ausweisInput.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        localStorage.setItem("ausweisDatei", file.name);
+        statusText.textContent = "✅ Ausweis hochgeladen: " + file.name;
+        statusText.style.color = "#00cc66";
       }
     });
   </script>
