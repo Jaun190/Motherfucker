@@ -3,40 +3,177 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Starterbox</title>
+  <title>Backoffice Lizenz & Upgrade</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('assets/dashboard.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+    }
+
+    .menu-toggle {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: #0f0;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .menu-content {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 20px;
+      background-color: rgba(0, 0, 0, 0.9);
+      border-radius: 8px;
+      padding: 10px;
+      z-index: 10;
+    }
+
+    .menu-content a {
+      display: block;
+      color: #0f0;
+      text-decoration: none;
+      padding: 5px 0;
+    }
+
+    .menu-toggle:hover + .menu-content,
+    .menu-content:hover {
+      display: block;
+    }
+
+    .box-container {
+      max-width: 700px;
+      margin: 120px auto 50px;
+      padding: 20px;
+    }
+
+    .box {
+      border: 2px solid #00ff90;
+      border-radius: 20px;
+      margin-bottom: 40px;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      box-shadow: 0 0 20px #00ff90;
+    }
+
+    .box h2 {
+      color: #00ff90;
+      margin-bottom: 10px;
+    }
+
+    .box ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .box li::before {
+      content: "🌿";
+      margin-right: 6px;
+    }
+
+    .buy-btn {
+      display: block;
+      background-color: #00ff90;
+      color: #000;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      margin-top: 20px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    #message {
+      text-align: center;
+      color: #0f0;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-  <div class="box-container">
-    <!-- PRO BOX -->
-    <div class="box" data-box="pro">
-      <h2>📦 Pro Box</h2>
-      <p><strong>CHF 150.–</strong> – für 6 Monate</p>
-      <ul>
-        <li>2 m² Anbaufläche</li>
-        <li>Exklusive Sorten freigeschaltet</li>
-        <li>Reinvest-Bonus</li>
-        <li>+20 % Ertrag auf Pflanzen</li>
-        <li>Referral-Link aktiv</li>
-      </ul>
-      <button class="buy-btn">Pro Box kaufen</button>
-    </div>
 
-    <!-- PREMIUM BOX -->
-    <div class="box" data-box="premium">
-      <h2>🎁 Premium Box</h2>
-      <p><strong>CHF 199.–</strong> – für 12 Monate</p>
-      <ul>
-        <li>3 m² Anbaufläche</li>
-        <li>Alle Sorten & Module freigeschaltet</li>
-        <li>Reinvest & Bonusaktionen</li>
-        <li>+30 % Ertrag auf Pflanzen</li>
-        <li>Extra Support</li>
-      </ul>
-      <button class="buy-btn">Premium Box kaufen</button>
-    </div>
+<!-- ☰ Menü -->
+<div class="menu-toggle">☰</div>
+<div class="menu-content">
+  <a href="dashboard.html">📊 Dashboard</a>
+  <a href="plants.html">🌱 Pflanzen kaufen</a>
+  <a href="starterboxseite.html">💎 Lizenz & Upgrade</a>
+  <a href="partner.html">🤝 Partner</a>
+  <a href="settings.html">⚙️ Einstellungen</a>
+  <a href="index.html">🚪 Logout</a>
+</div>
+
+<!-- Boxen -->
+<div class="box-container">
+
+  <!-- Lizenz -->
+  <div class="box">
+    <h2>Backoffice Lizenz</h2>
+    <p><strong>CHF 49.–</strong> einmalig</p>
+    <ul>
+      <li>Dashboard Zugriff</li>
+      <li>1 Starter-Pflanze kostenlos</li>
+      <li>Referral-Link</li>
+    </ul>
+    <button class="buy-btn" onclick="buyLicense()">Lizenz kaufen</button>
   </div>
 
-  <script src="starterbox.js"></script>
+  <!-- Pro -->
+  <div class="box">
+    <h2>Pro Box</h2>
+    <p><strong>CHF 150.–</strong> – 6 Monate</p>
+    <ul>
+      <li>2 m² Anbaufläche</li>
+      <li>+20 % Ertrag</li>
+      <li>Exklusive Pflanzen</li>
+    </ul>
+    <button class="buy-btn" onclick="buyPro()">Pro kaufen</button>
+  </div>
+
+  <!-- Premium -->
+  <div class="box">
+    <h2>Premium Box</h2>
+    <p><strong>CHF 300.–</strong> – 12 Monate</p>
+    <ul>
+      <li>3 m² Anbaufläche</li>
+      <li>+30 % Ertrag</li>
+      <li>Alle Features freigeschaltet</li>
+    </ul>
+    <button class="buy-btn" onclick="buyPremium()">Premium kaufen</button>
+  </div>
+
+</div>
+
+<div id="message"></div>
+
+<script>
+  function buyLicense() {
+    localStorage.setItem("lizenz", "true");
+    document.getElementById("message").innerText = "✅ Lizenz erfolgreich aktiviert!";
+  }
+
+  function buyPro() {
+    localStorage.setItem("lizenz", "true");
+    localStorage.setItem("pro", "true");
+    document.getElementById("message").innerText = "✅ Pro Box aktiviert!";
+  }
+
+  function buyPremium() {
+    localStorage.setItem("lizenz", "true");
+    localStorage.setItem("premium", "true");
+    document.getElementById("message").innerText = "✅ Premium Box aktiviert!";
+  }
+</script>
+
 </body>
 </html>
