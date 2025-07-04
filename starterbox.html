@@ -21,8 +21,8 @@
       background-color: #0f0;
       padding: 10px;
       border-radius: 6px;
-      z-index: 10;
       cursor: pointer;
+      z-index: 10;
     }
 
     .menu-content {
@@ -50,21 +50,21 @@
 
     .box-container {
       max-width: 600px;
-      margin: 100px auto;
+      margin: 100px auto 50px;
       padding: 20px;
     }
 
     .box {
-      border: 2px solid #00ff90;
+      border: 2px solid #0ff90;
       border-radius: 20px;
       margin-bottom: 40px;
       background-color: rgba(0, 0, 0, 0.6);
       padding: 20px;
-      box-shadow: 0 0 20px #00ff90;
+      box-shadow: 0 0 20px #0ff90;
     }
 
     .box h2 {
-      color: #00ff90;
+      color: #0ff90;
       margin-bottom: 10px;
     }
 
@@ -77,79 +77,114 @@
       padding-left: 0;
     }
 
-    .box li::before {
-      content: "🌱";
+    .box li:before {
+      content: "🌿";
       margin-right: 8px;
     }
 
     .buy-btn {
       display: block;
-      width: 100%;
-      background-color: #00ff90;
+      background-color: #0ff90;
       color: #000;
       padding: 12px;
+      border: none;
+      border-radius: 10px;
       margin-top: 20px;
       font-size: 16px;
       font-weight: bold;
-      border: none;
-      border-radius: 10px;
       cursor: pointer;
       text-align: center;
-      transition: 0.3s;
     }
 
-    .buy-btn:hover {
-      background-color: #00cc55;
+    .buy-btn.disabled {
+      background: gray;
+      cursor: not-allowed;
     }
   </style>
 </head>
 <body>
 
-  <!-- Menü -->
-  <div class="menu-toggle">☰</div>
-  <div class="menu-content">
-    <a href="dashboard.html">📊 Dashboard</a>
-    <a href="plants.html">🌱 Pflanzen kaufen</a>
-    <a href="starterbox.html">📦 Starterbox</a>
-    <a href="partner.html">🤝 Partner</a>
-    <a href="settings.html">⚙️ Einstellungen</a>
-    <a href="index.html">🚪 Logout</a>
+<!-- 🍔 Menü -->
+<div class="menu-toggle">☰</div>
+<div class="menu-content">
+  <a href="dashboard.html">📊 Dashboard</a>
+  <a href="plants.html">🌱 Pflanzen kaufen</a>
+  <a href="starterbox.html">📦 Starterbox</a>
+  <a href="partner.html">👥 Partner</a>
+  <a href="settings.html">⚙️ Einstellungen</a>
+  <a href="index.html">🚪 Logout</a>
+</div>
+
+<!-- 📦 Boxen -->
+<div class="box-container">
+
+  <!-- PRO BOX -->
+  <div class="box" data-box="pro">
+    <h2>🥈 Pro Box</h2>
+    <p><strong>CHF 150.–</strong> – für 6 Monate</p>
+    <ul>
+      <li>2 m² Anbaufläche</li>
+      <li>Exklusive Sorten freigeschaltet</li>
+      <li>Reinvest-Bonus</li>
+      <li>+20 % Ertrag auf Pflanzen</li>
+      <li>Referral-Link aktiv</li>
+    </ul>
+    <button class="buy-btn">Pro Box kaufen</button>
   </div>
 
-  <!-- Boxen -->
-  <div class="box-container">
-
-    <!-- PRO BOX -->
-    <div class="box">
-      <h2>🥈 Pro Box</h2>
-      <p><strong>CHF 150.–</strong> für 6 Monate</p>
-      <ul>
-        <li>2 m² Anbaufläche</li>
-        <li>Exklusive Sorten freigeschaltet</li>
-        <li>Reinvest-Bonus</li>
-        <li>+20 % Ertrag auf Pflanzen</li>
-        <li>Referral-Link aktiv</li>
-      </ul>
-      <button class="buy-btn" data-box="pro">Pro Box kaufen</button>
-    </div>
-
-    <!-- PREMIUM BOX -->
-    <div class="box">
-      <h2>🥇 Premium Box</h2>
-      <p><strong>CHF 199.–</strong> für 12 Monate</p>
-      <ul>
-        <li>3 m² Anbaufläche</li>
-        <li>Alle Sorten & Module freigeschaltet</li>
-        <li>Reinvest & Bonusaktionen</li>
-        <li>+30 % Ertrag auf Pflanzen</li>
-        <li>Extra Support</li>
-      </ul>
-      <button class="buy-btn" data-box="premium">Premium Box kaufen</button>
-    </div>
-
+  <!-- PREMIUM BOX -->
+  <div class="box" data-box="premium">
+    <h2>🥇 Premium Box</h2>
+    <p><strong>CHF 199.–</strong> – für 12 Monate</p>
+    <ul>
+      <li>3 m² Anbaufläche</li>
+      <li>Alle Sorten & Module freigeschaltet</li>
+      <li>Reinvest & Bonusaktionen</li>
+      <li>+30 % Ertrag auf Pflanzen</li>
+      <li>Extra Support</li>
+    </ul>
+    <button class="buy-btn">Premium Box kaufen</button>
   </div>
 
-  <script src="auth.js"></script>
-  <script src="starterbox.js"></script>
+</div>
+
+<script>
+  // Speichern
+  function getBoughtBoxes() {
+    return JSON.parse(localStorage.getItem('user_boxes')) || [];
+  }
+
+  function saveBox(name) {
+    const bought = getBoughtBoxes();
+    if (!bought.includes(name)) {
+      bought.push(name);
+      localStorage.setItem('user_boxes', JSON.stringify(bought));
+    }
+  }
+
+  // Klick-Event
+  document.querySelectorAll('.buy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const box = btn.closest('.box').dataset.box;
+      saveBox(box);
+      btn.textContent = "Gekauft";
+      btn.classList.add("disabled");
+      btn.disabled = true;
+    });
+  });
+
+  // Beim Laden prüfen
+  const bought = getBoughtBoxes();
+  document.querySelectorAll('.box').forEach(box => {
+    const name = box.dataset.box;
+    if (bought.includes(name)) {
+      const btn = box.querySelector('.buy-btn');
+      btn.textContent = "Gekauft";
+      btn.classList.add("disabled");
+      btn.disabled = true;
+    }
+  });
+</script>
+
 </body>
 </html>
