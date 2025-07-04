@@ -1,158 +1,142 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>GrowEmpire – Dashboard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pflanzen kaufen – GrowEmpire</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      color: #0f0;
-      background: url('assets/dashboard.png') no-repeat center center fixed;
+      font-family: 'Inter', sans-serif;
+      background: url('images/background.jpg') no-repeat center center fixed;
       background-size: cover;
+      color: white;
     }
 
-    #menu-btn {
-      position: fixed;
-      top: 15px;
-      left: 15px;
-      background-color: #0f0;
-      color: black;
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .topbar .title {
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .topbar .title img {
+      height: 20px;
+      margin-right: 8px;
+    }
+
+    .menu-button {
+      background: none;
       border: none;
-      border-radius: 8px;
-      width: 40px;
-      height: 40px;
+      color: white;
       font-size: 24px;
       cursor: pointer;
-      z-index: 1100;
     }
 
-    #sidebar {
-      position: fixed;
-      top: 0;
-      left: -240px;
-      width: 200px;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.95);
-      transition: left 0.3s ease;
-      padding: 20px;
-      z-index: 1000;
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-top: 1rem;
     }
 
-    #sidebar ul {
-      list-style: none;
-      padding: 0;
+    .plant-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
-    #sidebar ul li {
-      margin: 15px 0;
-    }
-
-    #sidebar ul li a {
-      color: #0f0;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .container {
-      padding: 20px;
-      padding-left: 80px;
-      margin-top: 320px;
-    }
-
-    .section {
-      background-color: rgba(0, 0, 0, 0.8);
-      border: 2px solid #0f0;
+    .plant-card {
+      background: rgba(0, 0, 0, 0.6);
       border-radius: 12px;
-      padding: 16px;
-      margin: 20px 0;
+      padding: 1rem;
+      text-align: center;
+      transition: transform 0.2s;
     }
 
-    .section h2 {
-      color: #0f0;
-      margin-bottom: 10px;
+    .plant-card:hover {
+      transform: scale(1.03);
     }
 
-    .warn {
-      color: red;
+    .plant-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+
+    .plant-name {
       font-weight: bold;
+      margin-top: 0.5rem;
     }
 
-    .emoji {
-      font-size: 20px;
-      margin-right: 5px;
+    .plant-status {
+      margin-top: 0.3rem;
+      font-size: 0.9rem;
+      background: #444;
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      display: inline-block;
     }
   </style>
 </head>
 <body>
 
-  <!-- Menü-Button -->
-  <button id="menu-btn">☰</button>
-
-  <!-- Sidebar Menü -->
-  <div id="sidebar">
-    <ul>
-      <li><a href="dashboard.html">🏠 Dashboard</a></li>
-      <li><a href="lizenz.html">📦 Lizenz</a></li>
-      <li><a href="plants.html">🪴 Pflanzen</a></li> <!-- Jetzt 100 % sichtbar -->
-      <li><a href="partner.html">👥 Partner</a></li>
-      <li><a href="settings.html">⚙️ Einstellungen</a></li>
-      <li><a href="#" onclick="logout()">🚪 Logout</a></li>
-    </ul>
+  <!-- Topbar mit Titel & Menü -->
+  <div class="topbar">
+    <div class="title">
+      <img src="images/leaf-icon.png" alt="Leaf Icon">
+      Pflanzen kaufen
+    </div>
+    <button class="menu-button" onclick="toggleMenu()">⋮</button>
   </div>
 
-  <!-- Dashboard Inhalt -->
-  <div class="container">
-    <div class="section">
-      <h2><span class="emoji">🕹️</span>Demo Version</h2>
-      <p>Nur Testsystem, kein echter Ertrag.</p>
-      <p><span class="emoji">📦</span>Box-Level: <span id="boxLevelText">demo</span></p>
-      <p id="demoWarn" class="warn">In Demo-Version nicht auszahlbar</p>
+  <!-- Überschrift -->
+  <h1>GrowEmpire</h1>
+
+  <!-- Pflanzen-Grid -->
+  <div class="plant-grid">
+    <div class="plant-card">
+      <img src="images/sativa.jpg" alt="Sativa">
+      <div class="plant-name">Sativa</div>
+      <div class="plant-status">Gekauft</div>
     </div>
 
-    <div class="section">
-      <h2><span class="emoji">🌿</span>Pflanzenübersicht</h2>
-      <p>Aktive Pflanzen: <span id="activePlants">0</span></p>
-      <p>Gratispflanzen: <span id="freePlantsText">0</span></p>
-      <p>Limit: <span id="plantLimitText">1</span></p>
+    <div class="plant-card">
+      <img src="images/haze.jpg" alt="Haze">
+      <div class="plant-name">Haze</div>
+      <div class="plant-status">Gekauft</div>
     </div>
 
-    <div class="section">
-      <h2><span class="emoji">💰</span>Ertrag</h2>
-      <p>Gesamter Ertrag: <span id="ertragText">CHF 0.00</span></p>
+    <div class="plant-card">
+      <img src="images/ogkush.jpg" alt="OG Kush">
+      <div class="plant-name">OG Kush</div>
+      <div class="plant-status">Gekauft</div>
+    </div>
+
+    <div class="plant-card">
+      <img src="images/kush2.jpg" alt="Kush 2">
+      <div class="plant-name">Kush 2</div>
+      <div class="plant-status">Gekauft</div>
     </div>
   </div>
 
-  <!-- Script -->
+  <!-- (Optionales Dropdown-Menü) -->
   <script>
-    // Menü öffnen/schließen
-    const menuBtn = document.getElementById("menu-btn");
-    const sidebar = document.getElementById("sidebar");
-
-    menuBtn.addEventListener("click", () => {
-      sidebar.style.left = (sidebar.style.left === "0px") ? "-240px" : "0px";
-    });
-
-    // Dashboard-Werte laden
-    window.addEventListener("DOMContentLoaded", () => {
-      const boxLevel = localStorage.getItem("boxLevel") || "demo";
-      const plantLimit = localStorage.getItem("plantLimit") || "1";
-      const freePlants = localStorage.getItem("freePlants") || "0";
-
-      document.getElementById("boxLevelText").textContent = boxLevel;
-      document.getElementById("plantLimitText").textContent = plantLimit;
-      document.getElementById("freePlantsText").textContent = freePlants;
-
-      if (boxLevel !== "demo") {
-        document.getElementById("demoWarn").style.display = "none";
-      }
-    });
-
-    // Logout
-    function logout() {
-      localStorage.clear();
-      alert("Du wurdest ausgeloggt.");
-      window.location.href = "index.html";
+    function toggleMenu() {
+      alert("Menü geöffnet – hier kannst du z. B. Logout, Hilfe oder Einstellungen einbauen.");
     }
   </script>
 
