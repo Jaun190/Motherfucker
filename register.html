@@ -61,7 +61,7 @@
   </div>
 
   <script>
-    // Ref aus URL speichern
+    // Referral aus URL speichern
     window.onload = () => {
       const urlParams = new URLSearchParams(window.location.search);
       const ref = urlParams.get("ref");
@@ -96,7 +96,7 @@
       refLink.innerText = yourRefLink;
       refBox.style.display = "block";
 
-      // Automatisch weiterleiten in 3 Sek
+      // Optional: Weiterleitung nach 3 Sek.
       setTimeout(() => {
         window.location.href = "dashboard.html";
       }, 3000);
