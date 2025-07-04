@@ -6,8 +6,16 @@
   <title>GrowEmpire – Pflanzen</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- jsPDF einbinden -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", async () => {
+      const script = document.createElement("script");
+      script.src = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js";
+      script.onload = () => {
+        window.jsPDF = window.jspdf.jsPDF;
+      };
+      document.head.appendChild(script);
+    });
+  </script>
 
   <style>
     body {
@@ -17,67 +25,6 @@
       background-size: cover;
       color: white;
     }
-
-    .topbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 64px;
-      background: rgba(0, 0, 0, 0.9);
-      border-bottom: 2px solid #00ff88;
-      box-shadow: 0 0 12px #00ff88;
-      z-index: 998;
-    }
-
-    .menu-wrapper {
-      position: relative;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      padding-left: 20px;
-    }
-
-    .menu-icon {
-      background: rgba(0, 255, 136, 0.1);
-      border: 2px solid #00ff88;
-      color: #00ff88;
-      padding: 8px 12px;
-      border-radius: 10px;
-      font-size: 22px;
-      cursor: pointer;
-      box-shadow: 0 0 10px #00ff88;
-    }
-
-    .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 60px;
-      left: 20px;
-      background: rgba(0, 0, 0, 0.95);
-      border: 2px solid #00ff88;
-      border-radius: 12px;
-      padding: 0.5rem 0;
-      min-width: 200px;
-      box-shadow: 0 0 12px #00ff88;
-      z-index: 999;
-    }
-
-    .dropdown-menu a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 18px;
-      color: #00ff88;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1rem;
-    }
-
-    .dropdown-menu a:hover {
-      background: rgba(0, 255, 136, 0.08);
-    }
-
     .plant-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -86,7 +33,6 @@
       max-width: 1200px;
       margin: auto;
     }
-
     .plant-card {
       background: rgba(0, 0, 0, 0.85);
       border: 2px solid #00ff88;
@@ -96,7 +42,6 @@
       color: white;
       box-shadow: 0 0 16px #00ff88;
     }
-
     .plant-card img {
       width: 100%;
       height: auto;
@@ -105,14 +50,12 @@
       border-radius: 10px;
       margin-bottom: 1rem;
     }
-
     .plant-name {
       font-size: 1.2rem;
       font-weight: bold;
       color: #00ff88;
       margin-bottom: 0.3rem;
     }
-
     .plant-buy {
       margin-top: 0.7rem;
       background: #00ff88;
@@ -126,11 +69,9 @@
       box-shadow: 0 0 8px #00ff88;
       transition: transform 0.2s;
     }
-
     .plant-buy:hover {
       transform: scale(1.05);
     }
-
     .plant-status {
       margin-top: 0.7rem;
       background: #00ff88;
@@ -144,37 +85,9 @@
 </head>
 <body>
 
-  <!-- Menü -->
-  <div class="topbar">
-    <div class="menu-wrapper">
-      <div class="menu-icon" onclick="toggleMenu()">☰</div>
-      <div class="dropdown-menu" id="dropdown">
-        <a href="dashboard.html">🧠 Dashboard</a>
-        <a href="plants.html">🧬 Pflanzen</a>
-        <a href="partner.html">🤝 Partner</a>
-        <a href="lizenz.html">🪪 Lizenz</a>
-        <a href="settings.html">⚙️ Einstellungen</a>
-        <a href="logout.html">📕 Logout</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Pflanzenliste -->
   <div class="plant-grid" id="plantGrid"></div>
 
   <script>
-    function toggleMenu() {
-      const menu = document.getElementById('dropdown');
-      menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
-    }
-
-    window.addEventListener('click', function (e) {
-      const menu = document.getElementById('dropdown');
-      if (!e.target.closest('.menu-wrapper')) {
-        menu.style.display = 'none';
-      }
-    });
-
     const plants = [
       { name: "Sativa", price: 190, duration: 75, image: "assets/sativa1.png", bought: false },
       { name: "Haze", price: 180, duration: 80, image: "assets/haze1.png", bought: false },
@@ -220,9 +133,10 @@
       localStorage.setItem("plants", JSON.stringify(plants));
       renderPlants();
 
-      const jsPDF = window.jspdf.jsPDF;
-      const doc = new jsPDF();
+      const jsPDF = window.jsPDF;
+      if (!jsPDF) return alert("PDF-Bibliothek noch nicht geladen. Bitte neu laden.");
 
+      const doc = new jsPDF();
       const plant = plants[index];
       const now = new Date().toLocaleDateString();
 
@@ -246,6 +160,5 @@
 
     renderPlants();
   </script>
-
 </body>
 </html>
