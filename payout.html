@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="de">
+<!DOCTYPE html><html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GrowEmpire – Auszahlung</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auszahlung – GrowEmpire</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     body {
       margin: 0;
@@ -12,204 +11,104 @@
       background: url('./assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
       color: #00ff88;
-    }
-
-    .topbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 60px;
-      background: rgba(0, 0, 0, 0.6);
-      border-bottom: 2px solid #00ff88;
-      box-shadow: 0 0 12px #00ff88;
-      z-index: 998;
-    }
-
-    .menu-wrapper {
-      position: relative;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      padding-left: 20px;
-    }
-
-    .menu-icon {
-      background: rgba(0, 255, 136, 0.1);
-      color: #00ff88;
-      border: 2px solid #00ff88;
-      padding: 6px 12px;
-      border-radius: 10px;
-      font-size: 22px;
-      cursor: pointer;
-      box-shadow: 0 0 10px #00ff88;
-    }
-
-    .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 60px;
-      left: 20px;
-      background: rgba(0, 0, 0, 0.95);
-      border: 2px solid #00ff88;
-      border-radius: 12px;
-      padding: 0.5rem;
-      min-width: 200px;
-      box-shadow: 0 0 12px #00ff88;
-      z-index: 999;
-    }
-
-    .dropdown-menu a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 18px;
-      color: #00ff88;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1rem;
-      transition: background 0.2s;
-    }
-
-    .dropdown-menu a:hover {
-      background: rgba(0, 255, 136, 0.08);
-    }
-
-    .dashboard-content {
-      margin-top: 100px;
+      text-align: center;
       padding: 2rem;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
     }
-
-    .plant-box {
-      background: rgba(0, 0, 0, 0.75);
+    .box {
+      background: rgba(0, 0, 0, 0.85);
       border: 2px solid #00ff88;
       border-radius: 16px;
+      box-shadow: 0 0 16px #00ff88;
       padding: 2rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 0 12px #00ff88;
-      color: white;
-      text-align: center;
+      max-width: 600px;
+      margin: 100px auto;
     }
-
+    h1 {
+      font-size: 2rem;
+      color: #00ff88;
+    }
+    p {
+      font-size: 1.1rem;
+      color: #ccc;
+      margin: 1rem 0;
+    }
     .btn {
       background-color: #00ff88;
       border: none;
       color: black;
-      padding: 10px 20px;
-      border-radius: 6px;
+      padding: 12px 24px;
+      border-radius: 8px;
       font-weight: bold;
+      font-size: 1rem;
       cursor: pointer;
-      margin: 10px 5px;
+      margin: 1rem;
+      box-shadow: 0 0 10px #00ff88;
+      transition: transform 0.2s;
     }
-
-    .btn[disabled] {
-      background-color: #444;
-      color: #999;
-      cursor: not-allowed;
+    .btn:hover {
+      transform: scale(1.05);
     }
-
-    .info {
-      margin-top: 10px;
-      font-size: 0.9rem;
-      color: #ccc;
+    .status {
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #ffffff;
+    }
+    .highlight {
+      color: #00ff88;
     }
   </style>
 </head>
 <body>
+  <div class="box">
+    <h1>💸 Deine Ernteübersicht</h1>
+    <p id="summary">Daten werden geladen...</p><div class="status" id="status"></div>
 
-<div class="topbar">
-  <div class="menu-wrapper">
-    <div class="menu-icon" onclick="toggleMenu()">≡</div>
-    <div class="dropdown-menu" id="dropdown">
-      <a href="dashboard.html"><span>🧠</span> Dashboard</a>
-      <a href="plants.html"><span>🌿</span> Pflanzen</a>
-      <a href="partner.html"><span>🤝</span> Partner</a>
-      <a href="lizenz.html"><span>🪪</span> Lizenz</a>
-      <a href="settings.html"><span>⚙️</span> Einstellungen</a>
-      <a href="index.html"><span>🔴</span> Logout</a>
-    </div>
-  </div>
-</div>
+<button class="btn" onclick="reinvest()">🔁 Reinvest</button>
+<button class="btn" id="btnPayout" disabled onclick="window.location.href='bank.html'">💸 Auszahlung</button>
 
-<div class="dashboard-content" id="payoutContainer">
-  <p style="text-align:center;">Keine erntebereiten Pflanzen gefunden.</p>
-</div>
+  </div>  <script>
+    const demoHarvests = JSON.parse(localStorage.getItem("purchases") || "[]")
+      .filter(p => {
+        const date = new Date(p.date);
+        const today = new Date();
+        const tage = p.tage || 75;
+        const diff = Math.ceil((today - date) / (1000 * 60 * 60 * 24));
+        return diff >= tage;
+      });
 
-<script>
-function toggleMenu() {
-  const menu = document.getElementById('dropdown');
-  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-}
+    const pflanzenAnzahl = demoHarvests.length;
+    const ertragProPflanze = (localStorage.getItem("lizenz") === "premium") ? 45 : 30;
+    const gesamtErtrag = pflanzenAnzahl * ertragProPflanze;
 
-window.addEventListener('click', function (e) {
-  const menu = document.getElementById('dropdown');
-  if (!e.target.closest('.menu-wrapper')) {
-    menu.style.display = 'none';
-  }
-});
+    // Beispielhafte Deckung: 90 von 150 gedeckt
+    let gedeckt = parseInt(localStorage.getItem("deckung") || "0");
+    const fehlt = Math.max(0, gesamtErtrag - gedeckt);
 
-const container = document.getElementById("payoutContainer");
-const data = JSON.parse(localStorage.getItem("purchases") || "[]");
-const today = new Date();
-let found = false;
-
-container.innerHTML = "";
-
-data.forEach((p, i) => {
-  const gekauft = new Date(p.date);
-  const ernte = new Date(p.date);
-  ernte.setDate(ernte.getDate() + p.tage);
-  const diff = Math.ceil((ernte - today) / (1000 * 60 * 60 * 24));
-
-  if (diff <= 0) {
-    found = true;
-    const box = document.createElement("div");
-    box.className = "plant-box";
-
-    const auszahlbar = (p.reinvested || p.refCovered);
-    const betrag = (p.preis || 150) + (p.ertrag || 30);
-
-    box.innerHTML = `
-      <h2>🌿 ${p.name}</h2>
-      <p>📅 Gekauft am: ${gekauft.toLocaleDateString("de-CH")}</p>
-      <p>💰 Auszahlbar: CHF ${betrag.toFixed(2)}</p>
-      <p class="info">➡️ Davon Ertrag CHF ${(p.ertrag || 30)} (muss gedeckt sein)</p>
-      <button class="btn" onclick="reinvest(${i})">🔁 Reinvest</button>
-      <button class="btn" onclick="auszahlen(${i})" ${auszahlbar ? "" : "disabled"}>💸 Auszahlen</button>
-      ${!auszahlbar ? '<p class="info">❌ Ertrag nicht gedeckt – Reinvest oder Referral nötig</p>' : ""}
+    document.getElementById("summary").innerHTML = `
+      Du hast <span class="highlight">${pflanzenAnzahl}</span> Pflanze(n) geerntet.<br>
+      Gesamt-Ertrag: <span class="highlight">CHF ${gesamtErtrag}.–</span><br>
+      Gedeckt: <span class="highlight">CHF ${gedeckt}.–</span><br>
+      Fehlbetrag: <span class="highlight">CHF ${fehlt}.–</span>
     `;
-    container.appendChild(box);
-  }
-});
 
-if (!found) {
-  container.innerHTML = "<p style='text-align:center;'>Keine erntebereiten Pflanzen gefunden.</p>";
-}
+    const payoutBtn = document.getElementById("btnPayout");
+    const status = document.getElementById("status");
 
-function reinvest(index) {
-  const pflanze = data[index];
-  pflanze.date = new Date().toISOString();
-  pflanze.reinvested = true;
-  localStorage.setItem("purchases", JSON.stringify(data));
-  alert("Reinvest erfolgreich!");
-  location.reload();
-}
+    if (fehlt === 0 && pflanzenAnzahl > 0) {
+      payoutBtn.disabled = false;
+      status.innerHTML = "✅ Deine Auszahlung ist jetzt möglich.";
+    } else if (pflanzenAnzahl > 0) {
+      status.innerHTML = "🔒 Auszahlung noch gesperrt – bitte Reinvestieren oder Partnerumsatz erhöhen.";
+    } else {
+      status.innerHTML = "🌱 Du hast aktuell keine erntebereiten Pflanzen.";
+    }
 
-function auszahlen(index) {
-  const pflanze = data[index];
-  if (!pflanze.reinvested && !pflanze.refCovered) {
-    alert("Ertrag nicht gedeckt. Bitte Reinvest oder Referral-Umsatz!");
-    return;
-  }
-  alert("CHF " + ((pflanze.preis || 150) + (pflanze.ertrag || 30)) + " wird ausgezahlt (simuliert)");
-  data.splice(index, 1); // Pflanze entfernen
-  localStorage.setItem("purchases", JSON.stringify(data));
-  location.reload();
-}
-</script>
-
-</body>
+    function reinvest() {
+      gedeckt += 30;
+      localStorage.setItem("deckung", gedeckt);
+      alert("🔁 CHF 30.– wurden reinvestiert und als gedeckt markiert.");
+      location.reload();
+    }
+  </script></body>
 </html>
