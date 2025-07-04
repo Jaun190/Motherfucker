@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="de">
+<!DOCTYPE html><html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard – GrowEmpire</title>
+  <title>Dashboard - GrowEmpire</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     body {
@@ -13,7 +12,6 @@
       background-size: cover;
       color: #00ff88;
     }
-
     .topbar {
       position: fixed;
       top: 0;
@@ -25,7 +23,6 @@
       box-shadow: 0 0 12px #00ff88;
       z-index: 998;
     }
-
     .menu-wrapper {
       position: relative;
       height: 100%;
@@ -33,7 +30,6 @@
       align-items: center;
       padding-left: 20px;
     }
-
     .menu-icon {
       background: rgba(0, 255, 136, 0.1);
       color: #00ff88;
@@ -44,7 +40,6 @@
       cursor: pointer;
       box-shadow: 0 0 10px #00ff88;
     }
-
     .dropdown-menu {
       display: none;
       position: absolute;
@@ -58,7 +53,6 @@
       box-shadow: 0 0 12px #00ff88;
       z-index: 999;
     }
-
     .dropdown-menu a {
       display: flex;
       align-items: center;
@@ -70,11 +64,9 @@
       font-size: 1rem;
       transition: background 0.2s;
     }
-
     .dropdown-menu a:hover {
       background: rgba(0, 255, 136, 0.08);
     }
-
     .dashboard-content {
       margin-top: 100px;
       padding: 2rem;
@@ -82,29 +74,25 @@
       margin-left: auto;
       margin-right: auto;
     }
-
     .plant-box {
       background: rgba(0, 0, 0, 0.75);
       border: 2px solid #00ff88;
       border-radius: 16px;
       padding: 2rem;
+      margin-bottom: 2rem;
       box-shadow: 0 0 12px #00ff88;
       color: white;
       text-align: center;
-      margin-bottom: 2rem;
     }
-
     .plant-box h1 {
       font-size: 1.5rem;
       margin-bottom: 0.5rem;
       color: #00ff88;
     }
-
     .plant-box p {
       font-size: 1rem;
       color: #ccc;
     }
-
     .progress-bar {
       width: 100%;
       background-color: rgba(255, 255, 255, 0.1);
@@ -114,25 +102,12 @@
       margin-top: 10px;
       border: 1px solid #00ff88;
     }
-
     .progress-fill {
       height: 100%;
       background: linear-gradient(90deg, #00ff88, #00cc66);
       width: 0%;
       transition: width 0.3s ease;
     }
-
-    .btn {
-      background-color: #00ff88;
-      border: none;
-      color: black;
-      padding: 8px 16px;
-      margin-top: 10px;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
     .license-box {
       background: rgba(0,0,0,0.5);
       border: 2px solid #00ff88;
@@ -144,43 +119,44 @@
       box-shadow: 0 0 10px #00ff88;
       max-width: 500px;
     }
+    .btn {
+      background-color: #00ff88;
+      border: none;
+      color: black;
+      padding: 8px 16px;
+      margin-top: 10px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-  <!-- Menu -->
   <div class="topbar">
     <div class="menu-wrapper">
-      <div class="menu-icon" onclick="toggleMenu()">☰</div>
+      <div class="menu-icon" onclick="toggleMenu()">≡</div>
       <div class="dropdown-menu" id="dropdown">
         <a href="dashboard.html"><span>🌿</span> Dashboard</a>
         <a href="plants.html"><span>🧪</span> Pflanzen</a>
         <a href="partner.html"><span>💼</span> Partner</a>
         <a href="lizenz.html"><span>📄</span> Lizenz</a>
         <a href="settings.html"><span>⚙️</span> Einstellungen</a>
+        <a href="payout.html"><span>💸</span> Auszahlung</a>
         <a href="index.html"><span>🔴</span> Logout</a>
       </div>
     </div>
-  </div>
-
-  <!-- Lizenz-Anzeige -->
-  <div class="license-box" id="licenseInfo"></div>
-
-  <!-- Pflanzenbereich -->
-  <div class="dashboard-content" id="plantContainer">
+  </div>  <!-- Lizenz-Anzeige -->  <div class="license-box" id="licenseInfo"></div>  <!-- Pflanzenbereich -->  <div class="dashboard-content" id="plantContainer">
     <p style="text-align:center;">Keine gekauften Pflanzen.</p>
-  </div>
-
-  <!-- Logik -->
-  <script>
+  </div>  <!-- Logik -->  <script>
     function toggleMenu() {
-      const menu = document.getElementById("dropdown");
-      menu.style.display = menu.style.display === "block" ? "none" : "block";
+      const menu = document.getElementById('dropdown');
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
     }
 
-    window.addEventListener("click", function (e) {
-      const menu = document.getElementById("dropdown");
-      if (!e.target.closest(".menu-wrapper")) {
-        menu.style.display = "none";
+    window.addEventListener('click', function (e) {
+      const menu = document.getElementById('dropdown');
+      if (!e.target.closest('.menu-wrapper')) {
+        menu.style.display = 'none';
       }
     });
 
@@ -188,10 +164,10 @@
     const data = JSON.parse(localStorage.getItem("purchases") || "[]");
     const lizenz = localStorage.getItem("lizenz") || "demo";
     const licenseInfoBox = document.getElementById("licenseInfo");
-    licenseInfoBox.textContent = "Aktive Lizenz: " + lizenz.toUpperCase();
+    licenseInfoBox.textContent = `Aktive Lizenz: ${lizenz.toUpperCase()}`;
 
     function createPDF(pflanze) {
-      const doc = new Blob([`Bestätigung: ${pflanze.name}\nGekauft am: ${new Date(pflanze.date).toLocaleDateString("de-CH")}`], { type: "application/pdf" });
+      const doc = new Blob([`Bestätigung: ${pflanze.name}\nGekauft am: ${new Date(pflanze.date).toLocaleDateString("de-CH")}`], { type: "text/plain" });
       const url = URL.createObjectURL(doc);
       const link = document.createElement("a");
       link.href = url;
@@ -201,7 +177,7 @@
 
     if (data.length > 0) {
       container.innerHTML = "";
-      data.forEach((p) => {
+      data.forEach(p => {
         const box = document.createElement("div");
         box.className = "plant-box";
 
@@ -211,29 +187,17 @@
         ende.setDate(gekauft.getDate() + p.tage);
 
         const diff = Math.max(0, Math.ceil((ende - heute) / (1000 * 60 * 60 * 24)));
-        const passed = Math.min(p.tage, Math.ceil((heute - gekauft) / (1000 * 60 * 60 * 24)));
+        const passed = p.tage - diff;
         const percent = Math.round((passed / p.tage) * 100);
 
         box.innerHTML = `
           <h1>🌱 ${p.name}</h1>
           <p>📅 Gekauft am: ${gekauft.toLocaleDateString("de-CH")}</p>
           <p>⏳ Noch ${diff} Tage bis zur Ernte</p>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width:${percent}%"></div>
+          </div>
         `;
-
-        const progress = document.createElement("div");
-        progress.className = "progress-bar";
-
-        const fill = document.createElement("div");
-        fill.className = "progress-fill";
-        fill.style.width = percent + "%";
-
-        if (diff === 0) {
-          fill.style.cursor = "pointer";
-          fill.onclick = () => window.location.href = "payout.html";
-        }
-
-        progress.appendChild(fill);
-        box.appendChild(progress);
 
         if (diff === 0) {
           const pdfBtn = document.createElement("button");
@@ -242,18 +206,15 @@
           pdfBtn.onclick = () => createPDF(p);
           box.appendChild(pdfBtn);
 
-          if (lizenz === "pro" || lizenz === "premium") {
-            const reinvestBtn = document.createElement("button");
-            reinvestBtn.className = "btn";
-            reinvestBtn.textContent = "🔁 Reinvest";
-            reinvestBtn.onclick = () => alert("Reinvest durchgeführt für " + p.name);
-            box.appendChild(reinvestBtn);
-          }
+          const payoutBtn = document.createElement("button");
+          payoutBtn.className = "btn";
+          payoutBtn.textContent = "💸 Ernte / Auszahlung";
+          payoutBtn.onclick = () => window.location.href = "payout.html";
+          box.appendChild(payoutBtn);
         }
 
         container.appendChild(box);
       });
     }
-  </script>
-</body>
+  </script></body>
 </html>
