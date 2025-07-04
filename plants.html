@@ -115,17 +115,35 @@
       font-size: 1.2rem;
       font-weight: bold;
       color: #00ff88;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .plant-buy {
+      margin-top: 0.7rem;
+      background: #00ff88;
+      color: black;
+      padding: 8px 16px;
+      font-weight: bold;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 0 8px #00ff88;
+      transition: transform 0.2s;
+    }
+
+    .plant-buy:hover {
+      transform: scale(1.05);
     }
 
     .plant-status {
+      margin-top: 0.7rem;
       background: #00ff88;
       color: black;
-      padding: 6px 12px;
+      padding: 8px 16px;
+      font-weight: bold;
       border-radius: 8px;
       display: inline-block;
-      font-weight: bold;
-      margin-top: 0.5rem;
     }
   </style>
 </head>
@@ -146,43 +164,9 @@
     </div>
   </div>
 
-  <!-- Überschrift -->
-  <h1 class="headline">GrowEmpire</h1>
+  <h1 class="headline">Meine Pflanzen</h1>
 
-  <!-- Pflanzenliste -->
-  <div class="plant-grid">
-
-    <div class="plant-card">
-      <img src="assets/sativa1.png" alt="Sativa">
-      <div class="plant-name">Sativa</div>
-      <div class="plant-status">Gekauft</div>
-    </div>
-
-    <div class="plant-card">
-      <img src="assets/haze1.png" alt="Haze">
-      <div class="plant-name">Haze</div>
-      <div class="plant-status">Gekauft</div>
-    </div>
-
-    <div class="plant-card">
-      <img src="assets/ogkush.png" alt="OG Kush">
-      <div class="plant-name">OG Kush</div>
-      <div class="plant-status">Gekauft</div>
-    </div>
-
-    <div class="plant-card">
-      <img src="assets/kush2.png" alt="Kush 2">
-      <div class="plant-name">Kush 2</div>
-      <div class="plant-status">Gekauft</div>
-    </div>
-
-    <div class="plant-card">
-      <img src="assets/kiffen.png" alt="Bubble Gum">
-      <div class="plant-name">Bubble Gum</div>
-      <div class="plant-status">Gekauft</div>
-    </div>
-
-  </div>
+  <div class="plant-grid" id="plantGrid"></div>
 
   <script>
     function toggleMenu() {
@@ -196,6 +180,47 @@
         menu.style.display = 'none';
       }
     });
+
+    // Pflanzenliste
+    const plants = [
+      { name: "Sativa", price: 190, duration: 75, image: "assets/sativa1.png", bought: false },
+      { name: "Haze", price: 180, duration: 80, image: "assets/haze1.png", bought: false },
+      { name: "OG Kush", price: 200, duration: 85, image: "assets/ogkush.png", bought: false },
+      { name: "Kush 2", price: 190, duration: 70, image: "assets/kush2.png", bought: false },
+      { name: "Bubble Gum", price: 185, duration: 70, image: "assets/kiffen.png", bought: false }
+    ];
+
+    function renderPlants() {
+      const grid = document.getElementById("plantGrid");
+      grid.innerHTML = "";
+
+      plants.forEach((plant, index) => {
+        const card = document.createElement("div");
+        card.className = "plant-card";
+
+        card.innerHTML = `
+          <img src="${plant.image}" alt="${plant.name}">
+          <div class="plant-name">${plant.name}</div>
+          <div>Dauer: ${plant.duration} Tage</div>
+          <div>Preis: CHF ${plant.price}.–</div>
+          ${
+            plant.bought
+              ? `<div class="plant-status">✅ Gekauft</div>`
+              : `<button class="plant-buy" onclick="buyPlant(${index})">Kaufen – CHF ${plant.price}.–</button>`
+          }
+        `;
+
+        grid.appendChild(card);
+      });
+    }
+
+    function buyPlant(index) {
+      plants[index].bought = true;
+      alert("✅ Du hast „" + plants[index].name + "“ gekauft!");
+      renderPlants();
+    }
+
+    renderPlants();
   </script>
 
 </body>
