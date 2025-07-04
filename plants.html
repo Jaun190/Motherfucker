@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="de">
+<!DOCTYPE html><html lang="de">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>GrowEmpire – Pflanzen</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
     body {
@@ -109,7 +108,6 @@
   </style>
 </head>
 <body>
-
   <div class="topbar">
     <div class="menu-icon" onclick="toggleMenu()">☰</div>
     <div class="dropdown-menu" id="dropdown">
@@ -120,11 +118,8 @@
       <a href="settings.html">⚙️ Einstellungen</a>
       <a href="logout.html">📕 Logout</a>
     </div>
-  </div>
-
-  <div class="container" id="plantList"></div>
-
-  <script>
+  </div>  <div class="container" id="plantList"></div>  <script>
+    const userStatus = localStorage.getItem("user_status") || "demo";
     const plants = [
       { name: "Sativa", img: "assets/sativa1.png", days: 75, price: 190 },
       { name: "Haze", img: "assets/haze1.png", days: 80, price: 180 },
@@ -133,6 +128,11 @@
     ];
 
     const container = document.getElementById("plantList");
+
+    function alreadyBought(name) {
+      const data = JSON.parse(localStorage.getItem(`plant_${name}`));
+      return data?.bought;
+    }
 
     plants.forEach(plant => {
       const card = document.createElement("div");
@@ -152,23 +152,25 @@
       price.textContent = `Preis: CHF ${plant.price}.–`;
 
       const button = document.createElement("button");
+      const gekauft = alreadyBought(plant.name);
 
-      const saved = JSON.parse(localStorage.getItem(`plant_${plant.name}`));
-      if (saved?.bought) {
+      if (gekauft) {
         button.textContent = "✅ Gekauft";
         button.disabled = true;
       } else {
         button.textContent = "Kaufen";
+        button.disabled = false;
         button.onclick = () => {
           const data = {
             bought: true,
             boughtAt: new Date().toISOString(),
-            days: plant.days
+            days: plant.days,
+            price: plant.price,
+            status: "growing"
           };
           localStorage.setItem(`plant_${plant.name}`, JSON.stringify(data));
           button.textContent = "✅ Gekauft";
           button.disabled = true;
-          generatePDF(plant.name, plant.days, plant.price);
         };
       }
 
@@ -184,19 +186,5 @@
       const menu = document.getElementById("dropdown");
       menu.style.display = menu.style.display === "block" ? "none" : "block";
     }
-
-    async function generatePDF(name, days, price) {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
-      doc.setFontSize(18);
-      doc.text("GrowEmpire – Kaufbestätigung", 20, 20);
-      doc.setFontSize(12);
-      doc.text(`Pflanze: ${name}`, 20, 40);
-      doc.text(`Dauer: ${days} Tage`, 20, 50);
-      doc.text(`Preis: CHF ${price}.–`, 20, 60);
-      doc.text(`Datum: ${new Date().toLocaleDateString()}`, 20, 70);
-      doc.save(`Kaufbestaetigung_${name}.pdf`);
-    }
-  </script>
-</body>
+  </script></body>
 </html>
