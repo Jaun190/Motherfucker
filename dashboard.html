@@ -12,7 +12,6 @@
       background-size: cover;
       color: white;
     }
-
     .topbar {
       position: fixed;
       top: 0;
@@ -26,7 +25,6 @@
       z-index: 1000;
       border-bottom: 2px solid #00ff88;
     }
-
     .menu-icon {
       background: rgba(0, 255, 136, 0.1);
       border: 2px solid #00ff88;
@@ -37,7 +35,6 @@
       cursor: pointer;
       box-shadow: 0 0 10px #00ff88;
     }
-
     .dropdown-menu {
       display: none;
       position: absolute;
@@ -51,7 +48,6 @@
       box-shadow: 0 0 12px #00ff88;
       z-index: 999;
     }
-
     .dropdown-menu a {
       display: block;
       padding: 10px 20px;
@@ -59,23 +55,19 @@
       text-decoration: none;
       font-weight: bold;
     }
-
     .dropdown-menu a:hover {
       background: #00ff8866;
     }
-
     .content {
       padding-top: 80px;
       max-width: 800px;
       margin: auto;
       padding: 2rem;
     }
-
     .plant-list {
       list-style: none;
       padding: 0;
     }
-
     .plant-list li {
       background: rgba(0, 0, 0, 0.7);
       border-left: 4px solid #00ff88;
@@ -123,13 +115,12 @@
       const key = localStorage.key(i);
       if (key.startsWith("plant_")) {
         const data = JSON.parse(localStorage.getItem(key));
-        if (data && data.bought && data.boughtAt && data.days) {
+        if (data?.bought && data.boughtAt && data.days) {
           found = true;
           const boughtDate = new Date(data.boughtAt);
           const today = new Date();
           const elapsed = Math.floor((today - boughtDate) / (1000 * 60 * 60 * 24));
           const remaining = data.days - elapsed;
-
           const name = key.replace("plant_", "");
           const li = document.createElement("li");
           li.innerHTML = `🌱 <b>${name}</b><br>
