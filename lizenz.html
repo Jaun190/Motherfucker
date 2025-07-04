@@ -15,10 +15,12 @@
       align-items: center;
       padding: 40px 20px;
     }
+
     h1 {
       color: #00ff90;
       margin-bottom: 20px;
     }
+
     .box-container {
       display: flex;
       flex-wrap: wrap;
@@ -27,6 +29,7 @@
       max-width: 1200px;
       width: 100%;
     }
+
     .box {
       background: #111;
       border: 2px solid #00ff90;
@@ -38,19 +41,23 @@
       flex-direction: column;
       justify-content: space-between;
     }
+
     .box h2 {
       margin-top: 0;
       color: #00ff90;
       font-size: 1.5em;
     }
+
     .box ul {
-      padding: 0;
+      padding-left: 18px;
       list-style: none;
       margin-bottom: 20px;
     }
+
     .box li {
-      margin: 10px 0;
+      margin: 8px 0;
     }
+
     .btn {
       background: #00ff90;
       color: black;
@@ -58,9 +65,10 @@
       padding: 12px;
       border-radius: 10px;
       font-weight: bold;
-      cursor: pointer;
       font-size: 1em;
+      cursor: pointer;
     }
+
     .btn:disabled {
       background: #444;
       cursor: not-allowed;
@@ -68,8 +76,9 @@
   </style>
 </head>
 <body>
-  <h1>🎁 Deine Starterbox</h1>
+  <h1🎁>Deine Starterbox</h1>
   <div class="box-container">
+    <!-- BASIC -->
     <div class="box">
       <h2>Basic Lizenz – CHF 49.–</h2>
       <ul>
@@ -77,29 +86,33 @@
         <li>🌱 Demo wird deaktiviert</li>
         <li>🌱 1 Gratispflanze (Wert: CHF 200.–)</li>
         <li>🌱 1 Pflanze max.</li>
-        <li>🌱 20 % Ertrag (nur auf Gratispflanze)</li>
+        <li>🌱 20 % Ertrag (nur auf Gratispflanze)</li>
       </ul>
       <button id="buyBasic" class="btn" onclick="buyBox('lizenz')">Basic Lizenz kaufen</button>
     </div>
+
+    <!-- PRO -->
     <div class="box">
       <h2>Pro Box – CHF 199.–</h2>
       <ul>
         <li>🌱 Nur mit Basic Lizenz nutzbar</li>
         <li>🌱 6 Pflanzenfläche</li>
-        <li>🌱 20 % Ertrag</li>
-        <li>🌱 Ref-Bonus: 10 % / 3 %</li>
+        <li>🌱 20 % Ertrag</li>
+        <li>🌱 Ref-Bonus: 10 % / 3 %</li>
         <li>🌱 Reinvest-Funktion</li>
       </ul>
       <button id="buyPro" class="btn" onclick="buyBox('pro')">Pro Box kaufen</button>
     </div>
+
+    <!-- PREMIUM -->
     <div class="box">
       <h2>Premium Box – CHF 299.–</h2>
       <ul>
         <li>🌱 Lizenz inklusive</li>
         <li>🌱 Unbegrenzte Fläche</li>
         <li>🌱 2 Gratispflanzen</li>
-        <li>🌱 30 % Ertrag</li>
-        <li>🌱 Ref-Bonus: 10 % / 5 % / 3 % / 1 %</li>
+        <li>🌱 30 % Ertrag</li>
+        <li>🌱 Ref-Bonus: 10 % / 5 % / 3 % / 1 %</li>
         <li>🌱 Voller Zugriff & Support</li>
       </ul>
       <button id="buyPremium" class="btn" onclick="buyBox('premium')">Premium Box kaufen</button>
@@ -110,42 +123,50 @@
     function buyBox(type) {
       if (type === 'lizenz') {
         localStorage.setItem('lizenz', 'true');
+        localStorage.setItem('gratisPflanzen', '1');
         alert('✅ Basic Lizenz aktiviert!');
         location.reload();
-      } else if (type === 'pro') {
+      }
+
+      else if (type === 'pro') {
         if (localStorage.getItem('lizenz') !== 'true') {
-          alert('❗ Bitte zuerst die Basic Lizenz kaufen.');
+          alert('⚠️ Bitte zuerst die Basic Lizenz kaufen.');
           return;
         }
         localStorage.setItem('pro', 'true');
         alert('✅ Pro Box aktiviert!');
         location.reload();
-      } else if (type === 'premium') {
+      }
+
+      else if (type === 'premium') {
         localStorage.setItem('lizenz', 'true');
         localStorage.setItem('premium', 'true');
+        localStorage.setItem('gratisPflanzen', '2');
         alert('✅ Premium Box aktiviert!');
         location.reload();
       }
     }
 
-    // Gekauft-Status anzeigen
+    // Buttons deaktivieren wenn bereits gekauft
     window.onload = () => {
       if (localStorage.getItem('lizenz') === 'true') {
         const btn = document.getElementById('buyBasic');
         btn.innerText = '✅ Gekauft';
         btn.disabled = true;
       }
+
       if (localStorage.getItem('pro') === 'true') {
         const btn = document.getElementById('buyPro');
         btn.innerText = '✅ Gekauft';
         btn.disabled = true;
       }
+
       if (localStorage.getItem('premium') === 'true') {
         const btn = document.getElementById('buyPremium');
         btn.innerText = '✅ Gekauft';
         btn.disabled = true;
       }
-    }
+    };
   </script>
 </body>
-</html>
+</html>ja
