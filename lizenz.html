@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <title>GrowEmpire – Lizenz & Boxen</title>
+  <meta charset="UTF-8">
+  <title>GrowEmpire – Lizenz</title>
   <style>
     body {
       background-color: #000;
@@ -17,7 +17,8 @@
 
     h1 {
       text-align: center;
-      text-shadow: 0 0 5px #0f0;
+      color: #0f0;
+      text-shadow: 0 0 10px #0f0;
     }
 
     .box {
@@ -45,12 +46,6 @@
       border-radius: 8px;
       margin-top: 10px;
       cursor: pointer;
-    }
-
-    button:disabled {
-      background-color: #444;
-      color: #0f0;
-      cursor: default;
     }
   </style>
 </head>
@@ -84,24 +79,18 @@
   </div>
 
   <script>
-    // Buttons holen
-    const proBtn = document.getElementById("proButton");
-    const premiumBtn = document.getElementById("premiumButton");
-
-    // Klick auf PRO
-    proBtn.addEventListener("click", () => {
+    document.getElementById("proButton").addEventListener("click", () => {
       localStorage.setItem("boxLevel", "pro");
-      localStorage.setItem("plantLimit", 6);
-      localStorage.setItem("freePlants", 0);
-      alert("✅ Pro Box aktiviert! Dashboard wurde aktualisiert.");
+      localStorage.setItem("plantLimit", "6");
+      localStorage.setItem("freePlants", "0");
+      alert("✅ Pro Box aktiviert!");
     });
 
-    // Klick auf PREMIUM
-    premiumBtn.addEventListener("click", () => {
+    document.getElementById("premiumButton").addEventListener("click", () => {
       localStorage.setItem("boxLevel", "premium");
-      localStorage.setItem("plantLimit", 999);
-      localStorage.setItem("freePlants", 2);
-      alert("✅ Premium Box aktiviert! Dashboard wurde aktualisiert.");
+      localStorage.setItem("plantLimit", "999");
+      localStorage.setItem("freePlants", "2");
+      alert("✅ Premium Box aktiviert!");
     });
   </script>
 
