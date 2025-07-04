@@ -11,10 +11,9 @@
       font-family: 'Inter', sans-serif;
       background: url('./assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
-      color: #00ff88;
+      color: white;
     }
 
-    /* Schwarzer Balken oben */
     .topbar {
       position: fixed;
       top: 0;
@@ -27,7 +26,6 @@
       z-index: 998;
     }
 
-    /* Menü links oben */
     .menu-wrapper {
       position: relative;
       height: 100%;
@@ -58,7 +56,6 @@
       padding: 0.5rem 0;
       min-width: 200px;
       box-shadow: 0 0 12px #00ff88;
-      animation: fadeIn 0.2s ease-out;
       z-index: 999;
     }
 
@@ -71,122 +68,122 @@
       text-decoration: none;
       font-weight: bold;
       font-size: 1rem;
-      transition: background 0.2s;
     }
 
     .dropdown-menu a:hover {
       background: rgba(0, 255, 136, 0.08);
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-5px); }
-      to { opacity: 1; transform: translateY(0); }
+    .headline {
+      text-align: center;
+      font-size: 2.5rem;
+      color: #00ff88;
+      text-shadow: 0 0 8px #00ff88;
+      margin-top: 100px;
+      margin-bottom: 2rem;
     }
 
-    /* Pflanzenkarten */
     .plant-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1.5rem;
       padding: 2rem;
-      max-width: 1000px;
-      margin: 100px auto 0 auto;
+      max-width: 1200px;
+      margin: auto;
     }
 
     .plant-card {
-      background: rgba(32, 32, 32, 0.8);
+      background: rgba(0, 0, 0, 0.85);
       border: 2px solid #00ff88;
       border-radius: 16px;
-      text-align: center;
       padding: 1rem;
+      text-align: center;
       color: white;
-      box-shadow: 0 0 12px #00ff88;
-      transition: transform 0.2s;
-    }
-
-    .plant-card:hover {
-      transform: scale(1.03);
-      box-shadow: 0 0 18px #00ff88;
+      box-shadow: 0 0 16px #00ff88;
     }
 
     .plant-card img {
       width: 100%;
       height: auto;
-      border-radius: 8px;
+      max-height: 200px;
       object-fit: contain;
+      border-radius: 10px;
+      margin-bottom: 1rem;
     }
 
     .plant-name {
-      font-weight: bold;
       font-size: 1.2rem;
-      margin-top: 0.5rem;
+      font-weight: bold;
       color: #00ff88;
+      margin-bottom: 0.5rem;
     }
 
-    .plant-details {
-      font-size: 0.95rem;
-      margin: 0.3rem 0;
-      color: #ccc;
-    }
-
-    .buy-button {
-      margin-top: 0.8rem;
+    .plant-status {
       background: #00ff88;
       color: black;
-      padding: 0.5rem 1rem;
-      border: none;
+      padding: 6px 12px;
       border-radius: 8px;
+      display: inline-block;
       font-weight: bold;
-      cursor: pointer;
-    }
-
-    .buy-button:hover {
-      background: #00cc66;
+      margin-top: 0.5rem;
     }
   </style>
 </head>
 <body>
 
-  <!-- Obere schwarze Menüleiste -->
+  <!-- Menü -->
   <div class="topbar">
     <div class="menu-wrapper">
       <div class="menu-icon" onclick="toggleMenu()">☰</div>
       <div class="dropdown-menu" id="dropdown">
-        <a href="dashboard.html"><span>🧠</span> Dashboard</a>
-        <a href="plants.html"><span>🧬</span> Pflanzen</a>
-        <a href="partner.html"><span>🤝</span> Partner</a>
-        <a href="lizenz.html"><span>🪪</span> Lizenz</a>
-        <a href="settings.html"><span>⚙️</span> Einstellungen</a>
-        <a href="logout.html"><span>🚪</span> Logout</a>
+        <a href="dashboard.html">🧠 Dashboard</a>
+        <a href="plants.html">🧬 Pflanzen</a>
+        <a href="partner.html">🤝 Partner</a>
+        <a href="lizenz.html">🪪 Lizenz</a>
+        <a href="settings.html">⚙️ Einstellungen</a>
+        <a href="logout.html">📕 Logout</a>
       </div>
     </div>
   </div>
 
+  <!-- Überschrift -->
+  <h1 class="headline">GrowEmpire</h1>
+
   <!-- Pflanzenliste -->
   <div class="plant-grid">
+
     <div class="plant-card">
-      <img src="./assets/blue-dream.jpg" alt="Blue Dream">
-      <div class="plant-name">Blue Dream</div>
-      <div class="plant-details">Dauer: 90 Tage<br>Preis: CHF 200.–</div>
-      <button class="buy-button">Kaufen</button>
+      <img src="assets/sativa1.png" alt="Sativa">
+      <div class="plant-name">Sativa</div>
+      <div class="plant-status">Gekauft</div>
     </div>
 
     <div class="plant-card">
-      <img src="./assets/amnesia-gold.jpg" alt="Amnesia Gold">
-      <div class="plant-name">Amnesia Gold</div>
-      <div class="plant-details">Dauer: 90 Tage<br>Preis: CHF 230.–</div>
-      <button class="buy-button">Kaufen</button>
+      <img src="assets/haze1.png" alt="Haze">
+      <div class="plant-name">Haze</div>
+      <div class="plant-status">Gekauft</div>
     </div>
 
     <div class="plant-card">
-      <img src="./assets/green-poison.jpg" alt="Green Poison">
-      <div class="plant-name">Green Poison</div>
-      <div class="plant-details">Dauer: 75 Tage<br>Preis: CHF 190.–</div>
-      <button class="buy-button">Kaufen</button>
+      <img src="assets/ogkush.png" alt="OG Kush">
+      <div class="plant-name">OG Kush</div>
+      <div class="plant-status">Gekauft</div>
     </div>
+
+    <div class="plant-card">
+      <img src="assets/kush2.png" alt="Kush 2">
+      <div class="plant-name">Kush 2</div>
+      <div class="plant-status">Gekauft</div>
+    </div>
+
+    <div class="plant-card">
+      <img src="assets/kiffen.png" alt="Bubble Gum">
+      <div class="plant-name">Bubble Gum</div>
+      <div class="plant-status">Gekauft</div>
+    </div>
+
   </div>
 
-  <!-- Menü-Logik -->
   <script>
     function toggleMenu() {
       const menu = document.getElementById('dropdown');
