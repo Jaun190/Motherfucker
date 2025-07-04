@@ -1,141 +1,173 @@
-<!DOCTYPE html>
-<html lang="de">
+<!DOCTYPE html><html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GrowEmpire – Pflanzen</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GrowEmpire - Pflanzen</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       background: url('assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
       color: white;
-      padding: 1rem;
-    }
-    .menu-button {
-      background: transparent;
-      border: 2px solid #0f0;
-      color: #0f0;
-      font-size: 24px;
-      padding: 8px;
-      border-radius: 12px;
-      cursor: pointer;
-    }
-    .menu {
-      position: absolute;
-      top: 60px;
-      left: 1rem;
-      background-color: black;
-      border-radius: 12px;
-      padding: 1rem;
-      display: none;
-      flex-direction: column;
-      box-shadow: 0 0 12px #0f0;
-      z-index: 999;
-    }
-    .menu a {
-      color: #0f0;
-      margin: 0.5rem 0;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .plant-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-    .plant-card {
-      background-color: rgba(0,0,0,0.85);
-      border-radius: 16px;
-      padding: 1rem;
-      text-align: center;
-      box-shadow: 0 0 10px #0f0;
-    }
-    .plant-card img {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-    }
-    .plant-card h3 {
-      margin: 0.5rem 0;
-      color: #0f0;
-    }
-    .plant-card button {
-      background-color: #0f0;
-      color: black;
-      font-weight: bold;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      cursor: pointer;
-    }
+    }.topbar {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.menu-btn {
+  font-size: 1.5rem;
+  cursor: pointer;
+  background: none;
+  border: 2px solid #00ff99;
+  border-radius: 10px;
+  color: #00ff99;
+  padding: 6px 12px;
+}
+
+.menu {
+  position: absolute;
+  top: 60px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.9);
+  border: 2px solid #00ff99;
+  border-radius: 12px;
+  padding: 10px 20px;
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.menu a {
+  color: #00ff99;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #00ff99;
+  text-shadow: 0 0 12px #00ff99;
+  margin: 1rem 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.card {
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid #00ff99;
+  border-radius: 14px;
+  text-align: center;
+  padding: 1rem;
+  box-shadow: 0 0 18px #00ff99;
+}
+
+.card img {
+  width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.card h2 {
+  margin: 0.5rem 0 0.2rem;
+  color: #00ff99;
+}
+
+.card p {
+  margin: 0.2rem;
+}
+
+.buy-btn {
+  background: #00ff99;
+  color: black;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  font-weight: bold;
+  border-radius: 8px;
+  margin-top: 0.8rem;
+  cursor: pointer;
+}
+
+.buy-btn:disabled {
+  background: #009944;
+  color: white;
+  cursor: default;
+}
+
   </style>
 </head>
 <body>
-
-  <button class="menu-button" onclick="toggleMenu()">☰</button>
-  <div id="dropdown" class="menu">
-    <a href="dashboard.html">🧠 Dashboard</a>
-    <a href="plants.html">🌱 Pflanzen</a>
-    <a href="partner.html">🤝 Partner</a>
-    <a href="lizenz.html">🪪 Lizenz</a>
-    <a href="settings.html">⚙️ Einstellungen</a>
-    <a href="#">📕 Logout</a>
+  <div class="topbar">
+    <button class="menu-btn" onclick="toggleMenu()">
+      <i class="fas fa-bars"></i>
+    </button>
   </div>
-
-  <div class="plant-grid" id="plantGrid">
-    <!-- Pflanzenkarten werden hier per JS eingefügt -->
-  </div>
-
-  <script>
+  <div class="menu" id="menu">
+    <a href="dashboard.html"><i class="fas fa-brain"></i> Dashboard</a>
+    <a href="plants.html"><i class="fas fa-seedling"></i> Pflanzen</a>
+    <a href="partner.html"><i class="fas fa-handshake"></i> Partner</a>
+    <a href="lizenz.html"><i class="fas fa-id-card"></i> Lizenz</a>
+    <a href="settings.html"><i class="fas fa-gear"></i> Einstellungen</a>
+    <a href="#"><i class="fas fa-door-closed"></i> Logout</a>
+  </div>  <h1>GrowEmpire</h1>  <div class="grid" id="plantGrid"></div>  <script>
     const pflanzen = [
-      { name: "Sativa", bild: "assets/sativa1.png", dauer: 75, preis: 190 },
-      { name: "Haze", bild: "assets/haze1.png", dauer: 80, preis: 180 },
-      { name: "OG Kush", bild: "assets/ogkush.png", dauer: 85, preis: 200 },
-      { name: "Kush 2", bild: "assets/kush2.png", dauer: 90, preis: 195 },
+      { name: 'Sativa', dauer: 75, preis: 190, bild: 'assets/sativa1.png' },
+      { name: 'Haze', dauer: 80, preis: 180, bild: 'assets/haze1.png' },
+      { name: 'Kush 2', dauer: 90, preis: 200, bild: 'assets/kush2.png' },
+      { name: 'OG Kush', dauer: 85, preis: 210, bild: 'assets/ogkush.png' },
+      { name: 'Kiffen', dauer: 70, preis: 195, bild: 'assets/kiffen.png' },
     ];
 
-    function toggleMenu() {
-      const menu = document.getElementById('dropdown');
-      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+    const gekauft = JSON.parse(localStorage.getItem('gekauft') || '[]');
+
+    function speichern(pflanze) {
+      gekauft.push({
+        name: pflanze.name,
+        datum: new Date().toLocaleDateString('de-CH'),
+        dauer: pflanze.dauer
+      });
+      localStorage.setItem('gekauft', JSON.stringify(gekauft));
+      render();
     }
 
-    function laden() {
-      const grid = document.getElementById("plantGrid");
-      const gekauft = JSON.parse(localStorage.getItem("gekauftePflanzen") || "[]");
+    function render() {
+      const grid = document.getElementById('plantGrid');
+      grid.innerHTML = '';
 
       pflanzen.forEach(p => {
-        const isGekauft = gekauft.find(g => g.name === p.name);
-        const buttonLabel = isGekauft ? "✅ Gekauft" : "Kaufen";
-        const buttonDisabled = isGekauft ? "disabled" : "";
-
-        const div = document.createElement("div");
-        div.className = "plant-card";
-        div.innerHTML = `
-          <img src="${p.bild}" alt="${p.name}">
-          <h3>${p.name}</h3>
-          <p>Dauer: ${p.dauer} Tage<br>Preis: CHF ${p.preis}.–</p>
-          <button id="btn-${p.name}" ${buttonDisabled} onclick="kaufen('${p.name}', ${p.dauer})">${buttonLabel}</button>
+        const gekauftSchon = gekauft.find(g => g.name === p.name);
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <img src="${p.bild}" alt="${p.name}" />
+          <h2>${p.name}</h2>
+          <p>Dauer: ${p.dauer} Tage</p>
+          <p>Preis: CHF ${p.preis}.–</p>
+          <button class="buy-btn" onclick="speichern(${JSON.stringify(p).replace(/"/g, '&quot;')})" ${gekauftSchon ? 'disabled' : ''}>
+            ${gekauftSchon ? '✅ Gekauft' : 'Kaufen'}
+          </button>
         `;
-        grid.appendChild(div);
+        grid.appendChild(card);
       });
     }
 
-    function kaufen(name, dauer) {
-      const gekauft = JSON.parse(localStorage.getItem("gekauftePflanzen") || "[]");
-      const datum = new Date();
-      const dateString = datum.toLocaleDateString("de-CH");
-      gekauft.push({ name: name, date: dateString, daysLeft: dauer });
-      localStorage.setItem("gekauftePflanzen", JSON.stringify(gekauft));
-
-      const btn = document.getElementById("btn-" + name);
-      btn.innerText = "✅ Gekauft";
-      btn.disabled = true;
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
     }
 
-    window.onload = laden;
-  </script>
-</body>
+    render();
+  </script></body>
 </html>
