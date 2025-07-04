@@ -11,11 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Button-Klick aktivieren
+  // Boxen kaufen
   document.querySelectorAll(".buy-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      const box = btn.closest(".box");
-      const boxType = box.getAttribute("data-box");
+      const parentBox = btn.closest(".box");
+      const boxType = parentBox.getAttribute("data-box");
       saveBox(boxType);
       btn.textContent = "Gekauft";
       btn.classList.add("disabled");
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Bereits gekaufte markieren
+  // Bereits gekaufte Boxen markieren
   const bought = getBoughtBoxes();
   document.querySelectorAll(".box").forEach(box => {
     const boxType = box.getAttribute("data-box");
