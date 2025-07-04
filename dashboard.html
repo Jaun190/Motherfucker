@@ -1,191 +1,157 @@
-<!DOCTYPE html><html lang="de">
+<!-- Schritt 1: Reinvest + PDF nach Ernte integriert --><!DOCTYPE html><html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>GrowEmpire – Dashboard</title>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <title>GrowEmpire Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: url("assets/dashboard.png") no-repeat center center fixed;
+      font-family: 'Arial', sans-serif;
+      background: url('assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
       color: white;
     }
-    .topbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 60px;
-      background: rgba(0, 0, 0, 0.9);
-      display: flex;
-      align-items: center;
-      padding-left: 20px;
-      z-index: 1000;
-      border-bottom: 2px solid #00ff88;
-    }
-    .menu-icon {
-      background: rgba(0, 255, 136, 0.1);
-      border: 2px solid #00ff88;
-      color: #00ff88;
-      padding: 8px 12px;
-      border-radius: 10px;
-      font-size: 22px;
+    .menu {
+      position: absolute;
+      top: 20px;
+      left: 20px;
       cursor: pointer;
-      box-shadow: 0 0 10px #00ff88;
+      padding: 10px;
+      border: 2px solid #00ff99;
+      border-radius: 10px;
+      z-index: 10;
     }
-    .dropdown-menu {
+    .menu-content {
       display: none;
       position: absolute;
-      top: 60px;
+      top: 70px;
       left: 20px;
-      background: rgba(0, 0, 0, 0.95);
-      border: 2px solid #00ff88;
-      border-radius: 12px;
-      padding: 0.5rem 0;
-      min-width: 200px;
-      box-shadow: 0 0 12px #00ff88;
-      z-index: 999;
+      background: #000;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #00ff99;
     }
-    .dropdown-menu a {
+    .menu-content a {
       display: block;
-      padding: 10px 20px;
-      color: #00ff88;
+      color: #00ff99;
       text-decoration: none;
-      font-weight: bold;
+      margin-bottom: 10px;
     }
-    .dropdown-menu a:hover {
-      background: #00ff8866;
+    h1 {
+      text-align: center;
+      font-size: 2.8em;
+      margin: 30px 0 10px;
+      color: #00ff99;
+      text-shadow: 0 0 20px #00ff99;
     }
-    .content {
-      padding-top: 80px;
-      max-width: 800px;
-      margin: auto;
-      padding: 2rem;
+    .plant-box {
+      background: rgba(0,0,0,0.8);
+      border: 2px solid #00ff99;
+      border-radius: 15px;
+      padding: 15px;
+      margin: 20px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    .plant-list {
-      list-style: none;
-      padding: 0;
+    .plant-box .title {
+      font-size: 1.5em;
+      margin-bottom: 10px;
     }
-    .plant-list li {
-      background: rgba(0, 0, 0, 0.7);
-      border-left: 4px solid #00ff88;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      border-radius: 8px;
-      font-size: 16px;
+    .plant-box .date, .plant-box .days {
+      font-size: 1em;
     }
-    .plant-list button {
-      margin-top: 0.5rem;
-      padding: 6px 12px;
+    .plant-box button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      background: #00ff99;
       border: none;
-      background: #00ff88;
+      border-radius: 8px;
       color: black;
       font-weight: bold;
-      border-radius: 8px;
       cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div class="topbar">
-    <div class="menu-icon" onclick="toggleMenu()">☰</div>
-    <div class="dropdown-menu" id="dropdown">
-      <a href="dashboard.html">🧠 Dashboard</a>
-      <a href="plants.html">🧬 Pflanzen</a>
-      <a href="partner.html">🤝 Partner</a>
-      <a href="lizenz.html">🪪 Lizenz</a>
-      <a href="settings.html">⚙️ Einstellungen</a>
-      <a href="logout.html">📕 Logout</a>
-    </div>
-  </div>  <div class="content">
-    <ul class="plant-list" id="plantList"></ul>
-  </div>  <script>
-    const userStatus = localStorage.getItem("user_status") || "demo";
+  <div class="menu" onclick="toggleMenu()">
+    <i class="fas fa-bars"></i>
+  </div>
+  <div class="menu-content" id="menu">
+    <a href="dashboard.html"><i class="fas fa-brain"></i> Dashboard</a>
+    <a href="plants.html"><i class="fas fa-seedling"></i> Pflanzen</a>
+    <a href="partner.html"><i class="fas fa-handshake"></i> Partner</a>
+    <a href="lizenz.html"><i class="fas fa-id-card"></i> Lizenz</a>
+    <a href="settings.html"><i class="fas fa-gear"></i> Einstellungen</a>
+    <a href="#" onclick="logout()"><i class="fas fa-door-open"></i> Logout</a>
+  </div>  <h1>GrowEmpire</h1>  <div id="plants"></div>  <script>
+    const daysBetween = (date1, date2) => Math.ceil((date2 - date1) / (1000 * 60 * 60 * 24));
+
+    function loadPlants() {
+      const container = document.getElementById('plants');
+      const plants = JSON.parse(localStorage.getItem("purchased_plants") || "[]");
+      const today = new Date();
+      container.innerHTML = '';
+
+      plants.forEach((p, i) => {
+        const boughtDate = new Date(p.date);
+        const daysLeft = p.days - daysBetween(boughtDate, today);
+        const box = document.createElement("div");
+        box.className = 'plant-box';
+
+        box.innerHTML = `
+          <div class="title">🌱 ${p.name}</div>
+          <div class="date">📅 Gekauft am: ${boughtDate.toLocaleDateString()}</div>
+          <div class="days">⏳ ${daysLeft > 0 ? daysLeft + ' Tage bis zur Ernte' : '✅ Ernte bereit!'}</div>
+        `;
+
+        if (daysLeft <= 0) {
+          const btnPDF = document.createElement("button");
+          btnPDF.textContent = "🧾 PDF herunterladen";
+          btnPDF.onclick = () => generatePDF(p);
+
+          const user = localStorage.getItem("user_status") || "demo";
+          if (user !== "demo") box.appendChild(btnPDF);
+
+          if (["pro","premium"].includes(user)) {
+            const reinvest = document.createElement("button");
+            reinvest.textContent = "♻️ Reinvest starten";
+            reinvest.onclick = () => {
+              plants[i].date = new Date().toISOString();
+              localStorage.setItem("purchased_plants", JSON.stringify(plants));
+              loadPlants();
+            }
+            box.appendChild(reinvest);
+          }
+        }
+        container.appendChild(box);
+      });
+    }
+
+    function generatePDF(p) {
+      const doc = new jsPDF();
+      doc.setFontSize(16);
+      doc.text("Kaufbestätigung", 20, 20);
+      doc.setFontSize(12);
+      doc.text(`Pflanze: ${p.name}`, 20, 40);
+      doc.text(`Kaufdatum: ${new Date(p.date).toLocaleDateString()}`, 20, 50);
+      doc.text(`Ernte: nach ${p.days} Tagen`, 20, 60);
+      doc.text(`Status: Abgeschlossen`, 20, 70);
+      doc.save(`${p.name}_Ernte.pdf`);
+    }
 
     function toggleMenu() {
-      const menu = document.getElementById("dropdown");
+      const menu = document.getElementById("menu");
       menu.style.display = menu.style.display === "block" ? "none" : "block";
     }
 
-    window.addEventListener("click", function (e) {
-      if (!e.target.closest(".topbar")) {
-        document.getElementById("dropdown").style.display = "none";
-      }
-    });
-
-    const list = document.getElementById("plantList");
-    let found = false;
-
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      if (key.startsWith("plant_")) {
-        const data = JSON.parse(localStorage.getItem(key));
-        if (data?.bought && data.boughtAt && data.days && data.status !== "harvested") {
-          found = true;
-          const boughtDate = new Date(data.boughtAt);
-          const today = new Date();
-          const elapsed = Math.floor((today - boughtDate) / (1000 * 60 * 60 * 24));
-          const remaining = data.days - elapsed;
-          const name = key.replace("plant_", "");
-
-          const li = document.createElement("li");
-          li.innerHTML = `🌱 <b>${name}</b><br>
-            📅 Gekauft am: ${boughtDate.toLocaleDateString()}<br>
-            ⏳ ${remaining > 0 ? `${remaining} Tage bis zur Ernte` : `✅ Ernte bereit!`}`;
-
-          if (remaining <= 0) {
-            const ertrag = userStatus === "premium" ? 0.3 : (userStatus === "demo" ? 0 : 0.2);
-            const betrag = Math.round(data.price * ertrag);
-
-            const ernteBtn = document.createElement("button");
-            ernteBtn.textContent = `Ernten (CHF ${betrag})`;
-            ernteBtn.onclick = () => {
-              data.status = "harvested";
-              localStorage.setItem(key, JSON.stringify(data));
-              if (betrag > 0) generatePDF(name, betrag);
-              location.reload();
-            };
-            li.appendChild(ernteBtn);
-
-            if (userStatus === "pro" || userStatus === "premium") {
-              const reinvestBtn = document.createElement("button");
-              reinvestBtn.textContent = "🔁 Reinvest";
-              reinvestBtn.onclick = () => {
-                const newData = {
-                  bought: true,
-                  boughtAt: new Date().toISOString(),
-                  days: data.days,
-                  price: data.price,
-                  status: "growing"
-                };
-                localStorage.setItem(`plant_${name}_` + Date.now(), JSON.stringify(newData));
-                location.reload();
-              };
-              li.appendChild(reinvestBtn);
-            }
-          }
-
-          list.appendChild(li);
-        }
-      }
+    function logout() {
+      localStorage.clear();
+      alert("Logout erfolgreich.");
+      window.location.href = "index.html";
     }
 
-    if (!found) {
-      list.innerHTML = "<li style='color:#ccc;'>Noch keine Pflanzen aktiv.</li>";
-    }
-
-    async function generatePDF(name, ertrag) {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
-      doc.setFontSize(18);
-      doc.text("GrowEmpire – Auszahlung", 20, 20);
-      doc.setFontSize(12);
-      doc.text(`Pflanze: ${name}`, 20, 40);
-      doc.text(`Ausgezahlt: CHF ${ertrag}.–`, 20, 50);
-      doc.text(`Datum: ${new Date().toLocaleDateString()}`, 20, 60);
-      doc.save(`Auszahlung_${name}.pdf`);
-    }
-  </script></body>
+    loadPlants();
+  </script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script></body>
 </html>
