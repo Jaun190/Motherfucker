@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GrowEmpire – Einstellungen</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <style>
@@ -38,7 +38,7 @@
       background: rgba(0, 255, 136, 0.1);
       border: 2px solid #00ff88;
       color: #00ff88;
-      padding: 8px 12px;
+      padding: 6px 12px;
       border-radius: 10px;
       font-size: 22px;
       cursor: pointer;
@@ -53,7 +53,7 @@
       background: rgba(0, 0, 0, 0.95);
       border: 2px solid #00ff88;
       border-radius: 12px;
-      padding: 0.5rem 0;
+      padding: 0.5rem;
       min-width: 200px;
       box-shadow: 0 0 12px #00ff88;
       animation: fadeIn 0.2s ease-out;
@@ -64,12 +64,12 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 12px 18px;
+      padding: 12px 10px;
       color: #00ff88;
       text-decoration: none;
       font-weight: bold;
       font-size: 1rem;
-      transition: background 0.2s;
+      transition: background 0.25s;
     }
 
     .dropdown-menu a:hover {
@@ -143,14 +143,15 @@
   <!-- Topbar mit Menü -->
   <div class="topbar">
     <div class="menu-wrapper">
-      <div class="menu-icon" onclick="toggleMenu()">☰</div>
+      <div class="menu-icon" onclick="toggleMenu()">≡</div>
       <div class="dropdown-menu" id="dropdown">
-        <a href="dashboard.html"><span>🧠</span> Dashboard</a>
-        <a href="plants.html"><span>🧬</span> Pflanzen</a>
-        <a href="partner.html"><span>🤝</span> Partner</a>
-        <a href="lizenz.html"><span>🪪</span> Lizenz</a>
+        <a href="dashboard.html"><span>🌿</span> Dashboard</a>
+        <a href="plants.html"><span>🧪</span> Pflanzen</a>
+        <a href="partner.html"><span>💼</span> Partner</a>
+        <a href="lizenz.html"><span>📄</span> Lizenz</a>
         <a href="settings.html"><span>⚙️</span> Einstellungen</a>
-        <a href="logout.html"><span>📕</span> Logout</a>
+        <a href="payout.html"><span>💸</span> Auszahlung</a>
+        <a href="logout.html"><span>🔴</span> Logout</a>
       </div>
     </div>
   </div>
@@ -161,13 +162,13 @@
       <h1>⚙️ Einstellungen</h1>
       <form>
         <label for="username">Benutzername:</label>
-        <input type="text" id="username" placeholder="DeinName">
+        <input type="text" id="username" placeholder="DeinName" />
 
         <label for="email">E-Mail:</label>
-        <input type="email" id="email" placeholder="deinname@email.com">
+        <input type="email" id="email" placeholder="deinname@email.com" />
 
         <label for="password">Neues Passwort:</label>
-        <input type="password" id="password" placeholder="••••••••••">
+        <input type="password" id="password" placeholder="**********" />
 
         <button class="submit-btn" type="submit">Speichern</button>
       </form>
@@ -177,17 +178,16 @@
   <!-- Menü-Logik -->
   <script>
     function toggleMenu() {
-      const menu = document.getElementById('dropdown');
-      menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+      const menu = document.getElementById("dropdown");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
     }
 
-    window.addEventListener('click', function (e) {
-      const menu = document.getElementById('dropdown');
-      if (!e.target.closest('.menu-wrapper')) {
-        menu.style.display = 'none';
+    window.addEventListener("click", function (e) {
+      const menu = document.getElementById("dropdown");
+      if (!e.target.closest(".menu-wrapper")) {
+        menu.style.display = "none";
       }
     });
   </script>
-
 </body>
 </html>
