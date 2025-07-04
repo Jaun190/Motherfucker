@@ -11,22 +11,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Button-Click
-  document.querySelectorAll(".buy-btn").forEach(btn => {
+  // Boxen kaufen
+  document.querySelectorAll(".buy-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
-      const box = btn.closest(".box").dataset.box;
-      saveBox(box);
+      const parentBox = btn.parentElement;
+      const boxType = parentBox.getAttribute("data-box");
+      saveBox(boxType);
       btn.textContent = "Gekauft";
       btn.classList.add("disabled");
       btn.disabled = true;
     });
   });
 
-  // Beim Laden prüfen
+  // Bereits gekaufte Boxen markieren
   const bought = getBoughtBoxes();
-  document.querySelectorAll(".box").forEach(box => {
-    const name = box.dataset.box;
-    if (bought.includes(name)) {
+  document.querySelectorAll(".box").forEach((box) => {
+    const boxType = box.getAttribute("data-box");
+    if (bought.includes(boxType)) {
       const btn = box.querySelector(".buy-btn");
       btn.textContent = "Gekauft";
       btn.classList.add("disabled");
