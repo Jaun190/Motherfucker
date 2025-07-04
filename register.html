@@ -2,30 +2,29 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Registrieren | Grow Empire</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #001e14;
+      background: #001f14;
       color: white;
       text-align: center;
       padding: 30px;
     }
     h1 {
       color: #32cd32;
-      margin-bottom: 10px;
     }
-    .ref-info, .your-ref {
-      margin: 10px 0 25px;
+    .ref-info {
+      margin: 20px 0;
       font-weight: bold;
-      color: #00ff99;
+      color: #00ff88;
     }
     input, button {
       padding: 12px;
-      font-size: 16px;
+      font-size: 15px;
       margin: 10px 0;
-      width: 90%;
+      width: 80%;
       max-width: 400px;
     }
     button {
@@ -35,71 +34,68 @@
       font-weight: bold;
       cursor: pointer;
     }
-    .ref-box {
-      background: #002a1d;
-      padding: 10px;
-      border-radius: 10px;
-      word-break: break-all;
-    }
   </style>
 </head>
 <body>
   <h1>Registriere dich bei<br>Grow Empire 🌱</h1>
 
-  <div class="ref-info" id="refInfoBox"></div>
+  <div class="ref-info" id="refInfo">⏳ Lade Referral...</div>
 
-  <form id="regForm">
-    <input type="text" id="username" placeholder="Dein Name" required><br>
-    <input type="email" id="email" placeholder="E-Mail" required><br>
-    <input type="password" id="password" placeholder="Passwort" required><br>
+  <form id="registerForm" action="dashboard.html">
+    <input type="text" placeholder="Dein Name" id="name" required><br>
+    <input type="email" placeholder="E-Mail" id="email" required><br>
+    <input type="password" placeholder="Passwort" id="password" required><br>
     <button type="submit">Jetzt registrieren</button>
   </form>
 
-  <div class="your-ref" id="yourRefLinkBox" style="display:none;">
-    Dein Referral-Link:<br>
-    <div class="ref-box" id="yourRefLink"></div>
-  </div>
-
   <script>
-    // Referral aus URL speichern
-    window.onload = () => {
+    // ✅ FAKE-Datenbank lokal – später durch Supabase ersetzen
+    const users = [
+      { email: "fomi@example.com", name: "Fomi" },
+      { email: "jaun190@gmail.com", name: "Dominique" },
+      { email: "sara@test.ch", name: "Sara" }
+    ];
+
+    // ✅ Referral aus URL speichern
+    window.onload = function () {
       const urlParams = new URLSearchParams(window.location.search);
-      const ref = urlParams.get("ref");
-      if (ref) {
-        localStorage.setItem("ref", ref);
-        document.getElementById("refInfoBox").innerText = "Du wurdest geworben von: " + ref;
+      const refId = urlParams.get("ref"); // z. B. jaun190
+
+      if (refId) {
+        localStorage.setItem("ref", refId);
+      }
+
+      // ✅ Gespeicherte Referral-ID holen
+      const savedRef = localStorage.getItem("ref");
+      let refName = "Unbekannt";
+
+      if (savedRef) {
+        // Suche User mit passender E-Mail vor dem @
+        const refUser = users.find(u => u.email.split("@")[0] === savedRef);
+        if (refUser) {
+          refName = refUser.name;
+        } else {
+          refName = "❌ Nutzer nicht gefunden";
+        }
+        document.getElementById("refInfo").textContent = "Du wurdest geworben von: " + refName;
+      } else {
+        document.getElementById("refInfo").textContent = "Kein Referral erkannt.";
       }
     };
 
-    document.getElementById("regForm").addEventListener("submit", function(e) {
+    // ✅ Später im Submit speichern (lokal oder in Supabase)
+    document.getElementById("registerForm").addEventListener("submit", function(e) {
       e.preventDefault();
-
-      const name = document.getElementById("username").value.trim();
-      const email = document.getElementById("email").value.trim().toLowerCase();
-      const password = document.getElementById("password").value;
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
       const ref = localStorage.getItem("ref") || null;
 
-      // Nutzer lokal speichern (in "users"-Liste)
-      let users = JSON.parse(localStorage.getItem("users") || "[]");
-      users.push({ email: email, name: name, password: password, referrer: ref });
-      localStorage.setItem("users", JSON.stringify(users));
+      // Test: lokal speichern
+      const user = { name, email, ref };
+      localStorage.setItem("user", JSON.stringify(user));
 
-      // Angemeldeten Nutzer merken
-      localStorage.setItem("user_email", email);
-      localStorage.setItem("user_name", name);
-
-      // Referral-Link anzeigen
-      const refBox = document.getElementById("yourRefLinkBox");
-      const refLink = document.getElementById("yourRefLink");
-      const baseUrl = window.location.origin + window.location.pathname;
-      const yourRefLink = `${baseUrl}?ref=${email.split("@")[0]}`;
-      refLink.innerText = yourRefLink;
-      refBox.style.display = "block";
-
-      // Optional: Weiterleitung nach 3 Sek.
-      setTimeout(() => {
-        window.location.href = "dashboard.html";
-      }, 3000);
+      // Geht zu Dashboard (kann später geändert werden)
+      window.location.href = "dashboard.html";
     });
   </script>
 </body>
