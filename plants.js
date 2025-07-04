@@ -1,43 +1,54 @@
-// Supabase Setup
-const supabaseUrl = 'https://ghfzdgaunxblpudkmxmy.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoZnpkZ2F1bnhibHB1ZGtteG15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3MDI5NTksImV4cCI6MjA2NjI3ODk1OX0.J8ni4SszaI33ljthdEjqXf8ZKFCs4uWnRZZDyU0IlUU';
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+const supabase = supabase.createClient(
+  'https://bopvgxzmmlpewbanfmdg.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJvcHZneHptbWxwZXdiYW5mbWRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA1NzQzMDQsImV4cCI6MjA2NjE1MDMwNH0.AM7buv9L-MBG1BGqj0T-pI1x_t2jRZdgeyfxo3g15qQ'
+);
 
-// Menü Toggle
-function toggleDropdown() {
-  const dropdown = document.getElementById("dropdown");
-  dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
-}
+let currentUser = null;
 
-// Fake-Kauf-Funktion
-function fakeBuy(name, price) {
-  alert(`✅ Du hast ${name} für CHF ${price}.– gekauft!`);
-}
-
-// Pflanzen dynamisch laden
-async function loadPlants() {
-  const { data, error } = await supabase.from('plants').select('*');
-  if (error) {
-    console.error('Fehler beim Laden:', error);
-    return;
+supabase.auth.getUser().then(({ data, error }) => {
+  if (error || !data.user) {
+    alert("Bitte zuerst einloggen.");
+    window.location.href = "index.html";
+  } else {
+    currentUser = data.user;
+    markBoughtPlants();
   }
+});
 
-  const container = document.getElementById('plant-container');
-  container.innerHTML = '';
+document.querySelectorAll('.buy-btn').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const plantName = btn.closest('.plant-card').dataset.name;
 
-  data.forEach(plant => {
-    const card = document.createElement('div');
-    card.className = 'plant-card';
+    const { error } = await supabase.from('user_plants').insert({
+      user_id: currentUser.id,
+      plant_name: plantName
+    });
 
-    card.innerHTML = `
-      <img src="assets/${plant.image}" alt="${plant.name}" />
-      <h2>${plant.name}</h2>
-      <p>CHF ${plant.price}.– | ${plant.days} Tage</p>
-      <button onclick="fakeBuy('${plant.name}', ${plant.price})">Kaufen</button>
-    `;
-
-    container.appendChild(card);
+    if (error) {
+      alert("Fehler beim Kauf: " + error.message);
+    } else {
+      alert("Gekauft: " + plantName);
+      btn.textContent = "Gekauft";
+      btn.disabled = true;
+    }
   });
-}
+});
 
-loadPlants();
+async function markBoughtPlants() {
+  const { data, error } = await supabase
+    .from('user_plants')
+    .select('plant_name')
+    .eq('user_id', currentUser.id);
+
+  if (!error && data) {
+    const bought = data.map(p => p.plant_name);
+    document.querySelectorAll('.plant-card').forEach(card => {
+      const name = card.dataset.name;
+      if (bought.includes(name)) {
+        const btn = card.querySelector('button');
+        btn.textContent = "Gekauft";
+        btn.disabled = true;
+      }
+    });
+  }
+}
