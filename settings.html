@@ -131,24 +131,9 @@
   <div class="settings-content">
     <div class="settings-box">
       <h1>Einstellungen</h1>
-      <p>Hier kannst du deine persönlichen Daten ändern, Benachrichtigungen verwalten und dein Profil anpassen.</p>
+      <p>Hier kannst du deine Profildaten, Sicherheit und Benachrichtigungen verwalten.<br>
+         Der Bereich wird bald vollständig freigeschaltet.</p>
     </div>
   </div>
 
-  <!-- Menü-Logik -->
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById('dropdown');
-      menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
-    }
-
-    window.addEventListener('click', function (e) {
-      const menu = document.getElementById('dropdown');
-      if (!e.target.closest('.menu-wrapper')) {
-        menu.style.display = 'none';
-      }
-    });
-  </script>
-
-</body>
-</html>
+  <!-- Menü-Logik
