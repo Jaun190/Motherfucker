@@ -40,8 +40,8 @@
       padding-left: 0;
     }
 
-    .box li::before {
-      content: "🌱 ";
+    .box li:before {
+      content: "🟢";
       margin-right: 8px;
     }
 
@@ -68,12 +68,12 @@
 <body>
 
 <!-- Menü -->
-<div class="menu-toggle">☰</div>
+<div class="menu-toggle">≡</div>
 <div class="menu-content">
   <a href="dashboard.html">📊 Dashboard</a>
   <a href="plants.html">🌿 Pflanzen kaufen</a>
   <a href="starterbox.html">📦 Starterbox</a>
-  <a href="partner.html">🤝 Partner</a>
+  <a href="partner.html">👥 Partner</a>
   <a href="settings.html">⚙️ Einstellungen</a>
   <a href="index.html">🔒 Logout</a>
 </div>
@@ -86,7 +86,7 @@
     <h2>📦 Pro Box</h2>
     <p><strong>CHF 150.–</strong> – für 6 Monate</p>
     <ul>
-      <li>2 m² Anbaufläche</li>
+      <li>2 m² Anbaufläche</li>
       <li>Exklusive Sorten freigeschaltet</li>
       <li>Reinvest-Bonus</li>
       <li>+20 % Ertrag auf Pflanzen</li>
@@ -100,7 +100,7 @@
     <h2>🎁 Premium Box</h2>
     <p><strong>CHF 199.–</strong> – für 12 Monate</p>
     <ul>
-      <li>3 m² Anbaufläche</li>
+      <li>3 m² Anbaufläche</li>
       <li>Alle Sorten & Module freigeschaltet</li>
       <li>Reinvest & Bonusaktionen</li>
       <li>+30 % Ertrag auf Pflanzen</li>
@@ -112,42 +112,6 @@
 </div>
 
 <!-- Script -->
-<script>
-  function getBoughtBoxes() {
-    return JSON.parse(localStorage.getItem("user_boxes")) || [];
-  }
-
-  function saveBox(name) {
-    const bought = getBoughtBoxes();
-    if (!bought.includes(name)) {
-      bought.push(name);
-      localStorage.setItem("user_boxes", JSON.stringify(bought));
-    }
-  }
-
-  // Klick-Event aktivieren
-  document.querySelectorAll(".buy-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const box = btn.closest(".box").dataset.box;
-      saveBox(box);
-      btn.textContent = "Gekauft";
-      btn.classList.add("disabled");
-      btn.disabled = true;
-    });
-  });
-
-  // Bereits gekaufte Boxen beim Laden markieren
-  const bought = getBoughtBoxes();
-  document.querySelectorAll(".box").forEach(box => {
-    const name = box.dataset.box;
-    if (bought.includes(name)) {
-      const btn = box.querySelector(".buy-btn");
-      btn.textContent = "Gekauft";
-      btn.classList.add("disabled");
-      btn.disabled = true;
-    }
-  });
-</script>
-
+<script src="starterbox.js"></script>
 </body>
 </html>
