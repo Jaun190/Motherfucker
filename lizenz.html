@@ -2,171 +2,90 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lizenz kaufen</title>
+  <title>GrowEmpire – Lizenz & Boxen</title>
   <style>
     body {
-      margin: 0;
+      background-color: #000;
+      color: #0f0;
       font-family: Arial, sans-serif;
-      background: #0c0c0c;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 40px 20px;
+      padding: 20px;
     }
-
     h1 {
-      color: #00ff90;
-      margin-bottom: 20px;
+      text-align: center;
     }
-
-    .box-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      justify-content: center;
-      max-width: 1200px;
-      width: 100%;
-    }
-
     .box {
-      background: #111;
-      border: 2px solid #00ff90;
-      border-radius: 20px;
-      padding: 30px;
-      width: 320px;
-      box-shadow: 0 0 20px #00ff90;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .box h2 {
-      margin-top: 0;
-      color: #00ff90;
-      font-size: 1.5em;
-    }
-
-    .box ul {
-      padding-left: 18px;
-      list-style: none;
-      margin-bottom: 20px;
-    }
-
-    .box li {
-      margin: 8px 0;
-    }
-
-    .btn {
-      background: #00ff90;
-      color: black;
-      border: none;
-      padding: 12px;
+      border: 2px solid #0f0;
+      padding: 20px;
+      margin-bottom: 30px;
       border-radius: 10px;
-      font-weight: bold;
-      font-size: 1em;
-      cursor: pointer;
+      background-color: #111;
     }
-
-    .btn:disabled {
-      background: #444;
-      cursor: not-allowed;
+    h2 {
+      margin-top: 0;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    button {
+      background-color: #0f0;
+      color: #000;
+      padding: 10px 20px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #3f3;
     }
   </style>
 </head>
 <body>
-  <h1🎁>Deine Starterbox</h1>
-  <div class="box-container">
-    <!-- BASIC -->
-    <div class="box">
-      <h2>Basic Lizenz – CHF 49.–</h2>
-      <ul>
-        <li>🌱 Starterlizenz fürs Backoffice</li>
-        <li>🌱 Demo wird deaktiviert</li>
-        <li>🌱 1 Gratispflanze (Wert: CHF 200.–)</li>
-        <li>🌱 1 Pflanze max.</li>
-        <li>🌱 20 % Ertrag (nur auf Gratispflanze)</li>
-      </ul>
-      <button id="buyBasic" class="btn" onclick="buyBox('lizenz')">Basic Lizenz kaufen</button>
-    </div>
 
-    <!-- PRO -->
-    <div class="box">
-      <h2>Pro Box – CHF 199.–</h2>
-      <ul>
-        <li>🌱 Nur mit Basic Lizenz nutzbar</li>
-        <li>🌱 6 Pflanzenfläche</li>
-        <li>🌱 20 % Ertrag</li>
-        <li>🌱 Ref-Bonus: 10 % / 3 %</li>
-        <li>🌱 Reinvest-Funktion</li>
-      </ul>
-      <button id="buyPro" class="btn" onclick="buyBox('pro')">Pro Box kaufen</button>
-    </div>
+  <h1>🌿 GrowEmpire – Lizenz & Boxen</h1>
 
-    <!-- PREMIUM -->
-    <div class="box">
-      <h2>Premium Box – CHF 299.–</h2>
-      <ul>
-        <li>🌱 Lizenz inklusive</li>
-        <li>🌱 Unbegrenzte Fläche</li>
-        <li>🌱 2 Gratispflanzen</li>
-        <li>🌱 30 % Ertrag</li>
-        <li>🌱 Ref-Bonus: 10 % / 5 % / 3 % / 1 %</li>
-        <li>🌱 Voller Zugriff & Support</li>
-      </ul>
-      <button id="buyPremium" class="btn" onclick="buyBox('premium')">Premium Box kaufen</button>
-    </div>
+  <div class="box">
+    <h2>Pro Box – CHF 199.–</h2>
+    <ul>
+      <li>Nur mit Basic Lizenz nutzbar</li>
+      <li>6 Pflanzenfläche</li>
+      <li>20 % Ertrag</li>
+      <li>Ref-Bonus: 10 % / 3 %</li>
+      <li>Reinvest-Funktion</li>
+    </ul>
+    <button onclick="setBox('pro')">✅ Gekauft</button>
+  </div>
+
+  <div class="box">
+    <h2>Premium Box – CHF 299.–</h2>
+    <ul>
+      <li>Lizenz inklusive</li>
+      <li>Unbegrenzte Fläche</li>
+      <li>2 Gratispflanzen</li>
+      <li>30 % Ertrag</li>
+      <li>Ref-Bonus: 10 % / 5 % / 3 % / 1 %</li>
+    </ul>
+    <button onclick="setBox('premium')">✅ Gekauft</button>
   </div>
 
   <script>
-    function buyBox(type) {
-      if (type === 'lizenz') {
-        localStorage.setItem('lizenz', 'true');
-        localStorage.setItem('gratisPflanzen', '1');
-        alert('✅ Basic Lizenz aktiviert!');
-        location.reload();
+    function setBox(level) {
+      localStorage.setItem("boxLevel", level);
+
+      if (level === "pro") {
+        localStorage.setItem("plantLimit", 6);
+        localStorage.setItem("freePlants", 0);
+      } else if (level === "premium") {
+        localStorage.setItem("plantLimit", 999); // unbegrenzte Fläche
+        localStorage.setItem("freePlants", 2);
       }
 
-      else if (type === 'pro') {
-        if (localStorage.getItem('lizenz') !== 'true') {
-          alert('⚠️ Bitte zuerst die Basic Lizenz kaufen.');
-          return;
-        }
-        localStorage.setItem('pro', 'true');
-        alert('✅ Pro Box aktiviert!');
-        location.reload();
-      }
-
-      else if (type === 'premium') {
-        localStorage.setItem('lizenz', 'true');
-        localStorage.setItem('premium', 'true');
-        localStorage.setItem('gratisPflanzen', '2');
-        alert('✅ Premium Box aktiviert!');
-        location.reload();
-      }
+      alert("Box gespeichert! Das Dashboard zeigt jetzt den neuen Status.");
+      // Optional automatische Weiterleitung:
+      // window.location.href = "dashboard.html";
     }
-
-    // Buttons deaktivieren wenn bereits gekauft
-    window.onload = () => {
-      if (localStorage.getItem('lizenz') === 'true') {
-        const btn = document.getElementById('buyBasic');
-        btn.innerText = '✅ Gekauft';
-        btn.disabled = true;
-      }
-
-      if (localStorage.getItem('pro') === 'true') {
-        const btn = document.getElementById('buyPro');
-        btn.innerText = '✅ Gekauft';
-        btn.disabled = true;
-      }
-
-      if (localStorage.getItem('premium') === 'true') {
-        const btn = document.getElementById('buyPremium');
-        btn.innerText = '✅ Gekauft';
-        btn.disabled = true;
-      }
-    };
   </script>
+
 </body>
-</html>ja
+</html>
