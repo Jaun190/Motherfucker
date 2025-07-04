@@ -1,148 +1,138 @@
-<!DOCTYPE html>
-<html lang="de">
+<!DOCTYPE html><html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Starterbox kaufen</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lizenz & Upgrades – GrowEmpire</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      background: #0c0c0c url('assets/dashboard.png') no-repeat center top;
+      background: url('assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
       color: #fff;
-      margin: 0;
-      padding: 40px 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
     }
-
-    h1 {
-      color: #00ff90;
-      margin-bottom: 20px;
+    .menu-toggle {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: #0f0;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      z-index: 10;
     }
-
+    .menu-content {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 20px;
+      background-color: rgba(0, 0, 0, 0.9);
+      border-radius: 8px;
+      padding: 10px;
+      z-index: 10;
+    }
+    .menu-content a {
+      display: block;
+      color: #0f0;
+      text-decoration: none;
+      padding: 5px 0;
+    }
+    .menu-toggle:hover + .menu-content,
+    .menu-content:hover {
+      display: block;
+    }
     .box-container {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
+      max-width: 1200px;
+      margin: 120px auto 50px;
+      padding: 20px;
     }
-
     .box {
       border: 2px solid #00ff90;
       border-radius: 20px;
+      background-color: rgba(0, 0, 0, 0.6);
       padding: 20px;
-      width: 280px;
-      background: #111;
       box-shadow: 0 0 20px #00ff90;
     }
-
     .box h2 {
       color: #00ff90;
       margin-bottom: 10px;
     }
-
-    .box p {
-      margin: 5px 0;
+    .box ul {
+      list-style: none;
+      padding-left: 0;
     }
-
-    .box button {
-      margin-top: 15px;
-      padding: 10px 20px;
+    .box li::before {
+      content: "🌱 ";
+    }
+    .buy-btn {
+      display: block;
       background-color: #00ff90;
+      color: #000;
+      padding: 12px;
       border: none;
-      color: black;
-      font-weight: bold;
       border-radius: 10px;
+      margin-top: 20px;
+      font-size: 16px;
+      font-weight: bold;
       cursor: pointer;
-    }
-
-    .disabled {
-      background-color: gray !important;
-      cursor: not-allowed;
-    }
-
-    .demo-hinweis {
-      margin-top: 10px;
-      font-size: 0.9em;
-      color: #ff4444;
+      text-align: center;
     }
   </style>
 </head>
 <body>
+  <div class="menu-toggle">☰</div>
+  <div class="menu-content">
+    <a href="dashboard.html">📊 Dashboard</a>
+    <a href="plants.html">🌱 Pflanzen kaufen</a>
+    <a href="lizenz.html">💼 Lizenz & Boxen</a>
+    <a href="partner.html">🤝 Partner</a>
+    <a href="settings.html">⚙️ Einstellungen</a>
+    <a href="index.html">🚪 Logout</a>
+  </div>  <div class="box-container">
+    <!-- Basic Lizenz -->
+    <div class="box">
+      <h2>💼 Basic Lizenz</h2>
+      <p><strong>CHF 49.– einmalig</strong></p>
+      <ul>
+        <li>1 m² Anbaufläche</li>
+        <li>1 Gratis-Pflanze im Wert von CHF 200.–</li>
+        <li>20 % Ertrag auf Gratispflanze</li>
+        <li>Zugang zu Dashboard & Statistik</li>
+        <li>Kein Referral-Bonus</li>
+      </ul>
+      <button class="buy-btn">Lizenz kaufen</button>
+    </div><!-- Pro Box -->
+<div class="box">
+  <h2>📦 Pro Box</h2>
+  <p><strong>CHF 199.– (6 Monate inkl. Lizenz)</strong></p>
+  <ul>
+    <li>5 m² Anbaufläche</li>
+    <li>20 % Ertrag</li>
+    <li>Referral-Bonus: 10 % / 3 %</li>
+    <li>Reinvest-System aktiv</li>
+    <li>Bonusaktionen</li>
+  </ul>
+  <button class="buy-btn">Pro Box aktivieren</button>
+</div>
 
-  <h1>🎁 Deine Starterbox</h1>
+<!-- Premium Box -->
+<div class="box">
+  <h2>💎 Premium Box</h2>
+  <p><strong>CHF 299.– (12 Monate inkl. Lizenz)</strong></p>
+  <ul>
+    <li>Unbegrenzte Anbaufläche</li>
+    <li>30 % Ertrag</li>
+    <li>Referral-Bonus: 10 % / 5 % / 3 % / 1 %</li>
+    <li>Exklusive Sorten</li>
+    <li>Reinvest-Cashback bis 10 %</li>
+  </ul>
+  <button class="buy-btn">Premium starten</button>
+</div>
 
-  <div class="box-container">
-    <div class="box" data-box="basic">
-      <h2>📦 Basic Box</h2>
-      <p><strong>CHF 49.–</strong> – für 6 Monate</p>
-      <p>🌱 1 m² Anbaufläche</p>
-      <p>🌱 Referral-Link aktiviert</p>
-      <p>🌱 Verdienstübersicht</p>
-      <p class="demo-hinweis">⚠️ Ohne Lizenz nur Demo-Version</p>
-      <button class="buy-btn">Kaufen</button>
-    </div>
-
-    <div class="box" data-box="pro">
-      <h2>⚡ Pro Box</h2>
-      <p><strong>CHF 49.–</strong> – für 6 Monate</p>
-      <p>🌱 2 m² Anbaufläche</p>
-      <p>🌱 +20 % Ertrag auf Pflanzen</p>
-      <p>🌱 Bonusfreischaltungen</p>
-      <button class="buy-btn">Kaufen</button>
-    </div>
-
-    <div class="box" data-box="premium">
-      <h2>🎁 Premium Box</h2>
-      <p><strong>CHF 49.–</strong> – für 6 Monate</p>
-      <p>🌱 3 m² Anbaufläche</p>
-      <p>🌱 +30 % Ertrag auf Pflanzen</p>
-      <p>🌱 Extra-Boni & Team-Vorteile</p>
-      <button class="buy-btn">Kaufen</button>
-    </div>
   </div>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      function getBoughtBoxes() {
-        return JSON.parse(localStorage.getItem("user_boxes")) || [];
-      }
-
-      function saveBox(name) {
-        const bought = getBoughtBoxes();
-        if (!bought.includes(name)) {
-          bought.push(name);
-          localStorage.setItem("user_boxes", JSON.stringify(bought));
-        }
-      }
-
-      // Kaufen-Buttons
-      document.querySelectorAll(".buy-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const parentBox = btn.parentElement;
-          const boxType = parentBox.getAttribute("data-box");
-          saveBox(boxType);
-          btn.textContent = "✅ Gekauft";
-          btn.classList.add("disabled");
-          btn.disabled = true;
-        });
-      });
-
-      // Bereits gekaufte markieren
-      const bought = getBoughtBoxes();
-      document.querySelectorAll(".box").forEach((box) => {
-        const boxType = box.getAttribute("data-box");
-        if (bought.includes(boxType)) {
-          const btn = box.querySelector(".buy-btn");
-          btn.textContent = "✅ Gekauft";
-          btn.classList.add("disabled");
-          btn.disabled = true;
-        }
-      });
-    });
-  </script>
-
 </body>
 </html>
