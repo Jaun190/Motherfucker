@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dashboard – GrowEmpire</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="menu.css">
+  <link rel="stylesheet" href="style.css" />
   <style>
     body {
       margin: 0;
@@ -22,73 +21,65 @@
       font-size: 30px;
       cursor: pointer;
       z-index: 1000;
-      color: #00ffcc;
+      padding: 10px 14px;
       border: 2px solid #00ffcc;
       border-radius: 12px;
-      padding: 5px 10px;
-      box-shadow: 0 0 12px #00ffcc;
+      color: #00ffcc;
+      background-color: black;
+      box-shadow: 0 0 10px #00ffcc;
     }
 
-    .menu {
+    .menu-content {
       display: none;
       position: absolute;
       top: 70px;
       left: 20px;
-      background: rgba(0, 0, 0, 0.95);
+      background-color: rgba(0, 0, 0, 0.95);
       border: 2px solid #00ffcc;
-      border-radius: 16px;
-      padding: 10px 0;
-      box-shadow: 0 0 20px #00ffcc;
+      border-radius: 20px;
+      padding: 20px;
       z-index: 999;
+      box-shadow: 0 0 15px #00ffcc;
     }
 
-    .menu a {
-      display: block;
-      color: #00ffcc;
+    .menu-content a {
+      display: flex;
+      align-items: center;
+      margin-bottom: 14px;
       text-decoration: none;
-      padding: 12px 20px;
+      color: #00ffcc;
       font-size: 18px;
     }
 
-    .menu a:hover {
-      background-color: rgba(0, 255, 204, 0.1);
+    .menu-content a:last-child {
+      margin-bottom: 0;
     }
 
-    .content {
-      padding-top: 120px;
-      text-align: center;
+    .menu-content a span {
+      margin-left: 10px;
     }
 
     .plant-box {
       background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      border-radius: 20px;
       border: 2px solid #00ffcc;
-      border-radius: 15px;
-      padding: 15px;
-      margin: 20px auto;
-      max-width: 300px;
-    }
-
-    .plant-name {
-      font-size: 20px;
-      font-weight: bold;
-      color: #00ffcc;
+      margin: 20px;
     }
   </style>
 </head>
 <body>
   <div class="menu-btn" onclick="toggleMenu()">☰</div>
-  <div class="menu" id="menu">
-    <a href="dashboard.html">🧠 Dashboard</a>
-    <a href="plants.html">🧬 Pflanzen</a>
-    <a href="partner.html">🤝 Partner</a>
-    <a href="lizenz.html">🪪 Lizenz</a>
-    <a href="settings.html">⚙️ Einstellungen</a>
-    <a href="index.html">🔴 Logout</a>
+  <div class="menu-content" id="menu">
+    <a href="dashboard.html">🧠 <span>Dashboard</span></a>
+    <a href="plants.html">🪴 <span>Pflanzen</span></a>
+    <a href="partner.html">🤝 <span>Partner</span></a>
+    <a href="lizenz.html">🪪 <span>Lizenz</span></a>
+    <a href="settings.html">⚙️ <span>Einstellungen</span></a>
+    <a href="index.html">🔴 <span>Logout</span></a>
   </div>
 
-  <div class="content" id="dashboardContent">
-    <div id="plantList">Keine gekauften Pflanzen.</div>
-  </div>
+  <div id="plantsContainer" style="margin-top: 140px;"></div>
 
   <script>
     function toggleMenu() {
@@ -96,28 +87,27 @@
       menu.style.display = menu.style.display === "block" ? "none" : "block";
     }
 
-    const plantListDiv = document.getElementById('plantList');
-    const plants = JSON.parse(localStorage.getItem('plants')) || [];
+    const container = document.getElementById("plantsContainer");
+    const plants = JSON.parse(localStorage.getItem("plants")) || [];
 
     if (plants.length === 0) {
-      plantListDiv.innerHTML = "<p>Keine gekauften Pflanzen.</p>";
+      container.innerHTML = "<h3 style='text-align: center;'>Keine gekauften Pflanzen.</h3>";
     } else {
-      plantListDiv.innerHTML = '';
-      plants.forEach(plant => {
-        const plantBox = document.createElement('div');
-        plantBox.className = 'plant-box';
-        const purchaseDate = new Date(plant.date);
-        const harvestDate = new Date(purchaseDate);
-        harvestDate.setDate(harvestDate.getDate() + plant.tage);
-        const now = new Date();
-        const daysLeft = Math.max(0, Math.ceil((harvestDate - now) / (1000 * 60 * 60 * 24)));
+      plants.forEach(p => {
+        const box = document.createElement("div");
+        box.className = "plant-box";
+        const gekauft = new Date(p.kaufdatum);
+        const ernte = new Date(p.kaufdatum);
+        ernte.setDate(ernte.getDate() + p.ernteTage);
+        const heute = new Date();
+        const diff = Math.max(0, Math.ceil((ernte - heute) / (1000 * 60 * 60 * 24)));
 
-        plantBox.innerHTML = `
-          <div class="plant-name">🌱 ${plant.name}</div>
-          <div>📅 Gekauft am: ${purchaseDate.toLocaleDateString('de-CH')}</div>
-          <div>⏳ Noch ${daysLeft} Tage bis zur Ernte</div>
+        box.innerHTML = `
+          <h2>🌱 ${p.name}</h2>
+          <p>📅 Gekauft am: ${gekauft.toLocaleDateString("de-CH")}</p>
+          <p>⏳ Noch ${diff} Tage bis zur Ernte</p>
         `;
-        plantListDiv.appendChild(plantBox);
+        container.appendChild(box);
       });
     }
   </script>
