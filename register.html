@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Registrieren | Grow Empire</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #0f1e14;
+      background: #001e14;
       color: white;
       text-align: center;
       padding: 30px;
@@ -20,12 +20,12 @@
     .ref-info {
       margin: 20px 0;
       font-weight: bold;
-      color: #90ee90;
+      color: #00ff88;
     }
 
     input, button {
       padding: 12px;
-      font-size: 16px;
+      font-size: 15px;
       margin: 10px 0;
       width: 80%;
       max-width: 400px;
@@ -39,37 +39,59 @@
       cursor: pointer;
     }
   </style>
-
-  <script>
-    // Referral aus URL speichern
-    window.onload = function () {
-      const urlParams = new URLSearchParams(window.location.search);
-      const ref = urlParams.get('ref');
-      if (ref) {
-        localStorage.setItem('ref', ref);
-      }
-
-      // Referral anzeigen, falls vorhanden
-      const savedRef = localStorage.getItem('ref');
-      if (savedRef) {
-        document.getElementById('refInfo').textContent =
-          'Du wurdest geworben von: ' + savedRef;
-      }
-    };
-  </script>
 </head>
 <body>
 
-  <h1>Registriere dich bei Grow Empire 🌱</h1>
+<h1>Registriere dich bei Grow Empire 🌱</h1>
 
-  <div class="ref-info" id="refInfo"></div>
+<div class="ref-info" id="refInfo">🔗</div>
 
-  <form action="/dashboard.html">
-    <input type="text" placeholder="Dein Name" required><br>
-    <input type="email" placeholder="E-Mail" required><br>
-    <input type="password" placeholder="Passwort" required><br>
-    <button type="submit">Jetzt registrieren</button>
-  </form>
+<form id="registerForm">
+  <input type="text" id="name" placeholder="Dein Name" required><br>
+  <input type="email" id="email" placeholder="E-Mail" required><br>
+  <input type="password" id="password" placeholder="Passwort" required><br>
+  <button type="submit">Jetzt registrieren</button>
+</form>
+
+<script>
+  // Referral aus URL speichern
+  window.onload = function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const ref = urlParams.get("ref");
+    if (ref) {
+      localStorage.setItem("ref", ref);
+    }
+
+    // Referral anzeigen
+    const savedRef = localStorage.getItem("ref");
+    if (savedRef) {
+      document.getElementById("refInfo").textContent = "Du wurdest geworben von: " + savedRef.split("@")[0];
+    }
+  };
+
+  // Registrierung & Partner speichern
+  document.getElementById("registerForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const referrer = localStorage.getItem("ref") || null;
+
+    // Nutzer speichern
+    localStorage.setItem("user_email", email);
+    localStorage.setItem("user_name", name);
+    localStorage.setItem("lizenz", "demo"); // Anfangszustand: demo
+
+    // Partner-Daten aktualisieren
+    const partners = JSON.parse(localStorage.getItem("partnerData") || "[]");
+    partners.push({ email: email, referrer: referrer });
+    localStorage.setItem("partnerData", JSON.stringify(partners));
+
+    // Weiterleitung
+    window.location.href = "dashboard.html";
+  });
+</script>
 
 </body>
 </html>
