@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard – GrowEmpire</title>
-  <link rel="stylesheet" href="style.css" />
   <style>
     body {
       margin: 0;
@@ -13,7 +12,6 @@
       background-size: cover;
       color: #00ffcc;
     }
-
     .menu-btn {
       position: absolute;
       top: 20px;
@@ -21,112 +19,107 @@
       font-size: 30px;
       cursor: pointer;
       z-index: 1000;
-      padding: 10px;
+      padding: 10px 12px;
       background-color: #000;
       border: 2px solid #00ffcc;
       border-radius: 12px;
       color: #00ffcc;
+      box-shadow: 0 0 12px #00ffcc;
     }
-
-    .menu-content {
+    .menu-box {
       display: none;
       position: absolute;
-      top: 70px;
+      top: 80px;
       left: 20px;
       background-color: rgba(0, 0, 0, 0.9);
       border: 2px solid #00ffcc;
       border-radius: 16px;
       padding: 20px;
       z-index: 999;
+      box-shadow: 0 0 20px #00ffcc;
       width: 250px;
     }
-
-    .menu-content a {
+    .menu-box a {
       display: block;
-      margin: 12px 0;
-      color: #00ffcc;
+      margin-bottom: 12px;
       font-size: 18px;
+      color: #00ffcc;
       text-decoration: none;
     }
-
-    .menu-content a:hover {
-      color: #ffffff;
+    .menu-box a:hover {
+      text-decoration: underline;
     }
-
     .header {
-      margin-top: 120px;
       text-align: center;
-      font-size: 40px;
+      font-size: 36px;
       font-weight: bold;
-      color: #ccffcc;
-      text-shadow: 2px 2px 5px #000;
+      margin-top: 80px;
+      text-shadow: 0 0 8px black;
     }
-
-    .plant-box {
+    .plant-card {
       background-color: rgba(0, 0, 0, 0.85);
       border: 2px solid #00ffcc;
-      border-radius: 20px;
-      padding: 20px;
+      border-radius: 16px;
+      padding: 16px;
       margin: 20px auto;
-      max-width: 85%;
-      color: #ffffff;
+      width: 85%;
+      max-width: 400px;
+      box-shadow: 0 0 12px #00ffcc;
     }
-
-    .plant-box h2 {
+    .plant-card h2 {
       color: #00ffcc;
+      margin-top: 0;
+    }
+    .plant-card p {
+      margin: 8px 0;
+      font-size: 16px;
     }
   </style>
 </head>
 <body>
+
   <div class="menu-btn" onclick="toggleMenu()">☰</div>
-  <div class="menu-content" id="menu">
+  <div class="menu-box" id="menuBox">
     <a href="dashboard.html">🧠 Dashboard</a>
-    <a href="pflanzen.html">🌿 Pflanzen</a>
+    <a href="plants.html">🌱 Pflanzen</a>
     <a href="partner.html">🤝 Partner</a>
     <a href="lizenz.html">🪪 Lizenz</a>
-    <a href="einstellungen.html">⚙️ Einstellungen</a>
-    <a href="logout.html">🔴 Logout</a>
+    <a href="settings.html">⚙️ Einstellungen</a>
+    <a href="index.html">🔴 Logout</a>
   </div>
 
   <div class="header">GrowEmpire</div>
 
-  <div id="plant-container">
-    <!-- Pflanzendaten werden hier dynamisch eingefügt -->
-  </div>
+  <div id="plantList"></div>
 
   <script>
     function toggleMenu() {
-      const menu = document.getElementById("menu");
-      menu.style.display = menu.style.display === "block" ? "none" : "block";
+      const box = document.getElementById("menuBox");
+      box.style.display = box.style.display === "block" ? "none" : "block";
     }
 
-    const plants = [
-      { name: "Sativa", gekauft: "2025-07-04", dauer: 75 },
-      { name: "Haze", gekauft: "2025-07-04", dauer: 80 },
-      { name: "Kush 2", gekauft: "2025-07-04", dauer: 90 },
-      { name: "OG Kush", gekauft: "2025-07-04", dauer: 84 },
-    ];
-
-    const container = document.getElementById("plant-container");
+    const plants = JSON.parse(localStorage.getItem("purchasedPlants")) || [];
+    const plantList = document.getElementById("plantList");
 
     if (plants.length === 0) {
-      container.innerHTML = "<p style='text-align:center;'>Keine gekauften Pflanzen.</p>";
+      plantList.innerHTML = "<p style='text-align:center;'>Keine gekauften Pflanzen.</p>";
     } else {
       plants.forEach(plant => {
-        const gekauftDate = new Date(plant.gekauft);
-        const heute = new Date();
-        const diffTime = gekauftDate.getTime() + plant.dauer * 24 * 60 * 60 * 1000 - heute.getTime();
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        const ernteText = diffDays <= 0 ? "Bereit zur Ernte!" : `Noch ${diffDays} Tage bis zur Ernte`;
-
         const card = document.createElement("div");
-        card.className = "plant-box";
+        card.className = "plant-card";
+
+        const gekauft = new Date(plant.buyDate);
+        const today = new Date();
+        const diff = gekauft.getTime() + (plant.growDays * 86400000) - today.getTime();
+        const resttage = Math.ceil(diff / (1000 * 60 * 60 * 24));
+        const ernte = resttage <= 0 ? "Bereit zur Ernte!" : `Noch ${resttage} Tage bis zur Ernte`;
+
         card.innerHTML = `
           <h2>🌱 ${plant.name}</h2>
-          <p>📅 Gekauft am: ${gekauftDate.toLocaleDateString()}</p>
-          <p>⏳ ${ernteText}</p>
+          <p>📅 Gekauft am: ${gekauft.toLocaleDateString()}</p>
+          <p>⏳ ${ernte}</p>
         `;
-        container.appendChild(card);
+        plantList.appendChild(card);
       });
     }
   </script>
