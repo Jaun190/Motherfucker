@@ -1,176 +1,56 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>GrowEmpire – Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
       background: url('./assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
+      font-family: sans-serif;
       color: white;
-    }
-
-    .topbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 64px;
-      background: rgba(0, 0, 0, 0.9);
-      border-bottom: 2px solid #00ff88;
-      box-shadow: 0 0 12px #00ff88;
-      z-index: 998;
-    }
-
-    .menu-wrapper {
-      position: relative;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      padding-left: 20px;
-    }
-
-    .menu-icon {
-      background: rgba(0, 255, 136, 0.1);
-      border: 2px solid #00ff88;
-      color: #00ff88;
-      padding: 8px 12px;
-      border-radius: 10px;
-      font-size: 22px;
-      cursor: pointer;
-      box-shadow: 0 0 10px #00ff88;
-    }
-
-    .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 60px;
-      left: 20px;
-      background: rgba(0, 0, 0, 0.95);
-      border: 2px solid #00ff88;
-      border-radius: 12px;
-      padding: 0.5rem 0;
-      min-width: 200px;
-      box-shadow: 0 0 12px #00ff88;
-      z-index: 999;
-    }
-
-    .dropdown-menu a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 18px;
-      color: #00ff88;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1rem;
-    }
-
-    .dropdown-menu a:hover {
-      background: rgba(0, 255, 136, 0.08);
-    }
-
-    .dashboard-content {
-      margin-top: 100px;
+      margin: 0;
       padding: 2rem;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
     }
-
-    .plant-box {
-      background: rgba(0, 0, 0, 0.75);
-      border: 2px solid #00ff88;
-      border-radius: 16px;
-      padding: 1.5rem;
-      box-shadow: 0 0 12px #00ff88;
-    }
-
-    .plant-box h1 {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-      color: #00ff88;
-    }
-
     .plant-list {
       list-style: none;
-      padding-left: 0;
-      margin: 0;
+      padding: 0;
+      max-width: 600px;
+      margin: auto;
     }
-
     .plant-list li {
-      margin-bottom: 0.7rem;
-      background: rgba(0, 255, 136, 0.08);
-      padding: 10px;
-      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.6);
       border-left: 4px solid #00ff88;
-    }
-
-    .no-plants {
-      color: #ccc;
-      font-style: italic;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 8px;
     }
   </style>
 </head>
 <body>
+  <h1 style="color:#00ff88;text-align:center;">🌱 Gekaufte Pflanzen</h1>
+  <ul class="plant-list" id="dashboardPlants"></ul>
 
-  <!-- Menü -->
-  <div class="topbar">
-    <div class="menu-wrapper">
-      <div class="menu-icon" onclick="toggleMenu()">☰</div>
-      <div class="dropdown-menu" id="dropdown">
-        <a href="dashboard.html">🧠 Dashboard</a>
-        <a href="plants.html">🧬 Pflanzen</a>
-        <a href="partner.html">🤝 Partner</a>
-        <a href="lizenz.html">🪪 Lizenz</a>
-        <a href="settings.html">⚙️ Einstellungen</a>
-        <a href="logout.html">📕 Logout</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Dashboard Inhalt -->
-  <div class="dashboard-content">
-    <div class="plant-box">
-      <h1>🌱 Gekaufte Pflanzen</h1>
-      <ul class="plant-list" id="dashboardPlants"></ul>
-    </div>
-  </div>
-
-  <!-- JS -->
   <script>
-    function toggleMenu() {
-      const menu = document.getElementById('dropdown');
-      menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
-    }
+    const container = document.getElementById("dashboardPlants");
+    const saved = localStorage.getItem("plants");
 
-    window.addEventListener('click', function (e) {
-      const menu = document.getElementById('dropdown');
-      if (!e.target.closest('.menu-wrapper')) {
-        menu.style.display = 'none';
-      }
-    });
-
-    // Pflanzen anzeigen
-    const list = document.getElementById("dashboardPlants");
-    const savedPlants = JSON.parse(localStorage.getItem("plants") || "[]");
-
-    if (savedPlants.length === 0 || savedPlants.every(p => !p.bought)) {
-      list.innerHTML = `<li class="no-plants">Keine Pflanzen gekauft.</li>`;
+    if (!saved) {
+      container.innerHTML = "<li>Keine Daten gefunden.</li>";
     } else {
-      savedPlants.forEach(p => {
-        if (p.bought) {
-          const item = document.createElement("li");
-          item.innerText = `✅ ${p.name} – ${p.duration} Tage – CHF ${p.price}.–`;
-          list.appendChild(item);
-        }
-      });
+      const data = JSON.parse(saved);
+      const bought = data.filter(p => p.bought);
+
+      if (bought.length === 0) {
+        container.innerHTML = "<li>Keine Pflanzen gekauft.</li>";
+      } else {
+        bought.forEach(p => {
+          const li = document.createElement("li");
+          li.innerHTML = `✅ <strong>${p.name}</strong> – CHF ${p.price}.– – ${p.duration} Tage`;
+          container.appendChild(li);
+        });
+      }
     }
   </script>
-
 </body>
 </html>
