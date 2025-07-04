@@ -2,9 +2,9 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GrowEmpire – Lizenzen</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GrowEmpire - Lizenzen</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     body {
       margin: 0;
@@ -53,7 +53,7 @@
       background: rgba(0, 0, 0, 0.95);
       border: 2px solid #00ff88;
       border-radius: 12px;
-      padding: 0.5rem 0;
+      padding: 0.5rem;
       min-width: 200px;
       box-shadow: 0 0 12px #00ff88;
       z-index: 999;
@@ -68,6 +68,7 @@
       text-decoration: none;
       font-weight: bold;
       font-size: 1rem;
+      transition: background 0.2s;
     }
 
     .dropdown-menu a:hover {
@@ -119,21 +120,12 @@
       width: 100%;
       background: #00ff88;
       color: black;
-      text-align: center;
       padding: 10px;
       border-radius: 8px;
       font-weight: bold;
       font-size: 1rem;
-      text-decoration: none;
-    }
-
-    .headline {
       text-align: center;
-      font-size: 2rem;
-      color: #00ff88;
-      text-shadow: 0 0 8px #00ff88;
-      margin-top: 120px;
-      margin-bottom: 1.5rem;
+      text-decoration: none;
     }
   </style>
 </head>
@@ -142,27 +134,25 @@
   <!-- Menü -->
   <div class="topbar">
     <div class="menu-wrapper">
-      <div class="menu-icon" onclick="toggleMenu()">☰</div>
+      <div class="menu-icon" onclick="toggleMenu()">≡</div>
       <div class="dropdown-menu" id="dropdown">
-        <a href="dashboard.html">🧠 Dashboard</a>
-        <a href="plants.html">🧬 Pflanzen</a>
-        <a href="partner.html">🤝 Partner</a>
-        <a href="lizenz.html">🪪 Lizenz</a>
-        <a href="settings.html">⚙️ Einstellungen</a>
-        <a href="logout.html">📕 Logout</a>
+        <a href="dashboard.html"><span>🌿</span> Dashboard</a>
+        <a href="plants.html"><span>🧪</span> Pflanzen</a>
+        <a href="partner.html"><span>💼</span> Partner</a>
+        <a href="lizenz.html"><span>📄</span> Lizenz</a>
+        <a href="settings.html"><span>⚙️</span> Einstellungen</a>
+        <a href="logout.html"><span>🔴</span> Logout</a>
       </div>
     </div>
   </div>
 
   <!-- Inhalt -->
-  <h1 class="headline">GrowEmpire</h1>
-
   <div class="content">
 
     <div class="box">
-      <h2>🪪 Basic Lizenz<br><small>CHF 49.– (einmalig)</small></h2>
+      <h2>📇 Basic Lizenz<br><small>CHF 49.– (einmalig)</small></h2>
       <ul>
-        <li>1 m² Anbaufläche</li>
+        <li>1m² Anbaufläche</li>
         <li>1 Gratis-Pflanze im Wert von CHF 200.–</li>
         <li>20 % Ertrag auf Gratispflanze</li>
         <li>Zugang zu Dashboard & Statistik</li>
@@ -176,7 +166,7 @@
       <ul>
         <li>5 m² Anbaufläche</li>
         <li>20 % Ertrag</li>
-        <li>Referral-Bonus: 10 % / 3 %</li>
+        <li>Referral-Bonus: 10 % / 3 % / 1 %</li>
         <li>Reinvest-System aktiv</li>
         <li>Bonusaktionen</li>
       </ul>
@@ -184,7 +174,7 @@
     </div>
 
     <div class="box">
-      <h2>💎 Premium Box<br><small>CHF 299.– (12 Monate inkl. Lizenz)</small></h2>
+      <h2>👑 Premium Box<br><small>CHF 299.– (12 Monate inkl. Lizenz)</small></h2>
       <ul>
         <li>Unbegrenzte Anbaufläche</li>
         <li>30 % Ertrag</li>
@@ -199,17 +189,16 @@
 
   <script>
     function toggleMenu() {
-      const menu = document.getElementById('dropdown');
-      menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+      const menu = document.getElementById("dropdown");
+      menu.style.display = (menu.style.display === "block") ? "none" : "block";
     }
 
-    window.addEventListener('click', function (e) {
-      const menu = document.getElementById('dropdown');
-      if (!e.target.closest('.menu-wrapper')) {
-        menu.style.display = 'none';
+    window.addEventListener("click", function (e) {
+      const menu = document.getElementById("dropdown");
+      if (!e.target.closest(".menu-wrapper")) {
+        menu.style.display = "none";
       }
     });
   </script>
-
 </body>
 </html>
