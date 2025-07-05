@@ -11,12 +11,10 @@
       font-family: 'Inter', sans-serif;
       background: url('./assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
-      background: #001e14;
       color: #00ff88;
       padding: 20px;
       text-align: center;
     }
-
     .topbar {
       position: fixed;
       top: 0;
@@ -28,7 +26,6 @@
       box-shadow: 0 0 12px #00ff88;
       z-index: 998;
     }
-
     .menu-wrapper {
       position: relative;
       height: 100%;
@@ -37,18 +34,16 @@
       justify-content: space-between;
       padding: 0 20px;
     }
-
     .menu-icon {
       background: rgba(0, 255, 136, 0.1);
       border: 2px solid #00ff88;
+      font-size: 22px;
       color: #00ff88;
       padding: 6px 12px;
       border-radius: 10px;
-      font-size: 22px;
       cursor: pointer;
       box-shadow: 0 0 10px #00ff88;
     }
-
     .dropdown-menu {
       display: none;
       position: absolute;
@@ -62,7 +57,6 @@
       box-shadow: 0 0 12px #00ff88;
       z-index: 999;
     }
-
     .dropdown-menu a {
       display: flex;
       align-items: center;
@@ -74,35 +68,23 @@
       font-size: 1rem;
       transition: background 0.2s;
     }
-
     .dropdown-menu a:hover {
       background: rgba(0, 255, 136, 0.08);
     }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-top: 80px;
-    }
-
     .ref-box {
-      margin: 20px auto;
+      margin: 100px auto 40px;
       padding: 10px;
       background: white;
       color: black;
       border-radius: 8px;
-      border: none;
       font-size: 1rem;
-      margin-top: 10px;
-      text-align: center;
       width: 90%;
       max-width: 500px;
       font-weight: bold;
     }
-
     .baum-container {
       margin-top: 40px;
     }
-
     .node {
       background: rgba(0, 255, 136, 0.1);
       border: 2px solid #00ff88;
@@ -116,15 +98,13 @@
       text-align: center;
       font-size: 1rem;
     }
-
     .children {
       display: flex;
       justify-content: center;
-      margin-top: 1rem;
-      gap: 1rem;
       flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
     }
-
     .node::after {
       content: "";
       position: absolute;
@@ -134,7 +114,6 @@
       height: 20px;
       border-left: 2px solid #00ff88;
     }
-
     .node:only-child::after {
       display: none;
     }
@@ -156,10 +135,7 @@
     </div>
   </div>
 
-  <h1>🌱 Dein persönlicher<br><span style="color:#00ff88">Referral-Link</span></h1>
-  <div class="ref-box" id="refLinkBox">Wird geladen...</div>
-
-  <h2>👥 Deine Partnerstruktur</h2>
+  <div class="ref-box" id="refLinkBox"></div>
   <div class="baum-container" id="baumContainer"></div>
 
   <script>
@@ -175,18 +151,16 @@
       }
     });
 
-    // Beispiel-Daten (lokal für Test)
-    const userEmail = localStorage.getItem("email") || "demo@growempire.com";
-    const username = userEmail.split("@")[0];
-    const refLink = `https://jaun190.github.io/register.html?ref=${username}`;
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    const emailPrefix = user.email ? user.email.split("@")[0] : "deinName";
+    const refLink = `https://jaun190.github.io/Motherfucker/register.html?ref=${emailPrefix}`;
     document.getElementById("refLinkBox").textContent = refLink;
 
-    // Einfacher Demo-Baum (1. Ebene)
-    const baumContainer = document.getElementById("baumContainer");
+    const baum = document.getElementById("baumContainer");
     const hauptNode = document.createElement("div");
     hauptNode.className = "node";
-    hauptNode.textContent = username;
-    baumContainer.appendChild(hauptNode);
+    hauptNode.textContent = emailPrefix;
+    baum.appendChild(hauptNode);
   </script>
 </body>
 </html>
