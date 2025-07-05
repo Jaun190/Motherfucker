@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="de">
+<!DOCTYPE html><html lang="de">
 <head>
   <meta charset="UTF-8" />
+  <title>Partner – GrowEmpire</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Partner - GrowEmpire</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     body {
@@ -12,8 +11,9 @@
       background: url('./assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
       color: #00ff88;
+      padding: 2rem;
+      text-align: center;
     }
-
     .topbar {
       position: fixed;
       top: 0;
@@ -23,9 +23,8 @@
       background: rgba(0, 0, 0, 0.9);
       border-bottom: 2px solid #00ff88;
       box-shadow: 0 0 12px #00ff88;
-      z-index: 999;
+      z-index: 998;
     }
-
     .menu-wrapper {
       position: relative;
       height: 100%;
@@ -33,18 +32,16 @@
       align-items: center;
       padding-left: 20px;
     }
-
     .menu-icon {
       background: rgba(0, 255, 136, 0.1);
       border: 2px solid #00ff88;
       color: #00ff88;
-      padding: 8px 12px;
+      padding: 6px 12px;
       border-radius: 10px;
       font-size: 22px;
       cursor: pointer;
       box-shadow: 0 0 10px #00ff88;
     }
-
     .dropdown-menu {
       display: none;
       position: absolute;
@@ -53,114 +50,54 @@
       background: rgba(0, 0, 0, 0.95);
       border: 2px solid #00ff88;
       border-radius: 12px;
-      padding: 0.5rem 0;
+      padding: 0.5rem;
       min-width: 200px;
       box-shadow: 0 0 12px #00ff88;
-      animation: fadeIn 0.2s ease-out;
       z-index: 999;
     }
-
     .dropdown-menu a {
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 12px 16px;
+      padding: 12px 18px;
       color: #00ff88;
       text-decoration: none;
       font-weight: bold;
       font-size: 1rem;
-      transition: background 0.25s;
+      transition: background 0.2s;
     }
-
     .dropdown-menu a:hover {
       background: rgba(0, 255, 136, 0.08);
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-5px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .partner-content {
-      margin-top: 100px;
-      padding: 2rem;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .partner-box {
-      background: rgba(0, 0, 0, 0.75);
-      border: 2px solid #00ff88;
-      border-radius: 16px;
-      padding: 2rem;
-      box-shadow: 0 0 12px #00ff88;
-      color: white;
-      text-align: center;
-    }
-
-    .partner-box h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .partner-box p {
-      font-size: 1.1rem;
-      color: #ccc;
-    }
-
-    .ref-link {
-      background: #000;
-      padding: 0.8rem;
-      color: #00ff88;
-      margin: 1rem auto;
-      border-radius: 10px;
-      width: fit-content;
-      font-weight: bold;
     }
   </style>
 </head>
 <body>
-
-<!-- Menü -->
-<div class="topbar">
-  <div class="menu-wrapper">
-    <div class="menu-icon" onclick="toggleMenu()">☰</div>
-    <div class="dropdown-menu" id="dropdown">
-      <a href="dashboard.html"><span>📊</span> Dashboard</a>
-      <a href="plants.html"><span>🌱</span> Pflanzen</a>
-      <a href="partner.html"><span>👥</span> Partner</a>
-      <a href="lizenz.html"><span>🧾</span> Lizenz</a>
-      <a href="settings.html"><span>⚙️</span> Einstellungen</a>
-      <a href="payout.html"><span>💸</span> Auszahlung</a>
-      <a href="index.html"><span>🔴</span> Logout</a>
+  <div class="topbar">
+    <div class="menu-wrapper">
+      <div class="menu-icon" onclick="toggleMenu()">☰</div>
+      <div class="dropdown-menu" id="dropdown">
+        <a href="dashboard.html">🌿 Dashboard</a>
+        <a href="plants.html">🧪 Pflanzen</a>
+        <a href="partner.html">💼 Partner</a>
+        <a href="lizenz.html">📄 Lizenz</a>
+        <a href="settings.html">⚙️ Einstellungen</a>
+        <a href="payout.html">💸 Auszahlung</a>
+        <a href="index.html">🔴 Logout</a>
+      </div>
     </div>
-  </div>
-</div>
-
-<!-- Partnerseite -->
-<div class="partner-content">
-  <div class="partner-box">
-    <h1>Deine Partnerübersicht</h1>
-    <p>Hier findest du bald deine geworbenen Partner, die Downline-Struktur, Provisionen und deinen persönlichen Reflink.</p>
-    <div class="ref-link" id="refLinkBox">Loading...</div>
-  </div>
-</div>
-
-<!-- Menü-Logik & RefLink -->
-<script>
-  function toggleMenu() {
-    const menu = document.getElementById('dropdown');
-    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-  }
-
-  window.addEventListener('click', function (e) {
-    const menu = document.getElementById('dropdown');
-    if (!e.target.closest('.menu-wrapper')) {
-      menu.style.display = 'none';
+  </div>  <h1>🌱 Dein persönlicher<br><span style="color:#00ff88">Referral-Link</span></h1>
+  <div class="ref-box" id="refLinkBox">Wird geladen...</div>  <h2>👥 Deine Partnerstruktur</h2>
+  <div class="baum-container" id="baumContainer"></div>  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("dropdown");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
     }
-  });
 
-  // RefLink anzeigen
-  const email = localStorage.getItem('email') || 'demo@growempire.io';
-  const username = email.split
+    window.addEventListener("click", function (e) {
+      const menu = document.getElementById("dropdown");
+      if (!e.target.closest(".menu-wrapper")) {
+        menu.style.display = "none";
+      }
+    });
+  </script></body>
+</html>
